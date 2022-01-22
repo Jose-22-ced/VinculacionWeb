@@ -9,6 +9,7 @@ import { VercordinadorvinculacionComponent } from './vercordinadorvinculacion/ve
 import { NuevaendidadbeneficiariaComponent } from './nuevaendidadbeneficiaria/nuevaendidadbeneficiaria.component';
 import { VerentidadesbeneficariasComponent } from './verentidadesbeneficarias/verentidadesbeneficarias.component';
 import { EditarentidadbeneficiariaComponent } from './editarentidadbeneficiaria/editarentidadbeneficiaria.component';
+import { NuevoresponsablepppComponent } from './nuevoresponsableppp/nuevoresponsableppp.component';
 
 const routes: Routes = [
   {path:'bienvenida',
@@ -23,6 +24,8 @@ const routes: Routes = [
     component:VerentidadesbeneficariasComponent
   },{path:'editarentidadveneficiaria/:id',
     component:EditarentidadbeneficiariaComponent
+  },{path:'nuevoresponsable',
+    component:NuevoresponsablepppComponent
   }
 ]
 
@@ -33,7 +36,8 @@ const routes: Routes = [
     VercordinadorvinculacionComponent,
     NuevaendidadbeneficiariaComponent,
     VerentidadesbeneficariasComponent,
-    EditarentidadbeneficiariaComponent
+    EditarentidadbeneficiariaComponent,
+    NuevoresponsablepppComponent
   ],
   imports: [
     CommonModule,
