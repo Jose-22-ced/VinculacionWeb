@@ -1,14 +1,14 @@
-<div>
-  <div>
-    <mat-card>
-      <mat-card-title>ENTIDADES BENEFICARIAS REGISTRADAS</mat-card-title>
-      <mat-form-field appearance="outline" style="width: 100%">
-        <mat-label>BUSCAR ENTIDAD BENEFICIARIA</mat-label>
-        <input matInput  placeholder="FILTRAR" [formControl]="myControl">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      </mat-form-field>
-    </mat-card>
-    <br>
+<div *ngIf="issloading==false">
+  <mat-card>
+    <mat-card-title>ENTIDADES BENEFICARIAS REGISTRADAS</mat-card-title>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>BUSCAR ENTIDAD BENEFICIARIA</mat-label>
+      <input matInput  placeholder="FILTRAR" [formControl]="myControl">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </mat-card>
+  <br>
+  <div *ngIf="isexist">
     <div *ngFor="let entidad of filteredOptions | async">
       <mat-card class="example-card">
         <mat-card-header>
@@ -23,7 +23,7 @@
               <mat-icon color="primary">edit</mat-icon>
               <span>Editar</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="eliminarEntidad(entidad.idEntidad)">
               <mat-icon color="warn">delete_forever</mat-icon>
               <span>Eliminar</span>
             </button>
@@ -53,4 +53,16 @@
       </mat-card>
     </div>
   </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>NO EXISTEN ENTIDADES BENEFICARIAS REGISTRADAS</mat-card-title>
+    </mat-card>
+  </div>
 </div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

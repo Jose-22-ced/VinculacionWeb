@@ -13,22 +13,33 @@ import {CordinadorVinculacion} from "../../../models/cordinadorvinculacion";
   styleUrls: ['./verentidadesbeneficarias.component.css']
 })
 export class VerentidadesbeneficariasComponent implements OnInit {
+
+  issloading=true;
+  isexist?:boolean
   panelOpenState = false;
   entidad:Entidadbeneficiaria[]=[];
   myControl = new FormControl();
   filteredOptions?: Observable<Entidadbeneficiaria[]>;
+
 
   constructor(private fechaService:FechaService,private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,private entidadbeneficiarioService:EntidadbeneficiarioService) { }
 
   ngOnInit(): void {
     this.entidadbeneficiarioService.getsaveEntidadBeneficiaria().subscribe(value => {
       this.entidad=value;
+      this.isexist=value.length!=0;
+      this.issloading=false;
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),
         map(values=>this.filter(values)),
       );
     })
+  }
 
+  ngAfterViewInit(): void {
+    setTimeout(()=>{
+
+    },1000)
   }
   filter(value: any): Entidadbeneficiaria[] {
     const filterValue = value.toLowerCase();
@@ -38,6 +49,11 @@ export class VerentidadesbeneficariasComponent implements OnInit {
       ||option.nombreAdministrador?.toLocaleLowerCase().includes(filterValue)
       ||option.representante?.toLocaleLowerCase().includes(filterValue)
     );
+  }
+
+
+  eliminarEntidad(id:Number){
+    console.log(id);
   }
 
 }
