@@ -26,6 +26,7 @@ const routes: Routes = [
     component:EditarentidadbeneficiariaComponent
   },{path:'nuevoresponsable',
     component:NuevoresponsablepppComponent
+
   }
 ]
 
