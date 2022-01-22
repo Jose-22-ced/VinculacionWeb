@@ -1,0 +1,68 @@
+<section class="bst-section">
+  <mat-toolbar class="mat-bar">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"  (click)="drawer.toggle()" >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>{{persona.nombrescompletos}}</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-drawer-container autosize>
+    <mat-drawer #drawer class="example-sidenav"  opened="true" mode="side">
+      <div class="contenedor-perfil">
+        <img class="imagem-mat" [src]="foto">
+        <div>
+          <h4>{{rolnombre}}</h4>
+        </div>
+      </div>
+      <ng-container>
+
+        <div [ngSwitch]="persona.rol">
+          <!--Autoriadad-->
+          <div class="list-group" *ngSwitchCase="'AUT'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Coordinador de Vinculación
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/cordinadorvinculacion']"
+                      routerLinkActive="active">-Nueva Asignación</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/vercordinadorvinculacion']"
+                      routerLinkActive="active">-Asignación Actual</button>
+            </mat-expansion-panel>
+          </div>
+          <!--Cordinado de VC-->
+          <div class="list-group" *ngSwitchCase="'CV'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Entidad Beneficiaria
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/nuevaentidadbenefiaria',persona.id]"
+                      routerLinkActive="active">-Nueva Entidad</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verentidadesbenefiarias']"
+                      routerLinkActive="active">-Ver Entidades Actuales</button>
+            </mat-expansion-panel>
+          </div>
+        </div>
+      </ng-container>
+    </mat-drawer>
+    <div class="example-sidenav-content">
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </mat-drawer-container>
+  <app-footer></app-footer>
+  <ng-container *ngIf="issloading">
+    <div class="bss-loader">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
+</section>
