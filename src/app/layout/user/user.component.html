@@ -50,6 +50,34 @@
                       routerLinkActive="active">-Ver Entidades Actuales</button>
             </mat-expansion-panel>
           </div>
+          <!--Cordinado de Carrera-->
+          <div class="list-group" *ngSwitchCase="'CC'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Resposable de Practicas PreProfesionales
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/nuevoresponsable',persona.cedula]"
+                      routerLinkActive="active">-Nueva Asignación</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verresponsable',persona.cedula]"
+                      routerLinkActive="active">-Asignación Actual</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Proyecto de Vinculación a la Sociedad
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/nuevoproyecto',persona.cedula]"
+                      routerLinkActive="active">-Nueva Proyecto</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verresponsable',persona.cedula]"
+                      routerLinkActive="active">-Proyectos Actuales</button>
+            </mat-expansion-panel>
+          </div>
         </div>
       </ng-container>
     </mat-drawer>

@@ -16,4 +16,6 @@ export class Entidadbeneficiaria {
   cedulaAdministrador?:string;
   correoAdministrador?:string;
   descripcionEmpresa?:string;
+  fecha_inicio_periodo?:Date;
+  fecha_fin_periodo?:Date;
 }

@@ -66,8 +66,11 @@ export class AsignarcodinadorvinculacionComponent implements OnInit {
   }
 
 
+
+
   //GuardarCordinador
   guardarcv(docente:CordinadorVinculacion):void{
+
     Swal.fire({
       title: 'Esta seguro?',
       text: "Al docente seleccionado como Cordinador de Vinculación",

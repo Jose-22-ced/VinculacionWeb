@@ -10,6 +10,8 @@ import { NuevaendidadbeneficiariaComponent } from './nuevaendidadbeneficiaria/nu
 import { VerentidadesbeneficariasComponent } from './verentidadesbeneficarias/verentidadesbeneficarias.component';
 import { EditarentidadbeneficiariaComponent } from './editarentidadbeneficiaria/editarentidadbeneficiaria.component';
 import { NuevoresponsablepppComponent } from './nuevoresponsableppp/nuevoresponsableppp.component';
+import { VerresposabledepppComponent } from './verresposabledeppp/verresposabledeppp.component';
+import { NuevoproyectoComponent } from './nuevoproyecto/nuevoproyecto.component';
 
 const routes: Routes = [
   {path:'bienvenida',
@@ -24,9 +26,12 @@ const routes: Routes = [
     component:VerentidadesbeneficariasComponent
   },{path:'editarentidadveneficiaria/:id',
     component:EditarentidadbeneficiariaComponent
-  },{path:'nuevoresponsable',
+  },{path:'nuevoresponsable/:cedula',
     component:NuevoresponsablepppComponent
-
+  }, {path:'verresponsable/:cedula',
+    component:VerresposabledepppComponent
+  }, {path:'nuevoproyecto/:cedula',
+    component:NuevoproyectoComponent
   }
 ]
 
@@ -38,7 +43,9 @@ const routes: Routes = [
     NuevaendidadbeneficiariaComponent,
     VerentidadesbeneficariasComponent,
     EditarentidadbeneficiariaComponent,
-    NuevoresponsablepppComponent
+    NuevoresponsablepppComponent,
+    VerresposabledepppComponent,
+    NuevoproyectoComponent
   ],
   imports: [
     CommonModule,

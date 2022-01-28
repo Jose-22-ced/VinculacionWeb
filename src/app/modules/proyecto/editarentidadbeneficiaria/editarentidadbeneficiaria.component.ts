@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 })
 export class EditarentidadbeneficiariaComponent implements OnInit {
   isLinear = true;
+  issloading=true;
   firstFormGroup?: FormGroup;
   secondFormGroup?: FormGroup;
   entidad:Entidadbeneficiaria = new Entidadbeneficiaria();
@@ -38,6 +39,7 @@ export class EditarentidadbeneficiariaComponent implements OnInit {
       console.log(id)
       this.entidadbeneficiarioService.getsaveEntidadBeneficiariabyId(id).subscribe(value => {
         this.entidad=value;
+        this.issloading=false;
       })
     });
     this.firstFormGroup = this._formBuilder.group({
@@ -56,6 +58,11 @@ export class EditarentidadbeneficiariaComponent implements OnInit {
       cedula1: ['', [Validators.required,Validators.pattern('[0-9]{10}')]],
       correo1: ['', [Validators.required,Validators.email]],
     });
+  }
+  ngAfterViewInit(): void {
+    setTimeout(()=>{
+
+    },1000)
   }
 
   editarEntidad(entidad:Entidadbeneficiaria){
