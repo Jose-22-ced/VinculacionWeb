@@ -86,7 +86,7 @@ export class IniciosesionComponent implements OnInit {
     )
   }
   public create():void{
-    console.log(this.userRequest)
+    console.log(this.userRequest.cedula)
     this.iniciosesionService.Signup(this.userRequest).subscribe(
       data => {
         sessionStorage.clear;

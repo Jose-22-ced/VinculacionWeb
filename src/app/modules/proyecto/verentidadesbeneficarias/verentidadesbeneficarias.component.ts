@@ -25,7 +25,7 @@ export class VerentidadesbeneficariasComponent implements OnInit {
   constructor(private fechaService:FechaService,private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,private entidadbeneficiarioService:EntidadbeneficiarioService) { }
 
   ngOnInit(): void {
-    this.entidadbeneficiarioService.getsaveEntidadBeneficiaria().subscribe(value => {
+    this.entidadbeneficiarioService.getEntidadBeneficiariaAll().subscribe(value => {
       this.entidad=value;
       this.isexist=value.length!=0;
       this.issloading=false;

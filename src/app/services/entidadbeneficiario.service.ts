@@ -21,7 +21,7 @@ export class EntidadbeneficiarioService {
     return this.http.put<Entidadbeneficiaria>(this.urlEndPoint,entidad,{headers: this.httpHeaders})
   }
 
-  getsaveEntidadBeneficiaria():Observable<Entidadbeneficiaria[]>{
+  getEntidadBeneficiariaAll():Observable<Entidadbeneficiaria[]>{
     return this.http.get(this.urlEndPoint+"/all",{headers: this.httpHeaders}).pipe(map(
       data => data as Entidadbeneficiaria[]
     ));

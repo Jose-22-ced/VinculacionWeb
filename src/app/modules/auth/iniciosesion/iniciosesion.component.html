@@ -43,7 +43,7 @@
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>CÉDULA</mat-label>
           <input type="text" matInput [formControl]="cedulaFormControl" [errorStateMatcher]="matcher"
-                 placeholder="Ex. 0154154874" (keypress)="omit_special_char($event)" (keypress)="omit_max_char($event)" (ngModelChange)="userRequest.cedula">
+                 placeholder="Ex. 0154154874" (keypress)="omit_special_char($event)" (keypress)="omit_max_char($event)" [(ngModel)]="userRequest.cedula">
           <mat-hint>Cédula Requerida!</mat-hint>
           <mat-error *ngIf="cedulaFormControl.hasError('pattern') && !cedulaFormControl.hasError('required')">
             Cedula Invalida
