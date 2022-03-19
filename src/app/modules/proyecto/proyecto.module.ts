@@ -13,6 +13,8 @@ import { NuevoresponsablepppComponent } from './nuevoresponsableppp/nuevorespons
 import { VerresposabledepppComponent } from './verresposabledeppp/verresposabledeppp.component';
 import { NuevoproyectoComponent } from './nuevoproyecto/nuevoproyecto.component';
 import {MaterialFileInputModule} from "ngx-material-file-input";
+import { VerproyectosComponent } from './verproyectos/verproyectos.component';
+import { EditarproyectoComponent } from './editarproyecto/editarproyecto.component';
 
 const routes: Routes = [
   {path:'bienvenida',
@@ -33,6 +35,10 @@ const routes: Routes = [
     component:VerresposabledepppComponent
   }, {path:'nuevoproyecto/:cedula/:nombres',
     component:NuevoproyectoComponent
+  },{path:'verproyecto/:cedula/:nombres',
+    component:VerproyectosComponent
+  },{path:'editarproyecto/:id/:cedula/:nombres',
+    component:EditarproyectoComponent
   }
 ]
 
@@ -46,7 +52,9 @@ const routes: Routes = [
     EditarentidadbeneficiariaComponent,
     NuevoresponsablepppComponent,
     VerresposabledepppComponent,
-    NuevoproyectoComponent
+    NuevoproyectoComponent,
+    VerproyectosComponent,
+    EditarproyectoComponent
   ],
   imports: [
     CommonModule,

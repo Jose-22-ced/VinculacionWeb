@@ -24,15 +24,14 @@ export class IniciosesionComponent implements OnInit {
   socialUser!: SocialUser;
   userLogged!: SocialUser;
 
-
+ //Obtiene los datos del inicio de sesión
   public userRequest: User = new User();
+  //Habilita ek incio o el cierre de sesión
   habilitar: boolean = true;
-
 
   //Validaciones
   cedulaFormControl = new FormControl('', [ Validators.pattern( '[0-9]{10}'),Validators.required]);
   matcher = new MyErrorStateMatcher();
-
   omit_special_char(event: { charCode: any; })
   {var k;
     k = event.charCode;  //         k = event.keyCode;  (Both can be used)
@@ -44,11 +43,7 @@ export class IniciosesionComponent implements OnInit {
     console.log(k)
     return (k <= 9);
   }
-
-
-
   constructor(private router: Router,private authService: SocialAuthService,private iniciosesionService: IniciosesionService) { }
-
   ngOnInit(): void {
     this.authService.authState.subscribe(data =>{
       this.userLogged=data;
@@ -57,7 +52,7 @@ export class IniciosesionComponent implements OnInit {
   logOut(): void{
     this.authService.signOut();
   }
-
+  //Auth2 para el incio de sesón con google.
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       data => {
@@ -85,6 +80,7 @@ export class IniciosesionComponent implements OnInit {
       }
     )
   }
+  //Crea a un usario nuevo si este no existe
   public create():void{
     console.log(this.userRequest.cedula)
     this.iniciosesionService.Signup(this.userRequest).subscribe(
@@ -102,6 +98,8 @@ export class IniciosesionComponent implements OnInit {
       }
     )
   }
+
+  //Metodo de ocultar y mostrar componetes.
   setHabilitar(habilitar:boolean):void{
     this.habilitar=(this.habilitar==true)? false: true;
   }

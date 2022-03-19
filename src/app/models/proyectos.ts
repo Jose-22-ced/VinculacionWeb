@@ -1,5 +1,6 @@
 export class Proyectos {
   id?:number;
+  particpantes?:Number;
   codigo?:string;
   nombre?:string;
   lineaaccion?:string;
@@ -8,20 +9,21 @@ export class Proyectos {
   estado?:boolean;
   fechaat?:string;
   entidadbeneficiaria?:number;
-  directorProyecto?:string;
   nombreresponsable?:string
-  responsablePPP?:string;
-  ceduladirector?:String;
-  nombredirector?:string
+  nombredirector?:String;
+  responsablePPP?:Number;
   objetivoGeneral?:String;
   alcanceTerritorial?:String;
   programaVinculacion?:String;
-  actividadeslistProyectos?: actividadeslistProyectos[];
-  requisitoslistProyectos?:  requisitoslistProyectos[];
-  objetivosEspecificosProyecto?:ObjetivosEspeciicoslistProyecto[]
+  coordinadorCedula?:String;
   plazoEjecucion?:String;
   fechaInicio?:Date;
   fechaFin?:Date;
+  actividadeslistProyectos?: actividadeslistProyectos[];
+  docentesDelegados?:DocentesDelegados[];
+  objetivosEspecificosProyecto?:ObjetivosEspeciicoslistProyecto[]
+  ///
+  requisitoslistProyectos?:  requisitoslistProyectos[];
   docenteApoyoResponse?:DocenteApoyoResponse[];
 }
 
@@ -46,5 +48,10 @@ export class listproyect{
   carrera?:String;
   nombre?:String;
   nombreresponsable?:String;
+}
 
+export class DocentesDelegados{
+  cedula?:String;
+  cargo?:String;
+  estado?:boolean;
 }

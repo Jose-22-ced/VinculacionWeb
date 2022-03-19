@@ -1,4 +1,5 @@
-<div>
+<div *ngIf="issloading==false">
+  <div *ngIf="isexist">
   <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
@@ -149,7 +150,7 @@
               <div id ="cabecera">
                 <h4>Seleccine del director del Proyecto</h4>
                 <mat-form-field appearance="outline" style="width: 90%">
-                  <mat-label>BUSCAR ENTIDAD BENEFICIARIA</mat-label>
+                  <mat-label>BUSCAR DOCENTE</mat-label>
                   <input matInput  placeholder="FILTRAR" [formControl]="myControl">
                   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                 </mat-form-field>
@@ -170,7 +171,7 @@
               <h4>Seleccione los docentes de Apoyo del Proyecto</h4>
               <div id ="izquierda">
                 <mat-form-field appearance="outline" style="width: 90%">
-                  <mat-label>BUSCAR ENTIDAD BENEFICIARIA</mat-label>
+                  <mat-label>BUSCAR DOCENTE</mat-label>
                   <input matInput  placeholder="FILTRAR" [formControl]="myControl1">
                   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                 </mat-form-field>
@@ -222,7 +223,7 @@
               </div>
               <div id ="derecha">
                 <mat-form-field appearance="outline" style="width: 90%">
-                  <mat-label>BUSCAR ENTIDAD BENEFICIARIA</mat-label>
+                  <mat-label>BUSCAR DOCENTE</mat-label>
                   <input matInput  placeholder="FILTRAR">
                   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                 </mat-form-field>
@@ -273,7 +274,6 @@
                 </cdk-virtual-scroll-viewport>
               </div>
             </div>
-
           </mat-card-content>
           <mat-divider></mat-divider>
           <br>
@@ -296,8 +296,8 @@
           <br>
           <mat-card-content>
             <p>Para seguir con la creación del proyecto debe *DESCARGAR EL ANENXO* para cada
-            docente miembro y firmarlo, debe *SUBIR ESTE DOCUENTO EN TIPO .pdf*; Sea resposable con
-            con el documento a subir, para llevar un buen control esto le evitara problemas futuros.</p>
+              docente miembro y firmarlo, debe *SUBIR ESTE DOCUENTO EN TIPO .pdf*; Sea resposable con
+              con el documento a subir, para llevar un buen control esto le evitara problemas futuros.</p>
             <br>
             <div *ngFor="let anexo of anexo1">
               <mat-card class="example-panel">
@@ -311,7 +311,7 @@
                   <div id ="derecha1">
                     <button mat-raised-button color="primary" (click)="generate(anexo)">Descargar el Anexo</button>
                     <mat-form-field appearance="outline" style="width: 70%; margin-left: 10px" >
-                      <ngx-mat-file-input accept="application/pdf" formControlName="documento" (change)="generarDocumento(anexo,$event.target.files)" placeholder="Subir Documento" required="required"></ngx-mat-file-input>
+                      <ngx-mat-file-input accept="application/pdf" (change)="generarDocumento(anexo,$event.target.files)" placeholder="Subir Documento" required="required"></ngx-mat-file-input>
                       <mat-icon matSuffix>folder</mat-icon>
                     </mat-form-field>
                   </div>
@@ -329,12 +329,49 @@
       </form>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="guardar(proyecto)">Reset</button>
-      </div>
+      <ng-template matStepLabel>Confirmar</ng-template>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>CREACIÓN DEL PROYECTO</mat-card-title>
+        </mat-card-header>
+        <p>Se guardara todos los los datos ingresdos, se pobra editar o eliminar el proyecto
+        unicamente si este no está en proceso de Vinculación<p>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-card-content>
+          <h2>INFORMACIÓN:</h2>
+          <h3>Nombre del proyecto: {{proyecto.nombre}}</h3>
+          <h3>Fecha de Inicio: {{proyecto.fechaInicio | date:"longDate"}}</h3>
+          <h3>Fecha de Finalización: {{proyecto.fechaFin | date:"longDate"}}</h3>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <br>
+        <div style="text-align: end">
+          <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
+          <button mat-fab color="primary" (click)="guardar(proyecto,anexo1)"><mat-icon>save</mat-icon></button>
+        </div>
+      </mat-card>
     </mat-step>
   </mat-stepper>
 </div>
+  <div *ngIf="isexist==false">
+    <mat-card style="margin: 0 auto; width: 600px;">
+      <mat-card-header style="text-align: start">
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Proyecto de vinculacón necesita a un responsable de Practicas Pre Profesionales</mat-card-title>
+        <mat-card-subtitle>Responsable actual con el cargo</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p> NO EXISTE NINGUN RESPONSABLE ACTUALMENTE</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
+

@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ResponsablepppService} from "../../../services/responsableppp.service";
-import {CarrerasService} from "../../../services/carreras.service";
-import {map, Observable, startWith} from "rxjs";
-import {Docentes} from "../../../models/docentes";
-import {Anexo1} from "../../../models/anexo1";
 import {FechaService} from "../../../services/fecha.service";
+import {CarrerasService} from "../../../services/carreras.service";
+import {ResponsablepppService} from "../../../services/responsableppp.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
+import {ProyectoService} from "../../../services/proyecto.service";
+import {Anexo1Service} from "../../../services/anexo1.service";
+import {Docentes} from "../../../models/docentes";
+import {DocentesDelegados, Proyectos} from "../../../models/proyectos";
+import {Entidadbeneficiaria} from "../../../models/entidadbeneficiaria";
+import {Anexo1} from "../../../models/anexo1";
+import {map, Observable, startWith} from "rxjs";
+import {MatSelectionListChange} from "@angular/material/list";
+import Swal from "sweetalert2";
 import Docxtemplater from "docxtemplater";
 // @ts-ignore
 import PizZip from "pizzip";
@@ -14,13 +21,7 @@ import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
-import {MatSelectionListChange} from "@angular/material/list";
-import {DocentesDelegados, Proyectos} from "../../../models/proyectos";
-import {Entidadbeneficiaria} from "../../../models/entidadbeneficiaria";
-import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
-import {ProyectoService} from "../../../services/proyecto.service";
-import {Anexo1Service} from "../../../services/anexo1.service";
-import Swal from "sweetalert2";
+
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -33,12 +34,14 @@ function getBase64(file: any) {
     reader.onerror = error => reject(error);
   });
 }
+
 @Component({
-  selector: 'app-nuevoproyecto',
-  templateUrl: './nuevoproyecto.component.html',
-  styleUrls: ['./nuevoproyecto.component.css']
+  selector: 'app-editarproyecto',
+  templateUrl: './editarproyecto.component.html',
+  styleUrls: ['./editarproyecto.component.css']
 })
-export class NuevoproyectoComponent implements OnInit {
+export class EditarproyectoComponent implements OnInit {
+
   panelOpenState = true;
   isLinear = true;
   firstFormGroup?: FormGroup;
@@ -57,6 +60,7 @@ export class NuevoproyectoComponent implements OnInit {
   proyecto:Proyectos = new Proyectos();
   entidadBeneficiaria:Entidadbeneficiaria []=[];
   anexo1:Anexo1[]=[];
+  anexo1list:Anexo1[]=[];
   delegados: DocentesDelegados[]=[];
   myControl = new FormControl();
   myControl1 = new FormControl();
@@ -83,23 +87,13 @@ export class NuevoproyectoComponent implements OnInit {
     this.rows = this._formBuilder.array([]);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.obtnerDatos();
-    this.responsablepppService.getDocentesbyAll().subscribe(value => {
-      this.docentes=value;
-      this.filteredOptions = this.myControl.valueChanges.pipe(
-        startWith(''),
-        map(values=>this.filter(values)),
-      );
-      this.filteredOptionsapoyo = this.myControl1.valueChanges.pipe(
-        startWith(''),
-        map(values=>this.filter0(values)),
-      );
-    })
     this.entidadbeneficiarioService.getEntidadBeneficiariaAll().subscribe(value => {
       this.entidadBeneficiaria=value;
     })
     this.activatedRoute.params.subscribe( params => {
+      let id = params['id']
       let cedula = params['cedula']
       let nombres = params['nombres']
       this.proyecto.coordinadorCedula=cedula;
@@ -125,12 +119,44 @@ export class NuevoproyectoComponent implements OnInit {
         // @ts-ignore
         this.responsablepppService.getResposablepppbyCarrera(value[0].codigo).subscribe(data=>{
           this.proyecto.responsablePPP=data.id;
-          this.issloading=false;
         },error=>{
           this.isexist=false;
-          this.issloading=false;
         })
       })
+      this.proyectoService.getProyectobyid(id).subscribe(getproyecto=>{
+        this.onRemoveRow(0);
+        getproyecto.objetivosEspecificosProyecto?.forEach(value => {
+          this.onAddRow(value.descripcion)
+          console.log(value)
+        })
+        this.proyecto=getproyecto;
+      })
+      this.responsablepppService.getDocentesbyAll().subscribe(value => {
+        this.docentes=value;
+        console.log(value)
+        this.anexo1Service.getAnexo1byIdProyecto(id).subscribe(value => {
+          value.forEach(value1 => {
+            if(value1.nombreRol=="apoyo"){
+              this.docentesselectApoyo.push(this.docentes.filter(value2 => value2.cedula==value1.cedulaDelegado)[0])
+            }
+            if(value1.nombreRol=="director"){
+              this.docentesselectDirector=this.docentes.filter(value2 => value2.cedula==value1.cedulaDelegado)[0]
+            }
+          })
+
+          this.anexo1list=value;
+          this.issloading=false;
+        })
+        this.filteredOptions = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map(values=>this.filter(values)),
+        );
+        this.filteredOptionsapoyo = this.myControl1.valueChanges.pipe(
+          startWith(''),
+          map(values=>this.filter0(values)),
+        );
+      })
+
     })
     this.fechaService.getSysdate().subscribe(value => {
       this.Fechaat=value.fecha;
@@ -152,7 +178,6 @@ export class NuevoproyectoComponent implements OnInit {
       objetivo: ['', Validators.required],
     });
     this.thirdFormGroup = this._formBuilder.group({
-      director: ['', Validators.required],
     });
     this.fourFormGroup = this._formBuilder.group({
     });
@@ -178,17 +203,17 @@ export class NuevoproyectoComponent implements OnInit {
     ).slice(0,10);
   }
   //ArrayActividades
-  onAddRow() {
+  onAddRow(descripcion?:String) {
     // @ts-ignore
-    this.rows.push(this.createItemFormGroup());
+    this.rows.push(this.createItemFormGroup(descripcion));
   }
   onRemoveRow(rowIndex:number){
     // @ts-ignore
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(): FormGroup {
+  createItemFormGroup(descripcion?:String): FormGroup {
     return this._formBuilder.group({
-      descripcion: ['', Validators.required],
+      descripcion: [descripcion, Validators.required],
     });
   }
 
@@ -301,6 +326,10 @@ export class NuevoproyectoComponent implements OnInit {
   }
 
   guardar(proyectos:Proyectos,anexo1:Anexo1[]){
+    console.log(anexo1)
+    console.log(anexo1)
+  }
+  /*guardar(proyectos:Proyectos,anexo1:Anexo1[]){
     var a1=0;
     var a2=0;
     proyectos.objetivosEspecificosProyecto=this.rows.getRawValue();
@@ -356,7 +385,7 @@ export class NuevoproyectoComponent implements OnInit {
         'warning'
       )
     }
-  }
+  }*/
   generate(anexo1: Anexo1) {
     var fecha:[];
     // @ts-ignore
@@ -430,6 +459,4 @@ export class NuevoproyectoComponent implements OnInit {
     });
   }
 
-
 }
-
