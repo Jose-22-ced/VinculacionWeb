@@ -6,6 +6,7 @@ import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.
 import {Entidadbeneficiaria} from "../../../models/entidadbeneficiaria";
 import {map, Observable, startWith} from "rxjs";
 import {CordinadorVinculacion} from "../../../models/cordinadorvinculacion";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-verentidadesbeneficarias',
@@ -52,8 +53,47 @@ export class VerentidadesbeneficariasComponent implements OnInit {
   }
 
 
-  eliminarEntidad(id:Number){
-    console.log(id);
+  eliminarEntidad(entidad:Entidadbeneficiaria){
+    console.log(entidad)
+    Swal.fire({
+      title: 'Seguro?',
+      text: "Está por eliminar la entidad: "+entidad.nombre,
+      icon: 'warning',
+      showCancelButton: true,
+      color: "#0c3255",
+      confirmButtonColor:"#0c3255",
+      iconColor:"#b72020",
+      background: "#fbc02d",
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.issloading=true;
+        this.entidadbeneficiarioService.deleteEntidadBeneficiaria(Number(entidad.idEntidad)).subscribe(value => {
+          Swal.fire({
+            title: 'Eliminado',
+            text: 'La entidad se elimino correctamente',
+            icon: 'success',
+            iconColor :'#17550c',
+            color: "#0c3255",
+            confirmButtonColor:"#0c3255",
+            background: "#fbc02d",
+          })
+          this.issloading=false;
+        },error => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error al eliminar la entidad '+error.error.message,
+            icon: 'warning',
+            iconColor :'#b72020',
+            color: "#0c3255",
+            confirmButtonColor:"#0c3255",
+            background: "#fbc02d",
+          })
+        })
+      }
+      this.issloading=false;
+    })
   }
 
 }

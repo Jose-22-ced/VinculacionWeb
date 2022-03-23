@@ -12,6 +12,6 @@ export class Anexo1 {
   siglasCarrera?:String;
   idProyectoPPP?:Number;
   documento?:String;
-  file?:null;
+  numProceso?:Number;
 
 }

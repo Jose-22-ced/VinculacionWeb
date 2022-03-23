@@ -15,6 +15,10 @@ import { NuevoproyectoComponent } from './nuevoproyecto/nuevoproyecto.component'
 import {MaterialFileInputModule} from "ngx-material-file-input";
 import { VerproyectosComponent } from './verproyectos/verproyectos.component';
 import { EditarproyectoComponent } from './editarproyecto/editarproyecto.component';
+import { DocentesdeapoyofirmaComponent } from './docentesdeapoyofirma/docentesdeapoyofirma.component';
+import { AgregaractividadesyrequisitosComponent } from './agregaractividadesyrequisitos/agregaractividadesyrequisitos.component';
+import { Verproyectos1Component } from './verproyectos1/verproyectos1.component';
+import { NuavaconvocatariaComponent } from './nuavaconvocataria/nuavaconvocataria.component';
 
 const routes: Routes = [
   {path:'bienvenida',
@@ -39,6 +43,14 @@ const routes: Routes = [
     component:VerproyectosComponent
   },{path:'editarproyecto/:id/:cedula/:nombres',
     component:EditarproyectoComponent
+  },{path:'docentedeapoyo/:cedula',
+    component:DocentesdeapoyofirmaComponent
+  },{path:'agregaractividadesyrequisitos/:id/:cedula',
+    component:AgregaractividadesyrequisitosComponent
+  },{path:'verproyectos1/:cedula',
+    component:Verproyectos1Component
+  },{path:'nuevaconvocatoria/:cedula',
+    component:NuavaconvocatariaComponent
   }
 ]
 
@@ -54,7 +66,11 @@ const routes: Routes = [
     VerresposabledepppComponent,
     NuevoproyectoComponent,
     VerproyectosComponent,
-    EditarproyectoComponent
+    EditarproyectoComponent,
+    DocentesdeapoyofirmaComponent,
+    AgregaractividadesyrequisitosComponent,
+    Verproyectos1Component,
+    NuavaconvocatariaComponent
   ],
   imports: [
     CommonModule,

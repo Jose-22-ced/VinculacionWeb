@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import {Proyectos} from "../models/proyectos";
+import {actividadeslistProyectos, Proyectos, requisitoslistProyectos} from "../models/proyectos";
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +33,18 @@ export class ProyectoService {
 
   getProyectobyid(id:number):Observable<Proyectos>{
     return this.http.get(this.urlEndPoint+"/"+id,{headers: this.httpHeaders}).pipe(map(Response => Response as Proyectos))
-
   }
+
+  updateRequistosbyIdProyectos(id:number,requisitoslistProyectos:requisitoslistProyectos[]):Observable<Proyectos>{
+    console.log(requisitoslistProyectos);
+    return this.http.put<Proyectos>(this.urlEndPoint+"/"+id+"/requisitos",requisitoslistProyectos,{headers: this.httpHeaders})
+  }
+
+  updateActividadesbyIdProyectos(id:number,actividadeslistProyecto:actividadeslistProyectos[]):Observable<Proyectos>{
+    console.log(actividadeslistProyecto);
+    return this.http.put<Proyectos>(this.urlEndPoint+"/"+id+"/actividades",actividadeslistProyecto,{headers: this.httpHeaders})
+  }
+
 
 
 

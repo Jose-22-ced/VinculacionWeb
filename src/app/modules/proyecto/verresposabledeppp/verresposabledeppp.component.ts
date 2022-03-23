@@ -46,23 +46,32 @@ export class VerresposabledepppComponent implements OnInit {
       text: "Al docente seleccionado ya no sera Resaposable de PPP",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      color: "#0c3255",
+      confirmButtonColor:"#0c3255",
+      background: "#fbc02d",
       cancelButtonColor: '#d33',
       confirmButtonText: 'Aceptar'
     }).then((result) => {
       if (result.isConfirmed) {
         this.responsablepppService.updateResposableppp(responsable).subscribe(datau=>{
           Swal.fire({
-            icon: 'success',
             title: 'Quitar Asiganación',
-            text: 'El docente ya no esta sido Asignado!'
+            text: 'El docente ya no esta sido Asignado!',
+            icon: 'success',
+            iconColor :'#17550c',
+            color: "#0c3255",
+            confirmButtonColor:"#0c3255",
+            background: "#fbc02d",
           })
           this.router.navigate(['/panelusuario/proyectovinculacion/nuevoresponsable',this.cedula]);
         },err => {
           Swal.fire({
+            title: 'Opss',
+            text: err.error().message,
             icon: 'warning',
-            title: 'Opss.',
-            text: err.error().message
+            color: "#0c3255",
+            confirmButtonColor:"#0c3255",
+            background: "#fbc02d",
           })
         })
       }

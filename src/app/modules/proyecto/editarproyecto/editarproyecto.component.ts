@@ -108,7 +108,7 @@ export class EditarproyectoComponent implements OnInit {
           }else {
             this.codigoProyecto=1;
           }
-          console.log( this.codigoProyecto)
+          console.log(this.codigoProyecto)
         })
         // @ts-ignore
         this.carrerasService.getCarreras().subscribe(value1 => {
@@ -136,6 +136,7 @@ export class EditarproyectoComponent implements OnInit {
         console.log(value)
         this.anexo1Service.getAnexo1byIdProyecto(id).subscribe(value => {
           value.forEach(value1 => {
+            console.log(value1+"dfsdfsd")
             if(value1.nombreRol=="apoyo"){
               this.docentesselectApoyo.push(this.docentes.filter(value2 => value2.cedula==value1.cedulaDelegado)[0])
             }
@@ -143,7 +144,7 @@ export class EditarproyectoComponent implements OnInit {
               this.docentesselectDirector=this.docentes.filter(value2 => value2.cedula==value1.cedulaDelegado)[0]
             }
           })
-
+          this.obtnerDatos();
           this.anexo1list=value;
           this.issloading=false;
         })
@@ -308,11 +309,14 @@ export class EditarproyectoComponent implements OnInit {
               value.documento="";
             }
           })
-          Swal.fire(
-            'Fallo',
-            'El docemento es demaciado pesado',
-            'warning'
-          )
+          Swal.fire({
+            title: 'Fallo',
+            text: 'El docemento es demaciado pesado',
+            icon: 'warning',
+            color: "#0c3255",
+            confirmButtonColor:"#0c3255",
+            background: "#fbc02d",
+          })
         }else{
           this.anexo1.forEach(value => {
             if (value.cedulaDelegado==anexo1.cedulaDelegado){

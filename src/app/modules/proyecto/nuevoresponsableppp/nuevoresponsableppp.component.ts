@@ -105,16 +105,23 @@ export class NuevoresponsablepppComponent implements OnInit {
       if (result.isConfirmed) {
         this.responsablepppService.saveResposableppp(this.obtnerdatos(docente)).subscribe(value => {
           Swal.fire({
-            icon: 'success',
             title: 'Asignado',
-            text: 'El docente a sido Asignado!'
+            text: 'El docente a sido Asignado!',
+            icon: 'success',
+            iconColor :'#17550c',
+            color: "#0c3255",
+            confirmButtonColor:"#0c3255",
+            background: "#fbc02d",
           })
           this.router.navigate(['/panelusuario/proyectovinculacion/verresponsable',this.cedula]);
         },error => {
           Swal.fire({
+            title: 'Opss',
+            text: error.error().message,
             icon: 'warning',
-            title: 'Opss.',
-            text: error.error().message
+            color: "#0c3255",
+            confirmButtonColor:"#0c3255",
+            background: "#fbc02d",
           })
         })
       }

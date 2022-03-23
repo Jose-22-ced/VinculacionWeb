@@ -31,8 +31,8 @@ export class actividadeslistProyectos {
   descripcion?: string;
 }
 
-interface requisitoslistProyectos {
-  descripcion: string;
+export class requisitoslistProyectos {
+  descripcion?: string;
 }
 export class ObjetivosEspeciicoslistProyecto{
   descripcion?: String;

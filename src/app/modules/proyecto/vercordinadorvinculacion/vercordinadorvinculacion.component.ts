@@ -45,16 +45,23 @@ export class VercordinadorvinculacionComponent implements OnInit {
             docente.estado=false;
             this.cordinadorvinculacionService.updateCordinadorVinculacion(docente).subscribe(datau=>{
               Swal.fire({
-                icon: 'success',
                 title: 'Quitar ASiganación',
-                text: 'El docente ya no esta sido Asignado!'
+                text: 'El docente ya no esta sido Asignado!',
+                icon: 'success',
+                iconColor :'#17550c',
+                color: "#0c3255",
+                confirmButtonColor:"#0c3255",
+                background: "#fbc02d",
               })
               this.router.navigate(['/panelusuario/proyectovinculacion/cordinadorvinculacion']);
             },err => {
               Swal.fire({
+                title: 'Opss',
+                text: err.error().message,
                 icon: 'warning',
-                title: 'Opss.',
-                text: err.error().message
+                color: "#0c3255",
+                confirmButtonColor:"#0c3255",
+                background: "#fbc02d",
               })
             })
           }

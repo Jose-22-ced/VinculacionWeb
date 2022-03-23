@@ -62,20 +62,25 @@ export class NuevaendidadbeneficiariaComponent implements OnInit {
       console.log(this.entidad)
       this.entidadbeneficiarioService.saveEntidadBeneficiaria(this.entidad).subscribe(data =>{
           console.log(data)
-          Swal.fire({
-            icon: 'success',
-            title: 'Éxito',
-            text: 'Entidad Registrada',
-            confirmButtonColor: "#0c3255"
-          })
+        Swal.fire({
+          title: 'Exito',
+          text: 'Entidad Registrada',
+          icon: 'success',
+          iconColor :'#17550c',
+          color: "#0c3255",
+          confirmButtonColor:"#0c3255",
+          background: "#fbc02d",
+        })
         this.router.navigate(['/panelusuario/proyectovinculacion/verentidadesbenefiarias']);
         },err=>{
-          Swal.fire({
-            icon: 'warning',
-            title: 'Al parecer hubo un problema',
-            text: err.error.message,
-            confirmButtonColor: "#0c3255"
-          })
+        Swal.fire({
+          title: 'Al parecer hubo un problema',
+          text: err.error.message,
+          icon: 'warning',
+          color: "#0c3255",
+          confirmButtonColor:"#0c3255",
+          background: "#fbc02d",
+        })
         }
       )
     })

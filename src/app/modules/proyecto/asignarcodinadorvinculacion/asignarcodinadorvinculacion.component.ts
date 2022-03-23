@@ -76,7 +76,9 @@ export class AsignarcodinadorvinculacionComponent implements OnInit {
       text: "Al docente seleccionado como Cordinador de Vinculación",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      color: "#0c3255",
+      confirmButtonColor:"#0c3255",
+      background: "#fbc02d",
       cancelButtonColor: '#d33',
       confirmButtonText: 'Aceptar'
     }).then((result) => {
@@ -86,32 +88,44 @@ export class AsignarcodinadorvinculacionComponent implements OnInit {
            docente.estado=true;
            this.cordinadorvinculacionService.updateCordinadorVinculacion(docente).subscribe(datau=>{
              Swal.fire({
-               icon: 'success',
                title: 'Asignado',
-               text: 'El docente a sido Asignado!'
+               text: 'El docente a sido Asignado!',
+               icon: 'success',
+               iconColor :'#17550c',
+               color: "#0c3255",
+               confirmButtonColor:"#0c3255",
+               background: "#fbc02d",
              })
              this.router.navigate(['/panelusuario/proyectovinculacion/vercordinadorvinculacion']);
            },err => {
              Swal.fire({
+               title: 'Opss',
                icon: 'warning',
-               title: 'Opss.',
-               text: err.error().message
+               color: "#0c3255",
+               confirmButtonColor:"#0c3255",
+               background: "#fbc02d",
              })
            })
           }else{
             docente.estado=true;
             this.cordinadorvinculacionService.saveCordinadorVinculacion(docente).subscribe(datau=>{
               Swal.fire({
-                icon: 'success',
                 title: 'Asignado',
-                text: 'El docente a sido Asignado!'
+                text: 'El docente a sido Asignado!',
+                icon: 'success',
+                iconColor :'#17550c',
+                color: "#0c3255",
+                confirmButtonColor:"#0c3255",
+                background: "#fbc02d",
               })
               this.router.navigate(['/panelusuario/proyectovinculacion/vercordinadorvinculacion']);
             },err => {
               Swal.fire({
+                title: 'Opss',
                 icon: 'warning',
-                title: 'Opss.',
-                text: err.error().message
+                color: "#0c3255",
+                confirmButtonColor:"#0c3255",
+                background: "#fbc02d",
               })
             })
           }

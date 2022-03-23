@@ -70,20 +70,25 @@ export class EditarentidadbeneficiariaComponent implements OnInit {
     entidad.id=entidad.idEntidad;
     this.entidadbeneficiarioService.updateEntidadBeneficiaria(this.entidad).subscribe(data =>{
         console.log(data)
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Entidad Actualizada',
-          confirmButtonColor: "#0c3255"
-        })
+      Swal.fire({
+        title: 'Exito',
+        text: 'Entidad Actualizada',
+        icon: 'success',
+        iconColor :'#17550c',
+        color: "#0c3255",
+        confirmButtonColor:"#0c3255",
+        background: "#fbc02d",
+      })
       this.router.navigate(['/panelusuario/proyectovinculacion/verentidadesbenefiarias']);
       },err=>{
-        Swal.fire({
-          icon: 'warning',
-          title: 'Al parecer hubo un problema',
-          text: err.error.message,
-          confirmButtonColor: "#0c3255"
-        })
+      Swal.fire({
+        title: 'Al parecer hubo un problema',
+        text: err.error.message,
+        icon: 'warning',
+        color: "#0c3255",
+        confirmButtonColor:"#0c3255",
+        background: "#fbc02d",
+      })
       }
     )
   }

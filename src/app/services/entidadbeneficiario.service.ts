@@ -21,6 +21,11 @@ export class EntidadbeneficiarioService {
     return this.http.put<Entidadbeneficiaria>(this.urlEndPoint,entidad,{headers: this.httpHeaders})
   }
 
+  deleteEntidadBeneficiaria(id:Number){
+    console.log(id)
+    return this.http.delete<Entidadbeneficiaria>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
+  }
+
   getEntidadBeneficiariaAll():Observable<Entidadbeneficiaria[]>{
     return this.http.get(this.urlEndPoint+"/all",{headers: this.httpHeaders}).pipe(map(
       data => data as Entidadbeneficiaria[]

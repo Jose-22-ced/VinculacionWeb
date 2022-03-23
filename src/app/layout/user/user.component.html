@@ -89,6 +89,46 @@
                       routerLinkActive="active">-Proyectos Actuales</button>
             </mat-expansion-panel>
           </div>
+          <!--Docente de Apoyo-->
+          <div class="list-group" *ngSwitchCase="'DA'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Firmas de anexo
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/docentedeapoyo',persona.cedula]"
+                      routerLinkActive="active">-Anexo 1</button>
+            </mat-expansion-panel>
+          </div>
+          <!--Resposanle de PPP-->
+          <div class="list-group" *ngSwitchCase="'RPPP'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Otros datos del los Proyectos
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verproyectos1',persona.cedula]"
+                      routerLinkActive="active">Actvidades y Materias</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                 Convocatorias
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/nuevaconvocatoria',persona.cedula]"
+                      routerLinkActive="active">Nueva convocatorias</button>
+            </mat-expansion-panel>
+          </div>
         </div>
       </ng-container>
     </mat-drawer>

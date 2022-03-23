@@ -31,7 +31,7 @@ export class Anexo1Service {
   getbyCarrera(codigocarrera?:String):Observable<Anexo1[]>{
     return this.http.get(this.urlEndPoint+"/allByCarrera/"+codigocarrera,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo1[]))
   }
-  getbyCedula(cedula?:String):Observable<Anexo1[]>{
+  getAnexo1byCedula(cedula?:String):Observable<Anexo1[]>{
     return this.http.get(this.urlEndPoint+"/allByCedula/"+cedula,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo1[]))
   }
 }

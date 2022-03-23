@@ -324,37 +324,50 @@ export class NuevoproyectoComponent implements OnInit {
           anexo1.forEach(value1 => {
             value1.idProyectoPPP=id;
             this.anexo1Service.saveAnexo1(value1).subscribe(value2 => {
-              Swal.fire(
-                'Exito',
-                'El proyecto ha sido creado con exito',
-                'success'
-              )
-              this.router.navigate(['/panelusuario/proyectovinculacion/nuevoproyecto',this.CedulaC]);
+              Swal.fire({
+                title: 'Exito',
+                text: 'El proyecto ha sido creado con exito',
+                icon: 'success',
+                iconColor :'#17550c',
+                color: "#0c3255",
+                confirmButtonColor:"#0c3255",
+                background: "#fbc02d",
+              })
+              this.router.navigate(['/panelusuario/proyectovinculacion/verproyecto',this.CedulaC,this.NombreC]);
               this.issloading=false;
             },error => {
-              Swal.fire(
-                'Fallo',
-                'El proyecto ha sido creado'  + error.error.message,
-                'error'
-              )
+              Swal.fire({
+                title: 'Fallo',
+                text: 'El proyecto ha sido creado'  + error.error.message,
+                icon: 'error',
+                color: "#0c3255",
+                confirmButtonColor:"#0c3255",
+                background: "#fbc02d",
+              })
               this.issloading=false;
             })
           })
         })
       },error => {
-        Swal.fire(
-          'Fallo',
-          'El proyecto ha sido creado'  + error.error.message,
-          'error'
-        )
+        Swal.fire({
+          title: 'Fallo',
+          text: 'El proyecto no ha sido creado'  + error.error.message,
+          icon: 'error',
+          color: "#0c3255",
+          confirmButtonColor:"#0c3255",
+          background: "#fbc02d",
+        })
         this.issloading=false;
       })
     }else{
-      Swal.fire(
-        'Fallo',
-        'Faltan documentos por subir!, en la paso 4',
-        'warning'
-      )
+      Swal.fire({
+        title: 'Fallo',
+        text: 'Faltan documentos por subir!, en la paso 4',
+        icon: 'warning',
+        color: "#0c3255",
+        confirmButtonColor:"#0c3255",
+        background: "#fbc02d",
+      })
     }
   }
   generate(anexo1: Anexo1) {
