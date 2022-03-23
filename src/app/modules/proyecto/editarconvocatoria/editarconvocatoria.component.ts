@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {map, Observable, startWith} from "rxjs";
+import {Proyectos} from "../../../models/proyectos";
+import {Actividadesanexo, Anexo2, Fechas} from "../../../models/anexo2";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FechaService} from "../../../services/fecha.service";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
-import {Proyectos} from "../../../models/proyectos";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {MatSelectionListChange} from "@angular/material/list";
 import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
 import {DateAdapter} from "@angular/material/core";
-import {map, Observable, startWith} from "rxjs";
-import {Actividadesanexo, Anexo2, Fechas} from "../../../models/anexo2";
 import {Anexo2Service} from "../../../services/anexo2.service";
-import {Anexo1} from "../../../models/anexo1";
+import {MatSelectionListChange} from "@angular/material/list";
 import Docxtemplater from "docxtemplater";
 // @ts-ignore
 import PizZip from "pizzip";
@@ -33,12 +32,14 @@ function getBase64(file: any) {
     reader.onerror = error => reject(error);
   });
 }
+
 @Component({
-  selector: 'app-nuavaconvocataria',
-  templateUrl: './nuavaconvocataria.component.html',
-  styleUrls: ['./nuavaconvocataria.component.css']
+  selector: 'app-editarconvocatoria',
+  templateUrl: './editarconvocatoria.component.html',
+  styleUrls: ['./editarconvocatoria.component.css']
 })
-export class NuavaconvocatariaComponent implements OnInit {
+export class EditarconvocatoriaComponent implements OnInit {
+
   issloading=true;
   isexist?:boolean;
   isLinear = true;
@@ -80,36 +81,39 @@ export class NuavaconvocatariaComponent implements OnInit {
               private anexo2Service:Anexo2Service) {
     this._adapter.setLocale('es-ec');
   }
-
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
-      let cedula = params['cedula']
-      this.cedula=cedula;
-      console.log(cedula)
-      this.responsablepppService.getResposablepppbyAll().subscribe(value => {
-        this.proyectoService.getProyectos().subscribe(value1 => {
-          this.isexist=value1.filter(value2 => value2.codigocarrera==value.filter(value3 => value3.cedula==cedula)[0]).length==0;
-          this.proyectos=value1.filter(value2 => value2.codigocarrera==value.filter(value3 => value3.cedula==cedula)[0].codigoCarrera)
-          this.anexo2Service.getAnexo2().subscribe(anexo2=>{
-            if(anexo2.filter(fil=>fil.siglasCarrera==this.proyectos[0].codigocarrera).length==0){
-              this.numeroConvocatoria="1";
-            }else{
-              // @ts-ignore
-              this.numeroConvocatoria=(Number(anexo2.filter(fil=>fil.siglasCarrera==this.proyectos[0].codigocarrera).pop().numeroConvocatoria)+1).toString();
-            }
+      let id = params['id']
+      this.anexo2Service.getAnexo2().subscribe(value => {
+        this.anexo2=value.filter(value1 => value1.id==id)[0]
+        // @ts-ignore
+        this.anexo2.actividades.forEach(value1 => {
+          if(value1.descripcion=="Emisión de la convocatoria"){
+            this.fechae1=value1.inicio;
+            this.fechae2=value1.fin;
+          }
+          if(value1.descripcion=="Recepción de solicitudes"){
+            this.fechar1=value1.inicio;
+            this.fechar2=value1.fin;
+          }
+          if(value1.descripcion=="Proceso de selección"){
+            this.fechap1=value1.inicio;
+            this.fechap2=value1.fin;
+          }
+          if(value1.descripcion=="Notificación de resultados"){
+            this.fechan1=value1.inicio;
+            this.fechan2=value1.fin;
+          }
+          this.proyectoService.getProyectos().subscribe(value2 => {
+            this.proyectoselect=value2.filter(value3 => value3.id==this.anexo2.idProyectoPPP)[0]
           })
-          this.issloading=false;
-          this.filteredOptions = this.myControl.valueChanges.pipe(
-            startWith(''),
-            map(values=>this.filter(values)),
-          );
         })
+        console.log(this.anexo2)
+        this.issloading=false;
       })
-
     })
 
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({
       ciclo: ['', Validators.required],
@@ -149,7 +153,7 @@ export class NuavaconvocatariaComponent implements OnInit {
   }
 
 
-  obtnerDatos(proyecto:Proyectos):Anexo2 {
+  obtnerDatos():Anexo2 {
     this.actividadesanexo.length=0;
     this.actividadesanexo.push({
       descripcion:"Emisión de la convocatoria",
@@ -177,27 +181,12 @@ export class NuavaconvocatariaComponent implements OnInit {
     this.fechas.fechap2=this.fechap2;
     this.fechas.fechar1=this.fechar1;
     this.fechas.fechar2=this.fechar2;
-
-    this.anexo2.numeroConvocatoria =this.numeroConvocatoria;
-    this.anexo2.siglasCarrera=proyecto.codigocarrera;
-    this.anexo2.carrera = proyecto.carrera;
-    this.anexo2.num_proceso=1;
-    this.anexo2.nombreProyecto = proyecto.nombre;
-    this.anexo2.nombreResponsable = proyecto.nombreresponsable;
-    this.anexo2.idProyectoPPP = proyecto.id;
     this.anexo2.actividades=this.actividadesanexo;
-    this.fechaService.getSysdate().subscribe(value => {
-      this.anexo2.anio = this.data.getFullYear()+""
-      this.anexo2.fecha = value.fecha;
-    })
-    this.entidadbeneficiarioService.getEntidadBeneficiariaAll().subscribe(value => {
-      this.anexo2.entidadBeneficiaria=value.filter(value1 => value1.idEntidad==proyecto.entidadbeneficiaria)[0].nombre
-    })
     return this.anexo2
   }
 
-  subirDocumento(proyecto:Proyectos,file:FileList){
-    this.obtnerDatos(proyecto);
+  subirDocumento(file:FileList){
+    this.obtnerDatos();
     if(file.length==0){
     }else{
       getBase64(file[0]).then(docx=>{
@@ -212,18 +201,19 @@ export class NuavaconvocatariaComponent implements OnInit {
             'warning'
           )
         }else{
+          this.anexo2.documento="";
           this.anexo2.documento=docx+"";
         }
       })
     }
   }
 
-  guardarAnexo2(proyeco:Proyectos){
+  guardarAnexo2(){
     this.issloading=true;
-    this.anexo2Service.saveAnexo2(this.obtnerDatos(proyeco)).subscribe(value => {
+    this.anexo2Service.updateAnexo2(this.obtnerDatos()).subscribe(value => {
       Swal.fire({
         title: 'Exito',
-        text: 'La convocatoria creado y enviada con exito',
+        text: 'Cambios guardados',
         icon: 'success',
         iconColor :'#17550c',
         color: "#0c3255",
@@ -231,12 +221,11 @@ export class NuavaconvocatariaComponent implements OnInit {
         background: "#fbc02d",
       })
       this.issloading=false;
-      this.router.navigate(['/panelusuario/proyectovinculacion/verconvocatoria',this.cedula]);
     },error => {
       if(error.error.message=="No se envió el email"){
         Swal.fire({
           title: 'Algo fallo',
-          text: 'La convocatoria creado y enviada con exito, pero no se envio el correo',
+          text: 'Cambios guardados con exito',
           icon: 'warning',
           iconColor :'#17550c',
           color: "#0c3255",
@@ -244,11 +233,10 @@ export class NuavaconvocatariaComponent implements OnInit {
           background: "#fbc02d",
         })
         this.issloading=false;
-        this.router.navigate(['/panelusuario/proyectovinculacion/verconvocatoria',this.cedula]);
       }else {
         Swal.fire({
           title: 'Fallo',
-          text: 'La convocatoria ha sido creada '  + error.error.message,
+          text: 'Cambios no guardados '  + error.error.message,
           icon: 'error',
           color: "#0c3255",
           confirmButtonColor:"#0c3255",
@@ -261,9 +249,9 @@ export class NuavaconvocatariaComponent implements OnInit {
   }
 
   generarDocumento(proyecto:Proyectos,fechas:Fechas) {
-    console.log(this.obtnerDatos(proyecto))
+    console.log(this.obtnerDatos())
     var pipe:DatePipe = new DatePipe('en-US')
-    var anexo:Anexo2=this.obtnerDatos(proyecto);
+    var anexo:Anexo2=this.obtnerDatos();
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo2.docx", function(
       // @ts-ignore
       error,
@@ -348,6 +336,5 @@ export class NuavaconvocatariaComponent implements OnInit {
       saveAs(out, "Anexo2 "+anexo.nombreResponsable+" Covocatoria Nª"+anexo.numeroConvocatoria+"de"+anexo.carrera+".docx");
     });
   }
-
 
 }

@@ -14,7 +14,12 @@ export class Anexo2 {
   carrera?:String;
   documento?:String;
   num_proceso?:Number;
+  materias?: MateriasProyecyo[]
   actividades?:Actividadesanexo[]=[]
+}
+
+export class MateriasProyecyo{
+  nombre?:String
 }
 
 export class Actividadesanexo {

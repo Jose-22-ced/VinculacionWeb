@@ -127,6 +127,22 @@
               <!--Redireccion con los routerlink-->
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/nuevaconvocatoria',persona.cedula]"
                       routerLinkActive="active">Nueva convocatorias</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verconvocatoria',persona.cedula]"
+                      routerLinkActive="active">Ver convocatoras</button>
+            </mat-expansion-panel>
+          </div>
+          <!--Resposanle de PPP-->
+          <div class="list-group" *ngSwitchCase="'EST'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Convocatoria
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verconvocatoria1',persona.cedula]"
+                      routerLinkActive="active">Convocatorias</button>
             </mat-expansion-panel>
           </div>
         </div>

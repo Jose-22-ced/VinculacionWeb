@@ -374,7 +374,7 @@ export class NuevoproyectoComponent implements OnInit {
     var fecha:[];
     // @ts-ignore
     fecha=anexo1.fechaDelegacion.toString().split("T");
-    loadFile("https://raw.githubusercontent.com/Sbryan20/Sistema-PPProfesionales/main/src/assets/doc/anexo1.docx", function(
+    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo1.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore

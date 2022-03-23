@@ -33,3 +33,4 @@ interface DocenteRol{
 export class CarreraDocente{
   codigo?:String;
 }
+

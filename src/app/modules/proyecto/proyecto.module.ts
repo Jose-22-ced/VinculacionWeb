@@ -19,6 +19,9 @@ import { DocentesdeapoyofirmaComponent } from './docentesdeapoyofirma/docentesde
 import { AgregaractividadesyrequisitosComponent } from './agregaractividadesyrequisitos/agregaractividadesyrequisitos.component';
 import { Verproyectos1Component } from './verproyectos1/verproyectos1.component';
 import { NuavaconvocatariaComponent } from './nuavaconvocataria/nuavaconvocataria.component';
+import { VerconvocatoriasComponent } from './verconvocatorias/verconvocatorias.component';
+import { EditarconvocatoriaComponent } from './editarconvocatoria/editarconvocatoria.component';
+import { Verconvocatorias1Component } from './verconvocatorias1/verconvocatorias1.component';
 
 const routes: Routes = [
   {path:'bienvenida',
@@ -51,6 +54,12 @@ const routes: Routes = [
     component:Verproyectos1Component
   },{path:'nuevaconvocatoria/:cedula',
     component:NuavaconvocatariaComponent
+  },{path:'verconvocatoria/:cedula',
+    component:VerconvocatoriasComponent
+  },{path:'editarconvocatoria/:id',
+    component:EditarconvocatoriaComponent
+  },{path:'verconvocatoria1/:cedula',
+    component:Verconvocatorias1Component
   }
 ]
 
@@ -70,7 +79,10 @@ const routes: Routes = [
     DocentesdeapoyofirmaComponent,
     AgregaractividadesyrequisitosComponent,
     Verproyectos1Component,
-    NuavaconvocatariaComponent
+    NuavaconvocatariaComponent,
+    VerconvocatoriasComponent,
+    EditarconvocatoriaComponent,
+    Verconvocatorias1Component
   ],
   imports: [
     CommonModule,
