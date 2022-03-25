@@ -114,7 +114,7 @@
               </mat-expansion-panel-header>
               <!--Redireccion con los routerlink-->
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verproyectos1',persona.cedula]"
-                      routerLinkActive="active">Actvidades y Materias</button>
+                      routerLinkActive="active">-Actvidades y Materias</button>
             </mat-expansion-panel>
             <br>
             <mat-expansion-panel (opened)="panelOpenState = true"
@@ -126,9 +126,23 @@
               </mat-expansion-panel-header>
               <!--Redireccion con los routerlink-->
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/nuevaconvocatoria',persona.cedula]"
-                      routerLinkActive="active">Nueva convocatorias</button>
+                      routerLinkActive="active">-Nueva convocatorias</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verconvocatoria',persona.cedula]"
-                      routerLinkActive="active">Ver convocatoras</button>
+                      routerLinkActive="active">-Ver convocatoras</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Postulación
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verportulaciones1',persona.cedula]"
+                      routerLinkActive="active">-Ver postulaciones</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verconvocatoria',persona.cedula]"
+                      routerLinkActive="active">-Ver convocatoras</button>
             </mat-expansion-panel>
           </div>
           <!--Resposanle de PPP-->
@@ -137,12 +151,14 @@
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  Convocatoria
+                  Postulaciones
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <!--Redireccion con los routerlink-->
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verconvocatoria1',persona.cedula]"
-                      routerLinkActive="active">Convocatorias</button>
+                      routerLinkActive="active">-Convocatorias</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verportulaciones',persona.cedula]"
+                      routerLinkActive="active">-Postuaciones envidas</button>
             </mat-expansion-panel>
           </div>
         </div>

@@ -33,4 +33,11 @@ interface DocenteRol{
 export class CarreraDocente{
   codigo?:String;
 }
-
+export class DirectorNombre{
+  cedula?:String;
+  nombre?:String;
+  apellidos?:String;
+}
+export class NombreResponsable{
+  nombre?:String;
+}

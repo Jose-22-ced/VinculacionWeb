@@ -4,6 +4,7 @@ import {map, Observable} from "rxjs";
 import {Anexo3} from "../models/anexo3";
 import {Alumno} from "../models/alumno";
 import {Resposable} from "../models/resposableppp";
+import {DirectorNombre, NombreResponsable} from "../models/docentes";
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,13 @@ export class Anexo3Service {
   }
   getAnexo3byCodigoCorrera(codigo?:String):Observable<Anexo3[]>{
     return this.http.get(this.urlEndPoint+"/allByCodigoCarrera/"+codigo,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo3[]))
+  }
+
+  getDocenteDirectorbyCodigoProyecto(codigoProyecto?:Number):Observable<DirectorNombre>{
+    return this.http.get("http://localhost:8080/api/docentes/director/"+codigoProyecto,{headers: this.httpHeaders}).pipe(map(Response => Response as DirectorNombre))
+  }
+  getReprecentantebyCodigoProyecto(codigoProyecto?:Number):Observable<NombreResponsable>{
+    return this.http.get("http://localhost:8080/api/entidad/entidadR/"+codigoProyecto,{headers: this.httpHeaders}).pipe(map(Response => Response as NombreResponsable))
+
   }
 }

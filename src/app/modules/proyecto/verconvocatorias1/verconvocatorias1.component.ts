@@ -90,6 +90,7 @@ export class Verconvocatorias1Component implements OnInit {
   aux: number = 0;
   aux2: number = 0;
   postular(anexo2:Anexo2){
+    var anexo3:Anexo3=this.obtnerDatos(anexo2)
     this.aux = 0;
     this.aux2 = 0;
     this.anexo3Service.getAnexo3byCedula(this.cedula+"").subscribe(value => {
@@ -103,50 +104,95 @@ export class Verconvocatorias1Component implements OnInit {
           background: "#fbc02d",
         })
       }else{
-        this.materiasService.getMateriasbyAlumno(this.cedula+"").subscribe(value1 => {
+        this.materiasService.getMateriasbyAlumno(this.cedula+"").subscribe(async value1 => {
           for (let i = 0; i < value1.materias!.length; i++) {
             for (let j = 0; j < anexo2.materias!.length; j++) {
-              if(value1.materias![i].nombre == anexo2.materias![j].nombre) {
+              if (value1.materias![i].nombre == anexo2.materias![j].nombre) {
                 this.aux2++;
                 console.log('la respuesta es' + this.aux2);
               }
             }
           }
-          if(this.aux2===anexo2.materias!.length){
+          if (this.aux2 === anexo2.materias!.length) {
             console.log("Si cumple con los requisitos para postular")
             Swal.fire({
               allowOutsideClick: false,
+              allowEnterKey:false,
+              allowEscapeKey:false,
               title: '¡¡¡ATENCIÓN!!!',
-              text: '🔊 Antes de "CONTINUAR LA POSTULACIÓN" usted deberá ' +
+              text: '🔊 Antes de "CONTINUAR LA ACEPTACIÓN" usted deberá ' +
                 '"OBTNER EL ANEXO" dando click en esa opción. Una vez obtenido el anexo deberá FIRMAR y trasformar' +
-                ' el documeto a formato PDF el cual se le pedirá mas adelante. ' +
+                ' el documeto a formato PDF el cual se le pedirá mas adelante, y sera enviada al estudiante ' +
                 'Tome su tiempo, una ves tenga lo requerido puede regresar a esta ventana' +
-                ' y "CONTINIAR LA POSTULACIÓN 🔊"',
+                ' y "CONTINUAR LA ACEPTACIÓN 🔊"',
               icon: 'info',
               showDenyButton: true,
               showCancelButton: true,
-              cancelButtonText:'Salir, y continuar después',
+              cancelButtonText: 'Salir, y continuar después',
               confirmButtonText: '📑OBTENER ANEXO',
               denyButtonText: `CONTINUAR POSTULACIÓN 👉`,
               denyButtonColor: "#3cb227",
               color: "#0c3255",
-              confirmButtonColor:"#0c3255",
+              confirmButtonColor: "#0c3255",
               background: "#fbc02d",
-            }).then((result) => {
+            }).then(async (result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
-                Swal.fire('Saved!', '', 'success')
+                this.generarDocumento(anexo2);
               } else if (result.isDenied) {
-                Swal.fire('Changes are not saved', '', 'info')
+                const {value: file} = await Swal.fire({
+                  allowOutsideClick: false,
+                  allowEnterKey:false,
+                  allowEscapeKey:false,
+                  showCancelButton: true,
+                  confirmButtonText:"Enviar postulación",
+                  color: "#0c3255",
+                  confirmButtonColor: "#3cb227",
+                  background: "#fbc02d",
+                  title: 'Confirmación',
+                  text: 'Debe subir la el anexo en el formato anterirmente requerido "PDF" para finalizar. Nota: Sea reponsable con el documento a subir, para evitar problemas futuros.',
+                  input: 'file',
+                  inputAttributes: {
+                    'accept': 'application/pdf',
+                    'aria-label': 'Debe subir la convocatoria en formato PDF'
+                  },
+                  inputValidator: (value) => {
+                    return new Promise((resolve) => {
+                      if (value === null) {
+                        resolve('Es necesario que seleccione el PDF del anexo')
+                      } else {
+                        getBase64(value).then(docx => {
+                          anexo3.documento = docx + '';
+                          this.anexo3Service.saveAnexo3(anexo3).subscribe(value2 => {
+                            Swal.fire({
+                              title: 'Exito',
+                              text: 'La solicitud enviada de forma existosa, espere su repuesta',
+                              icon: 'success',
+                              iconColor :'#17550c',
+                              color: "#0c3255",
+                              confirmButtonColor:"#0c3255",
+                              background: "#fbc02d",
+                            })
+                          },error => {
+                            Swal.fire({
+                              title: 'Fallo',
+                              text: 'La solicitud ha sido creada '  + error.error.message,
+                              icon: 'error',
+                              color: "#0c3255",
+                              confirmButtonColor:"#0c3255",
+                              background: "#fbc02d",
+                            })
+                          })
+                          console.log(anexo3)
+                        })
+                      }
+                    })
+                  }
+                })
               }
             })
 
-
-
-
-
-
-          }else{
+          } else {
             console.log("No cumple, para postular")
           }
         })
@@ -182,7 +228,7 @@ export class Verconvocatorias1Component implements OnInit {
   generarDocumento(anex2:Anexo2) {
     console.log(this.obtnerDatos(anex2))
     var anexo3:Anexo3=this.obtnerDatos(anex2);
-    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo2.docx", function(
+    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo3.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore

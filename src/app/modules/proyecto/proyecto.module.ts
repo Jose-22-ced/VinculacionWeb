@@ -22,6 +22,8 @@ import { NuavaconvocatariaComponent } from './nuavaconvocataria/nuavaconvocatari
 import { VerconvocatoriasComponent } from './verconvocatorias/verconvocatorias.component';
 import { EditarconvocatoriaComponent } from './editarconvocatoria/editarconvocatoria.component';
 import { Verconvocatorias1Component } from './verconvocatorias1/verconvocatorias1.component';
+import { VerpostulacionesComponent } from './verpostulaciones/verpostulaciones.component';
+import { Verpostulaciones1Component } from './verpostulaciones1/verpostulaciones1.component';
 
 const routes: Routes = [
   {path:'bienvenida',
@@ -60,6 +62,10 @@ const routes: Routes = [
     component:EditarconvocatoriaComponent
   },{path:'verconvocatoria1/:cedula',
     component:Verconvocatorias1Component
+  },{path:'verportulaciones/:cedula',
+    component:VerpostulacionesComponent
+  },{path:'verportulaciones1/:cedula',
+    component:Verpostulaciones1Component
   }
 ]
 
@@ -82,7 +88,9 @@ const routes: Routes = [
     NuavaconvocatariaComponent,
     VerconvocatoriasComponent,
     EditarconvocatoriaComponent,
-    Verconvocatorias1Component
+    Verconvocatorias1Component,
+    VerpostulacionesComponent,
+    Verpostulaciones1Component,
   ],
   imports: [
     CommonModule,
