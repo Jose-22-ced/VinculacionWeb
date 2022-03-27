@@ -135,17 +135,31 @@
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  Postulación
+                  Postulaciónes
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <!--Redireccion con los routerlink-->
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verportulaciones1',persona.cedula]"
                       routerLinkActive="active">-Ver postulaciones</button>
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verconvocatoria',persona.cedula]"
-                      routerLinkActive="active">-Ver convocatoras</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verfirmarportulaciones',persona.cedula]"
+                      routerLinkActive="active">-Firmas de aceptación</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Delegación
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/delegaciondealumnos',persona.cedula]"
+                      routerLinkActive="active">-Nueva delgación</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verfirmarportulaciones',persona.cedula]"
+                      routerLinkActive="active">-Firmas de aceptación</button>
             </mat-expansion-panel>
           </div>
-          <!--Resposanle de PPP-->
+          <!--Estudiante-->
           <div class="list-group" *ngSwitchCase="'EST'">
             <mat-expansion-panel (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
@@ -159,6 +173,8 @@
                       routerLinkActive="active">-Convocatorias</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verportulaciones',persona.cedula]"
                       routerLinkActive="active">-Postuaciones envidas</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmarportulaciones',persona.cedula]"
+                      routerLinkActive="active">-Firmar aceptación</button>
             </mat-expansion-panel>
           </div>
         </div>

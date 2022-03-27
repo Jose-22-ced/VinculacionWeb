@@ -41,3 +41,8 @@ export class DirectorNombre{
 export class NombreResponsable{
   nombre?:String;
 }
+export class DocenteApoyoDatos {
+  cedulaDAapoyo?:String
+  nombreDApoyo?:String
+  correoDApoyo?:String
+}

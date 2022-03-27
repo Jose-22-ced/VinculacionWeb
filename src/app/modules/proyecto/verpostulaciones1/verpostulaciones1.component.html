@@ -119,7 +119,7 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="convertFile(anexo.documento)">
                   <mat-icon color="warn">download</mat-icon>
                   <span>Descargar documento</span>
                 </button>
@@ -134,7 +134,40 @@
           </mat-card>
         </div>
       </mat-tab>
-      <mat-tab label="DENEGADAS">Content 3</mat-tab>
+      <mat-tab label="DENEGADAS">
+        <mat-card>
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>BUSCAR CONVOCATORIA: </mat-label>
+            <input matInput   placeholder="FILTRAR" [formControl]="myControlr">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-form-field>
+        </mat-card>
+        <br>
+        <div *ngFor="let anexo of filteredOptionsr | async">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-subtitle>Proyecto: {{anexo.nombreproyecto}}</mat-card-subtitle>
+              <mat-card-title>Estudiente: {{anexo.nombresestudiante}} {{anexo.apellidosestudiante}}</mat-card-title>
+              <span class="example-spacer"></span>
+              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="convertFile(anexo.documento)">
+                  <mat-icon color="warn">download</mat-icon>
+                  <span>Descargar documento</span>
+                </button>
+              </mat-menu>
+            </mat-card-header>
+            <mat-card-content>
+              <p>Parelelo: {{anexo.paralelo}}</p>
+              <p>Ciclo: {{anexo.ciclo}}</p>
+              <p>fecha_solicitud: {{anexo.fecha_solicitud  | date:"longDate"}}</p>
+              <p>Razón: {{anexo.observaciones}} </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-tab>
     </mat-tab-group>
   </div>
   <div *ngIf="isexist==false">

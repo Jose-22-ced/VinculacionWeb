@@ -26,6 +26,8 @@ import PizZip from "pizzip";
 // @ts-ignore
 import PizZipUtils from "pizzip/utils/index.js";
 import {Anexo4} from "../../../models/anexo4";
+import {DatePipe} from "@angular/common";
+import {Anexo4Service} from "../../../services/anexo4.service";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -79,7 +81,8 @@ export class Verpostulaciones1Component implements OnInit {
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private _adapter: DateAdapter<any>,
               private anexo2Service:Anexo2Service,
-              private anexo3Service:Anexo3Service) {
+              private anexo3Service:Anexo3Service,
+              private anexo4Service:Anexo4Service) {
     this._adapter.setLocale('es-ec');
   }
 
@@ -99,8 +102,12 @@ export class Verpostulaciones1Component implements OnInit {
             startWith(''),
             map(values=>this.filtera(values)),
           );
-          this.anexo3rechazados.filter(value2 => value2.estado=="DN")
+          this.anexo3rechazados=value1.filter(value2 => value2.estado=="DN")
           this.issloading=false;
+          this.filteredOptionsr = this.myControlr.valueChanges.pipe(
+            startWith(''),
+            map(values=>this.filterr(values)),
+          );
         })
       })
     })
@@ -148,6 +155,15 @@ export class Verpostulaciones1Component implements OnInit {
       ||option.ciclo?.toLocaleLowerCase().includes(filterValue)
     );
   }
+  filterr(value: any): Anexo3[] {
+    const filterValue = value.toLowerCase();
+    return this.anexo3rechazados.filter(option => option.cedula?.toLowerCase().includes(filterValue)
+      ||option.nombreproyecto?.toLocaleLowerCase().includes(filterValue)
+      ||option.nombresestudiante?.toLocaleLowerCase().includes(filterValue)
+      ||option.apellidosestudiante?.toLocaleLowerCase().includes(filterValue)
+      ||option.ciclo?.toLocaleLowerCase().includes(filterValue)
+    );
+  }
 
   async aceptarPostulacion(anexo: Anexo3) {
     var anexo4=this.obtnerdatos(anexo);
@@ -186,7 +202,7 @@ export class Verpostulaciones1Component implements OnInit {
           inputPlaceholder: 'Ingrese el numero de horas',
           color: "#0c3255",
           confirmButtonColor: "#0c3255",
-          background: "#fbc02d",
+          background: "#f3e0b8",
         })
         if (number) {
           anexo4.numeroHoras=number;
@@ -200,7 +216,7 @@ export class Verpostulaciones1Component implements OnInit {
           input: 'textarea',
           color: "#0c3255",
           confirmButtonColor: "#3cb227",
-          confirmButtonText: "ENVIAR ACEPTACION 👉",
+          confirmButtonText: "CONTINUAR ACEPTACIÓN 👉",
           background: "#f3e0b8",
           cancelButtonText: 'Salir, y continuar después',
           title:'¡¡¡ATENCIÓN!!!',
@@ -215,6 +231,70 @@ export class Verpostulaciones1Component implements OnInit {
         if (text) {
           anexo.observaciones=text;
           anexo.estado="AN";
+          const {value: file} = await Swal.fire({
+            allowOutsideClick: false,
+            allowEnterKey:false,
+            allowEscapeKey:false,
+            showCancelButton: true,
+            confirmButtonText:"ENVIAR ACEPTACIÓN 👉",
+            color: "#0c3255",
+            confirmButtonColor: "#3cb227",
+            background: "#fbc02d",
+            title: 'Confirmación',
+            text: 'Debe subir la el anexo en el formato anterirmente requerido "PDF" para finalizar. Nota: Sea reponsable con el documento a subir, para evitar problemas futuros.',
+            input: 'file',
+            inputAttributes: {
+              'accept': 'application/pdf',
+              'aria-label': 'Debe subir la convocatoria en formato PDF'
+            },
+            inputValidator: (value) => {
+              return new Promise((resolve) => {
+                if (value === null) {
+                  resolve('Es necesario que seleccione el PDF del anexo')
+                } else {
+                  getBase64(value).then(docx => {
+                    anexo4.documento = docx + '';
+                    this.anexo4Service.saveAnexo4(anexo4).subscribe(value1 => {
+                      this.anexo3Service.updateAnexo3(anexo).subscribe(value => {
+                        Swal.fire({
+                          title: 'Exito',
+                          text: 'La aceptación a sido enviada',
+                          icon: 'success',
+                          iconColor :'#17550c',
+                          color: "#0c3255",
+                          confirmButtonColor:"#0c3255",
+                          background: "#fbc02d",
+                        })
+                        this.proyetoFilterp("")
+                        this.filtera("");
+                        this.filterr("");
+                      },error => {
+                        Swal.fire({
+                          title: 'Fallo',
+                          text: 'La aceptación no a sido enviada' +error.error.message,
+                          icon: 'info',
+                          iconColor :'#17550c',
+                          color: "#0c3255",
+                          confirmButtonColor:"#0c3255",
+                          background: "#fbc02d",
+                        })
+                      })
+                    },error => {
+                      Swal.fire({
+                        title: 'Fallo',
+                        text: 'La aceptación no a sido enviada' +error.error.message,
+                        icon: 'info',
+                        iconColor :'#17550c',
+                        color: "#0c3255",
+                        confirmButtonColor:"#0c3255",
+                        background: "#fbc02d",
+                      })
+                    })
+                  })
+                }
+              })
+            }
+          })
         }
       }
     })
@@ -235,6 +315,7 @@ export class Verpostulaciones1Component implements OnInit {
       this.anexo4response.nombreRepresentante=data.nombre;
     })
     this.anexo4response.cedulaEstudiante=anexo3.cedula;
+    this.anexo4response.num_proceso=1;
     return this.anexo4response;
   }
 
@@ -268,7 +349,8 @@ export class Verpostulaciones1Component implements OnInit {
 
 
   generarDocumento(anexo4:Anexo4) {
-    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo3.docx", function(
+    var pipe:DatePipe = new DatePipe('en-US')
+    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo4.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore
@@ -279,10 +361,17 @@ export class Verpostulaciones1Component implements OnInit {
       }
       const zip = new PizZip(content);
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
-
-
       doc.setData({
-
+        fecha: pipe.transform(anexo4.fechaRespuesta,'dd/MM/yyyy'),
+        nombre_estudiante:anexo4.nombreEstudiante,
+        nombre_proyecto:anexo4.nombreProyecto,
+        siglas_carrera:anexo4.siglasCarrera,
+        nombre_poryecto:anexo4.nombreProyecto,
+        nom_director_proy:anexo4.nombreDirector,
+        nom_respre_entidad:anexo4.nombreRepresentante,
+        num_horas_asignadas:anexo4.numeroHoras,
+        nom_responsable_vinculacion:anexo4.nombreResponsable,
+        nom_apell_estudiante:anexo4.nombreEstudiante
       });
       try {
         // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
@@ -326,7 +415,7 @@ export class Verpostulaciones1Component implements OnInit {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
-      saveAs(out, ".docx");
+      saveAs(out, "Anexo 2 aceptacion al estudiente "+ anexo4.nombreEstudiante+".docx");
     });
   }
 

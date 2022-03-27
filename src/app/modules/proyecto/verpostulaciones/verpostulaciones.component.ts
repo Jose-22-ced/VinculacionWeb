@@ -25,6 +25,7 @@ export class VerpostulacionesComponent implements OnInit {
 
   issloading=true;
   isexist?:boolean
+  cedula?:String;
 
   anexo3enproceso:Anexo3[]=[];
   anexo3aceptados:Anexo3[]=[];
@@ -46,6 +47,7 @@ export class VerpostulacionesComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       let cedula = params['cedula']
+      this.cedula=cedula;
       this.anexo3Service.getAnexo3byCedula(cedula).subscribe(value => {
         this.isexist=value.length!=0;
         console.log(value)

@@ -54,7 +54,8 @@
               <p>Fecha de envio: {{anexo3.fecha_solicitud | date:"longDate"}}</p>
               <p>Ciclo: {{anexo3.ciclo}}</p>
               <p>Resposable: {{anexo3.nombre_responsable}}</p>
-
+              <p>Razón: {{anexo3.observaciones}}</p>
+              <button mat-flat-button style="width: 100%" color="primary" [routerLink]="['/panelusuario/proyectovinculacion/firmarportulaciones',cedula]">FINALIZAR PROCESOS</button>
             </mat-card-content>
           </mat-card>
         </div>
@@ -83,7 +84,7 @@
               <p>Fecha de envio: {{anexo3.fecha_solicitud | date:"longDate"}}</p>
               <p>Ciclo: {{anexo3.ciclo}}</p>
               <p>Resposable: {{anexo3.nombre_responsable}}</p>
-
+              <p>Razón: {{anexo3.observaciones}}</p>
             </mat-card-content>
           </mat-card>
         </div>
