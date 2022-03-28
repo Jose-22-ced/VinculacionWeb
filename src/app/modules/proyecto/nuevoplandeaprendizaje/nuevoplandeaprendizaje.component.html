@@ -39,36 +39,31 @@
       </mat-step>
       <mat-step [stepControl]="secondFormGroup" label="Seleccón de docente">
         <form [formGroup]="secondFormGroup">
-
           <mat-card class="example-card">
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
               <mat-card-title>ASIGNACIÓN DE ALUMNO A DIRECTOR O DOCENTE DE APOYO</mat-card-title>
               <mat-card-subtitle>Seleccione un director o docente de apoyo</mat-card-subtitle>
             </mat-card-header>
-            <mat-form-field appearance="outline" style="width: 100%">
-              <mat-label>BUSCAR DOCENTE</mat-label>
-              <input matInput  placeholder="FILTRAR" [formControl]="myControlanexo1">
-              <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-            </mat-form-field>
             <mat-divider></mat-divider>
             <mat-card-content>
-              <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
-                <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionDocente($event)" formControlName="secondCtrl" required>
-                  <mat-list-option *ngFor="let shoe of filteredOptionsanexo1 | async" [value]="shoe"  class="example-item">
-                    Cedula: {{shoe.cedulaDelegado}} ||-- Nombre: {{shoe.nombreDelegado}} ||--Rol: {{shoe.nombreRol}}
-                  </mat-list-option>
-                </mat-selection-list>
-              </cdk-virtual-scroll-viewport>
-              <br>
-              <p>
-                Docente seleccionado: {{docenteselect.nombreDelegado}}
-              </p>
-              <mat-divider></mat-divider>
-              <br>
+              <div>
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Primero seleccione al docente</mat-label>
+                  <mat-select formControlName="docente" (selectionChange)="selectionDocente($event.value)">
+                    <mat-option  *ngFor="let docente of anexo1" [value]="docente.cedulaDelegado">{{docente.cedulaDelegado}} {{docente.nombreDelegado}} como {{docente.nombreRol}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Segundo seleccione al estudiante</mat-label>
+                  <mat-select formControlName="estudiante" (selectionChange)="selectionAlumno($event.value)">
+                    <mat-option  *ngFor="let alumnos of anexo5.alumnos" [value]="alumnos.cedulaEstudiante">{{alumnos.cedulaEstudiante}} {{alumnos.nombreEstudiante}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
               <div>
                 <button mat-button matStepperPrevious color="warn">Atras</button>
-                <button mat-button matStepperNext color="primary">Siguente</button>
+                <button mat-button matStepperNext color="primary" [disabled]="activate">Siguente</button>
               </div>
             </mat-card-content>
           </mat-card>
@@ -76,7 +71,7 @@
       </mat-step>
       <mat-step [stepControl]="thirtdFormGroup" label="Seleccón de alumnos">
         <form [formGroup]="thirtdFormGroup">
-          <mat-card class="example-card" style="max-width: 100%">
+          <mat-card class="example-card"  style="max-width: 100%">
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
               <mat-card-title>ASIGNACIÓN DE ALUMNO A DIRECTOR O DOCENTE DE APOYO</mat-card-title>
@@ -84,48 +79,71 @@
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-card-content>
-              <div id ="contenedor">
-                <div id ="izquierda">
-                  <mat-form-field appearance="outline" style="width: 90%">
-                    <mat-label>BUSCAR MATERIAS</mat-label>
-                    <input matInput  placeholder="FILTRAR" [formControl]="myControlAnexe4">
-                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                  </mat-form-field>
-                  <br>
-                  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
-                    <div *ngFor="let alumno of filteredOptionsAnexe4 | async">
-                      <mat-card style="margin-top: 3px; margin-right: 3px; border: 1px solid  #0c3255; border-inline: 5px solid  #0c3255; writing-mode: horizontal-tb;" class="example-card">
-                        {{alumno.cedulaEstudiante}} ||--{{alumno.nombreEstudiante}}
-                        <button mat-button color="primary" (click)="addAlumnos(alumno)">Agregar
-                          <mat-icon matBadgeColor="warn">keyboard_arrow_right</mat-icon>
-                        </button>
-                      </mat-card>
-                    </div>
-                  </cdk-virtual-scroll-viewport>
+              <mat-grid-list cols="6" rowHeight="3:1">
+                <mat-grid-tile colspan="6">
+                  <button mat-fab color="primary" (click)="onAddRow('')" *ngIf="thirtdFormGroup.get('rows')"><mat-icon>add_circle</mat-icon></button>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  Num
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  Actividades
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  Asignatura
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  Resultado
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  Horas
+                </mat-grid-tile>
+                <mat-grid-tile>
+
+                </mat-grid-tile>
+                <div *ngFor="let row of thirtdFormGroup.get('rows')?.controls;let index = index;">
+                  <mat-grid-tile>
+                    {{index}}
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Actividad</mat-label>
+                      <mat-select [formControl]="row.get('actividad')">
+                        <mat-option *ngFor="let activida of proyectoselect.actividadeslistProyectos" [value]="activida.descripcion">{{activida.descripcion}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Seleccione</mat-label>
+                      <mat-select [formControl]="row.get('asignatura')">
+                        <mat-option *ngFor="let materias of materias" [value]="materias.nombre">{{materias.nombre}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Resultados</mat-label>
+                      <input matInput [formControl]="row.get('resultado')" placeholder="Ex. Bien">
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Horas</mat-label>
+                      <input matInput type="number" [formControl]="row.get('horasAsignadas')" (ngModelChange)="sumar()" (keyup)="sumar()" placeholder="Ex.5">
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <button mat-mini-fab color="warn" (click)="onRemoveRow(index)"><mat-icon>delete_sweep</mat-icon></button>
+                  </mat-grid-tile>
                 </div>
-                <div id ="derecha">
-                  <mat-form-field appearance="outline" style="width: 90%">
-                    <mat-label>BUSCAR ALUMNOS</mat-label>
-                    <input matInput  placeholder="FILTRAR">
-                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                  </mat-form-field>
-                  <br>
-                  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
-                    <div *ngFor="let alumno of alumnoselect">
-                      <mat-card style="margin-top: 3px; margin-right: 3px; border: 1px solid  #0c3255; border-inline: 5px solid  #0c3255; writing-mode: horizontal-tb;" class="example-card">
-                        {{alumno.cedulaEstudiante}} ||--{{alumno.nombreEstudiante}}
-                        <button mat-button color="warn" (click)="removeAlumnos(alumno)">
-                          <mat-icon matBadgeColor="warn">keyboard_arrow_left</mat-icon>
-                          Remover
-                        </button>
-                      </mat-card>
-                    </div>
-                  </cdk-virtual-scroll-viewport>
-                </div>
-              </div>
+                <mat-grid-tile colspan="6">
+                  <strong>{{sum}} de {{numerominimo}} horas minimas requeridas</strong>
+                </mat-grid-tile>
+              </mat-grid-list>
               <div>
                 <button mat-button matStepperPrevious color="warn">Atras</button>
-                <button mat-button matStepperNext color="primary">Siguente</button>
+                <button mat-button matStepperNext color="primary" [disabled]="activar">Siguente</button>
               </div>
             </mat-card-content>
           </mat-card>
@@ -136,14 +154,14 @@
           <mat-card class="example-card">
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>ASIGNACIÓN DE ALUMNO A DIRECTOR O DOCENTE DE APOYO</mat-card-title>
-              <mat-card-subtitle>Anexo 5</mat-card-subtitle>
+              <mat-card-title>Anexo 6</mat-card-title>
+              <mat-card-subtitle>Generar Anexo</mat-card-subtitle>
             </mat-card-header>
             <h4>Debe obtner el anexo en "Obtener Anexo" y posteriormente debera firmar y subir de en formato PDF</h4>
             <div>
-              <button mat-raised-button color="primary" (click)="generarAnexo()">Obtener Anexo</button>
+              <button mat-raised-button color="primary" (click)="generardoc()">Obtener Anexo</button>
               <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
-                <ngx-mat-file-input accept="application/pdf" (change)="subirDocumento($event.target.files)" formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
+                <ngx-mat-file-input accept="application/pdf"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
                 <mat-icon matSuffix>folder</mat-icon>
               </mat-form-field>
             </div>
@@ -163,16 +181,10 @@
             <mat-card-title>ASIGNACIÓN DE ALUMNO A DIRECTOR O DOCENTE DE APOYO</mat-card-title>
             <mat-card-subtitle>Guardar asignación</mat-card-subtitle>
           </mat-card-header>
-          <h4>DATOS</h4>
-          <h4>Asignado: {{docenteselect.nombreDelegado}}</h4>
-          <h4>Cedula: {{docenteselect.cedulaDelegado}}</h4>
-          <h4>Proyecto: {{docenteselect.nombreProyecto}}</h4>
-          <h4>Alumnos:</h4>
-          <h4 *ngFor="let alumnos of alumnoselect">{{alumnos.cedulaEstudiante}} {{alumnos.nombreEstudiante}}</h4>
           <mat-card-content>
             <div>
               <button mat-button matStepperPrevious color="primary">Atras</button>
-              <button mat-flat-button color="warn" (click)="guardarAnexo()">Asignar</button>
+              <button mat-flat-button color="warn">Asignar</button>
             </div>
           </mat-card-content>
         </mat-card>

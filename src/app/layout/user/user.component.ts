@@ -70,4 +70,7 @@ export class UserComponent implements OnInit,AfterViewInit {
     }
     return "Si rol";
   }
+  logout():void{
+    this.router.navigate(['/auth/inicio_sesion']);
+  }
 }

@@ -8,7 +8,7 @@
     <span>{{persona.nombrescompletos}}</span>
     <span class="example-spacer"></span>
     <!--button para el cerrar sesión-->
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
     </button>
   </mat-toolbar>
@@ -95,12 +95,30 @@
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  Firmas de anexo
+                  Firmas de anexos
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <!--Redireccion con los routerlink-->
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/docentedeapoyo',persona.cedula]"
-                      routerLinkActive="active">-Anexo 1</button>
+                      routerLinkActive="active">-Miembro de proyecto</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/delegaciondealumnosfirma',persona.cedula]"
+                      routerLinkActive="active">-Alumnos a cargo</button>
+            </mat-expansion-panel>
+          </div>
+          <!--Director-->
+          <div class="list-group" *ngSwitchCase="'DP'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Firmas de anexos
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/docentedeapoyo',persona.cedula]"
+                      routerLinkActive="active">-Miembro de proyecto</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/delegaciondealumnosfirma',persona.cedula]"
+                      routerLinkActive="active">-Alumnos a cargo</button>
             </mat-expansion-panel>
           </div>
           <!--Resposanle de PPP-->
@@ -155,8 +173,22 @@
               <!--Redireccion con los routerlink-->
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/delegaciondealumnos',persona.cedula]"
                       routerLinkActive="active">-Nueva delgación</button>
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verfirmarportulaciones',persona.cedula]"
-                      routerLinkActive="active">-Firmas de aceptación</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verdelegacion',persona.cedula]"
+                      routerLinkActive="active">-Ver delegaciones</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Plan de aprendizaje
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/nuevoplandeaprendizaje',persona.cedula]"
+                      routerLinkActive="active">-Nueva plan</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verdelegacion',persona.cedula]"
+                      routerLinkActive="active">-Ver planes</button>
             </mat-expansion-panel>
           </div>
           <!--Estudiante-->

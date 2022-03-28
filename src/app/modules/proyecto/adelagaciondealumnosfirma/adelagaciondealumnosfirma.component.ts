@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import {Anexo1Service} from "../../../services/anexo1.service";
-import {FormBuilder, FormControl} from "@angular/forms";
-import {map, Observable, startWith} from "rxjs";
-import {Proyectos} from "../../../models/proyectos";
-import {Anexo1} from "../../../models/anexo1";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FechaService} from "../../../services/fecha.service";
-import {CarrerasService} from "../../../services/carreras.service";
-import {ResponsablepppService} from "../../../services/responsableppp.service";
-import {ActivatedRoute} from "@angular/router";
-import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
 import {ProyectoService} from "../../../services/proyecto.service";
+import {ResponsablepppService} from "../../../services/responsableppp.service";
+import {FormBuilder, FormControl} from "@angular/forms";
+import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
+import {DateAdapter} from "@angular/material/core";
+import {Anexo2Service} from "../../../services/anexo2.service";
+import {Anexo3Service} from "../../../services/anexo3.service";
+import {Anexo4Service} from "../../../services/anexo4.service";
+import {Anexo1Service} from "../../../services/anexo1.service";
+import {Anexo5Service} from "../../../services/anexo5.service";
+import {Anexo5} from "../../../models/anexo5";
+import {map, Observable, startWith} from "rxjs";
 // @ts-ignore
 import { saveAs } from 'file-saver';
-import Swal from 'sweetalert2';
+import {Anexo1} from "../../../models/anexo1";
+import Swal from "sweetalert2";
 
 function getBase64(file:any) {
   return new Promise((resolve, reject) => {
@@ -24,55 +28,59 @@ function getBase64(file:any) {
 }
 
 @Component({
-  selector: 'app-docentesdeapoyofirma',
-  templateUrl: './docentesdeapoyofirma.component.html',
-  styleUrls: ['./docentesdeapoyofirma.component.css']
+  selector: 'app-adelagaciondealumnosfirma',
+  templateUrl: './adelagaciondealumnosfirma.component.html',
+  styleUrls: ['./adelagaciondealumnosfirma.component.css']
 })
-export class DocentesdeapoyofirmaComponent implements OnInit {
+export class AdelagaciondealumnosfirmaComponent implements OnInit {
 
   issloading=true;
-  isexist?:boolean
+  isexist?:boolean;
+  panelOpenState = false;
 
-  anexo1:Anexo1[]=[];
   myControl = new FormControl();
-  filteredOptions?: Observable<Anexo1[]>;
+  filteredOptions?: Observable<Anexo5[]>;
+  anexo5:Anexo5[]=[];
 
-  constructor(private fechaService:FechaService,private carrerasService:CarrerasService,
-              private responsablepppService:ResponsablepppService,
-              private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,
-              private entidadbeneficiarioService:EntidadbeneficiarioService,
+  constructor(private router: Router,
+              private fechaService:FechaService,
+              private activatedRoute: ActivatedRoute,
               private proyectoService:ProyectoService,
-              private anexo1Service:Anexo1Service) { }
+              private responsablepppService:ResponsablepppService,
+              private _formBuilder: FormBuilder,
+              private entidadbeneficiarioService:EntidadbeneficiarioService,
+              private _adapter: DateAdapter<any>,
+              private anexo2Service:Anexo2Service,
+              private anexo3Service:Anexo3Service,
+              private anexo4Service:Anexo4Service,
+              private anexo1Service:Anexo1Service,
+              private anexo5Service:Anexo5Service) {
+    this._adapter.setLocale('es-ec');
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       let cedula = params['cedula']
-      this.anexo1Service.getAnexo1byCedula(cedula).subscribe(value => {
-        if(value.length!=0){
-          this.isexist=true;
-        }
-        this.anexo1=value;
-        this.issloading=false;
+      this.anexo5Service.getAnexo5byCedula(cedula).subscribe(value => {
+        this.isexist=value.length!=0;
+        this.anexo5=value;
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values=>this.filter(values)),
         );
+        this.issloading=false;
+        console.log(value)
       })
     })
   }
-  ngAfterViewInit(): void {
-    setTimeout(()=>{
 
-    },1000)
-  }
-  filter(value: any): Anexo1[] {
+  filter(value: any): Anexo5[] {
     const filterValue = value.toLowerCase();
-    return this.anexo1.filter(option => option.cedulaCoordinador?.toLowerCase().includes(filterValue)
-      ||option.nombreCoordinador?.toLocaleLowerCase().includes(filterValue)
-      ||option.nombreCarrera?.toLocaleLowerCase().includes(filterValue)
-      ||option.siglasCarrera?.toLocaleLowerCase().includes(filterValue)
+    return this.anexo5.filter(option => option.nombreProyecto?.toLowerCase().includes(filterValue)
+      ||option.nombreDocenteReceptor?.toLocaleLowerCase().includes(filterValue)
+      ||option.cedulaDocenteApoyo?.toLocaleLowerCase().includes(filterValue)
+      ||option.cedulaDocenteApoyo?.toLocaleLowerCase().includes(filterValue)
       ||option.nombreProyecto?.toLocaleLowerCase().includes(filterValue)
-      ||option.docenteTitulo?.toLocaleLowerCase().includes(filterValue)
     );
   }
 
@@ -97,7 +105,7 @@ export class DocentesdeapoyofirmaComponent implements OnInit {
             getBase64(value).then(docx => {
               anexo1.documento = docx + '';
               anexo1.numProceso=2;
-              this.anexo1Service.updateAnexo1(anexo1).subscribe(value1 => {
+              this.anexo5Service.updateAnexo5(anexo1).subscribe(value1 => {
                 Swal.fire({
                   title: 'Exito',
                   text: 'El documneto ha sido enviado con exito',
@@ -126,16 +134,13 @@ export class DocentesdeapoyofirmaComponent implements OnInit {
 
   }
 
-  descargardocx(file:String){
-    console.log(file);
-  }
   //convert a pdf
   convertFile(docum:any) {
     console.log(docum)
     //Usage example:
-    var file = this.dataURLtoFile(docum, 'Anexo1.pdf');
+    var file = this.dataURLtoFile(docum, 'Anexo5.pdf');
     console.log(file);
-    saveAs(file, 'Anexo1.pdf');
+    saveAs(file, 'Anexo5.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {
     let arr = dataurl.split(','),

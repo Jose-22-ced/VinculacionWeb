@@ -27,6 +27,9 @@ import { Verpostulaciones1Component } from './verpostulaciones1/verpostulaciones
 import { FirmarpostulacionComponent } from './firmarpostulacion/firmarpostulacion.component';
 import { VerfirmadepostulacionComponent } from './verfirmadepostulacion/verfirmadepostulacion.component';
 import { DelegaciondealumnosComponent } from './delegaciondealumnos/delegaciondealumnos.component';
+import { VerdelegacionesComponent } from './verdelegaciones/verdelegaciones.component';
+import { AdelagaciondealumnosfirmaComponent } from './adelagaciondealumnosfirma/adelagaciondealumnosfirma.component';
+import { NuevoplandeaprendizajeComponent } from './nuevoplandeaprendizaje/nuevoplandeaprendizaje.component';
 
 const routes: Routes = [
   {path:'bienvenida',
@@ -75,6 +78,12 @@ const routes: Routes = [
     component:VerfirmadepostulacionComponent
   },{path:'delegaciondealumnos/:cedula',
     component:DelegaciondealumnosComponent
+  },{path:'verdelegacion/:cedula',
+    component:VerdelegacionesComponent
+  },{path:'delegaciondealumnosfirma/:cedula',
+    component:AdelagaciondealumnosfirmaComponent
+  },{path:'nuevoplandeaprendizaje/:cedula',
+    component:NuevoplandeaprendizajeComponent
   }
 ]
 
@@ -103,6 +112,9 @@ const routes: Routes = [
     FirmarpostulacionComponent,
     VerfirmadepostulacionComponent,
     DelegaciondealumnosComponent,
+    VerdelegacionesComponent,
+    AdelagaciondealumnosfirmaComponent,
+    NuevoplandeaprendizajeComponent,
   ],
   imports: [
     CommonModule,

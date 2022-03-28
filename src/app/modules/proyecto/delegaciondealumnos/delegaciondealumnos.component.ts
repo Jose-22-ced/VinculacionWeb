@@ -29,6 +29,14 @@ import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
 
+function getBase64(file: any) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -46,6 +54,9 @@ export class DelegaciondealumnosComponent implements OnInit {
   secondFormGroup?: FormGroup;
   thirtdFormGroup?: FormGroup;
   fourFormGroup?: FormGroup;
+
+  issloading=true;
+  isexist?:boolean
 
   myControlproyecto = new FormControl();
   filteredOptionsProyecto?: Observable<Proyectos[]>;
@@ -89,8 +100,10 @@ export class DelegaciondealumnosComponent implements OnInit {
             startWith(''),
             map(values=>this.filterProyecto(values)),
           );
+          this.issloading=false;
         })
       })
+      this.isexist=true;
       console.log(cedula)
     })
 
@@ -139,6 +152,7 @@ export class DelegaciondealumnosComponent implements OnInit {
   }
 
   selectionProyecto(proyectoselect: MatSelectionListChange){
+    this.issloading=true;
     this.docentesAnexo1.length=0;
     this.alumnoselect.length=0;
     this.filteredOptionsanexo1= this.myControlanexo1.valueChanges;
@@ -157,10 +171,10 @@ export class DelegaciondealumnosComponent implements OnInit {
             startWith(''),
             map(values=>this.filterAnexo1(values)),
           );
+          this.issloading=false;
         })
       })
     })
-    console.log(this.docentesAnexo1)
   }
 
   selectionDocente(docenteselect: MatSelectionListChange){
@@ -183,7 +197,12 @@ export class DelegaciondealumnosComponent implements OnInit {
         })
       })
     })
-    console.log(this.alumnosAnexe4)
+    this.fechaService.getSysdate().subscribe(data=>{
+      this.anexo5resposae.fechaEmision=data.fecha;
+    })
+    this.anexo3Service.getDocenteTitulo(this.docenteselect.siglasCarrera).subscribe(det=>{
+      this.anexo5resposae.nonbreDocenteEmisor=det.nombres_completo
+    })
   }
 
   addAlumnos(anexo:Anexo4){
@@ -203,33 +222,23 @@ export class DelegaciondealumnosComponent implements OnInit {
   public alumnosAnexo5:AlumnosAnexo5[]=[];
   obtnerDatos():Anexo5{
     this.alumnosAnexo5.length=0;
-      this.alumnoselect.forEach((value, index) => {
-        this.alumnosAnexo5.push({
-          nombreEstudiante:value.nombreEstudiante+"",
-          cedulaEstudiante:value.cedulaEstudiante+""
-        })
+    this.alumnoselect.forEach((value, index) => {
+      this.alumnosAnexo5.push({
+        nombreEstudiante:value.nombreEstudiante+"",
+        cedulaEstudiante:value.cedulaEstudiante+""
       })
-      this.anexo5resposae.siglasCarrera=this.docenteselect.siglasCarrera;
-      this.anexo5resposae.idProyectoPPP=this.docenteselect.idProyectoPPP;
-      this.anexo5resposae.nombreProyecto=this.docenteselect.nombreProyecto
-      this.anexo5resposae.nombrerol=this.docenteselect.nombreRol;
-      this.anexo5resposae.alumnos=this.alumnosAnexo5;
-      this.anexo5resposae.nombreDocenteReceptor=this.docenteselect.nombreDelegado;
-      this.anexo5resposae.cedulaDocenteApoyo=this.docenteselect.cedulaDelegado
-      this.anexo5resposae.nonbreDocenteEmisor
-      this.fechaService.getSysdate().subscribe(data=>{
-        this.anexo5resposae.fechaEmision=data.fecha;
-      })
-      this.anexo3Service.getDocenteTitulo(this.docenteselect.siglasCarrera).subscribe(det=>{
-        this.anexo5resposae.nonbreDocenteEmisor=det.nombres_completo
-        this.anexo5resposae.tituloTercerN=det.titulo;
-        console.log(det.nombres_completo)
-      })
-
+    })
+    this.anexo5resposae.num_proceso=1;
+    this.anexo5resposae.tituloTercerN=this.docenteselect.docenteTitulo;
+    this.anexo5resposae.siglasCarrera=this.docenteselect.siglasCarrera;
+    this.anexo5resposae.idProyectoPPP=this.docenteselect.idProyectoPPP;
+    this.anexo5resposae.nombreProyecto=this.docenteselect.nombreProyecto
+    this.anexo5resposae.nombrerol=this.docenteselect.nombreRol;
+    this.anexo5resposae.alumnos=this.alumnosAnexo5;
+    this.anexo5resposae.nombreDocenteReceptor=this.docenteselect.nombreDelegado;
+    this.anexo5resposae.cedulaDocenteApoyo=this.docenteselect.cedulaDelegado
     return this.anexo5resposae
   }
-
-
 
   generarAnexo(){
     if(this.alumnoselect.length==0){
@@ -242,13 +251,69 @@ export class DelegaciondealumnosComponent implements OnInit {
         background: "#fbc02d",
       })
     }else {
-      console.log(this.obtnerDatos())
+      this.generarDocumento(this.obtnerDatos())
+    }
+  }
+  guardarAnexo(){
+    if(this.alumnoselect.length==0){
+      Swal.fire({
+        title: 'Detalle',
+        text: 'No a seleccionado a ningun estudiantes, vueva atras y realicelo',
+        icon: 'info',
+        color: "#0c3255",
+        confirmButtonColor:"#0c3255",
+        background: "#fbc02d",
+      })
+    }else {
+      this.anexo5Service.saveAnexo5(this.obtnerDatos()).subscribe(value => {
+        Swal.fire({
+          title: 'Exito',
+          text: 'Asignacion guardada correctamnete',
+          icon: 'success',
+          iconColor :'#17550c',
+          color: "#0c3255",
+          confirmButtonColor:"#0c3255",
+          background: "#fbc02d",
+        })
+      },error => {
+        Swal.fire({
+          title: 'Fallo',
+          text: 'Asignacion no a guardada'  + error.error.message,
+          icon: 'error',
+          color: "#0c3255",
+          confirmButtonColor:"#0c3255",
+          background: "#fbc02d",
+        })
+      })
+    }
+  }
+
+  subirDocumento(file:FileList){
+    if(file.length==0){
+    }else{
+      getBase64(file[0]).then(docx=>{
+        // @ts-ignore
+        console.log(docx.length)
+        // @ts-ignore
+        if(docx.length>=10485760){
+          this.anexo5resposae.documento="";
+          Swal.fire(
+            'Fallo',
+            'El docemento es demaciado pesado',
+            'warning'
+          )
+        }else{
+          this.anexo5resposae.documento=docx+"";
+        }
+      })
     }
   }
 
 
   generarDocumento(anexo5:Anexo5) {
-    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo2.docx", function(
+    console.log(anexo5)
+    var pipe:DatePipe = new DatePipe('en-US')
+    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo5.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore
@@ -260,9 +325,15 @@ export class DelegaciondealumnosComponent implements OnInit {
       const zip = new PizZip(content);
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
 
-
       doc.setData({
-
+        fecha:pipe.transform(anexo5.fechaEmision,'dd/MM/yyyy'),
+        titulo:anexo5.tituloTercerN,
+        proyecto:anexo5.nombreProyecto,
+        docente:anexo5.nombreDocenteReceptor,
+        estudiantes:anexo5.alumnos,
+        nom_responsable_ppp:anexo5.nonbreDocenteEmisor,
+        siglas_carrera:anexo5.siglasCarrera,
+        rol:(anexo5.nombrerol=="apoyo")?"DOCENTE DE APOYO":"DIRECTOR"
       });
       try {
         // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
@@ -306,7 +377,7 @@ export class DelegaciondealumnosComponent implements OnInit {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
-      saveAs(out, "Anexo2 .docx");
+      saveAs(out, "Anexo5 de "+anexo5.nombreDocenteReceptor+".docx");
     });
   }
 

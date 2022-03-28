@@ -19,6 +19,7 @@ export class CordinadorvinculacionService {
       data => data as CordinadorVinculacion[]
     ));
   }
+
   getCordinadorVinculacioAll():Observable<CordinadorVinculacion>{
     return this.http.get(this.urlEndPoint,{headers: this.httpHeaders})
   }
