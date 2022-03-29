@@ -36,6 +36,7 @@ export class VerplanifcacionComponent implements OnInit {
   myControl = new FormControl();
   filteredOptions?: Observable<Anexo6[]>;
 
+  cedula?:String;
 
   constructor(private router: Router,
               private fechaService:FechaService,
@@ -58,8 +59,9 @@ export class VerplanifcacionComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       let cedula = params['cedula']
+      this.cedula=cedula;
       this.responsablepppService.getResposablepppbyAll().subscribe(value => {
-        this.anexo6Service.getanexo6all().subscribe(value1 => {
+        this.anexo6Service.getAnexo6all().subscribe(value1 => {
           this.cordinadorvinculacionService.getCordinadorVinculacioAll().subscribe(value2 => {
             this.isexist=value1.filter(value3 => value3.cedulaCoordinadorVinculacion==value2.cedula).length!=0;
             this.anexo6=value1.filter(value3 => value3.cedulaCoordinadorVinculacion==value2.cedula)

@@ -104,6 +104,34 @@
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/delegaciondealumnosfirma',persona.cedula]"
                       routerLinkActive="active">-Alumnos a cargo</button>
             </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Seguimienmto de aprendizaje parcial
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/anexo6_1',persona.id,persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-Nuevo seguimiento</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/veranexos6_1',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-Ver seguimientos</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Seguimienmto de aprendizaje final
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/anexo6_2',persona.id,persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-Nuevo seguimiento</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/veranexos6_2',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-Ver seguimientos</button>
+            </mat-expansion-panel>
           </div>
           <!--Director-->
           <div class="list-group" *ngSwitchCase="'DP'">
@@ -119,6 +147,34 @@
                       routerLinkActive="active">-Miembro de proyecto</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/delegaciondealumnosfirma',persona.cedula]"
                       routerLinkActive="active">-Alumnos a cargo</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Seguimienmto de aprendizaje parcial
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/anexo6_1',persona.id,persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-Nuevo seguimiento</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/veranexos6_1',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-Ver seguimientos</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Seguimienmto de aprendizaje final
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/anexo6_2',persona.id,persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-Nuevo seguimiento</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/veranexos6_2',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-Ver seguimientos</button>
             </mat-expansion-panel>
           </div>
           <!--Resposanle de PPP-->
@@ -210,6 +266,7 @@
             </mat-expansion-panel>
           </div>
         </div>
+        <br>
       </ng-container>
     </mat-drawer>
     <!--Main contiene los demas componetes dentro de div-->

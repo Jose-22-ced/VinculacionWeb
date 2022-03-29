@@ -32,6 +32,11 @@ import { AdelagaciondealumnosfirmaComponent } from './adelagaciondealumnosfirma/
 import { NuevoplandeaprendizajeComponent } from './nuevoplandeaprendizaje/nuevoplandeaprendizaje.component';
 import { VerplanifcacionComponent } from './verplanifcacion/verplanifcacion.component';
 import { EditardelegacionComponent } from './editardelegacion/editardelegacion.component';
+import { EditarplanificacionComponent } from './editarplanificacion/editarplanificacion.component';
+import { Anexo61Component } from './anexo61/anexo61.component';
+import { Veranexo61Component } from './veranexo61/veranexo61.component';
+import { Anexo62Component } from './anexo62/anexo62.component';
+import { Veranexo62Component } from './veranexo62/veranexo62.component';
 
 const routes: Routes = [
   {path:'bienvenida',
@@ -90,6 +95,16 @@ const routes: Routes = [
     component:VerplanifcacionComponent
   },{path:'editardelegacion/:id/:cedula',
     component:EditardelegacionComponent
+  },{path:'editarplanificacion/:id/:cedula',
+    component:EditarplanificacionComponent
+  },{path:'anexo6_1/:id/:cedula/:nombres',
+    component:Anexo61Component
+  },{path:'veranexos6_1/:cedula/:nombres',
+    component:Veranexo61Component
+  } ,{path:'anexo6_2/:id/:cedula/:nombres',
+    component:Anexo62Component
+  },{path:'veranexos6_2/:cedula/:nombres',
+    component:Veranexo62Component
   }
 ]
 
@@ -123,6 +138,11 @@ const routes: Routes = [
     NuevoplandeaprendizajeComponent,
     VerplanifcacionComponent,
     EditardelegacionComponent,
+    EditarplanificacionComponent,
+    Anexo61Component,
+    Veranexo61Component,
+    Anexo62Component,
+    Veranexo62Component,
   ],
   imports: [
     CommonModule,

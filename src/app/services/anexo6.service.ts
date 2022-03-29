@@ -16,8 +16,6 @@ export class Anexo6Service {
 
   constructor(private http:HttpClient) { }
 
-
-
   saveAnexo6(anexo6: Anexo6):Observable<Anexo6>{
     console.log(anexo6);
     return this.http.post<Anexo6>(this.urlEndPoint,anexo6,{headers: this.httpHeaders})
@@ -27,7 +25,7 @@ export class Anexo6Service {
     return this.http.put<Anexo6>(this.urlEndPoint,anexo6,{headers: this.httpHeaders})
   }
 
-  getanexo6all():Observable<Anexo6[]>{
+  getAnexo6all():Observable<Anexo6[]>{
     return this.http.get(this.urlEndPoint,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo6[]))
   }
 
@@ -35,7 +33,7 @@ export class Anexo6Service {
     return this.http.get(this.urlEndPoint+"/vinculacion/"+cedula,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo6[]))
   }
 
-  getanexo6byid(id?:Number):Observable<Anexo6>{
+  getAnexo6byid(id?:Number):Observable<Anexo6>{
     return this.http.get(this.urlEndPoint+"/"+id,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo6))
   }
   deleteAnexo6(id?: Number){

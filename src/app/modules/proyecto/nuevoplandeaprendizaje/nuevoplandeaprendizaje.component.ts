@@ -87,6 +87,9 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
   anexo1:Anexo1[]=[];
   anexo5:Anexo5=new Anexo5();
 
+
+  cedula?:String;
+
   constructor(private router: Router,
               private fechaService:FechaService,
               private activatedRoute: ActivatedRoute,
@@ -115,6 +118,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       let cedula = params['cedula']
+      this.cedula=cedula;
       this.responsablepppService.getResposablepppbyAll().subscribe(value => {
         this.proyectoService.getProyectos().subscribe(value1 => {
           this.proyectos=value1.filter(value2 => value2.codigocarrera==value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera);
