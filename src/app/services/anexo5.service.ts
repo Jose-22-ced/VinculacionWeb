@@ -3,6 +3,7 @@ import {map, Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Anexo5} from "../models/anexo5";
 import {DocenteApoyoDatos} from "../models/docentes";
+import {Proyectos} from "../models/proyectos";
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class Anexo5Service {
     console.log(anexo5);
     return this.http.put<Anexo5>(this.urlEndPoint,anexo5,{headers: this.httpHeaders})
   }
+  getAnexo5All():Observable<Anexo5[]>{
+    return this.http.get(this.urlEndPoint+"/all",{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo5[]))
+
+  }
   getAnexo5byId(id?:Number):Observable<Anexo5>{
     return this.http.get(this.urlEndPoint+'/'+id,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo5))
 
@@ -34,6 +39,8 @@ export class Anexo5Service {
   }
   getDocentesApoyo(cedulaEstudiante?:String,idProyectoPPP?:Number):Observable<DocenteApoyoDatos>{
     return this.http.get(this.urlEndPoint+ '/estudiante/'+cedulaEstudiante+'/proyecto/'+idProyectoPPP,{headers: this.httpHeaders}).pipe(map(Response => Response as DocenteApoyoDatos))
-
+  }
+  deleteAnexo5(id?: Number){
+    return this.http.delete<Proyectos>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
   }
 }

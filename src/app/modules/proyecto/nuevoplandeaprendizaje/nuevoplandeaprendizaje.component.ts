@@ -30,6 +30,9 @@ import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
+import {Anexo6Service} from "../../../services/anexo6.service";
+import {Anexo61} from "../../../models/anexo61";
+import {Anexo62} from "../../../models/anexo62";
 
 
 function loadFile(url:any, callback:any) {
@@ -71,6 +74,8 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
   materias:Materias[]=[];
 
   anexo6:Anexo6 = new Anexo6();
+  anexo61:Anexo61 = new Anexo61();
+  anexo62:Anexo62 = new Anexo62();
 
   sum = 0;
   numerominimo=0;
@@ -96,7 +101,8 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
               private anexo1Service:Anexo1Service,
               private anexo5Service:Anexo5Service,
               private materiasService:MateriasService,
-              private cordinadorvinculacionService:CordinadorvinculacionService) {
+              private cordinadorvinculacionService:CordinadorvinculacionService,
+              private anexo6Service:Anexo6Service) {
     this._adapter.setLocale('es-ec');
     //ArrayActividades
     this.thirtdFormGroup = this._formBuilder.group({
@@ -208,6 +214,11 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
   }
 
   selectionProyecto(proyectoselect: MatSelectionListChange){
+    this.rows.getRawValue().forEach((value, index) => {
+      this.onRemoveRow(index);
+    })
+    this.activate=true;
+    this.anexo5=new Anexo5();
     this.proyectoselect=proyectoselect.option.value
     this.proyectoselect.actividadeslistProyectos?.forEach(value1 => {
       this.onAddRow(value1.descripcion+"")
@@ -268,8 +279,18 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
   }
 
 
+  anexo6_1Requests:Anexo61[]=[];
+  anexo6_2Requests:Anexo62[]=[];
   obtnerdatos():Anexo6{
+    this.anexo6_1Requests.length=0;
+    this.anexo6_2Requests.length=0;
+    this.anexo6_1Requests.push(this.anexo61)
+    this.anexo6_2Requests.push(this.anexo62)
     this.anexo6.proyectoId=this.proyectoselect.id;
+    this.anexo61.idProyecto=this.proyectoselect.id;
+    this.anexo62.idProyecto=this.proyectoselect.id;
+    this.anexo6.anexo6_1Requests=this.anexo6_1Requests;
+    this.anexo6.anexo6_2Requests= this.anexo6_2Requests;
     this.anexo6.nombreProyecto=this.proyectoselect.nombre;
     this.anexo6.nombreResponsableVinculacion=this.proyectoselect.nombreresponsable;
     this.anexo6.totalHoras=this.sum+'';
@@ -278,13 +299,57 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
     return this.anexo6
   }
 
-  generardoc(){
-    console.log(this.obtnerdatos())
+
+  guardaranexo6(){
+    var anexo6=this.obtnerdatos();
+    this.anexo6Service.saveAnexo6(anexo6).subscribe(value => {
+      Swal.fire({
+        title: 'Exito',
+        text: 'La nueva planecion creado y enviada con exito',
+        icon: 'success',
+        iconColor :'#17550c',
+        color: "#0c3255",
+        confirmButtonColor:"#0c3255",
+        background: "#fbc02d",
+      })
+    },error => {
+      Swal.fire({
+        title: 'Error',
+        text: 'La nueva planecion no se creado '+error.error.message,
+        icon: 'error',
+        color: "#0c3255",
+        confirmButtonColor:"#0c3255",
+        background: "#fbc02d",
+      })
+    })
   }
 
-  generarDocumento(anexo6:Anexo6) {
+  subirDocumento(file:FileList){
+    if(file.length==0){
+    }else{
+      getBase64(file[0]).then(docx=>{
+        // @ts-ignore
+        console.log(docx.length)
+        // @ts-ignore
+        if(docx.length>=10485760){
+          this.anexo6.documento="";
+          Swal.fire(
+            'Fallo',
+            'El docemento es demaciado pesado',
+            'warning'
+          )
+        }else{
+          this.anexo6.documento=docx+"";
+        }
+      })
+    }
+  }
+
+  generarDocumento() {
+    var anexo6:Anexo6=this.obtnerdatos();
+    console.log(anexo6)
     var pipe:DatePipe = new DatePipe('en-US')
-    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo2.docx", function(
+    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore
@@ -298,7 +363,18 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
 
 
       doc.setData({
-
+        nombre_proyecto:anexo6.nombreProyecto,
+        docente_apoyo:anexo6.nombreDocenteApoyo,
+        entidad_beneficiaria:anexo6.nombreEntidad,
+        estudiante:anexo6.nombreEstudiante ,
+        periodo_academico:anexo6.periodoAcademico,
+        ciclo:anexo6.ciclo,
+        act:anexo6.actividades,
+        director_proyeto:anexo6.nombreCoordinadorVinculacion,
+        fecha:pipe.transform(anexo6.fecha,'dd/MM/yyyy'),
+        cordi_proyeto:anexo6.nombreCoordinadorVinculacion,
+        horaTotal:anexo6.totalHoras,
+        resposa_apoyo:anexo6.nombreResponsableVinculacion
       });
       try {
         // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
@@ -342,7 +418,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
-      saveAs(out, "Anexo2.docx");
+      saveAs(out, "Anexo6.docx");
     });
   }
 }

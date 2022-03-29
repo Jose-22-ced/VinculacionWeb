@@ -30,6 +30,8 @@ import { DelegaciondealumnosComponent } from './delegaciondealumnos/delegacionde
 import { VerdelegacionesComponent } from './verdelegaciones/verdelegaciones.component';
 import { AdelagaciondealumnosfirmaComponent } from './adelagaciondealumnosfirma/adelagaciondealumnosfirma.component';
 import { NuevoplandeaprendizajeComponent } from './nuevoplandeaprendizaje/nuevoplandeaprendizaje.component';
+import { VerplanifcacionComponent } from './verplanifcacion/verplanifcacion.component';
+import { EditardelegacionComponent } from './editardelegacion/editardelegacion.component';
 
 const routes: Routes = [
   {path:'bienvenida',
@@ -84,6 +86,10 @@ const routes: Routes = [
     component:AdelagaciondealumnosfirmaComponent
   },{path:'nuevoplandeaprendizaje/:cedula',
     component:NuevoplandeaprendizajeComponent
+  },{path:'verplanifiaciones/:cedula',
+    component:VerplanifcacionComponent
+  },{path:'editardelegacion/:id/:cedula',
+    component:EditardelegacionComponent
   }
 ]
 
@@ -115,6 +121,8 @@ const routes: Routes = [
     VerdelegacionesComponent,
     AdelagaciondealumnosfirmaComponent,
     NuevoplandeaprendizajeComponent,
+    VerplanifcacionComponent,
+    EditardelegacionComponent,
   ],
   imports: [
     CommonModule,

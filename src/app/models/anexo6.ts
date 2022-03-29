@@ -1,3 +1,6 @@
+import {Anexo61} from "./anexo61";
+import {Anexo62} from "./anexo62";
+
 export class Anexo6 {
   id?:Number;
   nombreProyecto?:String;
@@ -16,6 +19,9 @@ export class Anexo6 {
   proyectoId?:Number;
   num_proceso?:Number;
   actividades?:ActividadesAnexo6[];
+  anexo6_1Requests?:Anexo61[];
+  anexo6_2Requests?:Anexo62[];
+
 }
 
 export class ActividadesAnexo6{
