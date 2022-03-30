@@ -210,67 +210,122 @@ export class Anexo61Component implements OnInit,AfterViewInit {
   generardoc(){
     console.log(this.obtnerdatos())
   }
+  guardarAnexo61(){
+    console.log(this.obtnerdatos())
+    Swal.fire({
+      title: 'Esta seguro',
+      text: "Para ello debe firmar el siguiente anexo con sus datos",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'ANEXO 3!',
+          'Se le descargará un archivo WORD, y deberá subirlo en formato pdf',
+          'success'
+        )
 
-  generarDocumento(anexo61:Anexo61) {
-    var pipe:DatePipe = new DatePipe('en-US')
-    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6.1.docx", function(
-      // @ts-ignore
-      error,
-      // @ts-ignore
-      content
-    ) {
-      if (error) {
-        throw error;
-      }
-      const zip = new PizZip(content);
-      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
-
-
-      doc.setData({
-
-      });
-      try {
-        // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
-        doc.render();
-      } catch (error) {
-        // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
-        // @ts-ignore
-        function replaceErrors(key, value) {
-          if (value instanceof Error) {
-            return Object.getOwnPropertyNames(value).reduce(function(
-                error,
-                key
-              ) {
-                // @ts-ignore
-                error[key] = value[key];
-                return error;
-              },
-              {});
-          }
-          return value;
-        }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
-        // @ts-ignore
-        if (error.properties && error.properties.errors instanceof Array) {
-          // @ts-ignore
-          const errorMessages = error.properties.errors
-            // @ts-ignore
-            .map(function(error) {
-              return error.properties.explanation;
+        this.generateDocumento(this.obtnerdatos())
+        const { value: file } = await Swal.fire({
+          allowOutsideClick: false,
+          title: 'SELECCIONE EL PDF',
+          text:'Debe subir en tipo PDF',
+          input: 'file',
+          inputAttributes: {
+            'accept': 'application/pdf',
+            'aria-label': 'Debe subir en tipo PDF'
+          },
+          inputValidator: (value) => {
+            return new Promise((resolve) => {
+              if (value === null) {
+                resolve('Es necesario que seleccione el PDF')
+              } else {
+                getBase64(value).then(docx=>{
+                  this.anexoss61.documento=docx+''
+                  this.anexo61Service.saveAnexo61(this.obtnerdatos()).subscribe(data=>{
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'Anexo 6.1',
+                      text: '..',
+                      confirmButtonColor: "#0c3255"})
+                    window.location.reload();
+                  },err=>{
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Anexo',
+                      text: 'Hubo un error: '+err.error.message,
+                      confirmButtonColor: "#0c3255"})
+                  })
+                  window.location.reload();
+                })
+              }
             })
-            .join("\n");
-          console.log("errorMessages", errorMessages);
-          // errorMessages is a humanly readable message looking like this :
-          // 'The tag beginning with "foobar" is unopened'
-        }
-        throw error;
+          }
+        })
+
       }
-      const out = doc.getZip().generate({
-        type: "blob",
-        mimeType:
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-      });
-      // Output the document using Data-URI
-      saveAs(out, "Anexo6_1.docx");
-    });
-  }}
+    })
+  }
+
+
+
+
+  generateDocumento(anexo6_1: Anexo61) {
+
+    loadFile(
+      'https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6%20.1.docx',
+      function(
+        // @ts-ignore
+        error,
+        // @ts-ignore
+        content
+      ) {
+
+        if (error) {
+          throw error;
+        }
+        const zip = new PizZip(content);
+        const doc = new Docxtemplater(zip, {
+          paragraphLoop: true,
+          linebreaks: true,
+        });
+        try {
+          // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+          doc.render({
+            tb:anexo6_1.actividades,
+            docente_apoyo:anexo6_1.nombreApoyo,
+            director_proyeto:anexo6_1.nombreDirector
+          });
+        }  catch (error) {
+          // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+          // @ts-ignore
+          function replaceErrors(key, value) {
+            if (value instanceof Error) {
+              return Object.getOwnPropertyNames(value).reduce(function(
+                  error,
+                  key
+                ) {
+                  // @ts-ignore
+                  error[key] = value[key];
+                  return error;
+                },
+                {});
+            }
+            return value;
+          }
+          console.log(JSON.stringify({ error: error }, replaceErrors));
+        }
+        const out = doc.getZip().generate({
+          type: 'blob',
+          mimeType:
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        });
+        // Output the document using Data-URI
+        saveAs(out, 'anexo61.docx');
+      }
+    );
+  }
+}

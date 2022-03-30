@@ -343,7 +343,27 @@ export class Verpostulaciones1Component implements OnInit {
     if (text) {
       anexo.observaciones=text;
       anexo.estado="DN";
-      console.log(anexo);
+      this.anexo3Service.updateAnexo3(anexo).subscribe(value => {
+        Swal.fire({
+          title: 'Exito',
+          text: 'La denagación a sido enviada',
+          icon: 'success',
+          iconColor :'#17550c',
+          color: "#0c3255",
+          confirmButtonColor:"#0c3255",
+          background: "#fbc02d",
+        })
+      },error => {
+        Swal.fire({
+          title: 'Fallo',
+          text: 'La denagación no a sido enviada' +error.error.message,
+          icon: 'info',
+          iconColor :'#17550c',
+          color: "#0c3255",
+          confirmButtonColor:"#0c3255",
+          background: "#fbc02d",
+        })
+      })
     }
   }
 

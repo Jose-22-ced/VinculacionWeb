@@ -37,6 +37,7 @@ import { Anexo61Component } from './anexo61/anexo61.component';
 import { Veranexo61Component } from './veranexo61/veranexo61.component';
 import { Anexo62Component } from './anexo62/anexo62.component';
 import { Veranexo62Component } from './veranexo62/veranexo62.component';
+import { RegistroactividadesestudianteComponent } from './registroactividadesestudiante/registroactividadesestudiante.component';
 
 const routes: Routes = [
   {path:'bienvenida',
@@ -105,6 +106,8 @@ const routes: Routes = [
     component:Anexo62Component
   },{path:'veranexos6_2/:cedula/:nombres',
     component:Veranexo62Component
+  },{path:'registroactividadesestudiante/:cedula/:nombres',
+    component:RegistroactividadesestudianteComponent
   }
 ]
 
@@ -143,6 +146,7 @@ const routes: Routes = [
     Veranexo61Component,
     Anexo62Component,
     Veranexo62Component,
+    RegistroactividadesestudianteComponent
   ],
   imports: [
     CommonModule,

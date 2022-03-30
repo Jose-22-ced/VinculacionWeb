@@ -156,11 +156,7 @@
           </mat-card-header>
           <h4>Debe obtner el anexo en "Obtener Anexo" y posteriormente debera firmar y subir de en formato PDF</h4>
           <div>
-            <button mat-raised-button color="primary" (click)="generardoc()">Obtener Anexo</button>
-            <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
-              <ngx-mat-file-input accept="application/pdf"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
-              <mat-icon matSuffix>folder</mat-icon>
-            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="guardarAnexo61()">Obtener Anexo</button>
           </div>
           <mat-card-content>
             <div>
@@ -170,21 +166,6 @@
           </mat-card-content>
         </mat-card>
       </form>
-    </mat-step>
-    <mat-step  label="Confirmar">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>REGISTRO PARCIAL DE PLAN DE APRENDIZAJE</mat-card-title>
-          <mat-card-subtitle>Guardar </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <div>
-            <button type="submit" mat-raised-button color="primary" (click)="agregarActividades()" >GUARDAR</button>
-            <button mat-raised-button color="warn"  style="margin-left: 5px" [routerLink]="['/panelusuario/proyectovinculacion/bienvenida']" >CANCELAR</button>
-          </div>
-        </mat-card-content>
-      </mat-card>
     </mat-step>
   </mat-stepper>
 </div>

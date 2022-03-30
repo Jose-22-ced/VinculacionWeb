@@ -264,6 +264,18 @@
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmarportulaciones',persona.cedula]"
                       routerLinkActive="active">-Firmar aceptación</button>
             </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Actividades de Estudiantes
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/registroactividadesestudiante',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-Registro de Actividades</button>
+            </mat-expansion-panel>
           </div>
         </div>
         <br>

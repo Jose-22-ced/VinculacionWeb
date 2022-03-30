@@ -49,6 +49,8 @@ export class Anexo3Service {
   }
   getReprecentantebyCodigoProyecto(codigoProyecto?:Number):Observable<NombreResponsable>{
     return this.http.get("http://localhost:8080/api/entidad/entidadR/"+codigoProyecto,{headers: this.httpHeaders}).pipe(map(Response => Response as NombreResponsable))
-
+  }
+  getanexo3(cedula:String):Observable<Anexo3[]>{
+    return this.http.get(this.urlEndPoint+"/allByCedula/"+cedula,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo3[]))
   }
 }
