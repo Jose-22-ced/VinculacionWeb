@@ -55,6 +55,7 @@ export class Verpostulaciones1Component implements OnInit {
   anexo3aceptados:Anexo3[]=[];
   anexo3rechazados:Anexo3[]=[];
 
+  cedula?:String;
 
   proyecto:Proyectos[]=[];
 
@@ -279,6 +280,7 @@ export class Verpostulaciones1Component implements OnInit {
                           background: "#fbc02d",
                         })
                       })
+                      this.router.navigate(['/panelusuario/proyectovinculacion/verproyectos1',this.cedula]);
                     },error => {
                       Swal.fire({
                         title: 'Fallo',

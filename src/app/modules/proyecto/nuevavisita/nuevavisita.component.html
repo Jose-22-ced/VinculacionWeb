@@ -1,0 +1,78 @@
+<div *ngIf="issloading==false">
+  <div>
+    <form>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Visitas a la institución</mat-card-title>
+          <mat-card-subtitle>REGISTRO DE VISTAS</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content [formGroup]="addForm">
+          <h3>Empresa: {{entidad.nombre}}</h3>
+          <h3>Reprecentante legal: {{entidad.representante}}</h3>
+          <strong>Informe</strong>
+          <mat-grid-list cols="6" rowHeight="2:1">
+            <mat-grid-tile colspan="6">
+              <button mat-fab color="primary" (click)="onAddRow(Informe)" *ngIf="addForm.get('rows')"><mat-icon>add_circle</mat-icon></button>
+            </mat-grid-tile>
+            <div  *ngFor="let row of addForm.get('rows')?.controls;let index = index;">
+              <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px;">
+                  <mat-label>Fecha de visita</mat-label>
+                  <input matInput [matDatepicker]="picker" [formControl]="row.get('fecha')">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 50%; margin-left: 2px;">
+                  <mat-label>Inicio</mat-label>
+                  <input matInput type="time" [formControl]="row.get('horaInicio')">
+                </mat-form-field>
+                <mat-form-field appearance="fill" style="width: 50%; margin-left: 2px;">
+                  <mat-label>Fin</mat-label>
+                  <input matInput type="time" [formControl]="row.get('horaFin')">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px;">
+                  <mat-label>Asunto</mat-label>
+                  <input matInput placeholder="Ex.Implementacion" [formControl]="row.get('asunto')">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
+                  <mat-label>Actidades</mat-label>
+                  <textarea matInput [formControl]="row.get('actividades')"></textarea>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
+                  <mat-label>Observaciones</mat-label>
+                  <textarea matInput [formControl]="row.get('observaciones')"></textarea>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <button mat-mini-fab color="warn" style="margin-left: 50px" (click)="onRemoveRow(index)" [disabled]=""><mat-icon>delete_sweep</mat-icon></button>
+              </mat-grid-tile>
+            </div>
+          </mat-grid-list>
+          <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
+            <mat-label>Observaciones</mat-label>
+            <textarea matInput [(ngModel)]="anexo13.observaciones" name="observacion" [ngModelOptions]="{standalone: true}"></textarea>
+          </mat-form-field>
+          <div style="text-align: center">
+            <button type="submit" mat-raised-button color="primary" (click)="guardarAnexo13()" [disabled]="addForm.invalid">GUARDAR</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

@@ -1,0 +1,38 @@
+<div>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>VISITAS</mat-card-title>
+      <mat-card-subtitle>Actualización de visitas</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h3>Ciclo: {{anexo13.ciclo}}</h3>
+      <h3>Peridodo: {{date1 | date:'mediumDate'}} a {{date2 | date:'mediumDate'}} </h3>
+      <h3>Empresa:  {{anexo13.empresa}}</h3>
+      <h3>Representante legal: {{anexo13.representanteLegal}}</h3>
+      <h3>Observaciones: {{anexo13.observaciones }}</h3>
+      <h3>Alumnos:</h3>
+      <h3 *ngFor=" let alumnos of anexo13.estudiantesVisitas ">{{alumnos.cedula}} --{{alumnos.nombre}}</h3>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            INFORMES
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngFor="let info of anexo13.informes">
+          <p>{{info.fecha | date:'mediumDate'}} {{info.horaInicio}}-{{info.horaFin}}</p>
+          <p>{{info.actividades}}</p>
+          <p>{{info.asunto}}</p>
+          <p>{{info.observaciones}}</p>
+        </div>
+      </mat-expansion-panel>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent">OBTNER ANEXO ACTUALIZADO</button>
+      <button mat-raised-button color="primary">SUBIR ANEXO FIRMADO</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
