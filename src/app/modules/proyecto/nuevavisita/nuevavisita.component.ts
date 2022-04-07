@@ -148,7 +148,7 @@ export class NuevavisitaComponent implements OnInit {
       Swal.fire({
         title: 'Error',
         text: 'No nose guardo la vista ' + error.error.message,
-        icon: 'success',
+        icon: 'error',
         iconColor :'#17550c',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",
