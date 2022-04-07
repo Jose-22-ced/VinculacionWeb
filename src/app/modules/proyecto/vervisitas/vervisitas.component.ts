@@ -98,7 +98,7 @@ export class VervisitasComponent implements OnInit {
       doc.setData({
         direc_docenProyecto:anexo13.nombreDirectorDocenteApoyo,
         nombreProyecto:proyecto.nombre,
-        repre:anexo13.representanteLegal,
+        representanteEntidad:anexo13.representanteLegal,
         peridoAcademico:pipe.transform(date1,'MMMM d, y') +" "+ pipe.transform(date2,'MMMM d, y'),
         entidadBeneficiaria:anexo13.empresa,
         ciclo:anexo13.ciclo,

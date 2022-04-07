@@ -11,6 +11,7 @@ export class Anexo13{
   proyectoId?:Number;
   estudiantesVisitas?:EstudiantesVisitaRequest[]
   informes?:InformeVisitaRequest[]
+  num_proceso?:Number;
 }
 export class EstudiantesVisitaRequest{
   id?:Number;
