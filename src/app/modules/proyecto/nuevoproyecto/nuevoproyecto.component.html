@@ -62,7 +62,7 @@
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Entidad Beneficiaria</mat-label>
                   <mat-select formControlName="proyecto" [(ngModel)]="proyecto.entidadbeneficiaria">
-                    <mat-option  *ngFor="let item of entidadBeneficiaria" [ngVa]="item.idEntidad">{{item.nombre}} {{item.representante}}</mat-option>
+                    <mat-option  *ngFor="let item of entidadBeneficiaria" [value]="item.idEntidad">{{item.nombre}} {{item.representante}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </mat-grid-tile>
