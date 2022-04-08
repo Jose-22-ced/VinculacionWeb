@@ -1,9 +1,19 @@
-<div>
+<div *ngIf="issloading==false">
   <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>VISITAS</mat-card-title>
       <mat-card-subtitle>Actualización de visitas</mat-card-subtitle>
+      <span class="example-spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="convertFile(anexo13.documento)">
+          <mat-icon color="warn">download</mat-icon>
+          <span>Descargar Anexo</span>
+        </button>
+      </mat-menu>
     </mat-card-header>
     <mat-card-content>
       <h3>Ciclo: {{anexo13.ciclo}}</h3>
@@ -13,26 +23,17 @@
       <h3>Observaciones: {{anexo13.observaciones }}</h3>
       <h3>Alumnos:</h3>
       <h3 *ngFor=" let alumnos of anexo13.estudiantesVisitas ">{{alumnos.cedula}} --{{alumnos.nombre}}</h3>
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            INFORMES
-          </mat-panel-title>
-          <mat-panel-description>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div *ngFor="let info of anexo13.informes">
-          <p>{{info.fecha | date:'mediumDate'}} {{info.horaInicio}}-{{info.horaFin}}</p>
-          <p>{{info.actividades}}</p>
-          <p>{{info.asunto}}</p>
-          <p>{{info.observaciones}}</p>
-        </div>
-      </mat-expansion-panel>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="accent" (click)="generate(anexo13,proyecto,date1,date2)">OBTNER ANEXO ACTUALIZADO</button>
-      <button mat-raised-button color="primary">SUBIR ANEXO FIRMADO</button>
+      <button mat-raised-button color="primary" (click)="subiranexo(anexo13)">SUBIR ANEXO FIRMADO</button>
     </mat-card-actions>
   </mat-card>
 </div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

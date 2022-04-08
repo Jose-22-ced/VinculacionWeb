@@ -74,12 +74,18 @@ export class NuevavisitaComponent implements OnInit {
                 this.responsablepppService.getResposablepppbyCarrera(value4.siglasCarrera+'').subscribe(value5 => {
                   this.anexo13.periodoAcademicon=value5.fecha_inicio_periodo+" "+value5.fecha_fin_periodo;
                   this.anexo13Service.getAnexo13by(Number(value1[0].idProyectoPPP)).subscribe(value6 => {
-                    this.anexo13=value6[0];
-                    // @ts-ignore
-                    value6[0].informes.forEach(value7 => {
+                    if(value6.length==0){
+                      this.onAddRow(this.Informe)
                       this.issloading=false;
-                      this.onAddRow(value7)
-                    })
+                    }else {
+                      this.anexo13=value6[0];
+                      // @ts-ignore
+                      value6[0].informes.forEach(value7 => {
+                        this.issloading=false;
+                        this.onAddRow(value7)
+                      })
+                    }
+
                   })
 
                 })

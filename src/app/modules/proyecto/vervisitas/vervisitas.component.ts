@@ -21,6 +21,7 @@ import { saveAs } from "file-saver";
 import {Anexo1} from "../../../models/anexo1";
 import {Proyectos} from "../../../models/proyectos";
 import {DatePipe} from "@angular/common";
+import Swal from "sweetalert2";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -41,7 +42,7 @@ function getBase64(file: any) {
 export class VervisitasComponent implements OnInit {
 
   panelOpenState = false;
-
+  issloading=true;
   anexo13:Anexo13 = new Anexo13();
   // @ts-ignore
   date1:Date;
@@ -70,6 +71,7 @@ export class VervisitasComponent implements OnInit {
           this.proyectoService.getProyectobyid(Number(value[0].idProyectoPPP)).subscribe(value2 => {
             this.proyecto=value2;
           })
+          this.issloading=false;
           console.log(value1[0])
           // @ts-ignore
           date=value1[0].periodoAcademicon.split(" ");
@@ -77,6 +79,59 @@ export class VervisitasComponent implements OnInit {
           this.date2= new Date(date[1]+"")
         })
       })
+    })
+  }
+
+
+  subiranexo(anexo13:Anexo13){
+    Swal.fire({
+      allowOutsideClick: false,
+      allowEnterKey:false,
+      allowEscapeKey:false,
+      showCancelButton: true,
+      confirmButtonText:"ENVIAR ANEXO FIRMADO 👉",
+      color: "#0c3255",
+      confirmButtonColor: "#3cb227",
+      background: "#fbc02d",
+      title: 'Confirmación',
+      text: 'Debe subir la el anexo en el formato anterirmente requerido "PDF" para finalizar. Nota: Sea reponsable con el documento a subir, para evitar problemas futuros.',
+      input: 'file',
+      inputAttributes: {
+        'accept': 'application/pdf',
+        'aria-label': 'Debe subir la convocatoria en formato PDF'
+      },
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (value === null) {
+            resolve('Es necesario que seleccione el PDF del anexo')
+          } else {
+            getBase64(value).then(docx => {
+              anexo13.documento = docx + '';
+              this.anexo13Service.saveAnexo13(anexo13).subscribe(value1 => {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El anexo se subio correctamente',
+                  icon: 'success',
+                  iconColor :'#17550c',
+                  color: "#0c3255",
+                  confirmButtonColor:"#0c3255",
+                  background: "#fbc02d",
+                })
+              },error => {
+                Swal.fire({
+                  title: 'Error',
+                  text: 'Huba algun error',
+                  icon: 'warning',
+                  iconColor :'#17550c',
+                  color: "#0c3255",
+                  confirmButtonColor:"#0c3255",
+                  background: "#fbc02d",
+                })
+              })
+            })
+          }
+        })
+      }
     })
   }
 
@@ -150,6 +205,25 @@ export class VervisitasComponent implements OnInit {
       // Output the document using Data-URI
       saveAs(out, "Anexo13 "+anexo13.periodoAcademicon+" "+anexo13.ciclo+".docx");
     });
+  }
+
+  convertFile(docum:any) {
+    console.log(docum)
+    //Usage example:
+    var file = this.dataURLtoFile(docum, 'Anexo13.pdf');
+    console.log(file);
+    saveAs(file, 'Anexo2.pdf');
+  }
+  dataURLtoFile(dataurl:any, filename:any) {
+    let arr = dataurl.split(','),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
   }
 
 }
