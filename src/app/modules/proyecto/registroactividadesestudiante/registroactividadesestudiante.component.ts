@@ -18,6 +18,8 @@ import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
 import {FechaService} from "../../../services/fecha.service";
+import {Anexo61} from "../../../models/anexo61";
+import {DatePipe} from "@angular/common";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -31,16 +33,12 @@ function getBase64(file: any) {
   });
 }
 
-
-
 @Component({
   selector: 'app-registroactividadesestudiante',
   templateUrl: './registroactividadesestudiante.component.html',
   styleUrls: ['./registroactividadesestudiante.component.css']
 })
 export class RegistroactividadesestudianteComponent implements OnInit {
-
-
   issloading=true;
   Fechaenvio?: Date;
   isLinear = true;
@@ -55,9 +53,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
   anexo8requeste:Anexo8=new Anexo8;
   proyecto:Proyectos=new Proyectos;
   edntidad:Entidadbeneficiaria=new Entidadbeneficiaria();
-
   ceduladir?: String;
-
   //secuenciasdepantallas
   firstFormGroup?: FormGroup;
   secondFormGroup?: FormGroup;
@@ -65,7 +61,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
   ////ARRAY
   rows: FormArray;
   itemForm?: FormGroup;
-
+//ANEXO8
   constructor(private fechaService: FechaService,private anexo8Service:Anexo8Service,private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,
               private anexo3Service:Anexo3Service, private proyectoService:ProyectoService) {
     //ArrayActividades
@@ -75,6 +71,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
     });
     this.rows = this._formBuilder.array([]);
   }
+
   ngAfterViewInit(): void {
     setTimeout(()=>{
     },1000)
@@ -92,10 +89,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
       })
       this.fechaService.getSysdate().subscribe(value => {
         this.Fechaenvio = value.fecha;
-        this.Fechaenvio = value.fecha;
       })
-
-
     })
     //ArrayActividadesEst
 
@@ -105,6 +99,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
     });
     this.secondFormGroup = this._formBuilder.group({});
     this.fourFormGroup = this._formBuilder.group({
+      docx: ['', Validators.required],
     });
     //ArrayActividades
     this.secondFormGroup.get("items_value")?.setValue("yes");
@@ -130,10 +125,12 @@ export class RegistroactividadesestudianteComponent implements OnInit {
       console.log(this.sum)
     })
   }
+  ///
   createItemFormGroup(actividades:ActividadesAnexo8Request): FormGroup {
     return this._formBuilder.group({
       id:actividades?.id,
       fecha:actividades?.fecha,
+      // .setDate(actividades.fecha?.getDate()+1),
       descripcionActividad:actividades?.descripcionActividad,
       lugar:actividades?.lugar,
       numHoras:actividades?.numHoras,
@@ -171,8 +168,8 @@ export class RegistroactividadesestudianteComponent implements OnInit {
   }
 
 
-  selectOpcion(event:any){
-    this.proyectoService.getProyectobyid(event.target.value).subscribe(data=>{
+  selectOpcion(event:number){
+    this.proyectoService.getProyectobyid(event).subscribe(data=>{
       this.proyecto=data
       this.anexo8Service.getEntidadById(data.entidadbeneficiaria).subscribe(da=>{
         this.edntidad=da;
@@ -212,193 +209,140 @@ export class RegistroactividadesestudianteComponent implements OnInit {
     return this.anexo8;
   }
   guardar(){
-    console.log(this.ontnerDatos())
-    Swal.fire({
-      title: 'Esta seguro',
-      text: "Para ello debe firmar el siguiente anexo con sus datos",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si'
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'ANEXO 8!',
-          'Se le descargará un archivo WORD, y deberá subirlo en formato pdf',
-          'success'
-        )
-        this.generate(this.ontnerDatos());
-        const { value: file } = await Swal.fire({
-          allowOutsideClick: false,
-          title: 'SELECCIONE EL PDF',
-          text:'Debe subir la covocataria en tipo PDF',
-          input: 'file',
-          inputAttributes: {
-            'accept': 'application/pdf',
-            'aria-label': 'Debe subir la covocataria en tipo PDF'
-          },
-          inputValidator: (value) => {
-            return new Promise((resolve) => {
-              if (value === null) {
-                resolve('Es necesario que seleccione el PDF')
-              } else {
-                getBase64(value).then(
-                  data => {
-                    this.anexo8.documento=data+''
-                    this.anexo8Service.saveAnexo8(this.ontnerDatos()).subscribe(datos=>{
-                      Swal.fire({
-                        icon: 'success',
-                        title: 'ACTIVIDAD REGISTRADA CORRECTAMENTE',
-                        text: 'Datos guadados correctamente',
-                        confirmButtonColor: "#0c3255"
-                      })
-                      window.location.reload();
-                    },err=>{
-                      Swal.fire({
-                        icon: 'warning',
-                        title: 'Al paracer hubo un problema',
-                        text: err.error.message,
-                        confirmButtonColor: "#0c3255"
-                      })
-                      window.location.reload();
-                    })
-                  }
-                );
-
-              }
-            })
-          }
-        })
-
-      }
+     this.anexo8=this.ontnerDatos();
+    this.anexo8Service.saveAnexo8(this.ontnerDatos()).subscribe(datos=>{
+      Swal.fire({
+        icon: 'success',
+        title: 'ACTIVIDAD REGISTRADA CORRECTAMENTE',
+        text: 'Datos guadados correctamente',
+        confirmButtonColor: "#0c3255"
+      })
+      window.location.reload();
+    },err=>{
+      Swal.fire({
+        icon: 'warning',
+        title: 'Al paracer hubo un problema',
+        text: err.error.message,
+        confirmButtonColor: "#0c3255"
+      })
+      window.location.reload();
     })
+
   }
 
+  subirDocumento8(file:FileList){
+    if(file.length==0){
+    }else{
+      getBase64(file[0]).then(docx=>{
+        // @ts-ignore
+        console.log(docx.length)
+        // @ts-ignore
+        if(docx.length>=10485760){
+          this.anexo8.documento="";
+          Swal.fire(
+            'Fallo',
+            'El documento excede el peso permitido',
+            'warning'
+          )
+        }else{
+          this.anexo8.documento=docx+"";
+        }
+      })
+    }
+  }
 
   actulizar(){
     console.log(this.ontnerDatos())
-    Swal.fire({
-      title: 'Esta seguro',
-      text: "Para ello debe firmar el siguiente anexo con sus datos",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si'
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'ANEXO 3!',
-          'Se le descargará un archivo WORD, y deberá subirlo en formato pdf',
-          'success'
-        )
-        this.generate(this.ontnerDatos());
-        const { value: file } = await Swal.fire({
-          allowOutsideClick: false,
-          title: 'SELECCIONE EL PDF',
-          text:'Debe subir la covocataria en tipo PDF',
-          input: 'file',
-          inputAttributes: {
-            'accept': 'application/pdf',
-            'aria-label': 'Debe subir la covocataria en tipo PDF'
-          },
-          inputValidator: (value) => {
-            return new Promise((resolve) => {
-              if (value === null) {
-                resolve('Es necesario que seleccione el PDF')
-              } else {
-                getBase64(value).then(
-                  data => {
-                    this.anexo8.id=this.anexo8requeste.id
-                    this.anexo8.documento=data+''
-                    this.anexo8Service.updateActivadades(this.ontnerDatos()).subscribe(datos=>{
+    this.anexo8.id=this.anexo8requeste.id
+          this.anexo8Service.updateActivadades(this.ontnerDatos()).subscribe(datos=>{
+                      console.log(this.ontnerDatos()),
                       Swal.fire({
                         icon: 'success',
                         title: 'ACTIVIDAD REGISTRADA',
                         text: 'Datos guadados correctamente',
                         confirmButtonColor: "#0c3255"
                       })
-                    },err=>{
-                      Swal.fire({
-                        icon: 'warning',
-                        title: 'Al paracer hubo un problema',
-                        text: err.error.message,
-                        confirmButtonColor: "#0c3255"
-                      })
-                    })
-                  }
-                );
-
-              }
-            })
-          }
-        })
-
-      }
-    })
+            window.location.reload();
+                      this.issloading=false;
+             },err=>{
+          Swal.fire({
+        icon: 'warning',
+         title: 'Al paracer hubo un problema',
+      text: err.error.message,
+      confirmButtonColor: "#0c3255"
+       })
+     })
   }
-
-
-  generate(anexo8: Anexo8) {
-    loadFile(
-      'https://raw.githubusercontent.com/Sbryan20/Sistema-PPProfesionales/main/src/assets/doc/anexo8.docx',
-      function(
-        // @ts-ignore
-        error,
-        // @ts-ignore
-        content
-      ){
-
-    if (error) {
-          throw error;
-        }
-        const zip = new PizZip(content);
-        const doc = new Docxtemplater(zip, {
-          paragraphLoop: true,
-          linebreaks: true,
-        });
-        try {
-          // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
-          doc.render({
-            nombre_proyecto:anexo8.nombreProyecto,
-            entidad_beneficiaria:anexo8.nombreEntidadBeneficiaria,
-            nombre_estudiante:anexo8.nombreEstudiante,
-            identificiacion_est:anexo8.cedulaEstudiante,
-            nombre_admin_entidad:anexo8.nombreAdminEB,
-            docente_apoyo:anexo8.nombreDocenteApoyo,
-            nombre_director:anexo8.nombreDirectorProyecto,
-            tb:anexo8.actividades,
-            totalHoras:anexo8.totalHoras
-          });
-        }  catch (error) {
-          // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
-          // @ts-ignore
-          function replaceErrors(key, value) {
-            if (value instanceof Error) {
-              return Object.getOwnPropertyNames(value).reduce(function(
-                  error,
-                  key
-                ) {
-                  // @ts-ignore
-                  error[key] = value[key];
-                  return error;
-                },
-                {});
-            }
-            return value;
-          }
-          console.log(JSON.stringify({ error: error }, replaceErrors));
-        }
-        const out = doc.getZip().generate({
-          type: 'blob',
-          mimeType:
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        });
-        // Output the document using Data-URI
-        saveAs(out, 'Convocataria para Vinculacion.docx');
+  ggenerarDocumento8() {
+    var anexo8:Anexo8=this.ontnerDatos();
+    console.log(anexo8)
+    var pipe:DatePipe = new DatePipe('en-US')
+    loadFile("https://raw.githubusercontent.com/Sbryan20/Sistema-PPProfesionales/main/src/assets/doc/anexo8.docx", function(
+      // @ts-ignore
+      error,
+      // @ts-ignore
+      content
+    ) {
+      if (error) {
+        throw error;
       }
-    );
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+
+      doc.setData({
+        nombre_proyecto:anexo8.nombreProyecto,
+        entidad_beneficiaria:anexo8.nombreEntidadBeneficiaria,
+        nombre_estudiante:anexo8.nombreEstudiante,
+        identificiacion_est:anexo8.cedulaEstudiante,
+        nombre_admin_entidad:anexo8.nombreAdminEB,
+        docente_apoyo:anexo8.nombreDocenteApoyo,
+        nombre_director:anexo8.nombreDirectorProyecto,
+        tb:anexo8.actividades,
+        totalHoras:anexo8.totalHoras
+      });
+      try {
+        // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+        doc.render();
+      } catch (error) {
+        // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+        // @ts-ignore
+        function replaceErrors(key, value) {
+          if (value instanceof Error) {
+            return Object.getOwnPropertyNames(value).reduce(function(
+                error,
+                key
+              ) {
+                // @ts-ignore
+                error[key] = value[key];
+                return error;
+              },
+              {});
+          }
+          return value;
+        }
+        console.log(JSON.stringify({ error: error }, replaceErrors));
+        // @ts-ignore
+        if (error.properties && error.properties.errors instanceof Array) {
+          // @ts-ignore
+          const errorMessages = error.properties.errors
+            // @ts-ignore
+            .map(function(error) {
+              return error.properties.explanation;
+            })
+            .join("\n");
+          console.log("errorMessages", errorMessages);
+          // errorMessages is a humanly readable message looking like this :
+          // 'The tag beginning with "foobar" is unopened'
+        }
+        throw error;
+      }
+      const out = doc.getZip().generate({
+        type: "blob",
+        mimeType:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      });
+      // Output the document using Data-URI
+      saveAs(out, "Anexo8.docx");
+    });
   }
 }
-

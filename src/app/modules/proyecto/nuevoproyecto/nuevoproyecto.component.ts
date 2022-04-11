@@ -21,6 +21,7 @@ import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.
 import {ProyectoService} from "../../../services/proyecto.service";
 import {Anexo1Service} from "../../../services/anexo1.service";
 import Swal from "sweetalert2";
+import * as moment from 'moment';
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -85,6 +86,7 @@ export class NuevoproyectoComponent implements OnInit {
 
   ngOnInit() {
     this.obtnerDatos();
+    this.obtnerMeses()
     this.responsablepppService.getDocentesbyAll().subscribe(value => {
       this.docentes=value;
       this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -190,6 +192,14 @@ export class NuevoproyectoComponent implements OnInit {
     return this._formBuilder.group({
       descripcion: ['', Validators.required],
     });
+  }
+  meses?:String;
+
+  obtnerMeses(){
+    let ini = moment(this.firstFormGroup?.getRawValue().start);
+    let fin = moment(this.firstFormGroup?.getRawValue().end);
+    let diff = fin.diff(ini, 'months');
+    this.proyecto.plazoEjecucion=diff+' Meses'
   }
 
   //Tabla

@@ -1,0 +1,211 @@
+<div *ngIf="issloading==false">
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>MES</ng-template>
+        <mat-card class="example-card2">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>PLANIFICACIÓN MENSUAL DE ACTIVIDADES</mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-content>
+            <div id ="contenedor">
+              <div id ="cabecera">
+                <p>INFORMACION DEL ANEXO 7</p>
+                <br>
+                <h3>><strong>Nombre del Proyecto: </strong>{{proyecto.nombre}}</h3>
+                <h3>><strong>Director Proyecto: </strong>{{proyecto.nombredirector}}</h3>
+                <h3><strong>Empresa/Institucion: </strong>{{anexo2.entidadBeneficiaria}}</h3>
+                <mat-divider></mat-divider>
+                <h3>Mes/Año de planificación</h3>
+                <h3>{{anexo7.fechaPlanificacion | date:"MMMM/yyyy"}}</h3>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <br>
+          <div style="text-align: end">
+            <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
+          </div>
+        </mat-card>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="ESTUDICINTES">
+      <form [formGroup]="secondFormGroup">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>
+              PLANIFICACIÓN MENSUAL DE ACTIVIDADES</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h3>ACTIVIDADES DEL ESTUDIANTE</h3>
+            <mat-grid-list cols="7" rowHeight="2:1.50" [formGroup]="secondFormGroup">
+              <mat-grid-tile colspan="7" >
+                <button mat-fab color="primary" (click)="onAddRow('')" *ngIf="secondFormGroup.get('rows')"><mat-icon>add_circle</mat-icon></button>
+              </mat-grid-tile>
+              <div  *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Actividad</mat-label>
+                    <input matInput type="text" [formControl]="row.get('actividad')"  placeholder="Actividad" [required]>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>DOCENTES DE APOYO</mat-label>
+                    <mat-select [formControl]="row.get('nombreDocenteApoyo')" multiple>
+                      <mat-option *ngFor="let topping of anexo1" [value]="topping.nombreDelegado">{{topping.cedulaDelegado}}- {{topping.nombreDelegado}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Resultados</mat-label>
+                    <textarea matInput type="text" [formControl]="row.get('resultados')"  placeholder=".." [required]></textarea>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>N.Horas</mat-label>
+                    <input matInput type="number" min="0" [formControl]="row.get('numHoras')"  placeholder="Horas" [required]>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Fecha de Inicio y de Fin del Proyecto</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                      <input matStartDate [formControl]="row.get('fechaInicio')" placeholder="Inicio">
+                      <input matEndDate [formControl]="row.get('fechaFin')" placeholder="Fin">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Observaciones</mat-label>
+                    <textarea matInput type="text" [formControl]="row.get('observaciones')"  placeholder="Observaciones" [required]></textarea>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <button mat-mini-fab color="warn" style="margin-left: 50px" (click)="onRemoveRow(index)" [disabled]=""><mat-icon>delete_sweep</mat-icon></button>
+                </mat-grid-tile>
+              </div>
+            </mat-grid-list>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <br>
+          <div style="text-align: end">
+            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
+            <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
+          </div>
+        </mat-card>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="thirdFormGroup" label="PLANIFICACIÓN MENSUAL DE ACTIVIDADES ESTUDIANTES">
+      <form [formGroup]="thirdFormGroup">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>
+              PLANIFICACIÓN MENSUAL DE ACTIVIDADES</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h3>ACTIVIDADES DEL ESTUDIANTE</h3>
+            <mat-grid-list cols="7" rowHeight="2:1.50" [formGroup]="thirdFormGroup">
+              <mat-grid-tile colspan="7" >
+                <button mat-fab color="primary" (click)="onAddRow1('')" *ngIf="thirdFormGroup.get('rows1')"><mat-icon>add_circle</mat-icon></button>
+              </mat-grid-tile>
+              <div *ngFor="let row1 of thirdFormGroup.get('rows1')?.controls;let index = index;">
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Actividad</mat-label>
+                    <input matInput type="text" [formControl]="row1.get('actividad')"  placeholder="Actividad" [required]>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>ESTUDIANTES</mat-label>
+                    <mat-select [formControl]="row1.get('nombreEstudiante')" multiple>
+                      <mat-option *ngFor="let est of anexo3" [value]="est.nombresestudiante+' '+est.apellidosestudiante">{{est.cedula}}: {{est.nombresestudiante}} {{est.apellidosestudiante}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Resultados</mat-label>
+                    <textarea matInput type="text" [formControl]="row1.get('resultados')"  placeholder=".." [required]></textarea>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>N.Horas</mat-label>
+                    <input matInput type="number" min="0" [formControl]="row1.get('numHoras')"  placeholder="Horas" [required]>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Fecha de Inicio y de Fin del Proyecto</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                      <input matStartDate [formControl]="row1.get('fechaInicio')" placeholder="Inicio">
+                      <input matEndDate [formControl]="row1.get('fechaFin')" placeholder="Fin">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Observaciones</mat-label>
+                    <textarea matInput type="text" [formControl]="row1.get('observaciones')"  placeholder="Observaciones" [required]></textarea>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <button mat-mini-fab color="warn" style="margin-left: 50px" (click)="onRemoveRow1(index)" [disabled]=""><mat-icon>delete_sweep</mat-icon></button>
+                </mat-grid-tile>
+              </div>
+            </mat-grid-list>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <br>
+          <div style="text-align: end">
+            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
+            <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
+          </div>
+        </mat-card>
+      </form>
+    </mat-step>
+    <mat-step  label="Confirmar">
+      <mat-card style="width: 600px;margin: 0 auto">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>PLANIFICACIÓN MENSUAL DE ACTIVIDADES</mat-card-title>
+          <mat-card-subtitle>Guardar Planificacion Mensual </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div>
+            <button mat-button matStepperPrevious color="primary">Atras</button>
+            <button mat-flat-button color="warn" (click)="guardaranexo7()">GUARDAR</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-step>
+  </mat-stepper>
+</div>
+<div *ngIf="isexist==false">
+  <mat-card>
+    <mat-card-title>NO EXISTE</mat-card-title>
+  </mat-card>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

@@ -17,6 +17,8 @@ import {Anexo2Service} from "../../../services/anexo2.service";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
 import {Anexo13Service} from "../../../services/anexo13.service";
 import Swal from "sweetalert2";
+import {Anexo4Service} from "../../../services/anexo4.service";
+import {Anexo4} from "../../../models/anexo4";
 
 @Component({
   selector: 'app-nuevavisita',
@@ -26,12 +28,16 @@ import Swal from "sweetalert2";
 export class NuevavisitaComponent implements OnInit {
 
 
+  minDate: Date | undefined = new Date();
+
   anexo1:Anexo1 = new Anexo1();
   anexo5:Anexo5= new Anexo5();
   proyecto:Proyectos= new Proyectos();
   entidad:Entidadbeneficiaria = new Entidadbeneficiaria();
   isexist?:boolean=true;
   issloading=true;
+
+  anexo4:Anexo4[]=[];
 
   Informe:InformeVisitaRequest=new InformeVisitaRequest();
 
@@ -51,7 +57,8 @@ export class NuevavisitaComponent implements OnInit {
               private proyectoService:ProyectoService,
               private anexo2Service:Anexo2Service,
               private responsablepppService:ResponsablepppService,
-              private anexo13Service:Anexo13Service) {
+              private anexo13Service:Anexo13Service,
+              private anexo4Service:Anexo4Service) {
     //ArrayActividades
     this.addForm = this._formBuilder.group({
     });
@@ -59,12 +66,18 @@ export class NuevavisitaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fechaService.getSysdate().subscribe(value => {
+      this.minDate=value.fecha;
+    })
     this.activatedRoute.params.subscribe(params => {
       let cedula = params['cedula']
       this.anexo1Service.getAnexo1byCedula(cedula).subscribe(value => {
         this.anexo1=value[0]
         this.anexo5Service.getAnexo5byCedula(cedula).subscribe(value1 => {
           this.anexo5=value1[0]
+          this.anexo4Service.getAnexo4All().subscribe(value2 => {
+            this.anexo4=value2.filter(value3 => value3.idProyectoPPP==value1[0].idProyectoPPP&&value3.num_proceso==2)
+          })
           this.proyectoService.getProyectobyid(Number(value1[0].idProyectoPPP)).subscribe(value2 => {
             this.proyecto=value2;
             this.entidadbeneficiarioService.getsaveEntidadBeneficiariabyId(Number(value2.entidadbeneficiaria)).subscribe(value3 => {
@@ -122,7 +135,7 @@ export class NuevavisitaComponent implements OnInit {
   estudiantesVisitaRequest:EstudiantesVisitaRequest[]=[];
   obtnerDatos():Anexo13{
     this.estudiantesVisitaRequest.length=0;
-    this.anexo5.alumnos?.forEach(value => {
+    this.anexo4.forEach(value => {
       this.estudiantesVisitaRequest.push({
         cedula:value.cedulaEstudiante,
         nombre:value.nombreEstudiante,

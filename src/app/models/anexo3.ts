@@ -16,7 +16,7 @@ export class Anexo3 {
   idProyectoPPP?:Number;
   estado?:string;
   num_proceso?:Number;
-  observaciones?: String;
+  razon?:String;
 }
 
 export class CarreasAlumo{

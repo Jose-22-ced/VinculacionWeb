@@ -1,0 +1,92 @@
+<div *ngIf="issloading==false">
+  <mat-card>
+    <mat-card-title>
+      PLANIFICACIÓN MENSUAL DE ACTIVIDADES</mat-card-title>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>BUSCAR..</mat-label>
+      <input matInput   placeholder="FILTRAR" [formControl]="myControl">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </mat-card>
+  <br>
+  <div *ngIf="isexist">
+    <div *ngFor="let anex7 of filteredOptions | async">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-subtitle>Proyecto: {{anex7.nombreProyecto}}</mat-card-subtitle>
+          <mat-card-title>Director de Proyecto: {{anex7.nombreDirectorProyecto}}</mat-card-title>
+          <span class="example-spacer"></span>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [routerLink]="['/panelusuario/proyectovinculacion/editarplafinicacionmensuak',anex7.id,this.cedula,this.nombres]">
+                <mat-icon color="primary">edit</mat-icon>
+                <span>Editar</span>
+              </button>
+            <button mat-menu-item (click)="eliminarAnexo7(anex7)">
+              <mat-icon color="warn">delete_forever</mat-icon>
+              <span>Eliminar</span>
+            </button>
+              <button mat-menu-item (click)="convertFile(anex7.documento)">
+                <mat-icon color="warn">download</mat-icon>
+                Descargar documento</button>
+            </mat-menu>
+        </mat-card-header>
+        <mat-card-content>
+          <h3>Fecha de Emision: {{anex7.fechaPlanificacion | date:"longDate"}}</h3>
+          <h3>Mes Planificado: {{anex7.mesAnioPlanificado | date:"MMMM/yyyy"}}</h3>
+              <mat-expansion-panel (opened)="panelOpenState = true"
+                                   (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  HORAS DOCENTES
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p *ngFor="let act of anex7.horasDocentes">
+                Act: {{act.actividad}}  Fecha Inicio:{{act.fechaInicio}}
+                <br>Docente: {{act.nombreDocenteApoyo}}
+                <br>Fecha Fin: {{act.fechaFin}}
+                <br>N. Horas: {{act.numHoras}}
+                <br>Resultados: {{act.resultados}}
+                <br>Observaciones: {{act.observaciones}}</p>
+          </mat-expansion-panel>
+          <br>
+              <mat-expansion-panel (opened)="panelOpenState = true"
+                                   (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    HORAS ESTUDIANTES
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p *ngFor="let act of anex7.horasEstudiantes">
+                  Act: {{act.actividad}}  Fecha Inicio:{{act.fechaInicio}}
+                  <br>Docente: {{act.nombreEstudiante}}
+                  <br>Fecha Fin: {{act.fechaFin}}
+                  <br>N. Horas: {{act.numHoras}}
+                  <br>Resultados: {{act.resultados}}
+                  <br>Observaciones: {{act.observaciones}}</p>
+              </mat-expansion-panel>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="generarDocumento711(anex7,anexos3)">OBTNER ANEXO</button>
+          <button mat-raised-button color="warn" (click)="subiranexo(anex7)">SUBIR FIRMA</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>NO EXISTEN </mat-card-title>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
+
+

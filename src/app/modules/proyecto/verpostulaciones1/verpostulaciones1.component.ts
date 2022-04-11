@@ -90,26 +90,32 @@ export class Verpostulaciones1Component implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       let cedula = params['cedula']
-      this.responsablepppService.getResposablepppbyAll().subscribe(value => {
-        this.proyectoService.getProyectos().subscribe(value1 => {
-          this.proyecto=value1.filter(value2 => value2.codigocarrera==value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera);
-        })
-        this.anexo3Service.getAnexo3byCodigoCorrera(value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera).subscribe(value1 => {
-          this.isexist=value1.length!=0;
-          this.anexo3pendientes=value1.filter(value2 => value2.estado=="PN")
-          this.proyetoFilterp("ND")
-          this.anexo3aceptados=value1.filter(value2 => value2.estado=="AN")
-          this.filteredOptionsa = this.myControla.valueChanges.pipe(
-            startWith(''),
-            map(values=>this.filtera(values)),
-          );
-          this.anexo3rechazados=value1.filter(value2 => value2.estado=="DN")
-          this.issloading=false;
-          this.filteredOptionsr = this.myControlr.valueChanges.pipe(
-            startWith(''),
-            map(values=>this.filterr(values)),
-          );
-        })
+      this.cedula=cedula
+      this.cargarpostulaiones(cedula);
+
+    })
+  }
+
+  cargarpostulaiones(cedula:String){
+    this.responsablepppService.getResposablepppbyAll().subscribe(value => {
+      this.proyectoService.getProyectos().subscribe(value1 => {
+        this.proyecto=value1.filter(value2 => value2.codigocarrera==value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera);
+      })
+      this.anexo3Service.getAnexo3byCodigoCorrera(value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera).subscribe(value1 => {
+        this.isexist=value1.length!=0;
+        this.anexo3pendientes=value1.filter(value2 => value2.estado=="PN")
+        this.proyetoFilterp("ND")
+        this.anexo3aceptados=value1.filter(value2 => value2.estado=="AN")
+        this.filteredOptionsa = this.myControla.valueChanges.pipe(
+          startWith(''),
+          map(values=>this.filtera(values)),
+        );
+        this.anexo3rechazados=value1.filter(value2 => value2.estado=="DN")
+        this.issloading=false;
+        this.filteredOptionsr = this.myControlr.valueChanges.pipe(
+          startWith(''),
+          map(values=>this.filterr(values)),
+        );
       })
     })
   }
@@ -230,7 +236,7 @@ export class Verpostulaciones1Component implements OnInit {
           showCancelButton: true
         })
         if (text) {
-          anexo.observaciones=text;
+          anexo.razon=text;
           anexo.estado="AN";
           const {value: file} = await Swal.fire({
             allowOutsideClick: false,
@@ -253,6 +259,7 @@ export class Verpostulaciones1Component implements OnInit {
                 if (value === null) {
                   resolve('Es necesario que seleccione el PDF del anexo')
                 } else {
+                  this.issloading=true;
                   getBase64(value).then(docx => {
                     anexo4.documento = docx + '';
                     this.anexo4Service.saveAnexo4(anexo4).subscribe(value1 => {
@@ -266,6 +273,8 @@ export class Verpostulaciones1Component implements OnInit {
                           confirmButtonColor:"#0c3255",
                           background: "#fbc02d",
                         })
+                        this.cargarpostulaiones(this.cedula+"")
+                        this.router.navigate(['/panelusuario/proyectovinculacion/verportulaciones1',this.cedula]);
                         this.proyetoFilterp("")
                         this.filtera("");
                         this.filterr("");
@@ -280,7 +289,7 @@ export class Verpostulaciones1Component implements OnInit {
                           background: "#fbc02d",
                         })
                       })
-                      this.router.navigate(['/panelusuario/proyectovinculacion/verproyectos1',this.cedula]);
+                      this.issloading=false;
                     },error => {
                       Swal.fire({
                         title: 'Fallo',
@@ -291,6 +300,7 @@ export class Verpostulaciones1Component implements OnInit {
                         confirmButtonColor:"#0c3255",
                         background: "#fbc02d",
                       })
+                      this.issloading=false;
                     })
                   })
                 }
@@ -343,7 +353,8 @@ export class Verpostulaciones1Component implements OnInit {
       showCancelButton: true
     })
     if (text) {
-      anexo.observaciones=text;
+      this.issloading=true;
+      anexo.razon=text;
       anexo.estado="DN";
       this.anexo3Service.updateAnexo3(anexo).subscribe(value => {
         Swal.fire({
@@ -355,6 +366,11 @@ export class Verpostulaciones1Component implements OnInit {
           confirmButtonColor:"#0c3255",
           background: "#fbc02d",
         })
+        this.cargarpostulaiones(this.cedula+"")
+        this.router.navigate(['/panelusuario/proyectovinculacion/verportulaciones1',this.cedula]);
+        this.proyetoFilterp("")
+        this.filtera("");
+        this.filterr("")
       },error => {
         Swal.fire({
           title: 'Fallo',
@@ -365,6 +381,7 @@ export class Verpostulaciones1Component implements OnInit {
           confirmButtonColor:"#0c3255",
           background: "#fbc02d",
         })
+        this.issloading=false;
       })
     }
   }

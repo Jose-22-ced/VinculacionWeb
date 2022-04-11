@@ -40,6 +40,16 @@ import { Veranexo62Component } from './veranexo62/veranexo62.component';
 import { RegistroactividadesestudianteComponent } from './registroactividadesestudiante/registroactividadesestudiante.component';
 import { NuevavisitaComponent } from './nuevavisita/nuevavisita.component';
 import { VervisitasComponent } from './vervisitas/vervisitas.component';
+import { NuevoinformedeculminacionComponent } from './nuevoinformedeculminacion/nuevoinformedeculminacion.component';
+import { VerinformesdeculminacionComponent } from './verinformesdeculminacion/verinformesdeculminacion.component';
+import {Anexo7planificacionmensualComponent} from "./anexo7planificacionmensual/anexo7planificacionmensual.component";
+import {Veranexos7Component} from "./veranexos7/veranexos7.component";
+import { EditarinformedeculminacionComponent } from './editarinformedeculminacion/editarinformedeculminacion.component';
+import { FirmarinformdedeculmnacionapoyoComponent } from './firmarinformdedeculmnacionapoyo/firmarinformdedeculmnacionapoyo.component';
+import { FirmainformedeculmunaciondirectorComponent } from './firmainformedeculmunaciondirector/firmainformedeculmunaciondirector.component';
+import { FirmarplandeaprendizajeComponent } from './firmarplandeaprendizaje/firmarplandeaprendizaje.component';
+import {Editar7planmesualComponent} from "./editar7planmesual/ediatar7planmesual.component";
+
 
 const routes: Routes = [
   {path:'bienvenida',
@@ -114,6 +124,24 @@ const routes: Routes = [
     component:NuevavisitaComponent
   },{path:'vervisitas/:cedula',
     component:VervisitasComponent
+  },{path:'nuevoinformedeculminacion/:cedula',
+    component:NuevoinformedeculminacionComponent
+  },{path:'verinformedeculminación/:cedula',
+    component:VerinformesdeculminacionComponent
+  },{path:'nuevaplaificacionmensual/:cedula/:nombres',
+    component:Anexo7planificacionmensualComponent
+  },{path:'verplatificaciones/:cedula/:nombres',
+    component:Veranexos7Component
+  },{path:'editarinformedeculminacion/:id',
+    component:EditarinformedeculminacionComponent
+  },{path:'firmarpladeaprendizajeapoyo/:cedula',
+    component:FirmarinformdedeculmnacionapoyoComponent
+  },{path:'firmarpladeaprendizajedirector/:cedula',
+    component:FirmainformedeculmunaciondirectorComponent
+  },{path:'firmarplandeaprondizaje/:cedula',
+    component:FirmarplandeaprendizajeComponent
+  },{path:'editarplafinicacionmensuak/:id/:cedula/:nombre',
+    component:Editar7planmesualComponent
   }
 ]
 
@@ -154,7 +182,17 @@ const routes: Routes = [
     Veranexo62Component,
     RegistroactividadesestudianteComponent,
     NuevavisitaComponent,
-    VervisitasComponent
+    VervisitasComponent,
+    NuevoinformedeculminacionComponent,
+    VerinformesdeculminacionComponent,
+    Anexo7planificacionmensualComponent,
+    Veranexos7Component,
+    EditarinformedeculminacionComponent,
+    FirmarinformdedeculmnacionapoyoComponent,
+    FirmainformedeculmunaciondirectorComponent,
+    FirmarplandeaprendizajeComponent,
+    Editar7planmesualComponent
+
   ],
   imports: [
     CommonModule,

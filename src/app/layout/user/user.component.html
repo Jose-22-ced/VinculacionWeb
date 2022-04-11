@@ -49,6 +49,18 @@
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title>
+                  Firmas de anexos
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmarplandeaprondizaje',persona.cedula]"
+                      routerLinkActive="active">-Plan de aprendizaje</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
                   Entidad Beneficiaria
                 </mat-panel-title>
               </mat-expansion-panel-header>
@@ -103,6 +115,8 @@
                       routerLinkActive="active">-Miembro de proyecto</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/delegaciondealumnosfirma',persona.cedula]"
                       routerLinkActive="active">-Alumnos a cargo</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmarpladeaprendizajeapoyo',persona.cedula]"
+                      routerLinkActive="active">-Revisión de Informe culminación</button>
             </mat-expansion-panel>
             <br>
             <mat-expansion-panel (opened)="panelOpenState = true"
@@ -161,6 +175,10 @@
                       routerLinkActive="active">-Miembro de proyecto</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/delegaciondealumnosfirma',persona.cedula]"
                       routerLinkActive="active">-Alumnos a cargo</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmarpladeaprendizajeapoyo',persona.cedula]"
+                      routerLinkActive="active">-Revisión de Informe culminación </button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmarpladeaprendizajedirector',persona.cedula]"
+                      routerLinkActive="active">-Aceptacion de Informe culminación </button>
             </mat-expansion-panel>
             <br>
             <mat-expansion-panel (opened)="panelOpenState = true"
@@ -203,6 +221,20 @@
                       routerLinkActive="active">-Nuevo vista</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/vervisitas',persona.cedula]"
                       routerLinkActive="active">-Ver visitas</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Planificación mensual
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/nuevaplaificacionmensual',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-Nueva planificaciones</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verplatificaciones',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-Ver planficaciones</button>
             </mat-expansion-panel>
           </div>
           <!--Resposanle de PPP-->
@@ -303,6 +335,20 @@
               <!--Redireccion con los routerlink-->
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/registroactividadesestudiante',persona.cedula,persona.nombrescompletos]"
                       routerLinkActive="active">-Registro de Actividades</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Informe de culminación
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/nuevoinformedeculminacion',persona.cedula]"
+                      routerLinkActive="active">-Nuevo informe</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verinformedeculminación',persona.cedula]"
+                      routerLinkActive="active">-Ver informe</button>
             </mat-expansion-panel>
           </div>
         </div>

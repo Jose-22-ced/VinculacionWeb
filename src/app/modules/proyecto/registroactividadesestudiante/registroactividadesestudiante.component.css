@@ -47,6 +47,15 @@ height: max-content;
 .example-full-width {
   width: 90%;
 }
+.example-full-widthl {
+  width: 150px;
+}
+.example-full-widthf {
+  width: 150px;
+}
+.example-full-width2 {
+  width: 80px;
+}
 #contenedor{
   overflow: hidden;
 }

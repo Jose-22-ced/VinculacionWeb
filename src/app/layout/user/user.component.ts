@@ -33,11 +33,23 @@ export class UserComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
-    //Obtine los datos el de incio de sesion con el JSON
-    this.persona=JSON.parse(sessionStorage['user']);
-    this.foto=JSON.parse(sessionStorage['user']).urlFoto
-    this.rolnombre=this.geRolName(JSON.parse(sessionStorage['user']).rol);
-    sessionStorage.clear;
+    if(JSON.parse(sessionStorage['user'])!=""){
+      //Obtine los datos el de incio de sesion con el JSON
+      this.persona=JSON.parse(sessionStorage['user']);
+      this.foto=JSON.parse(sessionStorage['user']).urlFoto
+      this.rolnombre=this.geRolName(JSON.parse(sessionStorage['user']).rol);
+      console.log(JSON.parse(sessionStorage['user']).token)
+      sessionStorage.clear;
+    }else {
+      sessionStorage.clear;
+      localStorage.removeItem("user");
+      sessionStorage.setItem('user', JSON.stringify(""));
+      console.log(JSON.parse(sessionStorage['user']))
+      this.router.navigate(['/auth/inicio_sesion']).then(() => {
+        window.location.reload();
+      });
+    }
+
 
   }
 
@@ -71,6 +83,12 @@ export class UserComponent implements OnInit,AfterViewInit {
     return "Si rol";
   }
   logout():void{
-    this.router.navigate(['/auth/inicio_sesion']);
+    sessionStorage.clear;
+    localStorage.removeItem("user");
+    sessionStorage.setItem('user', JSON.stringify(""));
+    console.log(JSON.parse(sessionStorage['user']))
+    this.router.navigate(['/auth/inicio_sesion']).then(() => {
+      window.location.reload();
+    });
   }
 }
