@@ -90,14 +90,11 @@ export class Veranexos7Component implements OnInit {
         })
       })
     })
-
   }
-
   ngAfterViewInit(): void {
     setTimeout(() => {
     }, 1000)
   }
-
   filter(value: any): Anexo7[] {
     const filterValue = value.toLowerCase();
     // @ts-ignore
