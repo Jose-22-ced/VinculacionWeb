@@ -155,7 +155,8 @@ export class Editar7planmesualComponent implements OnInit {
       id:horasDocentes.id,
       resultados: [horasDocentes.resultados, Validators.required],
       actividad: [horasDocentes.actividad, Validators.required],
-      nombreDocenteApoyo: [[horasDocentes.nombreDocenteApoyo], Validators.required ],
+      cedulaDocente: [horasDocentes.cedulaDocente,Validators.required],
+      nombreDocenteApoyo: [horasDocentes.nombreDocenteApoyo, Validators.required ],
       numHoras: [horasDocentes.numHoras, Validators.required],
       fechaInicio: [horasDocentes.fechaInicio, Validators.required],
       fechaFin: [horasDocentes.fechaFin, Validators.required],
@@ -178,7 +179,8 @@ export class Editar7planmesualComponent implements OnInit {
       id:horasEstudiantes.id,
       resultados: [ horasEstudiantes.resultados, Validators.required],
       actividad: [horasEstudiantes.actividad, Validators.required],
-      nombreEstudiante:[[horasEstudiantes.nombreEstudiante], Validators.required],
+      cedulaEstudiante: [horasEstudiantes.cedulaEstudiante, Validators.required],
+      nombreEstudiante:[horasEstudiantes.nombreEstudiante, Validators.required],
       numHoras: [horasEstudiantes.numHoras, Validators.required],
       fechaInicio: [horasEstudiantes.fechaInicio, Validators.required],
       fechaFin: [horasEstudiantes.fechaFin, Validators.required],
@@ -196,10 +198,11 @@ export class Editar7planmesualComponent implements OnInit {
   guardaranexo7(){
     this.issloading=true;
     var anexo7=this.obtnerdatos();
+    console.log(anexo7)
     this.anexo7service.updateAnexo7(anexo7).subscribe(value => {
       Swal.fire({
         title: 'Exito',
-        text: 'SEGUIMIENTO GUARDADO',
+        text: 'Planeacion actualizada',
         icon: 'success',
         iconColor :'#17550c',
         color: "#0c3255",
@@ -211,7 +214,7 @@ export class Editar7planmesualComponent implements OnInit {
     },error => {
       Swal.fire({
         title: 'Error',
-        text: 'La nueva planecion no se creado '+error.error.message,
+        text: 'Planeacion no se actualizada '+error.error.message,
         icon: 'error',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",

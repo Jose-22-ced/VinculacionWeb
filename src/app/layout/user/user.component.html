@@ -18,7 +18,7 @@
   <mat-drawer-container autosize>
     <mat-drawer #drawer class="example-sidenav"  opened="true" mode="side">
       <div class="contenedor-perfil">
-        <img class="imagem-mat" [src]="foto">
+        <div class="imagem-mat" style="background-image:url({{persona.urlFoto}})" referrerpolicy="no-referrer"></div>
         <div>
           <h4>{{rolnombre}}</h4>
         </div>

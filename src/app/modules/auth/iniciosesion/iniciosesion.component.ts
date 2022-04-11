@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import Swal from "sweetalert2";
 import {ErrorStateMatcher} from "@angular/material/core";
 import {FormControl, FormGroupDirective, NgForm, Validators} from "@angular/forms";
@@ -19,11 +19,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './iniciosesion.component.html',
   styleUrls: ['./iniciosesion.component.css']
 })
-export class IniciosesionComponent implements OnInit {
+export class IniciosesionComponent implements OnInit,AfterViewInit {
   //Angular Social Login
   socialUser!: SocialUser;
   userLogged!: SocialUser;
-
+  issloading=true;
  //Obtiene los datos del inicio de sesión
   public userRequest: User = new User();
   //Habilita ek incio o el cierre de sesión
@@ -44,6 +44,11 @@ export class IniciosesionComponent implements OnInit {
     return (k <= 9);
   }
   constructor(private router: Router,private authService: SocialAuthService,private iniciosesionService: IniciosesionService) { }
+  ngAfterViewInit(): void {
+    setTimeout(()=>{
+      this.issloading=false;
+    },2000)
+  }
   ngOnInit(): void {
     this.authService.authState.subscribe(data =>{
       this.userLogged=data;

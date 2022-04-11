@@ -62,7 +62,7 @@ export class Verpostulaciones1Component implements OnInit {
   //tablas
   displayedColumns: string[] = ['nombresestudiante', 'apellidosestudiante', 'cedula', 'paralelo','ciclo','nombreproyecto','fecha_solicitud','documento','aceptar','denegar'];
   // @ts-ignore
-  dataSourcep: MatTableDataSource<Anexo3>;
+  dataSource: MatTableDataSource<Anexo3>;
   // @ts-ignore
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
@@ -92,7 +92,6 @@ export class Verpostulaciones1Component implements OnInit {
       let cedula = params['cedula']
       this.cedula=cedula
       this.cargarpostulaiones(cedula);
-
     })
   }
 
@@ -104,7 +103,6 @@ export class Verpostulaciones1Component implements OnInit {
       this.anexo3Service.getAnexo3byCodigoCorrera(value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera).subscribe(value1 => {
         this.isexist=value1.length!=0;
         this.anexo3pendientes=value1.filter(value2 => value2.estado=="PN")
-        this.proyetoFilterp("ND")
         this.anexo3aceptados=value1.filter(value2 => value2.estado=="AN")
         this.filteredOptionsa = this.myControla.valueChanges.pipe(
           startWith(''),
@@ -123,33 +121,33 @@ export class Verpostulaciones1Component implements OnInit {
   proyetoFilterp(event: any){
     console.log(this.anexo3pendientes)
     if(event+""!="ND"){
-      this.dataSourcep = new MatTableDataSource(this.anexo3pendientes.filter(value => value.nombreproyecto==event+""));
-      this.dataSourcep.paginator = this.paginator;
-      this.dataSourcep.sort = this.sort;
+      this.dataSource = new MatTableDataSource(this.anexo3pendientes.filter(value => value.nombreproyecto==event+""));
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }else {
-      this.dataSourcep = new MatTableDataSource(this.anexo3pendientes);
-      this.dataSourcep.paginator = this.paginator;
-      this.dataSourcep.sort = this.sort;
+      this.dataSource = new MatTableDataSource(this.anexo3pendientes);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
   proyetoFiltera(event: any){
     console.log(this.anexo3pendientes)
     if(event+""!="ND"){
-      this.dataSourcep = new MatTableDataSource(this.anexo3pendientes.filter(value => value.nombreproyecto==event+""));
-      this.dataSourcep.paginator = this.paginator;
-      this.dataSourcep.sort = this.sort;
+      this.dataSource = new MatTableDataSource(this.anexo3pendientes.filter(value => value.nombreproyecto==event+""));
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }else {
-      this.dataSourcep = new MatTableDataSource(this.anexo3pendientes);
-      this.dataSourcep.paginator = this.paginator;
-      this.dataSourcep.sort = this.sort;
+      this.dataSource = new MatTableDataSource(this.anexo3pendientes);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSourcep.filter = filterValue.trim().toLowerCase();
-    if (this.dataSourcep.paginator) {
-      this.dataSourcep.paginator.firstPage();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
 
@@ -275,9 +273,6 @@ export class Verpostulaciones1Component implements OnInit {
                         })
                         this.cargarpostulaiones(this.cedula+"")
                         this.router.navigate(['/panelusuario/proyectovinculacion/verportulaciones1',this.cedula]);
-                        this.proyetoFilterp("")
-                        this.filtera("");
-                        this.filterr("");
                       },error => {
                         Swal.fire({
                           title: 'Fallo',
@@ -368,9 +363,6 @@ export class Verpostulaciones1Component implements OnInit {
         })
         this.cargarpostulaiones(this.cedula+"")
         this.router.navigate(['/panelusuario/proyectovinculacion/verportulaciones1',this.cedula]);
-        this.proyetoFilterp("")
-        this.filtera("");
-        this.filterr("")
       },error => {
         Swal.fire({
           title: 'Fallo',

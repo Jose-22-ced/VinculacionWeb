@@ -7,7 +7,7 @@
           <strong>FILTRAR POR PROYECTOS:</strong>
           <mat-form-field appearance="fill">
             <mat-label>Seleccionar proyecto:</mat-label>
-            <mat-select  (selectionChange)="proyetoFilterp($event.value)">
+            <mat-select (selectionChange)="proyetoFilterp($event.value)">
               <mat-option value="ND">Ver todos</mat-option>
               <mat-divider></mat-divider>
               <mat-option *ngFor="let proyecto of proyecto" [value]="proyecto.nombre">{{proyecto.nombre}}</mat-option>
@@ -20,7 +20,7 @@
         </mat-form-field>
 
         <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSourcep" matSort>
+          <table mat-table [dataSource]="dataSource" matSort>
 
             <!-- ID Column -->
             <ng-container matColumnDef="nombresestudiante">

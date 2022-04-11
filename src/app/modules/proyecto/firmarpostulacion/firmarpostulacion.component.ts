@@ -60,13 +60,23 @@ export class FirmarpostulacionComponent implements OnInit {
       this.anexo4Service.getAnexo4byCedula(cedula).subscribe(value => {
         this.isexist=value.length!=0;
         this.anexo4=value;
+        this.issloading=false;
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values=>this.filter(values)),
         );
-        this.issloading=false;
       })
     })
+  }
+  filter(value: any): Anexo4[] {
+    console.log(value)
+    const filterValue = value.toLowerCase();
+    return this.anexo4.filter(option => option.nombreProyecto?.toLowerCase().includes(filterValue)
+      ||option.cedulaDirector?.toLocaleLowerCase().includes(filterValue)
+      ||option.nombreEstudiante?.toLocaleLowerCase().includes(filterValue)
+      ||option.cedulaEstudiante?.toLocaleLowerCase().includes(filterValue)
+      ||option.numeroHoras?.toLocaleLowerCase().includes(filterValue)
+    );
   }
 
 
@@ -162,15 +172,6 @@ export class FirmarpostulacionComponent implements OnInit {
 
   }
 
-  filter(value: any): Anexo4[] {
-    const filterValue = value.toLowerCase();
-    return this.anexo4.filter(option => option.nombreProyecto?.toLowerCase().includes(filterValue)
-      ||option.cedulaDirector?.toLocaleLowerCase().includes(filterValue)
-      ||option.nombreEstudiante?.toLocaleLowerCase().includes(filterValue)
-      ||option.cedulaEstudiante?.toLocaleLowerCase().includes(filterValue)
-      ||option.numeroHoras?.toLocaleLowerCase().includes(filterValue)
-    );
-  }
 
   convertFile(docum:any) {
     console.log(docum)

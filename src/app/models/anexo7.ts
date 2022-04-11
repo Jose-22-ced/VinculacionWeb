@@ -15,6 +15,7 @@ export class HorasDocentesA7Request{
   id?:Number;
   resultados?:String;
   actividad?:String;
+  cedulaDocente?:String;
   nombreDocenteApoyo?:[]=[];
   numHoras?:Number;
   fechaInicio?:Date;
@@ -29,6 +30,7 @@ export class HorasEstudiantesA7Request{
   id?:Number;
   resultados?:String;
   actividad?:String;
+  cedulaEstudiante?:String;
   nombreEstudiante?:[]=[];
   numHoras?:Number;
   fechaInicio?:Date;

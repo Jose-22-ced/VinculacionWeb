@@ -38,7 +38,7 @@ export class UserComponent implements OnInit,AfterViewInit {
       this.persona=JSON.parse(sessionStorage['user']);
       this.foto=JSON.parse(sessionStorage['user']).urlFoto
       this.rolnombre=this.geRolName(JSON.parse(sessionStorage['user']).rol);
-      console.log(JSON.parse(sessionStorage['user']).token)
+      console.log(JSON.parse(sessionStorage['user']).urlFoto)
       sessionStorage.clear;
     }else {
       sessionStorage.clear;

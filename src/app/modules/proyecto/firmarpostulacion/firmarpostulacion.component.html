@@ -1,6 +1,5 @@
 <div *ngIf="issloading==false">
   <div *ngIf="isexist">
-    <div *ngFor="let anexo4 of filteredOptions | async">
       <mat-card>
         <mat-form-field appearance="outline" style="width: 100%">
           <mat-label>BUSCAR CONVOCATORIA: </mat-label>
@@ -9,6 +8,7 @@
         </mat-form-field>
       </mat-card>
       <br>
+    <div *ngFor="let anexo4 of filteredOptions | async">
       <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title>Proyecto: {{anexo4.nombreProyecto}}</mat-card-title>
