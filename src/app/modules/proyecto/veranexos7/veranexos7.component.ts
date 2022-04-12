@@ -77,6 +77,7 @@ export class Veranexos7Component implements OnInit {
       console.log(cedula)
       this.anexo1Service.getAnexo1byCedula(cedula).subscribe(datos=>{
         this.anexo7Service.getAnexo7All().subscribe(anex7 => {
+          console.log(anex7)
           this.anexos7 = anex7.filter(value => value.nombreDirectorProyecto==nombres);
           this.isexist = anex7.length != 0;
           this.anexo3Service.getAnexo3byProyecto(datos[0].idProyectoPPP).subscribe(value => {

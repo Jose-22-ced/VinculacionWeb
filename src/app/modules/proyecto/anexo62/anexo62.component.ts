@@ -20,6 +20,8 @@ import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
+import {Anexo61} from "../../../models/anexo61";
+import {Anexo61Service} from "../../../services/anexo61.service";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -43,7 +45,14 @@ export class Anexo62Component implements OnInit {
   panelOpenState = true;
   issloading = true;
   isexist?: boolean;
-  //ArrayActividadesEstudiante
+  actualzar=false
+//Variables
+  cedula?: String;
+  nombre?: String;
+  ceduladir?: String;
+  nombredir?: String;
+  Fechaenvio?: Date;
+//ArrayActividadesEstudiante
   rows: FormArray;
   itemForm?: FormGroup;
 //secuenciasdepantallas
@@ -54,24 +63,19 @@ export class Anexo62Component implements OnInit {
   anexo62: Anexo62[] = []
   anexo62es: Anexo62 = new Anexo62();
   seleccionanexos62: Anexo62[] = [];
+  anexo62requeste:Anexo62=new Anexo62;
 //anexo6
   anexo6: Anexo6[] = []
   anexo6es: Anexo6 = new Anexo6();
   seleccionanexos6: Anexo6[] = [];
   anexo6select: Anexo6 = new Anexo6();
+  anexo6requeste:Anexo6=new Anexo6;
 //filtros
   myControl = new FormControl();
   filteredOptions?: Observable<Anexo6[]>;
-  cedula?: String;
-  nombre?: String;
-
-  ceduladir?: String;
-  nombredir?: String;
-  Fechaenvio?: Date;
-
 
   constructor(private fechaService: FechaService, private anexo6Service: Anexo6Service, private activatedRoute: ActivatedRoute,
-              private anexo62Service: Anexo62Service, private proyectoService: ProyectoService,
+              private anexo62Service: Anexo62Service, private anexo3Service: Anexo3Service, private proyectoService: ProyectoService,
               private _formBuilder: FormBuilder) {
 
     this.secondFormGroup = this._formBuilder.group({
@@ -87,15 +91,16 @@ export class Anexo62Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.obtnerdatos();
+    // this.obtnerdatos();
     this.activatedRoute.params.subscribe(params => {
+      let id = params['id']
       let cedula = params['cedula']
-      let nombre = params['nombrescompletos']
+      let nombre = params['nombres']
       this.nombre = nombre;
       console.log(cedula)
-      this.anexo62Service.getAnexo62_porid(0).subscribe(value => {
+      this.anexo62Service.getAnexo62_porid(id).subscribe(value => {
         this.anexo62es = value
-        if (value.actividades?.length == 0) {
+        if (value.actividades?.length != 0) {
           this.onAddRow("");
         }
         value.actividades?.forEach(value1 => {
@@ -103,7 +108,9 @@ export class Anexo62Component implements OnInit {
         })
       })
       this.anexo6Service.getAnexo6all().subscribe(data => {
-        this.anexo6 = data;
+        this.anexo6 = data.filter(value => value.nombreDocenteApoyo==nombre);
+        // AUN NO HAY CEDULAS
+        // this.anexo6 = data.filter(value => value.cedulaDocente==cedula);
         console.log(data);
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
@@ -112,7 +119,6 @@ export class Anexo62Component implements OnInit {
         this.issloading = false;
       })
       this.fechaService.getSysdate().subscribe(value => {
-        this.Fechaenvio = value.fecha;
         this.Fechaenvio = value.fecha;
       })
     })
@@ -138,11 +144,9 @@ export class Anexo62Component implements OnInit {
   selectionAnexo6(anexo6: MatSelectionListChange){
     this.anexo6select=anexo6.option.value
     console.log(this.anexo6select.cedulaEstudiante)
-
     this.anexo6select.actividades?.forEach(value1 => {
       this.onAddRow(value1.actividad+"")
     })
-    this.obtnerdatos();
   }
 
   onAddRow(actividad:String) {
@@ -161,10 +165,13 @@ export class Anexo62Component implements OnInit {
     });
   }
 
-
+  refresh(){
+    window.location.reload();
+  }
   anexoss62: Anexo62 = new Anexo62();
   obtnerdatos(){
     this.anexoss62.idProyecto = this.anexo6select.proyectoId;
+    this.anexoss62.cedulaApoyo= this.anexo6select.cedulaDocente;
     this.anexoss62.nombreApoyo = this.anexo6select.nombreDocenteApoyo;
     this.anexoss62.fechaApoyo=this.Fechaenvio;
     this.anexoss62.fechaDirector=this.Fechaenvio;
@@ -173,43 +180,70 @@ export class Anexo62Component implements OnInit {
       this.ceduladir = value.cedula;
     })
     this.anexoss62.cedulaDirector=this.ceduladir;
+    this.anexoss62.id_anexo=this.anexo6select.id;
     this.anexoss62.nombreDirector=this.nombredir;
+    this.anexoss62.nombreEstudiante=this.anexo6select.nombreEstudiante;
+    this.anexoss62.cedulaEstudiante=this.anexo6select.cedulaEstudiante;
+    this.anexoss62.ciclo=this.anexo6select.ciclo;
     this.anexoss62.actividades = this.rows.getRawValue();
     return this.anexoss62;
   }
 
 
-  agregarActividades() {
-    this.anexo62Service.saveAnexo62(this.obtnerdatos()).subscribe(data => {
-      console.log(data)
+//////////////GUARDAR///////////////
+  guardaranexo62(){
+    var anexo62=this.obtnerdatos();
+    this.anexo62Service.saveAnexo62(anexo62).subscribe(value => {
       Swal.fire({
         title: 'Exito',
-        text: 'guardado',
+        text: 'SEGUIMIENTO FINAL GUARDADO',
         icon: 'success',
-        iconColor: '#17550c',
+        iconColor :'#17550c',
         color: "#0c3255",
-        confirmButtonColor: "#0c3255",
+        confirmButtonColor:"#0c3255",
         background: "#fbc02d",
       })
-    }, error => {
+      window.location.reload();
+    },error => {
       Swal.fire({
-        title: 'Fallo',
-        text: '' + error.error.message,
+        title: 'Error',
+        text: 'La nueva planecion no se creado '+error.error.message,
         icon: 'error',
         color: "#0c3255",
-        confirmButtonColor: "#0c3255",
+        confirmButtonColor:"#0c3255",
         background: "#fbc02d",
       })
+      window.location.reload();
+      this.issloading=false;
     })
   }
 
-  generardoc(){
-    console.log(this.obtnerdatos())
+  subirDocumento62(file:FileList){
+    if(file.length==0){
+    }else{
+      getBase64(file[0]).then(docx=>{
+        // @ts-ignore
+        console.log(docx.length)
+        // @ts-ignore
+        if(docx.length>=10485760){
+          this.anexoss62.documento="";
+          Swal.fire(
+            'Fallo',
+            'El documento excede el peso permitido',
+            'warning'
+          )
+        }else{
+          this.anexoss62.documento=docx+"";
+        }
+      })
+    }
   }
 
-  generarDocumento(anexo62:Anexo62) {
+  generarDocumento62() {
+    var anexo62:Anexo62=this.obtnerdatos();
+    console.log(anexo62)
     var pipe:DatePipe = new DatePipe('en-US')
-    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6.1.docx", function(
+    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6%20.1.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore
@@ -223,7 +257,11 @@ export class Anexo62Component implements OnInit {
 
 
       doc.setData({
-
+        fecha:pipe.transform(anexo62.fechaDirector,'dd/MM/yyyy'),
+        tb:anexo62.actividades,
+        fecha2:anexo62.fechaApoyo,
+        docente_apoyo:anexo62.nombreApoyo,
+        director_proyeto:anexo62.nombreDirector,
       });
       try {
         // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
@@ -267,6 +305,7 @@ export class Anexo62Component implements OnInit {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
-      saveAs(out, "Anexo6_1.docx");
+      saveAs(out, "Anexo6_2.docx");
     });
-  }}
+  }
+}

@@ -1,0 +1,67 @@
+<div *ngIf="issloading==false">
+  <mat-card>
+    <mat-card-title>LISTA INFORMES DE SEGUIMIENTO</mat-card-title>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>BUSCAR... </mat-label>
+      <input matInput   placeholder="FILTRAR" [formControl]="myControl">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </mat-card>
+  <br>
+  <div  *ngIf="isexist">
+    <div *ngFor="let informe of filteredOptions | async">
+      <mat-card class="example-card">
+
+        <mat-card-header>
+          <mat-card-title>INFORME DE SEGUIMIENTO</mat-card-title>
+          <mat-card-subtitle>Nombre Proyecto:: {{informe.nombreProyecto}}</mat-card-subtitle>
+          <span class="example-spacer"></span>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+
+            <button mat-menu-item (click)="eliminar(informe)">
+              <mat-icon color="warn">delete_forever</mat-icon>
+              <span>Eliminar</span>
+            </button>
+          </mat-menu>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Fecha de seguimiento: {{informe.fechaSeguimiento | date:"longDate"}}</p>
+          <strong>Carrera: {{informe.carrera}}</strong>
+
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Docentes Participantes
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p *ngFor="let act of informe.docentesParticipantes">
+              Docente: {{act.nombres}}
+              <br>Cédula:{{act.cedula}}
+              <br>Total de Horas: {{act.numeroHoras}}
+
+          </mat-expansion-panel>
+          <mat-divider></mat-divider>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Estudiantes Participantes
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p *ngFor="let act of informe.estudiantesParticipantes">
+              Estudiante: {{act.nombres}}
+              <br>Cédula:{{act.cedula}}
+              <br>Total de Horas: {{act.numeroHoras}}
+
+          </mat-expansion-panel>
+          <mat-divider></mat-divider>
+          <br>
+          <button mat-raised-button color="primary" (click)="convertFile(informe.documento)">DESCARGAR DOCUMENTO</button>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

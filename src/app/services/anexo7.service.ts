@@ -40,4 +40,7 @@ export class Anexo7Service {
   deleteAnexo7(id?: Number){
     return this.http.delete<Anexo7>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
   }
+  getanexo7ById(id: number): Observable<Anexo7> {
+    return this.http.get(this.urlEndPoint + '/' + id, {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo7))
+  }
 }

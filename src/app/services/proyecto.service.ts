@@ -44,6 +44,15 @@ export class ProyectoService {
     console.log(actividadeslistProyecto);
     return this.http.put<Proyectos>(this.urlEndPoint+"/"+id+"/actividades",actividadeslistProyecto,{headers: this.httpHeaders})
   }
+  getProyectosCICedulaDirector(cedula:String):Observable<Proyectos[]>{
+    return this.http.get(this.urlEndPoint+"/director/"+cedula,{headers: this.httpHeaders}).pipe(map(Response => Response as Proyectos[]))
+  }
+  getProyectosCICedulaAp(cedula:String):Observable<Proyectos[]>{
+    return this.http.get(this.urlEndPoint+"/apoyo/"+cedula,{headers: this.httpHeaders}).pipe(map(Response => Response as Proyectos[]))
+  }
+  getProyectobyCIApoyo(cedula:string):Observable<Proyectos>{
+    return this.http.get(this.urlEndPoint+'/cedula/apoyo/'+cedula,{headers: this.httpHeaders}).pipe(map(Response => Response as Proyectos))
+  }
 
 
 

@@ -18,7 +18,8 @@ export class Anexo6 {
   totalHoras?:String;
   proyectoId?:Number;
   num_proceso?:Number;
-  actividades?:ActividadesAnexo6[];
+  cedulaDocente?:String
+  actividades:ActividadesAnexo6[]=[];
   anexo6_1Requests?:Anexo61[];
   anexo6_2Requests?:Anexo62[];
 

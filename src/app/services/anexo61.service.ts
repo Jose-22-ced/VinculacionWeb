@@ -6,6 +6,7 @@ import {Anexo2} from "../models/anexo2";
 import {actividadeslistProyectos, Proyectos} from "../models/proyectos";
 import {Entidadbeneficiaria} from "../models/entidadbeneficiaria";
 import {DirectorNombres} from "../models/directorNombres";
+import {Anexo4} from "../models/anexo4";
 
 @Injectable({
   providedIn: 'root'
@@ -26,16 +27,19 @@ export class Anexo61Service {
   getAnexo61_porid(id:Number):Observable<Anexo61>{
     return this.http.get(this.urlEndPoint+"/allById/"+id,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo61))
   }
-
+  getAnexo61_pordirector(cedulaDirector:String):Observable<Anexo61[]>{
+    return this.http.get(this.urlEndPoint+"/allAnexos/"+cedulaDirector,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo61[]))
+  }
+  updateAnexo61(anexo61:Anexo61):Observable<Anexo61>{
+    console.log(anexo61)
+    return this.http.put<Anexo61>(this.urlEndPoint,anexo61,{headers:this.httpHeaders})
+  }
 
   deleteAnexo61(id?: Number){
     return this.http.delete<Anexo61>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
   }
 
-  updateAct1(id:number,actividades:Actividades[]):Observable<Anexo61>{
-    console.log(actividades);
-    return this.http.put<Anexo61>(this.urlEndPoint+"/"+id+"/",actividades,{headers: this.httpHeaders})
-  }
+
   updateActivadades(anexo61: Anexo61):Observable<Anexo61>{
     console.log(anexo61);
     return this.http.put<Anexo61>(this.urlEndPoint,anexo61,{headers: this.httpHeaders})
@@ -51,8 +55,5 @@ export class Anexo61Service {
     return this.http.post<Anexo61[]>(this.urlEndPoint,anexo61,{headers: this.httpHeaders})
   }
 
-  // deteledActivadades(idAnexo?: Number,idactividad?:Number){
-  //   return this.http.delete<Anexo61>(this.urlEndPoint+'/'+idAnexo+"/actividad/"+idactividad,{headers: this.httpHeaders})
-  // }
 
 }

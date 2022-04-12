@@ -1,4 +1,5 @@
 export class CordinadorVinculacion {
+  id?:number;
   cedula?:string;
   nombres?:string;
   apellidos?:string;

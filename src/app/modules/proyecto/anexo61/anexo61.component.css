@@ -2,13 +2,16 @@
   margin-top: 8px;
 }
 .example-card {
-  margin: 0 auto;
-  max-width: 950px;
-}
+   margin: 0 auto;
+   max-width: 1100px;
+ }
+
 mat-form-field{
   width: 100%;
 }
-
+.example-full-widthl {
+  width: 150px;
+}
 mat-list-option[aria-selected="true"] {
   background: rgba(255, 204, 0, 0.7);
 }
@@ -26,15 +29,16 @@ mat-list-option[aria-selected="true"] {
 }
 .example-card {
   text-align: center;
-  border: 1px solid  #0c3255;
+  border: 2px solid  #0c3255;
   border-inline: 5px solid  #0c3255;
   writing-mode: horizontal-tb;
   height: max-content;
 }
+
 .example-header-image {
   background-image: url('src/assets/images/LogoCiculo.png');
   background-size: cover;
-  margin: 0;
+  margin: 50px;
 }
 .example-spacer {
   flex: 1 1 auto;

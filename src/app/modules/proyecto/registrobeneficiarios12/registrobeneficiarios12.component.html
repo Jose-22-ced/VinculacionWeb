@@ -1,0 +1,213 @@
+<div *ngIf="issloading == false">
+  <mat-stepper mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="fourFormGroup">
+      <form [formGroup]="fourFormGroup">
+        <ng-template matStepLabel>Seleccionar Proyecto</ng-template>
+        <mat-card class="example-card">
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-subtitle>ANEXO 12</mat-card-subtitle>
+          <mat-card-title>INSTITUTO SUPERIOR TECNOLOGICO DEL AZUAY</mat-card-title>
+          <mat-card-title>COORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD</mat-card-title>
+        </mat-card>
+        <mat-card-content>
+          <div id="contenedor">
+            <div id="cabecera">
+              <mat-form-field appearance="outline" style="width: 90%">
+                <mat-label>BUSCAR...</mat-label>
+                <input matInput placeholder="FILTRAR" [formControl]="myControl">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+              <cdk-virtual-scroll-viewport appendOnly itemSize="40" class="example-viewport1">
+                <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionProyecto($event)"
+                                    formControlName="proyecto">
+                  <mat-list-option *ngFor="let option of filteredOptionsP | async" [value]="option" >
+                    Proyecto: {{option.nombre}} Director de Proyecto:{{option.nombredirector}}
+                  </mat-list-option>
+                </mat-selection-list>
+              </cdk-virtual-scroll-viewport>
+              <br>
+              <p style="font-size: medium">
+                Proyecto Seleccionado: {{proyectoSelect.nombre}}
+              </p>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <br>
+        <div style="text-align: end">
+          <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px">
+            <mat-icon>undo</mat-icon>
+          </button>
+          <button mat-fab matStepperNext color="primary">
+            <mat-icon>queue_play_next</mat-icon>
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Datos de proyecto</ng-template>
+        <mat-card class="example-card">
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-subtitle>ANEXO 12</mat-card-subtitle>
+          <mat-card-title>INSTITUTO SUPERIOR TECNOLOGICO DEL AZUAY</mat-card-title>
+          <mat-card-title>COORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD</mat-card-title>
+          <mat-card-title>REGISTRO DE BENEFICIARIOS / CAPACITACIONES</mat-card-title>
+        </mat-card>
+        <br>
+        <mat-card class="example-card">
+          <mat-card-title>DATOS PROYECTO</mat-card-title>
+        </mat-card>
+
+        <br>
+        <mat-card-content>
+          <mat-card class="example-card">
+            <mat-list>
+              <mat-list-item>Nombre del proyecto: {{proyectoSelect.nombre}}</mat-list-item>
+              <mat-divider></mat-divider>
+              <mat-list-item>Fecha Capacitación: <input type="date" formControlName="fecha" [(ngModel)]="anexo12Ob.fechaCapacitacion">
+                <h1 style="color: white">.....................................</h1>
+                No. Horas: <input type="number" formControlName="fecha" [(ngModel)]="anexo12Ob.horasCapacitacion">
+                </mat-list-item>
+              <mat-divider></mat-divider>
+              <mat-list-item>Entidad Beneficiaria: {{entidadSelect.nombre}}</mat-list-item>
+              <mat-divider></mat-divider>
+              <mat-list-item>Representante: {{entidadSelect.representante}}
+                <h1 style="color: white">......</h1>
+                Teléfono: {{entidadSelect.telefonoEntidad}}
+                <h1 style="color: white">......</h1>
+                Email Representante: {{entidadSelect.emailRepresentante}}
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <mat-list-item>Asunto: <input id="asunto" type="text" formControlName="fecha" [(ngModel)]="anexo12Ob.asuntoCapacitacion"></mat-list-item>
+
+            </mat-list>
+          </mat-card>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <br>
+        <div style="text-align: end">
+          <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px">
+            <mat-icon>undo</mat-icon>
+          </button>
+          <button mat-fab matStepperNext color="primary">
+            <mat-icon>queue_play_next</mat-icon>
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Agregar Beneficiarios">
+      <form [formGroup]="secondFormGroup">
+        <mat-card class="example-card">
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-subtitle>ANEXO 12</mat-card-subtitle>
+          <mat-card-title>INSTITUTO SUPERIOR TECNOLOGICO DEL AZUAY</mat-card-title>
+          <mat-card-title>COORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD</mat-card-title>
+          <mat-card-title>REGISTRO DE BENEFICIARIOS / CAPACITACIONES</mat-card-title>
+        </mat-card>
+        <mat-card-content>
+          <mat-grid-list cols="3" rowHeight="6:1.10" [formGroup]="secondFormGroup">
+            <div style="margin-top: 15px">
+              <mat-grid-tile colspan="3" >
+                <button mat-fab color="primary" (click)="onAddRow()" ><mat-icon>add_circle</mat-icon></button>
+              </mat-grid-tile>
+              <br>
+              <mat-grid-tile colspan="3" *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Nombres Completos</mat-label>
+                <input matInput type="text"   [formControl]="row.get('nombresCompletos')"  placeholder="Nombres y Apellidos" [required]>
+              </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Cédula</mat-label>
+                  <input matInput type="text"   [formControl]="row.get('cedula')"  placeholder="Cédula Beneficiario" [required]>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Firma</mat-label>
+                  <input matInput type="text"    placeholder="Firma Beneficiario" [required]>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Observaciones</mat-label>
+                  <input matInput type="text"   [formControl]="row.get('observaciones')"  placeholder="Observaciones" [required]>
+                </mat-form-field>
+                <span class="example-spacer"></span>
+                <button mat-mini-fab color="warn" style="margin-left: 50px" (click)="onRemoveRow(index)" [disabled]=""><mat-icon>delete_sweep</mat-icon></button>
+              </mat-grid-tile>
+            </div>
+          </mat-grid-list>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <br>
+        <div style="text-align: end">
+          <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px">
+            <mat-icon>undo</mat-icon>
+          </button>
+          <button mat-fab matStepperNext color="primary">
+            <mat-icon>queue_play_next</mat-icon>
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" label="Documento">
+      <form [formGroup]="thirdFormGroup">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>  (ANEXO 12)<br><br> REGISTRO DE BENEFICIARIOS/CAPACITACIONES</mat-card-title>
+            <mat-card-subtitle><br />
+              PROYECTOS DE VINCULACIÓN CON LA SOCIEDAD <br />
+              INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY <br />
+            </mat-card-subtitle>
+          </mat-card-header>
+          <h4>Debe obtEner el anexo en "Obtener Anexo" y posteriormente debera firmar y subir de en formato PDF</h4>
+          <div>
+            <button mat-raised-button color="primary" (click)="generarDocumento12()">Obtener Anexo</button>
+            <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
+              <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento12($event.target.files)"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
+            </mat-form-field>
+          </div>
+          <mat-card-content>
+            <div>
+              <button mat-button matStepperPrevious color="primary">Atras</button>
+              <button mat-button matStepperNext color="warn">Siguente</button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </mat-step>
+    <mat-step  label="Confirmar">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>  (ANEXO 12)<br><br> REGISTRO DE BENEFICIARIOS/CAPACITACIONES</mat-card-title>
+          <mat-card-subtitle><br />
+            PROYECTOS DE VINCULACIÓN CON LA SOCIEDAD <br />
+            INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY <br />
+          </mat-card-subtitle>
+          <mat-card-subtitle>GUARDAR REGISTRO DE CAPACITACIONES </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+
+          <div>
+            <button mat-button matStepperPrevious color="primary">Atras</button>
+            <button mat-flat-button color="warn" (click)="guardarAnexo12()">GUARDAR</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-step>
+
+  </mat-stepper>
+</div>
+<div *ngIf="isexist==false">
+  <mat-card>
+    <mat-card-title>NO EXISTE</mat-card-title>
+  </mat-card>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
+

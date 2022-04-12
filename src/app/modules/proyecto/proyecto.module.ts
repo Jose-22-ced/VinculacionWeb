@@ -49,6 +49,20 @@ import { FirmarinformdedeculmnacionapoyoComponent } from './firmarinformdedeculm
 import { FirmainformedeculmunaciondirectorComponent } from './firmainformedeculmunaciondirector/firmainformedeculmunaciondirector.component';
 import { FirmarplandeaprendizajeComponent } from './firmarplandeaprendizaje/firmarplandeaprendizaje.component';
 import {Editar7planmesualComponent} from "./editar7planmesual/ediatar7planmesual.component";
+import {Firmaanexo61Component} from "./firmaanexo61/firmaanexo61.component";
+import {Firmaanexo62Component} from "./firmaanexo62/firmaanexo62.component";
+import {Anexo11Component} from "./anexo11/anexo11.component";
+import {Veranexo8Component} from "./veranexo8/veranexo8.component";
+import {
+  SeguimientomensualplanificacionComponent
+} from "./seguimientomensualplanificacion/seguimientomensualplanificacion.component";
+import {Veranexo9Component} from "./veranexo9/veranexo9.component";
+import {Firmaranexo9Component} from "./firmaranexo9/firmaranexo9.component";
+import {Registrobeneficiarios12Component} from "./registrobeneficiarios12/registrobeneficiarios12.component";
+import {Veranexo12Component} from "./veranexo12/veranexo12.component";
+import {InformeseguimientoComponent} from "./informeseguimiento/informeseguimiento.component";
+import {ListainformeseguimientoComponent} from "./listainformeseguimiento/listainformeseguimiento.component";
+import {FirmarinformeseguimientoComponent} from "./firmarinformeseguimiento/firmarinformeseguimiento.component";
 
 
 const routes: Routes = [
@@ -142,6 +156,38 @@ const routes: Routes = [
     component:FirmarplandeaprendizajeComponent
   },{path:'editarplafinicacionmensuak/:id/:cedula/:nombre',
     component:Editar7planmesualComponent
+  },{path: 'firmaranexo61/:cedula',
+    component: Firmaanexo61Component
+  },{path:'firmaranexo62/:cedula',
+    component:Firmaanexo62Component
+  },{path:'firmaranexo8/:cedula/:nombres',
+    component:Veranexo8Component
+  },{path:'anexo11/:cedula/:nombres',
+    component:Anexo11Component
+  },{path:'registroactividadesestudiante/:cedula/:nombres',
+    component:RegistroactividadesestudianteComponent
+  },{path:'firmaranexo61/:cedula',
+    component:Firmaanexo61Component
+  },{path:'firmaranexo62/:cedula',
+    component:Firmaanexo62Component
+  },{ path: 'planificacion_de_actividades_mensual/:cedula',
+    component: Anexo7planificacionmensualComponent
+  },{ path: 'seguimiento_mensual/:cedula/:nombres',
+    component: SeguimientomensualplanificacionComponent
+  },{ path: 'ver_seguimiento_mensual/:cedula/:nombres',
+    component: Veranexo9Component
+  },{ path: 'firmar_seguimiento_mensual/:cedula/:nombres',
+    component: Firmaranexo9Component
+  },{ path: 'registro_beneficiarios/:id/:cedula/:nombres',
+    component: Registrobeneficiarios12Component
+  },{ path: 'ver_registro_beneficiarios/:id/:cedula/:nombres',
+    component: Veranexo12Component
+  },{ path: 'informe_seguimiento/:cedula/:nombres',
+    component: InformeseguimientoComponent
+  },{ path: 'lista_informe_seguimiento/:cedula/:nombres',
+    component: ListainformeseguimientoComponent
+  },{ path: 'firmar_informe_seguimiento/:cedula/:nombres',
+    component: FirmarinformeseguimientoComponent
   }
 ]
 
@@ -191,7 +237,19 @@ const routes: Routes = [
     FirmarinformdedeculmnacionapoyoComponent,
     FirmainformedeculmunaciondirectorComponent,
     FirmarplandeaprendizajeComponent,
-    Editar7planmesualComponent
+    Editar7planmesualComponent,
+    Firmaanexo61Component,
+    Firmaanexo62Component,
+    Anexo11Component,
+    Veranexo8Component,
+    SeguimientomensualplanificacionComponent,
+    Veranexo9Component,
+    Firmaranexo9Component,
+    Registrobeneficiarios12Component,
+    Veranexo12Component,
+    InformeseguimientoComponent,
+    ListainformeseguimientoComponent,
+    FirmarinformeseguimientoComponent
 
   ],
   imports: [

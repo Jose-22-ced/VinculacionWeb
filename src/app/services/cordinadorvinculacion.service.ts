@@ -40,4 +40,7 @@ export class CordinadorvinculacionService {
     console.log(cordinadorVinculacion);
     return this.http.put<CordinadorVinculacion>(this.urlEndPoint,cordinadorVinculacion,{headers: this.httpHeaders})
   }
+  getCVbyId(id:number):Observable<CordinadorVinculacion>{
+    return this.http.get(this.urlEndPoint+"/"+id,{headers: this.httpHeaders}).pipe(map(Response => Response as CordinadorVinculacion))
+  }
 }

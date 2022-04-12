@@ -18,4 +18,7 @@ export class CarrerasService {
       data => data as Carreras[]
     ));
   }
+  getCarrerabyCodigo(codigo:String):Observable<Carreras>{
+    return this.http.get(this.urlEndPoint+"/nombre/"+codigo,{headers: this.httpHeaders}).pipe(map(Response => Response as Carreras))
+  }
 }

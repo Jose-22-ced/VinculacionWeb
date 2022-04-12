@@ -67,7 +67,7 @@ export class NuevoresponsablepppComponent implements OnInit {
 
     },1000)
   }
-  filter(value: any): CordinadorVinculacion[] {
+  filter(value: any): Docentes[] {
     const filterValue = value.toLowerCase();
     return this.docentes.filter(option => option.nombres_completo?.toLowerCase().includes(filterValue)
       ||option.titulo?.toLocaleLowerCase().includes(filterValue)

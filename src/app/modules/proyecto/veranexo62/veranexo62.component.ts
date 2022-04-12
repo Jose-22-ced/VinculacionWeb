@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
-import {Anexo61} from "../../../models/anexo61";
 import {FechaService} from "../../../services/fecha.service";
 import {CarrerasService} from "../../../services/carreras.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
-import {Anexo61Service} from "../../../services/anexo61.service";
-import {Anexo1Service} from "../../../services/anexo1.service";
 import Swal from "sweetalert2";
 import {Anexo62} from "../../../models/anexo62";
+import {Anexo62Service} from "../../../services/anexo62.service";
 
 @Component({
   selector: 'app-veranexo62',
@@ -30,8 +27,7 @@ export class Veranexo62Component implements OnInit {
 
   constructor(private fechaService:FechaService,private carrerasService:CarrerasService,
               private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,
-              private entidadbeneficiarioService:EntidadbeneficiarioService,
-              private anexo62Service:Anexo61Service,
+              private anexo62Service:Anexo62Service,
               private router:Router) {
 
   }
@@ -43,7 +39,7 @@ export class Veranexo62Component implements OnInit {
       this.nombre = nombre;
       console.log(cedula)
       this.anexo62Service.getAnexo6().subscribe(anex62 => {
-        this.anexos62=anex62.filter(value => value.nombreApoyo==cedula);
+        this.anexos62=anex62.filter(value => value.nombreApoyo==nombre);
         this.isexist=anex62.length!=0;
         this.issloading=false;
         this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -66,6 +62,9 @@ export class Veranexo62Component implements OnInit {
     return this.anexos62.filter(option => option.cedulaDirector?.toLowerCase().includes(filterValue)
       ||option.nombreDirector?.toLocaleLowerCase().includes(filterValue)
       ||option.nombreApoyo?.toLocaleLowerCase().includes(filterValue)
+      || option.cedulaEstudiante?.toLocaleLowerCase().includes(filterValue)
+      || option.ciclo?.toLocaleLowerCase().includes(filterValue)
+      || option.nombreEstudiante?.toLocaleLowerCase().includes(filterValue)
     );
   }
 
@@ -84,7 +83,7 @@ export class Veranexo62Component implements OnInit {
       if (result.isConfirmed) {
         this.issloading=true;
         console.log(Number(anexo62.id))
-        this.anexo62Service.deleteAnexo61(anexo62.id).subscribe(value => {
+        this.anexo62Service.deleteAnexo62(anexo62.id).subscribe(value => {
           Swal.fire({
             title: 'Eliminado',
             text: 'El proyecto se elimino correctamente',
@@ -94,7 +93,7 @@ export class Veranexo62Component implements OnInit {
             confirmButtonColor:"#0c3255",
             background: "#fbc02d",
           })
-          this.router.navigate(['/panelusuario/proyectovinculacion/veranexos6_1',this.cedula,this.nombre]);
+          window.location.reload();
         },error => {
           Swal.fire({
             title: 'Error',
@@ -105,6 +104,7 @@ export class Veranexo62Component implements OnInit {
             background: "#fbc02d",
           })
         })
+        window.location.reload();
       }
       this.issloading=false;
     })

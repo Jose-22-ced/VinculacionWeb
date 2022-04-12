@@ -70,6 +70,19 @@
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verentidadesbenefiarias']"
                       routerLinkActive="active">-Ver Entidades Actuales</button>
             </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Firmar Informe de Seguimiento
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmar_informe_seguimiento',persona.cedula, persona.nombrescompletos]"
+                      routerLinkActive="active">-Firmar Informe</button>
+
+            </mat-expansion-panel>
           </div>
           <!--Cordinado de Carrera-->
           <div class="list-group" *ngSwitchCase="'CC'">
@@ -160,6 +173,64 @@
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/vervisitas',persona.cedula]"
                       routerLinkActive="active">-Ver visitas</button>
             </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  EVALUACIÓN AL ESTUDIANTE
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/anexo11',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-EVALUACIÓN ESTUDIANTE</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/veranexo11apoyo',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-VER EVALUACIONES</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  SEGUIMIENTO MENSUAL SEGÚN PLANIFICACIÓN
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/seguimiento_mensual',persona.cedula, persona.nombrescompletos]"
+                      routerLinkActive="active">-Anexo9</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/ver_seguimiento_mensual',persona.cedula, persona.nombrescompletos]"
+                      routerLinkActive="active">-Ver Anexo9</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  REGISTRO BENEFICIARIOS CAPACITACIONES
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/registro_beneficiarios',persona.id, persona.cedula, persona.nombrescompletos]"
+                      routerLinkActive="active">-Registro capacitaciones</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/ver_registro_beneficiarios',persona.id, persona.cedula, persona.nombrescompletos]"
+                      routerLinkActive="active">-Ver registro capacitaciones</button>
+            </mat-expansion-panel>
+            <br>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  REGISTRO BENEFICIARIOS CAPACITACIONES
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/registro_beneficiarios',persona.id, persona.cedula, persona.nombrescompletos]"
+                      routerLinkActive="active">-Registro capacitaciones</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/ver_registro_beneficiarios',persona.id, persona.cedula, persona.nombrescompletos]"
+                      routerLinkActive="active">-Ver registro capacitaciones</button>
+
+            </mat-expansion-panel>
           </div>
           <!--Director-->
           <div class="list-group" *ngSwitchCase="'DP'">
@@ -179,6 +250,14 @@
                       routerLinkActive="active">-Revisión de Informe culminación </button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmarpladeaprendizajedirector',persona.cedula]"
                       routerLinkActive="active">-Aceptacion de Informe culminación </button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmaranexo61',persona.cedula]"
+                      routerLinkActive="active">-Firmar Anexos 6.1</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmaranexo62',persona.cedula]"
+                      routerLinkActive="active">-Firmar Anexos 6.2</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmaranexo8',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">-Revisar y Firmar Actividades Estudiantiles</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmar_seguimiento_mensual',persona.cedula, persona.nombrescompletos]"
+                      routerLinkActive="active">-Seguimiento planificacion Anexo 9</button>
             </mat-expansion-panel>
             <br>
             <mat-expansion-panel (opened)="panelOpenState = true"
@@ -235,6 +314,21 @@
                       routerLinkActive="active">-Nueva planificaciones</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verplatificaciones',persona.cedula,persona.nombrescompletos]"
                       routerLinkActive="active">-Ver planficaciones</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Informe de Seguimiento
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/informe_seguimiento',persona.cedula, persona.nombrescompletos]"
+                      routerLinkActive="active">-Nuevo Informe Seguimiento</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/lista_informe_seguimiento',persona.cedula, persona.nombrescompletos]"
+                      routerLinkActive="active">-Lista Informe Seguimiento</button>
+
             </mat-expansion-panel>
           </div>
           <!--Resposanle de PPP-->

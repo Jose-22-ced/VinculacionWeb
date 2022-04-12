@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Veranexo62Component } from './veranexo62.component';
+import { Veranexo62Component } from '../../../../../../../Downloads/anexo61 y 62/veranexo62/veranexo62.component';
 
 describe('Veranexo62Component', () => {
   let component: Veranexo62Component;

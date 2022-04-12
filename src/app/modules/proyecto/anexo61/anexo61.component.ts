@@ -21,6 +21,9 @@ import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
 import {Anexo62} from "../../../models/anexo62";
+import {Anexo1} from "../../../models/anexo1";
+import {Proyectos} from "../../../models/proyectos";
+import {Anexo8} from "../../../models/anexo8";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -45,7 +48,13 @@ export class Anexo61Component implements OnInit,AfterViewInit {
   issloading = true;
   isexist?: boolean;
   actualzar=false
-  //ArrayActividadesEstudiante
+//Variables
+  cedula?: String;
+  nombre?: String;
+  ceduladir?: String;
+  nombredir?: String;
+  Fechaenvio?: Date;
+//ArrayActividadesEstudiante
   rows: FormArray;
   itemForm?: FormGroup;
 //secuenciasdepantallas
@@ -66,13 +75,6 @@ export class Anexo61Component implements OnInit,AfterViewInit {
 //filtros
   myControl = new FormControl();
   filteredOptions?: Observable<Anexo6[]>;
-  cedula?: String;
-  nombre?: String;
-
-  ceduladir?: String;
-  nombredir?: String;
-  Fechaenvio?: Date;
-
 
   constructor(private fechaService: FechaService, private anexo6Service: Anexo6Service, private activatedRoute: ActivatedRoute,
               private anexo61Service: Anexo61Service, private anexo3Service: Anexo3Service, private proyectoService: ProyectoService,
@@ -91,15 +93,16 @@ export class Anexo61Component implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.obtnerdatos();
+    // this.obtnerdatos();
     this.activatedRoute.params.subscribe(params => {
+      let id = params['id']
       let cedula = params['cedula']
-      let nombre = params['nombrescompletos']
+      let nombre = params['nombres']
       this.nombre = nombre;
       console.log(cedula)
-      this.anexo61Service.getAnexo61_porid(0).subscribe(value => {
+      this.anexo61Service.getAnexo61_porid(id).subscribe(value => {
         this.anexo61es = value
-        if (value.actividades?.length == 0) {
+        if (value.actividades?.length != 0) {
           this.onAddRow("");
         }
         value.actividades?.forEach(value1 => {
@@ -107,7 +110,9 @@ export class Anexo61Component implements OnInit,AfterViewInit {
         })
       })
       this.anexo6Service.getAnexo6all().subscribe(data => {
-        this.anexo6 = data;
+        this.anexo6 = data.filter(value => value.nombreDocenteApoyo==nombre);
+        // AUN NO HAY CEDULAS
+        // this.anexo6 = data.filter(value => value.cedulaDocente==cedula);
         console.log(data);
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
@@ -115,8 +120,10 @@ export class Anexo61Component implements OnInit,AfterViewInit {
         );
         this.issloading = false;
       })
+
+
+
       this.fechaService.getSysdate().subscribe(value => {
-        this.Fechaenvio = value.fecha;
         this.Fechaenvio = value.fecha;
       })
     })
@@ -142,13 +149,13 @@ export class Anexo61Component implements OnInit,AfterViewInit {
   selectionAnexo6(anexo6: MatSelectionListChange){
     this.anexo6select=anexo6.option.value
     console.log(this.anexo6select.cedulaEstudiante)
-
     this.anexo6select.actividades?.forEach(value1 => {
       this.onAddRow(value1.actividad+"")
     })
-    this.obtnerdatos();
   }
-
+refresh(){
+  window.location.reload();
+}
   onAddRow(actividad:String) {
     this.rows.push(this.createItemFormGroup(actividad));
     console.log(this.rows.getRawValue())
@@ -169,6 +176,7 @@ export class Anexo61Component implements OnInit,AfterViewInit {
   anexoss61: Anexo61 = new Anexo61();
   obtnerdatos(){
     this.anexoss61.idProyecto = this.anexo6select.proyectoId;
+    this.anexoss61.cedulaApoyo= this.anexo6select.cedulaDocente;
     this.anexoss61.nombreApoyo = this.anexo6select.nombreDocenteApoyo;
     this.anexoss61.fechaApoyo=this.Fechaenvio;
     this.anexoss61.fechaDirector=this.Fechaenvio;
@@ -177,155 +185,132 @@ export class Anexo61Component implements OnInit,AfterViewInit {
       this.ceduladir = value.cedula;
     })
     this.anexoss61.cedulaDirector=this.ceduladir;
+    this.anexoss61.id_anexo=this.anexo6select.id;
     this.anexoss61.nombreDirector=this.nombredir;
+    this.anexoss61.nombreEstudiante=this.anexo6select.nombreEstudiante;
+    this.anexoss61.cedulaEstudiante=this.anexo6select.cedulaEstudiante;
+    this.anexoss61.ciclo=this.anexo6select.ciclo;
     this.anexoss61.actividades = this.rows.getRawValue();
     return this.anexoss61;
   }
 
 
-  agregarActividades() {
-    this.anexo61Service.saveAnexo61(this.obtnerdatos()).subscribe(data => {
-      console.log(data)
+//////////////GUARDAR///////////////
+  guardaranexo611(){
+    var anexo61=this.obtnerdatos();
+    this.anexo61Service.saveAnexo61(anexo61).subscribe(value => {
       Swal.fire({
         title: 'Exito',
-        text: 'guardado',
+        text: 'SEGUIMIENTO GUARDADO',
         icon: 'success',
-        iconColor: '#17550c',
+        iconColor :'#17550c',
         color: "#0c3255",
-        confirmButtonColor: "#0c3255",
+        confirmButtonColor:"#0c3255",
         background: "#fbc02d",
       })
-    }, error => {
+      window.location.reload();
+    },error => {
       Swal.fire({
-        title: 'Fallo',
-        text: '' + error.error.message,
+        title: 'Error',
+        text: 'La nueva planecion no se creado '+error.error.message,
         icon: 'error',
         color: "#0c3255",
-        confirmButtonColor: "#0c3255",
+        confirmButtonColor:"#0c3255",
         background: "#fbc02d",
       })
+      window.location.reload();
+      this.issloading=false;
     })
   }
 
-  generardoc(){
-    console.log(this.obtnerdatos())
-  }
-  guardarAnexo61(){
-    console.log(this.obtnerdatos())
-    Swal.fire({
-      title: 'Esta seguro',
-      text: "Para ello debe firmar el siguiente anexo con sus datos",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si'
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'ANEXO 3!',
-          'Se le descargará un archivo WORD, y deberá subirlo en formato pdf',
-          'success'
-        )
-
-        this.generateDocumento(this.obtnerdatos())
-        const { value: file } = await Swal.fire({
-          allowOutsideClick: false,
-          title: 'SELECCIONE EL PDF',
-          text:'Debe subir en tipo PDF',
-          input: 'file',
-          inputAttributes: {
-            'accept': 'application/pdf',
-            'aria-label': 'Debe subir en tipo PDF'
-          },
-          inputValidator: (value) => {
-            return new Promise((resolve) => {
-              if (value === null) {
-                resolve('Es necesario que seleccione el PDF')
-              } else {
-                getBase64(value).then(docx=>{
-                  this.anexoss61.documento=docx+''
-                  this.anexo61Service.saveAnexo61(this.obtnerdatos()).subscribe(data=>{
-                    Swal.fire({
-                      icon: 'success',
-                      title: 'Anexo 6.1',
-                      text: '..',
-                      confirmButtonColor: "#0c3255"})
-                    window.location.reload();
-                  },err=>{
-                    Swal.fire({
-                      icon: 'error',
-                      title: 'Anexo',
-                      text: 'Hubo un error: '+err.error.message,
-                      confirmButtonColor: "#0c3255"})
-                  })
-                  window.location.reload();
-                })
-              }
-            })
-          }
-        })
-
-      }
-    })
-  }
-
-
-
-
-  generateDocumento(anexo6_1: Anexo61) {
-
-    loadFile(
-      'https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6%20.1.docx',
-      function(
+  subirDocumento6111(file:FileList){
+    if(file.length==0){
+    }else{
+      getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        error,
+        console.log(docx.length)
         // @ts-ignore
-        content
-      ) {
-
-        if (error) {
-          throw error;
+        if(docx.length>=10485760){
+          this.anexoss61.documento="";
+          Swal.fire(
+            'Fallo',
+            'El documento excede el peso permitido',
+            'warning'
+          )
+        }else{
+          this.anexoss61.documento=docx+"";
         }
-        const zip = new PizZip(content);
-        const doc = new Docxtemplater(zip, {
-          paragraphLoop: true,
-          linebreaks: true,
-        });
-        try {
-          // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
-          doc.render({
-            tb:anexo6_1.actividades,
-            docente_apoyo:anexo6_1.nombreApoyo,
-            director_proyeto:anexo6_1.nombreDirector
-          });
-        }  catch (error) {
-          // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+      })
+    }
+  }
+
+  generarDocumento6111() {
+    var anexo61:Anexo61=this.obtnerdatos();
+    console.log(anexo61)
+    var pipe:DatePipe = new DatePipe('en-US')
+    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6%20.1.docx", function(
+      // @ts-ignore
+      error,
+      // @ts-ignore
+      content
+    ) {
+      if (error) {
+        throw error;
+      }
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+
+
+      doc.setData({
+        fecha:pipe.transform(anexo61.fechaDirector,'dd/MM/yyyy'),
+        tb:anexo61.actividades,
+        fecha2:anexo61.fechaApoyo,
+        docente_apoyo:anexo61.nombreApoyo,
+        director_proyeto:anexo61.nombreDirector,
+      });
+      try {
+        // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+        doc.render();
+      } catch (error) {
+        // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+        // @ts-ignore
+        function replaceErrors(key, value) {
+          if (value instanceof Error) {
+            return Object.getOwnPropertyNames(value).reduce(function(
+                error,
+                key
+              ) {
+                // @ts-ignore
+                error[key] = value[key];
+                return error;
+              },
+              {});
+          }
+          return value;
+        }
+        console.log(JSON.stringify({ error: error }, replaceErrors));
+        // @ts-ignore
+        if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
-          function replaceErrors(key, value) {
-            if (value instanceof Error) {
-              return Object.getOwnPropertyNames(value).reduce(function(
-                  error,
-                  key
-                ) {
-                  // @ts-ignore
-                  error[key] = value[key];
-                  return error;
-                },
-                {});
-            }
-            return value;
-          }
-          console.log(JSON.stringify({ error: error }, replaceErrors));
+          const errorMessages = error.properties.errors
+            // @ts-ignore
+            .map(function(error) {
+              return error.properties.explanation;
+            })
+            .join("\n");
+          console.log("errorMessages", errorMessages);
+          // errorMessages is a humanly readable message looking like this :
+          // 'The tag beginning with "foobar" is unopened'
         }
-        const out = doc.getZip().generate({
-          type: 'blob',
-          mimeType:
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        });
-        // Output the document using Data-URI
-        saveAs(out, 'anexo61.docx');
+        throw error;
       }
-    );
+      const out = doc.getZip().generate({
+        type: "blob",
+        mimeType:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      });
+      // Output the document using Data-URI
+      saveAs(out, "Anexo6_1.docx");
+    });
   }
 }

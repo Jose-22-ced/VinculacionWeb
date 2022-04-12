@@ -1,0 +1,58 @@
+<div *ngIf="issloading==false">
+  <mat-card>
+    <mat-card-title>REVISION Y FIRMA DE ANEXOS 8</mat-card-title>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>BUSCAR </mat-label>
+      <input matInput   placeholder="FILTRAR" [formControl]="myControl">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </mat-card>
+  <br>
+  <div  *ngIf="isexist">
+    <div *ngFor="let anexo8 of filteredOptions | async">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>REGISTRO DIARIO DE ACTIVIDADES</mat-card-title>
+          <br>
+          <mat-card-subtitle style="font-size: large"><b>Director: </b>{{anexo8.nombreDirectorProyecto}}</mat-card-subtitle>
+          <mat-card-subtitle style="font-size: large"><b>Docente de Apoyo:</b> {{anexo8.nombreDocenteApoyo}}</mat-card-subtitle>
+          <mat-card-subtitle style="font-size: large"><b>Estudiante:</b> {{anexo8.nombreEstudiante}}</mat-card-subtitle>
+          <mat-card-subtitle style="font-size: large"><b>Cedula Estudiante:</b> {{anexo8.cedulaEstudiante}}</mat-card-subtitle>
+          <mat-card-subtitle style="font-size: large"><b>Entidad Beneficiaria:</b> {{anexo8.nombreEntidadBeneficiaria}}</mat-card-subtitle>
+
+        </mat-card-header>
+        <mat-card-content>
+
+
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Seguimiento de Actividades
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p *ngFor="let alumnos of anexo8.actividades">
+              <b>Fecha:</b>{{alumnos.fecha}} -
+              <b>Descripcion:</b> {{alumnos.descripcionActividad}} -
+              <b>N.Horas:</b> {{alumnos.numHoras}}</p> -
+          </mat-expansion-panel>
+          <mat-divider></mat-divider>
+          <br>
+          <button mat-raised-button color="primary" (click)="convertFile(anexo8.documento)">DESCARGAR DOCUMENTO</button>
+          <button mat-raised-button color="accent" style="margin-left: 5px" (click)="update(anexo8)">SUBIR DOCUMENTO</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>No tiene anexos 8</mat-card-title>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

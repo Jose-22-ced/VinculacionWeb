@@ -47,4 +47,12 @@ export class Anexo62Service {
     console.log(anexo62);
     return this.http.post<Anexo62[]>(this.urlEndPoint, anexo62, {headers: this.httpHeaders})
   }
+
+  getAnexo62_pordirector(cedulaDirector:String):Observable<Anexo62[]>{
+    return this.http.get(this.urlEndPoint+"/allAnexos/"+cedulaDirector,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo62[]))
+  }
+  updateAnexo62(anexo62:Anexo62):Observable<Anexo62>{
+    console.log(anexo62)
+    return this.http.put<Anexo62>(this.urlEndPoint,anexo62,{headers:this.httpHeaders})
+  }
 }

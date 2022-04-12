@@ -251,6 +251,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
     this.anexo5Service.getAnexo5byCedula(docenteselect).subscribe(value => {
       if(value.length!=0){
         this.anexo5=value[0];
+        this.anexo6.cedulaDocente=value[0].cedulaDocenteApoyo;
         this.anexo6.nombreDocenteApoyo=value[0].nombreDocenteReceptor;
         this.activate=false;
       }else {

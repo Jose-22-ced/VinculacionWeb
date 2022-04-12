@@ -7,6 +7,11 @@ export class Anexo62 {
   fechaDirector?: Date;
   nombreApoyo?:String;
   nombreDirector?:String;
+  cedulaApoyo?:String;
+  id_anexo?:Number;
+  cedulaEstudiante?:String
+  nombreEstudiante?:String
+  ciclo?:String;
   actividades?:Actividades[]=[];
 }
 
