@@ -137,6 +137,7 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
     const filterValue = value.toString().toLowerCase();
     return this.anexo7select.filter(option => option.mesAnioPlanificado?.toISOString().toLowerCase().includes(filterValue)
     );
+
   }
 
   selectionProyecto(proyectoSelection:MatSelectionListChange){
