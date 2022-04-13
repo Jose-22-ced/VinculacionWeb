@@ -6,7 +6,7 @@
         <mat-card class="example-card">
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-subtitle>INFORME DE SEGUIMIENTO</mat-card-subtitle>
-          <mat-card-title>INSTITUTO SUPERIOR TECNOLOGICO DEL AZUAY</mat-card-title>
+          <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY</mat-card-title>
           <mat-card-title>COORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD</mat-card-title>
         </mat-card>
         <mat-card-content>
@@ -27,7 +27,7 @@
               </cdk-virtual-scroll-viewport>
               <br>
               <p style="font-size: medium">
-                Proyecto Seleccionado: {{proyectoSelect.nombre}}
+                <strong>Proyecto Seleccionado: </strong>{{proyectoSelect.nombre}}
               </p>
             </div>
           </div>
@@ -57,13 +57,14 @@
         <mat-card-content>
           <mat-card class="example-card">
             <mat-list>
-              <mat-list-item>Programa de Vinculación: {{proyectoSelect.programaVinculacion}}</mat-list-item>
+              <mat-list-item>
+                <strong> Programa de Vinculación:  </strong>{{proyectoSelect.programaVinculacion}}</mat-list-item>
               <mat-divider></mat-divider>
-              <mat-list-item>Línea de acción: {{proyectoSelect.lineaaccion}}</mat-list-item>
+              <mat-list-item><strong>Línea de acción: </strong> {{proyectoSelect.lineaaccion}}</mat-list-item>
               <mat-divider></mat-divider>
-              <mat-list-item>Línea de acción: {{proyectoSelect.nombre}}</mat-list-item>
+              <mat-list-item><strong>Nombre del Proyecto: </strong> {{proyectoSelect.nombre}}</mat-list-item>
               <mat-divider></mat-divider>
-              <mat-list-item>Carrera: {{carreraSelect.nombre}}</mat-list-item>
+              <mat-list-item><strong>Carrera: </strong> {{carreraSelect.nombre}}</mat-list-item>
               <mat-divider></mat-divider>
             </mat-list>
           </mat-card>
@@ -209,21 +210,21 @@
         <mat-card-content>
           <mat-card class="example-card">
             <mat-list>
-              <mat-list-item>1.6 Entidad Beneficiaria: {{entidadSelect.nombre}}</mat-list-item>
+              <mat-list-item><strong>1.6 Entidad Beneficiaria:  </strong>{{entidadSelect.nombre}}</mat-list-item>
               <mat-divider></mat-divider>
-              <mat-list-item>1.7 Plazo de Ejecución del Proyecto </mat-list-item>
+              <mat-list-item><strong>1.7 Plazo de Ejecución del Proyecto </strong> </mat-list-item>
 
-              <mat-list-item>Fecha de Inicio de Proyecto: {{proyectoSelect.fechaInicio}}</mat-list-item>
+              <mat-list-item><strong>Fecha de Inicio de Proyecto: </strong> {{proyectoSelect.fechaInicio}}</mat-list-item>
               <mat-divider></mat-divider>
-              <mat-list-item>Fecha de fin planeado: {{proyectoSelect.fechaFin}}</mat-list-item>
+              <mat-list-item><strong>Fecha de fin planeado: </strong> {{proyectoSelect.fechaFin}}</mat-list-item>
               <mat-divider></mat-divider>
-              <mat-list-item>Fecha de seguimiento: {{fecha | date:'mediumDate'}} </mat-list-item>
+              <mat-list-item><strong>Fecha de seguimiento: </strong>{{fecha | date:'mediumDate'}} </mat-list-item>
               <mat-divider></mat-divider>
-              <mat-list-item>Fecha de inicio real: <input type="date" formControlName="fecha" [(ngModel)]="informe.fechaInicioReal "></mat-list-item>
+              <mat-list-item><strong>Fecha de inicio real: </strong><input type="date" formControlName="fecha" [(ngModel)]="informe.fechaInicioReal "></mat-list-item>
               <mat-divider></mat-divider>
               <br>
               <br>
-              <mat-list-item>Fecha de fin real: <input type="date" formControlName="fecha" [(ngModel)]="informe.fechaFinReal" >
+              <mat-list-item><strong>Fecha de fin real: </strong><input type="date" formControlName="fecha" [(ngModel)]="informe.fechaFinReal" >
                  </mat-list-item>
               <mat-divider></mat-divider>
             </mat-list>
@@ -255,16 +256,16 @@
         <mat-card-content>
           <mat-card class="example-card">
             <mat-list>
-              <mat-list-item>2.1 Alcance territorial del proyecto: {{proyectoSelect.alcanceTerritorial}}</mat-list-item>
+              <mat-list-item><strong>2.1 Alcance territorial del proyecto: </strong>{{proyectoSelect.alcanceTerritorial}}</mat-list-item>
               <mat-divider></mat-divider>
-              <mat-list-item>2.2 Objetivo General: {{proyectoSelect.objetivoGeneral}}</mat-list-item>
+              <mat-list-item><strong>2.2 Objetivo General: </strong> {{proyectoSelect.objetivoGeneral}}</mat-list-item>
               <mat-divider></mat-divider>
 
             </mat-list>
           </mat-card>
           <mat-grid-list cols="3" rowHeight="6:1.10" [formGroup]="sixFormGroup">
             <div style="margin-top: 15px">
-              <h3>1.5 Equipo de Trabajo</h3>
+
               <br>
               <br>
               <div>
@@ -283,17 +284,17 @@
             </div>
           </mat-grid-list>
           <br>
-          <mat-label>Situación al inicio de la ejecución del proyecto</mat-label>
+          <mat-label><strong>Situación al inicio de la ejecución del proyecto </strong></mat-label>
           <br>
           <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
-            <mat-label>Situación inicial</mat-label>
+            <mat-label> <strong>Situación inicial </strong></mat-label>
             <textarea   matInput formControlName="situacion" [(ngModel)]="informe.situacionInicio" name="situacionInicial" ></textarea>
           </mat-form-field>
           <br>
-          <mat-label>Situación actual de los beneficiarios</mat-label>
+          <mat-label><strong>Situación actual de los beneficiarios </strong></mat-label>
           <br>
           <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
-            <mat-label>Situación actual</mat-label>
+            <mat-label><strong>Situación actual</strong></mat-label>
             <textarea   matInput formControlName="situacion" [(ngModel)]="informe.situacionActual" name="situacionActual" ></textarea>
           </mat-form-field>
         </mat-card-content>
@@ -322,39 +323,39 @@
         <mat-card-content>
           <mat-grid-list cols="3" rowHeight="6:1.10" [formGroup]="secondFormGroup">
             <div style="margin-top: 15px">
-              <h3>2.6 Descripción de las actividades realizadas durante la ejecución del proyecto</h3>
+              <h3><strong>2.6 Descripción de las actividades realizadas durante la ejecución del proyecto</strong></h3>
               <br>
               <br>
               <div>
                 <mat-grid-tile colspan="3" *ngFor="let row of sevenFormGroup.get('rowsInfo')?.controls;let index = index;">
                   <!--Carga de lista de actividades-->
                   <mat-form-field style="width: 380px" appearance="outline">
-                    <mat-label>Actividades</mat-label>
+                    <mat-label><strong>Actividades</strong></mat-label>
                     <input matInput type="text" [formControl]="row.get('actividades')"
                            placeholder="Actividades" [required]>
                   </mat-form-field>
                   <mat-form-field class="example-full-width" appearance="outline" style="width: 180px">
-                    <mat-label>Porcentaje Cumplimiento (%){{index}}</mat-label>
+                    <mat-label><strong>Porcentaje Cumplimiento (%)</strong>{{index}}</mat-label>
                     <input matInput type="number" min="0" max="100" [formControl]="row.get('porcentajeCumplimiento')"
                            placeholder="Avance de la Actividad (%)" [required]>
                   </mat-form-field>
                   <mat-form-field class="example-full-width" appearance="outline" style="width: 180px">
-                    <mat-label>Fecha de Ejeucion{{index}}</mat-label>
+                    <mat-label><strong>Fecha de Ejeucion</strong>{{index}}</mat-label>
                     <input matInput type="date"  [formControl]="row.get('fechaEjecucion')"
                             [required]>
                   </mat-form-field>
                   <mat-form-field style="width: 380px" appearance="outline">
-                    <mat-label>Responsable de la Ejecución</mat-label>
+                    <mat-label><strong>Responsable de la Ejecución</strong></mat-label>
                     <input matInput type="text" [formControl]="row.get('responsableEjecucion')"
                            placeholder="Responsable" [required]>
                   </mat-form-field>
                   <mat-form-field style="width: 380px" appearance="outline">
-                    <mat-label>Documento de Evidencia</mat-label>
+                    <mat-label><strong>Documento de Evidencia</strong></mat-label>
                     <input matInput type="text" [formControl]="row.get('documento')"
                            placeholder="Responsable" [required]>
                   </mat-form-field>
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Observaciones</mat-label>
+                    <mat-label><strong>Observaciones</strong></mat-label>
                     <textarea matInput type="text" [formControl]="row.get('observaciones')"  placeholder="Observaciones" [required]></textarea>
                   </mat-form-field>
                   <span class="example-spacer"></span>
@@ -381,15 +382,15 @@
         <mat-card-content>
 
 
-          <mat-label>3.1 Conclusiones</mat-label>
+          <mat-label><strong>3.1 Conclusiones</strong></mat-label>
           <br>
           <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
-            <mat-label>Conclusiones</mat-label>
+            <mat-label><strong>Conclusiones</strong></mat-label>
             <textarea   matInput [(ngModel)]="informe.conclusiones" name="conclusiones" [ngModelOptions]="{standalone: true}"
             placeholder="Describir las enseñanzas aprendidas hasta la fecha de elaboración del informe"></textarea>
           </mat-form-field>
           <br>
-          <mat-label>3.2 Observaciones</mat-label>
+          <mat-label><strong>3.2 Observaciones</strong></mat-label>
           <br>
           <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
             <mat-label>Observaciones</mat-label>
@@ -449,9 +450,9 @@
         </mat-card>
       </form>
     </mat-step>
-    <mat-step  label="Confirmar">
+    <!--<mat-step  label="Confirmar">
       <mat-card class="example-card">
-        <mat-card-header>
+        <mat-card-header style="align-content: center">
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title><br><br> INFORME DE SEGUIMIENTO</mat-card-title>
           <mat-card-subtitle><br />
@@ -462,6 +463,21 @@
         </mat-card-header>
         <mat-card-content>
 
+          <div>
+            <button mat-button matStepperPrevious color="primary">Atras</button>
+            <button mat-flat-button color="warn" (click)="guardarAnexo()">GUARDAR</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-step>-->
+    <mat-step  label="CONFIRMAR">
+      <mat-card style="width: 600px;margin: 0 auto">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Informe de Seguimiento</mat-card-title>
+          <mat-card-subtitle>Guardar Informe de Seguimiento </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
           <div>
             <button mat-button matStepperPrevious color="primary">Atras</button>
             <button mat-flat-button color="warn" (click)="guardarAnexo()">GUARDAR</button>

@@ -1,3 +1,23 @@
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+.example-card {
+  margin: 0 auto;
+  max-width: 950px;
+}
+mat-form-field{
+  width: 100%;
+}
+
+mat-list-option[aria-selected="true"] {
+  background: rgba(255, 204, 0, 0.7);
+}
+
+.example-header-image {
+  background-image: url('src/assets/images/LogoCiculo.png');
+  background-size: cover;
+}
+
 .mat-stepper-vertical {
 }
 
@@ -11,10 +31,15 @@
   writing-mode: horizontal-tb;
   height: max-content;
 }
+.imp {
+  background: antiquewhite;
+  border: #0c3255;
+  text-align: center;
+}
 .example-header-image {
   background-image: url('src/assets/images/LogoCiculo.png');
   background-size: cover;
-  margin: 0 auto;
+  margin: 15px;
 }
 .example-spacer {
   flex: 1 1 auto;
@@ -77,8 +102,4 @@ h4{
   color: #0c3255;
   font-style: inherit;
   font-size: medium;
-}
-
-.mensaje{
-  text-align: justify;
 }

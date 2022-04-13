@@ -13,14 +13,14 @@
           <mat-card-content>
             <div id ="contenedor">
               <div id ="cabecera">
-                  <p>INFORMACION DEL ANEXO 7</p>
+                  <p>INFORMACIÓN DEL ANEXO 7</p>
                   <br>
                   <h3>><strong>Nombre del Proyecto: </strong>{{proyecto.nombre}}</h3>
                   <h3>><strong>Director Proyecto: </strong>{{proyecto.nombredirector}}</h3>
                   <h3><strong>Empresa/Institucion: </strong>{{anexo2.entidadBeneficiaria}}</h3>
                 <mat-divider></mat-divider>
                 <mat-form-field appearance="fill">
-                  <mat-label>Mes/Año de plafinificaion</mat-label>
+                  <mat-label>Mes/Año de planificación</mat-label>
                   <input matInput [matDatepicker]="dp"  [formControl]="date"  [min]="proyecto.fechaInicio"  [max]="proyecto.fechaFin" formControlName="mesAnioPlanificado" [(ngModel)]="anexoss71.mesAnioPlanificado">
                   <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
                   <mat-datepicker #dp
@@ -43,7 +43,7 @@
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="secondFormGroup" label="ESTUDICINTES">
+    <mat-step [stepControl]="secondFormGroup" label="ESTUDIANTES">
       <form [formGroup]="secondFormGroup">
         <mat-card class="example-card">
           <mat-card-header>
@@ -66,7 +66,7 @@
                 </mat-grid-tile>
                 <mat-grid-tile>
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>DOCENTES DE APOYO</mat-label>
+                    <mat-label>Docentes de Apoyo</mat-label>
                     <mat-select [formControl]="row.get('nombreDocenteApoyo')" multiple>
                       <mat-option *ngFor="let topping of anexo1" [value]="topping.cedulaDelegado">{{topping.cedulaDelegado}}- {{topping.nombreDelegado}}</mat-option>
                     </mat-select>
@@ -190,12 +190,12 @@
         </mat-card>
       </form>
     </mat-step>
-    <mat-step  label="Confirmar">
+    <mat-step  label="CONFIRMAR">
       <mat-card style="width: 600px;margin: 0 auto">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>PLANIFICACIÓN MENSUAL DE ACTIVIDADES</mat-card-title>
-          <mat-card-subtitle>Guardar Planificacion Mensual </mat-card-subtitle>
+          <mat-card-subtitle>Guardar Planificación Mensual </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
           <div>
@@ -209,7 +209,7 @@
 </div>
 <div *ngIf="isexist==false">
   <mat-card>
-    <mat-card-title>NO EXISTE</mat-card-title>
+    <mat-card-title>No existe ningún documento.</mat-card-title>
   </mat-card>
 </div>
 <ng-container *ngIf="issloading">

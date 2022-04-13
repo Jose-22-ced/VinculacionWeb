@@ -1,6 +1,6 @@
 <div *ngIf="issloading==false">
   <mat-card>
-    <mat-card-title>INFORMES DE CULMINACION</mat-card-title>
+    <mat-card-title>REVISIÓN INFORMES DE CULMINACION</mat-card-title>
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>BUSCAR INFORMES</mat-label>
       <input matInput   placeholder="FILTRAR" [formControl]="myControl">
@@ -12,15 +12,15 @@
     <div *ngFor="let anex10 of filteredOptions | async">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-subtitle>Proyecto: {{anex10.nombreProyecto}}</mat-card-subtitle>
+          <mat-card-title>Proyecto: {{anex10.nombreProyecto}}</mat-card-title>
           <mat-card-title>Empresa: {{anex10.nombreEmpresa}}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Apoyo: {{anex10.nombreDocenteapoyo}}</p>
-          <p>Fecha de Inico y Fin: {{anex10.fechaFin | date:"longDate"}} - {{anex10.fechaFin | date:"longDate"}}</p>
-          <p>Director: {{anex10.nombreDirector}}</p>
-          <p>Cédula: {{anex10.cedulaEstudiante}}</p>
-          <p>Estudiante: {{anex10.nombreEstudiante}}</p>
+          <p><strong>Docente Apoyo:</strong> {{anex10.nombreDocenteapoyo}}</p>
+          <p><strong>Fecha de Inico y Fin:</strong> {{anex10.fechaFin | date:"longDate"}} - {{anex10.fechaFin | date:"longDate"}}</p>
+          <p><strong>Director:</strong> {{anex10.nombreDirector}}</p>
+          <p><strong>Cédula:</strong> {{anex10.cedulaEstudiante}}</p>
+          <p><strong>Estudiante:</strong> {{anex10.nombreEstudiante}}</p>
           <strong *ngIf="date>=anex10.fechaFin">Fuera de tiempo</strong>
         </mat-card-content>
         <mat-card-actions>
@@ -32,7 +32,7 @@
   </div>
   <div *ngIf="isexist==false">
     <mat-card>
-      <mat-card-title>NO EXISTEN PROYECTOS ACTUALMENTE BENEFICARIAS REGISTRADAS</mat-card-title>
+      <mat-card-title>No existen revisiones de informes de culminación.</mat-card-title>
     </mat-card>
   </div>
 </div>

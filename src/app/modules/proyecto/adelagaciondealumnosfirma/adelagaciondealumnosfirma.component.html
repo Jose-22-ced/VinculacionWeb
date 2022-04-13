@@ -1,6 +1,6 @@
 <div *ngIf="issloading==false">
   <mat-card>
-    <mat-card-title>FIRMA DE ANEXO 4</mat-card-title>
+    <mat-card-title>FIRMA DELEGACIÓN DE ESTUDIANTES A DOCENTES DE APOYO</mat-card-title>
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>BUSCAR PROYECTO</mat-label>
       <input matInput   placeholder="FILTRAR" [formControl]="myControl">
@@ -12,12 +12,15 @@
     <div *ngFor="let anexo5 of filteredOptions | async">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-subtitle>Resposanble: {{anexo5.nonbreDocenteEmisor}}</mat-card-subtitle>
           <mat-card-title>{{anexo5.nombreProyecto}}</mat-card-title>
+          <mat-card-subtitle>
+            <strong>Responsable:</strong> {{anexo5.nonbreDocenteEmisor}}</mat-card-subtitle>
+
         </mat-card-header>
         <mat-card-content>
-          <p>Carrera: {{anexo5.siglasCarrera}}</p>
-          <p>Fecha de delegacón: {{anexo5.fechaEmision | date:"longDate"}}</p>
+          <p><strong>
+            Carrera:</strong> {{anexo5.siglasCarrera}}</p>
+          <p><strong>Fecha de delegación:</strong> {{anexo5.fechaEmision | date:"longDate"}}</p>
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
             <mat-expansion-panel-header>

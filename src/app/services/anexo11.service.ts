@@ -8,6 +8,7 @@ import {Anexo11} from "../models/anexo11";
 import {User} from "../models/user";
 import {Anexo6} from "../models/anexo6";
 import {Proyectos} from "../models/proyectos";
+import {Anexo61} from "../models/anexo61";
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class Anexo11Service {
   }
 
   getAll(): Observable<Anexo11[]> {
-    return this.http.get(this.urlEndPoint, {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo11[]))
+    return this.http.get(this.urlEndPoint+"/all", {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo11[]))
   }
   getAnexo11byid(id?:Number):Observable<Anexo11>{
     return this.http.get(this.urlEndPoint+"/"+id,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo11))

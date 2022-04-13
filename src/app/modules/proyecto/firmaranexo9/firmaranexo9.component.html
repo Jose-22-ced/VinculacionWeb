@@ -1,6 +1,6 @@
 <div *ngIf="issloading==false">
   <mat-card>
-    <mat-card-title>FIRMA DE ANEXOS</mat-card-title>
+    <mat-card-title>FIRMA DE SEGUIMIENTOS MENSUALES SEGÚN PLANIFICACIÓN</mat-card-title>
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>BUSCAR... </mat-label>
       <input matInput   placeholder="FILTRAR" [formControl]="myControl">
@@ -13,13 +13,14 @@
       <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title>SEGUIMIENTO MENSUAL SEGUN PLANIFICACIÓN</mat-card-title>
-          <mat-card-subtitle>Director: {{anexo9.nombreDirector}}</mat-card-subtitle>
-          <mat-card-title>{{anexo9.nombreApoyo}}</mat-card-title>
+          <mat-card-subtitle><strong>Director: </strong>{{anexo9.nombreDirector}}</mat-card-subtitle>
+          <mat-card-subtitle><strong>Docente de poyo: </strong>{{anexo9.nombreApoyo}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <p>Fecha de seguimiento: {{anexo9.fechaSeguimeinto | date:"longDate"}}</p>
-          <strong>Mes planificado:: {{anexo9.mesPlanificaccion}}</strong>
-
+          <p><strong>Fecha de seguimiento: </strong> {{anexo9.fechaSeguimeinto | date:"longDate"}}</p>
+          <strong>Mes planificado: </strong> {{anexo9.mesPlanificaccion}}
+<br>
+          <br>
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -27,14 +28,21 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <p *ngFor="let act of anexo9.actividadesAnexo9">
-              Actividad: {{act.actividadesPlanificacion}}  Estudiante:{{act.estudianteResponsable}}
-              <br>Fecha Planificada: {{act.fechaPlanificacion}}   Finalizada: {{act.finalizacion}}
-              <br>Fecha Finalizacion Prevista: {{act.fechaFinalizacion}} Porcentaje de Avance: {{act.numero}}
-              <br>Observaciones: {{anexo9.observaciones}}</p>
+              <mat-divider></mat-divider>
+              <br>
+              <strong>Actividad: </strong> {{act.actividadesPlanificacion}}
+              <br><strong>Estudiante: </strong>{{act.estudianteResponsable}}
+              <br><strong>Fecha Planificada: </strong>{{act.fechaPlanificacion}}
+              <br><strong>Finalizada: </strong> {{act.finalizacion}}
+              <br><strong>Fecha Finalizacion Prevista: </strong>{{act.fechaFinalizacion}}
+              <br><strong>Porcentaje de Avance: </strong> {{act.numero}}
+              <br><strong>Observaciones: </strong> {{anexo9.observaciones}}</p>
           </mat-expansion-panel>
           <mat-divider></mat-divider>
           <br>
           <button mat-raised-button color="primary" (click)="convertFile(anexo9.documento)">DESCARGAR DOCUMENTO</button>
+          <br>
+          <br>
           <button mat-raised-button color="accent" style="margin-left: 5px" (click)="update(anexo9)">SUBIR DOCUMENTO</button>
         </mat-card-content>
       </mat-card>

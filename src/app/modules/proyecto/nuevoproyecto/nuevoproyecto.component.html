@@ -7,7 +7,7 @@
         <mat-card class="example-card">
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-subtitle>CREACIÓN DEL PROYECTO</mat-card-subtitle>
-          <mat-card-title>INSTITUTO SUPERIOR TECNOLOGICO DEL AZUAY</mat-card-title>
+          <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY</mat-card-title>
           <p>{{carrera}}</p>
           <mat-divider inset></mat-divider>
           <br>
@@ -28,7 +28,7 @@
               </mat-grid-tile>
               <mat-grid-tile>
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Linea de Accion</mat-label>
+                  <mat-label>Linea de Acción</mat-label>
                   <mat-select formControlName="linea" [(ngModel)]="proyecto.lineaaccion">
                     <mat-option value="Tecnica">Asesoría Técnica</mat-option>
                     <mat-option value="Comunitario" selected>Trabajo Comunitario</mat-option>
@@ -96,11 +96,11 @@
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup" >
-        <ng-template matStepLabel>Objetivo General y Especifico</ng-template>
+        <ng-template matStepLabel>Objetivos General y Específicos</ng-template>
         <mat-card class="example-card">
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-subtitle>CREACIÓN DEL PROYECTO</mat-card-subtitle>
-          <mat-card-title>INSTITUTO SUPERIOR TECNOLOGICO DEL AZUAY</mat-card-title>
+          <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY</mat-card-title>
           <p>{{carrera}}</p>
           <mat-divider></mat-divider>
           <br>
@@ -108,17 +108,17 @@
             <h3>OBJETIVO GENERAL</h3>
             <mat-grid-list cols="3" rowHeight="6:1">
               <mat-form-field class="example-full-width"  appearance="outline">
-                <mat-label>INGRESE EL OBJETIVO GENERAL</mat-label>
+                <mat-label>Ingrese el objetivo general</mat-label>
                 <textarea matInput formControlName="objetivo" placeholder="Ex. Desarrillar un sistema de....." [(ngModel)]="proyecto.objetivoGeneral"></textarea>
               </mat-form-field>
               <div style="margin-top: 15px">
-                <h3>OBJETIVOS ESPECIFICOS DEL PROYECTO</h3>
+                <h3>OBJETIVOS ESPECÍFICOS DEL PROYECTO</h3>
                 <mat-grid-tile colspan="3" >
                   <button mat-fab color="primary" (click)="onAddRow()" *ngIf="secondFormGroup.get('rows')"><mat-icon>add_circle</mat-icon></button>
                 </mat-grid-tile>
                 <mat-grid-tile colspan="3" *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Objetivo Especifico {{index}}</mat-label>
+                    <mat-label>Objetivo Específico {{index}}</mat-label>
                     <input matInput [formControl]="row.get('descripcion')" placeholder="Ex. Realizar...">
                   </mat-form-field>
                   <span class="example-spacer"></span>
@@ -142,14 +142,14 @@
         <mat-card class="example-card">
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-subtitle>CREACIÓN DEL PROYECTO</mat-card-subtitle>
-          <mat-card-title>INSTITUTO SUPERIOR TECNOLOGICO DEL AZUAY</mat-card-title>
+          <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY</mat-card-title>
           <p>{{carrera}}</p>
           <mat-divider></mat-divider>
           <br>
           <mat-card-content>
             <div id ="contenedor">
               <div id ="cabecera">
-                <h4>Seleccine del director del Proyecto</h4>
+                <h4>Seleccione el Director del Proyecto</h4>
                 <mat-form-field appearance="outline" style="width: 90%">
                   <mat-label>BUSCAR DOCENTE</mat-label>
                   <input matInput  placeholder="FILTRAR" [formControl]="myControl">
@@ -169,7 +169,7 @@
               </div>
               <mat-divider></mat-divider>
               <br>
-              <h4>Seleccione los docentes de Apoyo del Proyecto</h4>
+              <h4>Seleccione los Docentes de Apoyo</h4>
               <div id ="izquierda">
                 <mat-form-field appearance="outline" style="width: 90%">
                   <mat-label>BUSCAR DOCENTE</mat-label>
@@ -188,7 +188,7 @@
                       </mat-expansion-panel-header>
                       <div style="float:left; width:80%;">
                         <p>Tiempo: {{docente.docente_tipo_tiempo}}</p>
-                        <p>Titulo:{{docente.titulo}}</p>
+                        <p>TÍtulo:{{docente.titulo}}</p>
                         <mat-expansion-panel hideToggle>
                           <mat-expansion-panel-header>
                             <mat-panel-title>
@@ -240,7 +240,7 @@
                       </mat-expansion-panel-header>
                       <div style="float:left; width:80%;">
                         <p>Tiempo: {{docente.docente_tipo_tiempo}}</p>
-                        <p>Titulo:{{docente.titulo}}</p>
+                        <p>TÍtulo:{{docente.titulo}}</p>
                         <mat-expansion-panel hideToggle>
                           <mat-expansion-panel-header>
                             <mat-panel-title>
@@ -291,14 +291,13 @@
         <mat-card class="example-card">
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-subtitle>CREACIÓN DEL PROYECTO</mat-card-subtitle>
-          <mat-card-title>INSTITUTO SUPERIOR TECNOLOGICO DEL AZUAY</mat-card-title>
+          <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY</mat-card-title>
           <p>{{carrera}}</p>
           <mat-divider></mat-divider>
           <br>
           <mat-card-content>
-            <p>Para seguir con la creación del proyecto debe *DESCARGAR EL ANENXO* para cada
-              docente miembro y firmarlo, debe *SUBIR ESTE DOCUENTO EN TIPO .pdf*; Sea resposable con
-              con el documento a subir, para llevar un buen control esto le evitara problemas futuros.</p>
+            <p class="mensaje">Para seguir con la creación del proyecto debe DESCARGAR EL ANEXO para cada
+              docente asignado y firmarlo, debe SUBIR ESTE DOCUMENTO EN FORMATO .pdf</p>
             <br>
             <div *ngFor="let anexo of anexo1">
               <mat-card class="example-panel">
@@ -335,11 +334,12 @@
         <mat-card-header>
           <mat-card-title>CREACIÓN DEL PROYECTO</mat-card-title>
         </mat-card-header>
-        <p>Se guardara todos los los datos ingresdos, se pobra editar o eliminar el proyecto
+        <p class="mensaje">Se guardará todos los datos ingresados, se pobrá editar o eliminar el proyecto
         unicamente si este no está en proceso de Vinculación<p>
         <mat-divider></mat-divider>
         <br>
         <mat-card-content>
+
         <h2>INFORMACIÓN:</h2>
         <h3>Nombre del proyecto: {{proyecto.nombre}}</h3>
         <h3>Fecha de Inicio: {{proyecto.fechaInicio | date:"longDate"}}</h3>
@@ -360,11 +360,11 @@
     <mat-card style="margin: 0 auto; width: 600px;">
       <mat-card-header style="text-align: start">
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Proyecto de vinculacón necesita a un responsable de Practicas Pre Profesionales</mat-card-title>
+        <mat-card-title>Proyecto de vinculación necesita a un Responsable de Prácticas Pre Profesionales</mat-card-title>
         <mat-card-subtitle>Responsable actual con el cargo</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p> NO EXISTE NINGUN RESPONSABLE ACTUALMENTE</p>
+        <p> NO EXISTE NINGÚN RESPONSABLE ACTUALMENTE</p>
       </mat-card-content>
     </mat-card>
   </div>

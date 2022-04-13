@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {User} from "../../../models/user";
 import {Anexo6} from "../../../models/anexo6";
 import {Proyectos} from "../../../models/proyectos";
 import {map, Observable, startWith} from "rxjs";
@@ -8,13 +9,11 @@ import {Anexo6Service} from "../../../services/anexo6.service";
 import {IniciosesionService} from "../../../services/iniciosesion.service";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {FechaService} from "../../../services/fecha.service";
-import {MatSelectionListChange} from "@angular/material/list";
-import {Anexo11, Anexo11ApoyoResponse} from "../../../models/anexo11";
 import {Anexo11Service} from "../../../services/anexo11.service";
+import {MatSelectionListChange} from "@angular/material/list";
+import {Anexo11, Anexo11ApoyoResponse, Anexo11DirectorResponse} from "../../../models/anexo11";
 import Swal from "sweetalert2";
-import {User} from "../../../models/user";
 import {DateAdapter} from "@angular/material/core";
-import {Anexo61} from "../../../models/anexo61";
 import {DatePipe} from "@angular/common";
 import Docxtemplater from "docxtemplater";
 
@@ -24,6 +23,7 @@ import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
+import {Anexo61} from "../../../models/anexo61";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -36,70 +36,54 @@ function getBase64(file: any) {
     reader.onerror = error => reject(error);
   });
 }
-
-const resultado = [
-  {item:'1.1',de: 'Control de Avance de Actividades: Cumple con las tareas planificadas\n' +
-      '(En base a las actividades planteadas en el plan de aprendizaje)'},
-  {item:'1.2' ,de: 'Resultados Alcanzados\n' +
-      '(Presenta Informe indicando los resultados que se lograron con el proyecto\n' +
-      'de vinculación en razón del cumplimiento de metas y objetivos)'},
-  {item:'1.3' ,de: 'Demuestra conocimientos en el área de práctica pre profesional para cumplir con las\n' +
-      '(El Tutor puede emitir juicios de valor con respecto al conocimiento\n' +
-      'demostrado por el estudiante)'},
-  {item:'1.4' ,de: 'Aplicación y manejo de destrezas y habilidades acordes al perfil profesional'},
+const resultado2 = [
+  {item: '2.1' , instrumento: 'Adaptabilidad e Integración al sistema de trabajo de la Institución.  '},
+  {item: '2.2' , instrumento: 'Demuestra capacidad de liderazgo y de trabajo en equipo '},
+  {item: '2.3' , instrumento: 'Asiste puntualmente '},
+  {item: '2.4' , instrumento: 'Capacidad de Trabajo en Equipo / Presión '}
 ]
 
-
 @Component({
-  selector: 'app-anexo11',
-  templateUrl: './anexo11.component.html',
-  styleUrls: ['./anexo11.component.css']
+  selector: 'app-anexo11director',
+  templateUrl: './anexo11director.component.html',
+  styleUrls: ['./anexo11director.component.css']
 })
-
-
-export class Anexo11Component implements OnInit {
-
+export class Anexo11directorComponent implements OnInit {
   activar?:boolean=false;
   sum = 0;
   numerominimo=0;
-
+  idpro?:Number;
+  puntajea?:Number;
   isLinear = true;
   panelOpenState = true;
   issloading = true;
+  fechae?:Date;
   isexist?: boolean;
   myControl = new FormControl();
   cedula?:String;
   nombres?:String;
-  fechai?:Date;
-  fechaf?:Date;
-  fechae?:Date;
-  resultadoAnexo11?:String;
+  fecha?:Date;
   user: User=new User();
-  anexo6: Anexo6[] = []
-  anexo6select: Anexo6 = new Anexo6();
+  anexo11: Anexo11[] = []
+  anexo11select: Anexo11 = new Anexo11();
   proyectoselect: Proyectos = new Proyectos();
-  filteredOptions?: Observable<Anexo6[]>;
+  filteredOptions?: Observable<Anexo11[]>;
+  //secuenciasdepantallas
   firstFormGroup?: FormGroup;
   secondFormGroup?:FormGroup;
   thirdFormGroup?:FormGroup;
   fourFormGroup?:FormGroup;
   fiveFormGroup?:FormGroup;
-  numero?:Number;
   rows: FormArray;
   itemForm?: FormGroup;
-  rows2: FormArray;
-  itemForm2?: FormGroup;
-  apoyoItem1?:String
-
   constructor(private activatedRoute: ActivatedRoute,
               private _formBuilder: FormBuilder,
               private anexo6Service: Anexo6Service,
               private usarioService: IniciosesionService,
               private proyectoService: ProyectoService,
               private fechaService: FechaService,
-              private _adapter: DateAdapter<any>,
               private anexo11Service: Anexo11Service,
-
+              private _adapter: DateAdapter<any>,
   ) {
     this._adapter.setLocale('es-ec');
     this.thirdFormGroup = this._formBuilder.group({
@@ -108,27 +92,20 @@ export class Anexo11Component implements OnInit {
     });
     this.rows = this._formBuilder.array([]);
 
-    this.fiveFormGroup = this._formBuilder.group({
-      items: [null, Validators.required],
-      items_value: ['no', Validators.required]
-    });
-    this.rows2 = this._formBuilder.array([]);
-
   }
   ngAfterViewInit(): void {
     setTimeout(() => {
     }, 1000)
   }
-
-
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe(params=>{
       let cedula = params['cedula']
       let nombres = params['nombres']
       this.nombres = nombres;
-      this.anexo6Service.getAnexo6all().subscribe(data => {
-        this.anexo6 = data.filter(value => value.nombreDocenteApoyo==nombres);
+      this.anexo11Service.getAll().subscribe(data => {
+        this.anexo11 = data.filter(value => value.nombreDirector==nombres);
+
         console.log(data);
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
@@ -138,7 +115,7 @@ export class Anexo11Component implements OnInit {
 
       })
       this.fechaService.getSysdate().subscribe(value => {
-        this.fechae = value.fecha;
+        this.fecha = value.fecha;
       })
     })
 
@@ -146,61 +123,45 @@ export class Anexo11Component implements OnInit {
       anexo6: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      numero:['', Validators.required],
-      fechai:['', Validators.required],
-      fechaf:['', Validators.required],
     });
     this.thirdFormGroup = this._formBuilder.group({
-      // resultadoAnexo11:['', Validators.required]
+      resultadoAnexo11:['', Validators.required]
     });
     this.fiveFormGroup = this._formBuilder.group({
     });
     this.fourFormGroup = this._formBuilder.group({
       docx: ['', Validators.required],
     });
-    //ArrayActividades
     this.thirdFormGroup.get("items_value")?.setValue("yes");
     this.thirdFormGroup.addControl('rows', this.rows);
 
-    this.fiveFormGroup.get("items_value")?.setValue("yes");
-    this.fiveFormGroup.addControl('rows2', this.rows2);
   }
-  filter(value: any): Anexo6[] {
+  filter(value: any): Anexo11[] {
     const filterValue = value.toString().toLowerCase();
-    return this.anexo6.filter(option => option.nombreProyecto?.toLowerCase().includes(filterValue)
-      ||option.nombreEstudiante?.toLocaleLowerCase().includes(filterValue)
-      ||option.cedulaEstudiante?.toLocaleLowerCase().includes(filterValue)
+    return this.anexo11.filter(option => option.nombresEstudiante?.toLowerCase().includes(filterValue)
+      ||option.nombreApoyo?.toLocaleLowerCase().includes(filterValue)
     );
   }
 
-  selectionAnexo6(anexo6: MatSelectionListChange){
-    this.anexo6select=anexo6.option.value
-    console.log(this.anexo6select.cedulaEstudiante)
-    //this.usarioService.
-    this.proyectoService.getProyectobyid(Number(this.anexo6select.proyectoId)).subscribe(dataP=>{
-      this.proyectoselect=dataP
+  selectionAnexo11(anexo11: MatSelectionListChange){
+    this.anexo11select=anexo11.option.value
+    console.log(this.anexo11select)
+    this.idpro=this.anexo11select.idProyecto;
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAA"+this.idpro)
+    this.puntajea=this.anexo11select.apoyoPuntaje;
+    resultado2?.forEach(value2 => {
+      // @ts-ignore
+      this.onAddRow(value2.item+"", value2.instrumento+"")
+      console.log(this.rows.getRawValue())
     })
-
-    this.anexo11Service.getusuario(this.anexo6select.cedulaEstudiante+'').subscribe(dataUser=>{
-        this.user=dataUser
-      console.log(this.user)
-    })
-
-    resultado?.forEach(value2 => {
-        // @ts-ignore
-        this.onAddRow(value2.item+"", value2.de+"")
-        console.log(this.rows.getRawValue())
-      })
-
-
   }
 
   //Array
-  onAddRow(apoyo1:String,apoyo:String) {
+  onAddRow(director1:String,director:String) {
     this.sum = 0;
-    this.rows.push(this.createItemFormGroup(apoyo1,apoyo));
+    this.rows.push(this.createItemFormGroup(director1,director));
     this.rows.getRawValue().forEach(element => {
-      this.sum+=element.apoyoPuntaje;
+      this.sum+=element.directorPuntaje;
       console.log(this.sum)
     })
     if(this.numerominimo-1>=this.sum){
@@ -213,7 +174,7 @@ export class Anexo11Component implements OnInit {
     this.sum = 0;
     this.rows.removeAt(rowIndex);
     this.rows.getRawValue().forEach(element => {
-      this.sum+=element.apoyoItem3;
+      this.sum+=element.directorItem3;
       console.log(this.sum)
     })
     if(this.numerominimo-1>=this.sum){
@@ -225,7 +186,7 @@ export class Anexo11Component implements OnInit {
   sumar(){
     this.sum = 0;
     this.rows.getRawValue().forEach(element => {
-      this.sum+=element.apoyoItem3;
+      this.sum+=element.directorItem3;
       console.log(this.sum)
     })
     if(this.numerominimo-1>=this.sum){
@@ -234,58 +195,52 @@ export class Anexo11Component implements OnInit {
       this.activar=false;
     }
   }
-  createItemFormGroup(apoyo1:String,apoyo:String): FormGroup {
+  createItemFormGroup(director1:String,director:String): FormGroup {
     return this._formBuilder.group({
-      apoyoItem1:[apoyo1, Validators.required],
-      apoyoItem2:[apoyo, Validators.required],
-      apoyoItem3:['', Validators.required],
+      directorItem1:[director1, Validators.required],
+      directorItem2:[director, Validators.required],
+      directorItem3:['', Validators.required],
     });
   }
 
-  onAddRow1(director:String) {
-    this.rows2.push(this.createItemFormGroup2(director));
-    // console.log(this.rows2.getRawValue())
-  }
-  createItemFormGroup2(director:String): FormGroup {
-    return this._formBuilder.group({
-      directoroitem1:[''],
-      directorItem2:[''],
-      directorItem3:[''],
-      directorItem4:[''],
-    });
-  }
+
 
   anexo11ob: Anexo11 = new Anexo11();
   obtenerdatos(){
-    this.anexo11ob.cedulaEstudiante=this.anexo6select.cedulaEstudiante;
-    this.anexo11ob.carrera=this.proyectoselect.carrera;
-    this.anexo11ob.idProyecto=this.proyectoselect.id;
-    this.anexo11ob.nombreApoyo=this.nombres;
-    this.anexo11ob.nombresEstudiante=this.anexo6select.nombreEstudiante;
-    this.anexo11ob.cedulaEstudiante=this.anexo6select.cedulaEstudiante;
-    this.anexo11ob.emailEstudiante=this.user.email;
-    this.anexo11ob.apoyoPuntaje=this.sum;
-    this.anexo11ob.nombreDirector=this.proyectoselect.nombredirector;
-    this.anexo11ob.promedio=this.anexo11ob.promedio;
+    this.anexo11ob.id=this.anexo11select.id;
+    this.anexo11ob.cedulaEstudiante=this.anexo11select.cedulaEstudiante;
+    this.anexo11ob.carrera=this.anexo11select.carrera;
+    this.anexo11ob.idProyecto=this.idpro;
+    this.anexo11ob.nombreApoyo=this.anexo11select.nombreApoyo;
+    this.anexo11ob.nombresEstudiante=this.anexo11select.nombresEstudiante;
+    this.anexo11ob.cedulaEstudiante=this.anexo11select.cedulaEstudiante;
+    this.anexo11ob.emailEstudiante=this.anexo11select.emailEstudiante;
+    this.anexo11ob.directorPuntaje=this.sum;
+    this.anexo11ob.nombreDirector=this.anexo11select.nombreDirector;
+    this.anexo11ob.promedio=this.anexo11select.promedio;
     this.anexo11ob.fechaEvaluacion=this.fechae;
+    this.anexo11ob.apoyo=this.anexo11select.apoyo;
+    this.anexo11ob.fechaInicio=this.anexo11select.fechaInicio;
+    this.anexo11ob.fechaFinaliza=this.anexo11select.fechaFinaliza;
+    this.anexo11ob.apoyoPuntaje=this.anexo11select.apoyoPuntaje;
+    // @ts-ignore
+    this.anexo11ob.promedio=(this.puntajea+this.anexo11ob.directorPuntaje)/2
     // this.anexo11ob.totalHoras=this.numero;
-    this.anexo11ob.apoyo=this.rows.getRawValue();
-    this.anexo11ob.director=this.rows2.getRawValue();
+    this.anexo11ob.director=this.rows.getRawValue();
     return this.anexo11ob;
-}
+  }
 
 
-  guardar(){
-    this.anexo11ob=this.obtenerdatos();
-    this.anexo11Service.saveAnexo11(this.obtenerdatos()).subscribe(datos=>{
+  edit(anexo11: Anexo11){
+    anexo11=this.obtenerdatos();
+    this.anexo11Service.updateanexo11(anexo11).subscribe(datos=>{
       Swal.fire({
         icon: 'success',
-        title: 'EVALUACION AL ESTUDIANTE COMPLETADA',
+        title: 'EVALUACION TERMINADA',
         text: 'Datos guadados correctamente',
         confirmButtonColor: "#0c3255",
         background: "#fbc02d",
       })
-      window.location.reload();
     },err=>{
       Swal.fire({
         icon: 'warning',
@@ -294,33 +249,10 @@ export class Anexo11Component implements OnInit {
         confirmButtonColor: "#0c3255",
         background: "#fbc02d",
       })
-      window.location.reload();
-      this.issloading=false;
     })
 
   }
 
-
-  subirDocumento11(file:FileList){
-    if(file.length==0){
-    }else{
-      getBase64(file[0]).then(docx=>{
-        // @ts-ignore
-        console.log(docx.length)
-        // @ts-ignore
-        if(docx.length>=10485760){
-          this.anexo11ob.documento="";
-          Swal.fire(
-            'Fallo',
-            'El documento excede el peso permitido',
-            'warning'
-          )
-        }else{
-          this.anexo11ob.documento=docx+"";
-        }
-      })
-    }
-  }
 
   generarDocumento11() {
     var anexo11:Anexo11=this.obtenerdatos();
@@ -344,14 +276,18 @@ export class Anexo11Component implements OnInit {
         fechainicio:pipe.transform(anexo11.fechaInicio,'dd/MM/yyyy'),
         fechafinaliza:pipe.transform(anexo11.fechaFinaliza,'dd/MM/yyyy'),
         tb:anexo11.apoyo,
+        tb2:anexo11.director,
         nombreDocenteApoyo:anexo11.nombreApoyo,
         puntaje1:anexo11.apoyoPuntaje,
+        puntaje2:anexo11.directorPuntaje,
         nombreDirectoProyecto:anexo11.nombreDirector,
         nombreEstudiante:anexo11.nombresEstudiante,
         cedulaEs:anexo11.cedulaEstudiante,
         emailEst:anexo11.emailEstudiante,
         carrera:anexo11.carrera,
         numHoras:anexo11.totalHoras,
+        apruebaSiNo:anexo11.resultadoAnexo11,
+        promedio:anexo11.promedio,
 
 
       });
@@ -401,5 +337,25 @@ export class Anexo11Component implements OnInit {
     });
   }
 
+  subirDocumento11(file:FileList){
+    if(file.length==0){
+    }else{
+      getBase64(file[0]).then(docx=>{
+        // @ts-ignore
+        console.log(docx.length)
+        // @ts-ignore
+        if(docx.length>=10485760){
+          this.anexo11ob.documento="";
+          Swal.fire(
+            'Fallo',
+            'El documento excede el peso permitido',
+            'warning'
+          )
+        }else{
+          this.anexo11ob.documento=docx+"";
+        }
+      })
+    }
+  }
 
 }

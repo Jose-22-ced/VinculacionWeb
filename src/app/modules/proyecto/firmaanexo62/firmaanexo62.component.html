@@ -1,6 +1,6 @@
 <div *ngIf="issloading==false">
   <mat-card>
-    <mat-card-title>FIRMA DE ANEXO 6.2</mat-card-title>
+    <mat-card-title>FIRMA DE SEGUIMIENTOS FINALES 6.2</mat-card-title>
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>BUSCAR </mat-label>
       <input matInput   placeholder="FILTRAR" [formControl]="myControl">
@@ -13,13 +13,13 @@
       <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title>SEGUIMIENTO FINAL</mat-card-title>
-          <mat-card-subtitle>Director: {{anexo62.cedulaDirector}}</mat-card-subtitle>
-          <mat-card-title>{{anexo62.nombreApoyo}}</mat-card-title>
+          <mat-card-subtitle><strong>Director: </strong>{{anexo62.cedulaDirector}}</mat-card-subtitle>
+          <mat-card-subtitle><strong>Docente de Apoyo: </strong>{{anexo62.nombreApoyo}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <p>Fecha de seguimiento: {{anexo62.fechaApoyo | date:"longDate"}}</p>
+          <p><strong>Fecha de seguimiento: </strong> {{anexo62.fechaApoyo | date:"longDate"}}</p>
           <strong>Estudiante: {{anexo62.nombreEstudiante}}</strong>
-          <mat-card-subtitle>DNI: {{anexo62.cedulaEstudiante}}</mat-card-subtitle>
+          <mat-card-subtitle><strong>Cédula: </strong> {{anexo62.cedulaEstudiante}}</mat-card-subtitle>
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -27,11 +27,17 @@
               <mat-panel-title>Seguimiento Final de Actividades
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <p *ngFor="let alumnos of anexo62.actividades">{{alumnos.actividadesEstudiante}} {{alumnos.desempenoEstudiante}} {{alumnos.controlEstudiante}}</p>
+            <p *ngFor="let alumnos of anexo62.actividades">
+              <strong> Actividad: </strong>{{alumnos.actividadesEstudiante}}
+              <br> <strong>Desempeño: </strong>{{alumnos.desempenoEstudiante}}
+              <br> <strong> Control: </strong>{{alumnos.controlEstudiante}} %</p>
           </mat-expansion-panel>
           <mat-divider></mat-divider>
           <br>
           <button mat-raised-button color="primary" (click)="convertFile(anexo62.documento)">DESCARGAR DOCUMENTO</button>
+          <br>
+          <br>
+
           <button mat-raised-button color="accent" style="margin-left: 5px" (click)="update(anexo62)">SUBIR DOCUMENTO</button>
         </mat-card-content>
       </mat-card>

@@ -64,6 +64,10 @@ import {InformeseguimientoComponent} from "./informeseguimiento/informeseguimien
 import {ListainformeseguimientoComponent} from "./listainformeseguimiento/listainformeseguimiento.component";
 import {FirmarinformeseguimientoComponent} from "./firmarinformeseguimiento/firmarinformeseguimiento.component";
 
+import { Veranexos11Component } from './veranexos11/veranexos11.component';
+import { Anexo11directorComponent } from './anexo11director/anexo11director.component';
+import { Firmaranexo11Component } from './firmaranexo11/firmaranexo11.component';
+
 
 const routes: Routes = [
   {path:'bienvenida',
@@ -188,6 +192,17 @@ const routes: Routes = [
     component: ListainformeseguimientoComponent
   },{ path: 'firmar_informe_seguimiento/:cedula/:nombres',
     component: FirmarinformeseguimientoComponent
+  },{path:'anexo11/:cedula/:nombres',
+    component:Anexo11Component
+  },
+  {path:'anexo11director/:cedula/:nombres',
+    component:Anexo11directorComponent
+  },
+  {path:'veranexo11apoyo/:cedula/:nombres',
+    component:Veranexos11Component
+  },
+  {path:'firmaranexo11director/:cedula/:nombres',
+    component:Firmaranexo11Component
   }
 ]
 
@@ -249,7 +264,10 @@ const routes: Routes = [
     Veranexo12Component,
     InformeseguimientoComponent,
     ListainformeseguimientoComponent,
-    FirmarinformeseguimientoComponent
+    FirmarinformeseguimientoComponent,
+    Veranexos11Component,
+    Anexo11directorComponent,
+    Firmaranexo11Component
 
   ],
   imports: [

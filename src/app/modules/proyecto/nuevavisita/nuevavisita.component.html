@@ -4,12 +4,12 @@
       <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Visitas a la institución</mat-card-title>
-          <mat-card-subtitle>REGISTRO DE VISTAS</mat-card-subtitle>
+          <mat-card-title>VISITAS A LA INSTITUCIÓN</mat-card-title>
+          <mat-card-subtitle>REGISTRO DE VISITAS</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content [formGroup]="addForm">
-          <h3>Empresa: {{entidad.nombre}}</h3>
-          <h3>Reprecentante legal: {{entidad.representante}}</h3>
+          <h3><strong>Empresa: </strong>{{entidad.nombre}}</h3>
+          <h3><strong>Reprecentante legal: </strong>{{entidad.representante}}</h3>
           <strong>Informe</strong>
           <mat-grid-list cols="6" rowHeight="2:1">
             <mat-grid-tile colspan="6">

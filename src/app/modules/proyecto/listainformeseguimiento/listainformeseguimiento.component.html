@@ -13,8 +13,8 @@
       <mat-card class="example-card">
 
         <mat-card-header>
-          <mat-card-title>INFORME DE SEGUIMIENTO</mat-card-title>
-          <mat-card-subtitle>Nombre Proyecto:: {{informe.nombreProyecto}}</mat-card-subtitle>
+
+          <mat-card-title>Nombre Proyecto: {{informe.nombreProyecto}}</mat-card-title>
           <span class="example-spacer"></span>
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
@@ -28,8 +28,8 @@
           </mat-menu>
         </mat-card-header>
         <mat-card-content>
-          <p>Fecha de seguimiento: {{informe.fechaSeguimiento | date:"longDate"}}</p>
-          <strong>Carrera: {{informe.carrera}}</strong>
+          <p><strong>Fecha de seguimiento: </strong>{{informe.fechaSeguimiento | date:"longDate"}}</p>
+          <strong>Carrera: </strong>{{informe.carrera}}
 
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
@@ -38,9 +38,12 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <p *ngFor="let act of informe.docentesParticipantes">
-              Docente: {{act.nombres}}
-              <br>Cédula:{{act.cedula}}
-              <br>Total de Horas: {{act.numeroHoras}}
+              <br>
+              <mat-divider></mat-divider>
+              <br>
+              <strong>Docente: </strong> {{act.nombres}}
+              <br><strong>Cédula:  </strong>{{act.cedula}}
+              <br><strong>Total de Horas: </strong>{{act.numeroHoras}}
 
           </mat-expansion-panel>
           <mat-divider></mat-divider>
@@ -51,9 +54,12 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <p *ngFor="let act of informe.estudiantesParticipantes">
-              Estudiante: {{act.nombres}}
-              <br>Cédula:{{act.cedula}}
-              <br>Total de Horas: {{act.numeroHoras}}
+              <br>
+              <mat-divider></mat-divider>
+              <br>
+              <strong>Estudiante: </strong> {{act.nombres}}
+              <br><strong>Cédula:  </strong>{{act.cedula}}
+              <br><strong>Total de Horas: </strong>{{act.numeroHoras}}
 
           </mat-expansion-panel>
           <mat-divider></mat-divider>

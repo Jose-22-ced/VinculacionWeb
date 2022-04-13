@@ -1,6 +1,6 @@
 <div *ngIf="issloading==false">
   <mat-card>
-    <mat-card-title>SEGUIMIENTOS DE APRENDIZAJE PARCIALES ANEXOS 6.1</mat-card-title>
+    <mat-card-title>ANEXOS 11</mat-card-title>
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>BUSCAR..</mat-label>
       <input matInput   placeholder="FILTRAR" [formControl]="myControl">
@@ -9,45 +9,39 @@
   </mat-card>
   <br>
   <div *ngIf="isexist">
-    <div *ngFor="let anex61 of filteredOptions | async">
+    <div *ngFor="let anex11 of filteredOptions | async">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-subtitle><strong>Director: </strong>{{anex61.nombreDirector}}</mat-card-subtitle>
-          <mat-card-subtitle><strong>Docente de Apoyo: </strong>{{anex61.nombreApoyo}}</mat-card-subtitle>
+            <mat-card-subtitle class="mat-cardss-subtitle"><b>Carrera:</b>  {{anex11.carrera}}</mat-card-subtitle>
+          <mat-card-subtitle class="mat-cardss-subtitle"><b>Director:</b>  {{anex11.nombreDirector}}</mat-card-subtitle>
+          <mat-card-subtitle class="mat-cardss-subtitle"><b>Docente de Apoyo:</b>  {{anex11.nombreApoyo}}</mat-card-subtitle>
+          <mat-card-subtitle class="mat-cardss-subtitle"><b>Estudiante:</b>  {{anex11.nombresEstudiante}}</mat-card-subtitle>
           <span class="example-spacer"></span>
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-<!--            <button mat-menu-item [routerLink]="['/panelusuario/proyectovinculacion/editaranexo6_2',anex61.id,cedula,nombre]">-->
-<!--              <mat-icon color="primary">edit</mat-icon>-->
-<!--              <span>Editar</span>-->
-<!--            </button>-->
-            <button mat-menu-item (click)="eliminarAnexo61(anex61)">
+
+            <button mat-menu-item (click)="eliminarAnexo11(anex11)">
               <mat-icon color="warn">delete_forever</mat-icon>
               <span>Eliminar</span>
             </button>
           </mat-menu>
         </mat-card-header>
         <mat-card-content>
-          <p><strong>Fecha de Emision: </strong>{{anex61.fechaDirector | date:"longDate"}}</p>
-          <mat-card-subtitle><strong>Docentede Apoyo: </strong>{{anex61.nombreApoyo}}</mat-card-subtitle>
-          <strong>Estudiante: {{anex61.nombreEstudiante}}</strong>
-          <mat-card-subtitle><strong>Cédula: </strong>{{anex61.cedulaEstudiante}}</mat-card-subtitle>
+          <mat-card-subtitle class="mat-cardss-subtitle"><b>Fecha de Inicio:</b>  {{anex11.fechaInicio | date:"longDate"}}</mat-card-subtitle>
+          <mat-card-subtitle class="mat-cardss-subtitle"><b>Fecha de Finalizacion:</b>   {{anex11.fechaFinaliza| date:"longDate"}}</mat-card-subtitle>
+          <mat-card-title class="mat-cardss-subtitle"><b>PUNTAJE:</b>  {{anex11.apoyoPuntaje}}</mat-card-title>
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Actividades Evaluadas:
+                RESULTADOS DE EVALUACION
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <p *ngFor="let act of anex61.actividades"><br>
-              <mat-divider></mat-divider>
-              <br>
-              <strong>Actividad: </strong> {{act.actividadesEstudiante}}<br>
-              <strong>Control: </strong>{{act.controlEstudiante}}<br>
-              <strong>Desempeño: </strong>{{act.desempenoEstudiante}}<br>
-              <strong>Asignaturas base: </strong>{{act.asignaturasBase}}</p>
+            <p *ngFor="let act of anex11.apoyo">
+              Item: {{act.apoyoItem1}}  , Calificacion:{{act.apoyoItem3}}
+
           </mat-expansion-panel>
 
         </mat-card-content>

@@ -16,16 +16,18 @@
       </mat-menu>
     </mat-card-header>
     <mat-card-content>
-      <h3>Ciclo: {{anexo13.ciclo}}</h3>
-      <h3>Peridodo: {{date1 | date:'mediumDate'}} a {{date2 | date:'mediumDate'}} </h3>
-      <h3>Empresa:  {{anexo13.empresa}}</h3>
-      <h3>Representante legal: {{anexo13.representanteLegal}}</h3>
-      <h3>Observaciones: {{anexo13.observaciones }}</h3>
-      <h3>Alumnos:</h3>
-      <h3 *ngFor=" let alumnos of anexo13.estudiantesVisitas ">{{alumnos.cedula}} --{{alumnos.nombre}}</h3>
+      <h3><strong>Ciclo: </strong> {{anexo13.ciclo}}</h3>
+      <h3><strong>Peridodo: </strong> {{date1 | date:'mediumDate'}} a {{date2 | date:'mediumDate'}} </h3>
+      <h3><strong>Empresa: </strong> {{anexo13.empresa}}</h3>
+      <h3><strong>Representante legal: </strong> {{anexo13.representanteLegal}}</h3>
+      <h3><strong>Observaciones: </strong> {{anexo13.observaciones }}</h3>
+      <h3><strong>Alumnos: </strong></h3>
+      <h3 *ngFor=" let alumnos of anexo13.estudiantesVisitas ">
+        <strong>Cédula: </strong>{{alumnos.cedula}}
+        <strong>  Nombres: </strong>{{alumnos.nombre}}</h3>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="accent" (click)="generate(anexo13,proyecto,date1,date2)">OBTNER ANEXO ACTUALIZADO</button>
+      <button mat-raised-button color="accent" (click)="generate(anexo13,proyecto,date1,date2)">OBTENER ANEXO ACTUALIZADO</button>
       <button mat-raised-button color="primary" (click)="subiranexo(anexo13)">SUBIR ANEXO FIRMADO</button>
     </mat-card-actions>
   </mat-card>
