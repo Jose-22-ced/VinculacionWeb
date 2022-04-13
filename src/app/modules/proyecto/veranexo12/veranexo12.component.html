@@ -1,6 +1,6 @@
 <div *ngIf="issloading==false">
   <mat-card>
-    <mat-card-title>LISTA DE ANEXOS 9</mat-card-title>
+    <mat-card-title>REGISTRO DE BENEFICIARIOS/CAPACITACIONES ANEXO 12</mat-card-title>
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>BUSCAR...</mat-label>
       <input matInput   placeholder="FILTRAR" [formControl]="myControl">
@@ -12,8 +12,8 @@
     <div *ngFor="let anex12 of filteredOptions | async">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-subtitle>Nombre Proyecto: {{anex12.nombreProyecto}}</mat-card-subtitle>
-          <mat-card-subtitle>Entidad Beneficiaria: {{anex12.entidadBeneficiaria}}</mat-card-subtitle>
+          <mat-card-title>Nombre Proyecto: {{anex12.nombreProyecto}}</mat-card-title>
+          <mat-card-subtitle><strong>Entidad Beneficiaria: </strong>{{anex12.entidadBeneficiaria}}</mat-card-subtitle>
           <span class="example-spacer"></span>
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
@@ -26,9 +26,9 @@
           </mat-menu>
         </mat-card-header>
         <mat-card-content>
-          <p>Fecha de Capacitación: {{anex12.fechaCapacitacion | date:"longDate"}}</p>
-          <mat-card-subtitle>Representante Entidad: {{anex12.repreentanteEntidad}}</mat-card-subtitle>
-          <mat-card-subtitle>Asunto Capacitación: {{anex12.asuntoCapacitacion}}</mat-card-subtitle>
+          <p><strong>Fecha de Capacitación: </strong>{{anex12.fechaCapacitacion | date:"longDate"}}</p>
+          <mat-card-subtitle><strong>Representante Entidad: </strong>{{anex12.repreentanteEntidad}}</mat-card-subtitle>
+          <mat-card-subtitle><strong>Asunto Capacitación: </strong>{{anex12.asuntoCapacitacion}}</mat-card-subtitle>
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -37,9 +37,9 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <p *ngFor="let act of anex12.actividadesAnexo12">
-              -Nombre Beneficiario: {{act.nombresCompletos}}
-              <br>Cédula:{{act.cedula}}
-              <br>Observaciones: {{act.observaciones}} <mat-divider></mat-divider> </p>
+              <strong>-Nombre Beneficiario: </strong>{{act.nombresCompletos}}
+              <br><strong>Cédula: </strong>{{act.cedula}}
+              <br><strong>Observaciones: </strong>{{act.observaciones}} <mat-divider></mat-divider> </p>
 
           </mat-expansion-panel>
         </mat-card-content>
@@ -48,7 +48,7 @@
   </div>
   <div *ngIf="isexist==false">
     <mat-card>
-      <mat-card-title>NO EXISTEN </mat-card-title>
+      <mat-card-title>No existen registros de beneficiarios por el momento. </mat-card-title>
     </mat-card>
   </div>
 </div>

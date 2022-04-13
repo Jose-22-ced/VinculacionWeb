@@ -20,13 +20,13 @@
               <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
                 <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionProyecto($event)" formControlName="firstCtrl" required>
                   <mat-list-option *ngFor="let shoe of filteredOptionsProyecto | async" [value]="shoe"  class="example-item">
-                    Nombre: {{shoe.nombre}} ||-- Director: {{shoe.nombredirector}}
+                    Nombre: {{shoe.nombre}} -- Director: {{shoe.nombredirector}}
                   </mat-list-option>
                 </mat-selection-list>
               </cdk-virtual-scroll-viewport>
               <br>
               <p>
-                Proyecto seleccionado: {{proyectoselect.nombre}}
+                <strong>Proyecto seleccionado:</strong> {{proyectoselect.nombre}}
               </p>
               <mat-divider></mat-divider>
               <br>
@@ -62,12 +62,12 @@
               </cdk-virtual-scroll-viewport>
               <br>
               <p>
-                Docente seleccionado: {{docenteselect.nombreDelegado}}
+                <strong> Docente seleccionado: </strong>{{docenteselect.nombreDelegado}}
               </p>
               <mat-divider></mat-divider>
               <br>
               <div>
-                <button mat-button matStepperPrevious color="warn">Atras</button>
+                <button mat-button matStepperPrevious color="warn">Atrás</button>
                 <button mat-button matStepperNext color="primary">Siguente</button>
               </div>
             </mat-card-content>
@@ -124,7 +124,7 @@
                 </div>
               </div>
               <div>
-                <button mat-button matStepperPrevious color="warn">Atras</button>
+                <button mat-button matStepperPrevious color="warn">Atrás</button>
                 <button mat-button matStepperNext color="primary">Siguente</button>
               </div>
             </mat-card-content>
@@ -139,7 +139,7 @@
               <mat-card-title>ASIGNACIÓN DE ALUMNO A DIRECTOR O DOCENTE DE APOYO</mat-card-title>
               <mat-card-subtitle>Anexo 5</mat-card-subtitle>
             </mat-card-header>
-            <h4>Debe obtner el anexo en "Obtener Anexo" y posteriormente debera firmar y subir de en formato PDF</h4>
+            <h4>Debe obtener el anexo en "Obtener Anexo" y posteriormente deberá firmar y subir de en formato PDF</h4>
             <div>
               <button mat-raised-button color="primary" (click)="generarAnexo()">Obtener Anexo</button>
               <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
@@ -149,7 +149,7 @@
             </div>
             <mat-card-content>
               <div>
-                <button mat-button matStepperPrevious color="primary">Atras</button>
+                <button mat-button matStepperPrevious color="primary">Atrás</button>
                 <button mat-button matStepperNext color="warn">Siguente</button>
               </div>
             </mat-card-content>
@@ -163,11 +163,11 @@
             <mat-card-title>ASIGNACIÓN DE ALUMNO A DIRECTOR O DOCENTE DE APOYO</mat-card-title>
             <mat-card-subtitle>Guardar asignación</mat-card-subtitle>
           </mat-card-header>
-          <h4>DATOS</h4>
-          <h4>Asignado: {{docenteselect.nombreDelegado}}</h4>
-          <h4>Cedula: {{docenteselect.cedulaDelegado}}</h4>
-          <h4>Proyecto: {{docenteselect.nombreProyecto}}</h4>
-          <h4>Alumnos:</h4>
+          <h4><strong>DATOS</strong></h4>
+          <h4><strong>Asignado: </strong>{{docenteselect.nombreDelegado}}</h4>
+          <h4><strong>Cedula: </strong>{{docenteselect.cedulaDelegado}}</h4>
+          <h4><strong>Proyecto: </strong>{{docenteselect.nombreProyecto}}</h4>
+          <h4><strong>Alumnos:</strong></h4>
           <h4 *ngFor="let alumnos of alumnoselect">{{alumnos.cedulaEstudiante}} {{alumnos.nombreEstudiante}}</h4>
           <mat-card-content>
             <div>
@@ -181,7 +181,7 @@
   </div>
   <div *ngIf="isexist==false">
     <mat-card>
-      <mat-card-title>NO EXISTEN DOCENTES</mat-card-title>
+      <mat-card-title>No existen datos actualmente.</mat-card-title>
     </mat-card>
   </div>
 </div>

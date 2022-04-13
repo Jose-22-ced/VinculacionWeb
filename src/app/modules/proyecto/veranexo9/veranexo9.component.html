@@ -1,6 +1,6 @@
 <div *ngIf="issloading==false">
   <mat-card>
-    <mat-card-title>ANEXOS 9</mat-card-title>
+    <mat-card-title>Seguimientos Mensuales según planificación Anexos 9</mat-card-title>
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>BUSCAR...</mat-label>
       <input matInput   placeholder="FILTRAR" [formControl]="myControl">
@@ -12,8 +12,9 @@
     <div *ngFor="let anex9 of filteredOptions | async">
       <mat-card class="example-card">
         <mat-card-header>
-      <mat-card-subtitle>Director: {{anex9.nombreDirector}}</mat-card-subtitle>
-      <mat-card-subtitle>Docente de Apoyo: {{anex9.nombreApoyo}}</mat-card-subtitle>
+          <mat-card-title>Nombre de Proyecto: {{anex9.nombreProyecto}}</mat-card-title>
+      <mat-card-subtitle><strong>Director: </strong>{{anex9.nombreDirector}}</mat-card-subtitle>
+      <mat-card-subtitle><strong>Docente de Apoyo: </strong>{{anex9.nombreApoyo}}</mat-card-subtitle>
       <span class="example-spacer"></span>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>more_vert</mat-icon>
@@ -26,9 +27,9 @@
       </mat-menu>
         </mat-card-header>
         <mat-card-content>
-          <p>Fecha de Seguimiento: {{anex9.fechaSeguimeinto | date:"longDate"}}</p>
-          <strong>Entidad Beneficiaria: {{anex9.entidadBeneficiaria}}</strong>
-          <mat-card-subtitle>Mes: {{anex9.mesPlanificaccion}}</mat-card-subtitle>
+          <p><strong>Fecha de Seguimiento: </strong>{{anex9.fechaSeguimeinto | date:"longDate"}}</p>
+          <p><strong>Entidad Beneficiaria: </strong>{{anex9.entidadBeneficiaria}}</p>
+          <mat-card-subtitle><strong>Mes: </strong>{{anex9.mesPlanificaccion}}</mat-card-subtitle>
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -37,9 +38,11 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <p *ngFor="let act of anex9.actividadesAnexo9">
-              Actividad: {{act.actividadesPlanificacion}}  Estudiante:{{act.estudianteResponsable}}
-              <br>Fecha Planificada: {{act.fechaPlanificacion}}   Finalizada: {{act.finalizacion}}
-            <br>Fecha Finalizacion Prevista: {{act.fechaFinalizacion}} Porcentaje de Avance: {{act.numero}}</p>
+              <mat-divider></mat-divider>
+              <br>
+              <strong>Actividad: </strong>{{act.actividadesPlanificacion}}  Estudiante:{{act.estudianteResponsable}}
+              <br><strong>Fecha Planificada: </strong>{{act.fechaPlanificacion}}   Finalizada: {{act.finalizacion}}
+            <br><strong>Fecha Finalizacion Prevista: </strong>{{act.fechaFinalizacion}} Porcentaje de Avance: {{act.numero}}</p>
           </mat-expansion-panel>
         </mat-card-content>
       </mat-card>
@@ -47,7 +50,7 @@
   </div>
 <div *ngIf="isexist==false">
   <mat-card>
-    <mat-card-title>NO EXISTEN </mat-card-title>
+    <mat-card-title>No existen por el momento seguimientos mensuales según planificación. </mat-card-title>
   </mat-card>
 </div>
 </div>

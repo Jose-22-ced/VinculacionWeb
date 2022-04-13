@@ -1,6 +1,6 @@
 <div *ngIf="issloading==false">
   <mat-card>
-    <mat-card-title>ENTIDADES BENEFICARIAS REGISTRADAS</mat-card-title>
+    <mat-card-title>AGREGAR ACTIVIDADES Y REQUSIITOS A PROYECTO</mat-card-title>
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>BUSCAR PROYECTO</mat-label>
       <input matInput   placeholder="FILTRAR" [formControl]="myControl">
@@ -12,8 +12,9 @@
     <div *ngFor="let proyecto of filteredOptions | async">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-subtitle>Resposanble: {{proyecto.nombreresponsable}}</mat-card-subtitle>
-          <mat-card-title>{{proyecto.nombre}}</mat-card-title>
+          <mat-card-title>Nombre de proyecto{{proyecto.nombre}}</mat-card-title>
+          <mat-card-subtitle><strong>Responsable: </strong> {{proyecto.nombreresponsable}}</mat-card-subtitle>
+
           <span class="example-spacer"></span>
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
@@ -26,11 +27,11 @@
           </mat-menu>
         </mat-card-header>
         <mat-card-content>
-          <p>Carrera: {{proyecto.carrera}}</p>
-          <p>Fecha de Inico y Fin: {{proyecto.fechaFin | date:"longDate"}} - {{proyecto.fechaFin | date:"longDate"}}</p>
-          <p>Director: {{proyecto.nombredirector}}</p>
-          <p>Plazo: {{proyecto.plazoEjecucion}}</p>
-          <p>Objetivo General: {{proyecto.objetivoGeneral}}</p>
+          <p><strong>Carrera: </strong>{{proyecto.carrera}}</p>
+          <p><strong>Fecha de Inico y Fin: </strong>{{proyecto.fechaFin | date:"longDate"}} - {{proyecto.fechaFin | date:"longDate"}}</p>
+          <p><strong>Director: </strong>{{proyecto.nombredirector}}</p>
+          <p><strong>Plazo: </strong>{{proyecto.plazoEjecucion}}</p>
+          <p><strong>Objetivo General: </strong>{{proyecto.objetivoGeneral}}</p>
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -39,6 +40,8 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <p *ngFor="let objetivos of proyecto.objetivosEspecificosProyecto" > {{objetivos.descripcion}}</p>
+            <mat-divider></mat-divider>
+            <br>
           </mat-expansion-panel>
           <br>
           <mat-expansion-panel (opened)="panelOpenState = true"

@@ -112,8 +112,8 @@
         <div *ngFor="let anexo of filteredOptionsa | async">
           <mat-card class="example-card">
             <mat-card-header>
-              <mat-card-subtitle>Proyecto: {{anexo.nombreproyecto}}</mat-card-subtitle>
-              <mat-card-title>Estudiente: {{anexo.nombresestudiante}} {{anexo.apellidosestudiante}}</mat-card-title>
+              <mat-card-title>Proyecto: {{anexo.nombreproyecto}}</mat-card-title>
+              <mat-card-subtitle><strong>Estudiente: </strong>{{anexo.nombresestudiante}} {{anexo.apellidosestudiante}}</mat-card-subtitle>
               <span class="example-spacer"></span>
               <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>more_vert</mat-icon>
@@ -126,10 +126,10 @@
               </mat-menu>
             </mat-card-header>
             <mat-card-content>
-              <p>Parelelo: {{anexo.paralelo}}</p>
-              <p>Ciclo: {{anexo.ciclo}}</p>
-              <p>fecha_solicitud: {{anexo.fecha_solicitud  | date:"longDate"}}</p>
-              <p>Razón: {{anexo.razon}} </p>
+              <p><strong>Parelelo: </strong>{{anexo.paralelo}}</p>
+              <p><strong>Ciclo: </strong>{{anexo.ciclo}}</p>
+              <p><strong>Fecha Solicitud: </strong>{{anexo.fecha_solicitud  | date:"longDate"}}</p>
+              <p><strong>Razón: </strong>{{anexo.razon}} </p>
             </mat-card-content>
           </mat-card>
         </div>
@@ -146,8 +146,8 @@
         <div *ngFor="let anexo of filteredOptionsr | async">
           <mat-card class="example-card">
             <mat-card-header>
-              <mat-card-subtitle>Proyecto: {{anexo.nombreproyecto}}</mat-card-subtitle>
-              <mat-card-title>Estudiente: {{anexo.nombresestudiante}} {{anexo.apellidosestudiante}}</mat-card-title>
+              <mat-card-title>Proyecto: {{anexo.nombreproyecto}}</mat-card-title>
+              <mat-card-subtitle><strong>Estudiante: </strong>{{anexo.nombresestudiante}} {{anexo.apellidosestudiante}}</mat-card-subtitle>
               <span class="example-spacer"></span>
               <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>more_vert</mat-icon>
@@ -160,10 +160,10 @@
               </mat-menu>
             </mat-card-header>
             <mat-card-content>
-              <p>Parelelo: {{anexo.paralelo}}</p>
-              <p>Ciclo: {{anexo.ciclo}}</p>
-              <p>fecha_solicitud: {{anexo.fecha_solicitud  | date:"longDate"}}</p>
-              <p>Razón: {{anexo.razon}} </p>
+              <p><strong>Parelelo: </strong>{{anexo.paralelo}}</p>
+              <p><strong>Ciclo: </strong>{{anexo.ciclo}}</p>
+              <p><strong>Fecha Solicitud: </strong>{{anexo.fecha_solicitud  | date:"longDate"}}</p>
+              <p><strong>Razón: </strong>{{anexo.razon}} </p>
             </mat-card-content>
           </mat-card>
         </div>
@@ -172,7 +172,7 @@
   </div>
   <div *ngIf="isexist==false">
     <mat-card>
-      <mat-card-title>NO EXISTEN POSTULACIONES</mat-card-title>
+      <mat-card-title>No existen postulaciones.</mat-card-title>
     </mat-card>
   </div>
 </div>

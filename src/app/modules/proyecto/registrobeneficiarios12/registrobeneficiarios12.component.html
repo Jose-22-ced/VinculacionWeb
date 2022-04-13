@@ -6,7 +6,7 @@
         <mat-card class="example-card">
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-subtitle>ANEXO 12</mat-card-subtitle>
-          <mat-card-title>INSTITUTO SUPERIOR TECNOLOGICO DEL AZUAY</mat-card-title>
+          <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY</mat-card-title>
           <mat-card-title>COORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD</mat-card-title>
         </mat-card>
         <mat-card-content>
@@ -27,7 +27,7 @@
               </cdk-virtual-scroll-viewport>
               <br>
               <p style="font-size: medium">
-                Proyecto Seleccionado: {{proyectoSelect.nombre}}
+                <strong> Proyecto Seleccionado: </strong>{{proyectoSelect.nombre}}
               </p>
             </div>
           </div>
@@ -121,10 +121,10 @@
                   <mat-label>Cédula</mat-label>
                   <input matInput type="text"   [formControl]="row.get('cedula')"  placeholder="Cédula Beneficiario" [required]>
                 </mat-form-field>
-                <mat-form-field class="example-full-width" appearance="outline">
+                <!--<mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Firma</mat-label>
                   <input matInput type="text"    placeholder="Firma Beneficiario" [required]>
-                </mat-form-field>
+                </mat-form-field>-->
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Observaciones</mat-label>
                   <input matInput type="text"   [formControl]="row.get('observaciones')"  placeholder="Observaciones" [required]>
@@ -158,7 +158,7 @@
               INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY <br />
             </mat-card-subtitle>
           </mat-card-header>
-          <h4>Debe obtEner el anexo en "Obtener Anexo" y posteriormente debera firmar y subir de en formato PDF</h4>
+          <h4>Debe obtener el anexo en "Obtener Anexo" y posteriormente deberé firmar y subir en formato PDF</h4>
           <div>
             <button mat-raised-button color="primary" (click)="generarDocumento12()">Obtener Anexo</button>
             <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
@@ -168,29 +168,25 @@
           </div>
           <mat-card-content>
             <div>
-              <button mat-button matStepperPrevious color="primary">Atras</button>
+              <button mat-button matStepperPrevious color="primary">Atrás</button>
               <button mat-button matStepperNext color="warn">Siguente</button>
             </div>
           </mat-card-content>
         </mat-card>
       </form>
     </mat-step>
-    <mat-step  label="Confirmar">
-      <mat-card class="example-card">
+
+    <mat-step  label="CONFIRMAR">
+      <mat-card style="width: 600px;margin: 0 auto">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>  (ANEXO 12)<br><br> REGISTRO DE BENEFICIARIOS/CAPACITACIONES</mat-card-title>
-          <mat-card-subtitle><br />
-            PROYECTOS DE VINCULACIÓN CON LA SOCIEDAD <br />
-            INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY <br />
-          </mat-card-subtitle>
-          <mat-card-subtitle>GUARDAR REGISTRO DE CAPACITACIONES </mat-card-subtitle>
+          <mat-card-subtitle>Guardar Registro de Beneficiarios  </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-
           <div>
-            <button mat-button matStepperPrevious color="primary">Atras</button>
-            <button mat-flat-button color="warn" (click)="guardarAnexo12()">GUARDAR</button>
+            <button mat-button matStepperPrevious color="primary">Atrás</button>
+            <button mat-flat-button color="warn" (click)="guardarAnexo12()">Guardar</button>
           </div>
         </mat-card-content>
       </mat-card>
@@ -200,7 +196,7 @@
 </div>
 <div *ngIf="isexist==false">
   <mat-card>
-    <mat-card-title>NO EXISTE</mat-card-title>
+    <mat-card-title>No existen registros de beneficiarios por el momento.</mat-card-title>
   </mat-card>
 </div>
 <ng-container *ngIf="issloading">

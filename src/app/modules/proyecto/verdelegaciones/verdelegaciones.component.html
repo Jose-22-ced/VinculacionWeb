@@ -1,6 +1,6 @@
 <div *ngIf="issloading==false">
   <mat-card>
-    <mat-card-title>DELEGACIONES</mat-card-title>
+    <mat-card-title>DELEGACIÓN DE ALUMNOS A DOCENTES </mat-card-title>
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>BUSCAR PROYECTO</mat-label>
       <input matInput   placeholder="FILTRAR" [formControl]="myControl">
@@ -12,8 +12,8 @@
     <div *ngFor="let anexo5 of filteredOptions | async">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-subtitle>Proyecto: {{anexo5.nombreProyecto}}</mat-card-subtitle>
-          <mat-card-title>Docente: {{anexo5.nombreDocenteReceptor}}</mat-card-title>
+          <mat-card-title>Proyecto: {{anexo5.nombreProyecto}}</mat-card-title>
+          <mat-card-subtitle><strong>Docente: </strong>{{anexo5.nombreDocenteReceptor}}</mat-card-subtitle>
           <span class="example-spacer"></span>
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
@@ -34,8 +34,8 @@
           </mat-menu>
         </mat-card-header>
         <mat-card-content>
-          <p>Cedula docente: {{anexo5.cedulaDocenteApoyo}}</p>
-          <p>Fecha: {{anexo5.fechaEmision | date:"longDate"}}</p>
+          <p><strong>Cedula docente: </strong>{{anexo5.cedulaDocenteApoyo}}</p>
+          <p><strong>Fecha: </strong>{{anexo5.fechaEmision | date:"longDate"}}</p>
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -51,7 +51,7 @@
   </div>
   <div *ngIf="isexist==false">
     <mat-card>
-      <mat-card-title>NO EXISTEN PROYECTOS ACTUALMENTE BENEFICARIAS REGISTRADAS</mat-card-title>
+      <mat-card-title>No existen delegaciones actualmente.</mat-card-title>
     </mat-card>
   </div>
 </div>

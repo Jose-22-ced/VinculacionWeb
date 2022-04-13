@@ -12,7 +12,7 @@
             </mat-card-header>
             <mat-card-content>
               <p>
-                Proyecto seleccionado: {{anexo2.nombreProyecto}}
+                <strong>Proyecto seleccionado: </strong>{{anexo2.nombreProyecto}}
               </p>
               <mat-divider></mat-divider>
               <br>
@@ -123,7 +123,7 @@
               <mat-card-title>Anexo 2</mat-card-title>
               <mat-card-subtitle>Generar Anexo</mat-card-subtitle>
             </mat-card-header>
-            <h4>Debe obtner el anexo en "Obtener Anexo" y posteriormente debera firmar y subir de en formato PDF</h4>
+            <h4>Debe obtener el anexo en "Obtener Anexo" y posteriormente deberá firmar y subir de en formato PDF</h4>
             <div>
               <button mat-raised-button color="primary" (click)="generarDocumento(proyectoselect,fechas)">Obtener Anexo</button>
               <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
@@ -133,7 +133,7 @@
             </div>
             <mat-card-content>
               <div>
-                <button mat-button matStepperPrevious color="primary">Atras</button>
+                <button mat-button matStepperPrevious color="primary">Atrás</button>
                 <button mat-button matStepperNext color="warn">Siguente</button>
               </div>
             </mat-card-content>
@@ -145,21 +145,21 @@
         <mat-card class="example-card">
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Informacion Final</mat-card-title>
+            <mat-card-title>Información Final</mat-card-title>
             <mat-card-subtitle>Generar Anexo</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <br>
             <mat-card-content>
-              <h2 title> La convocatoria sera enviada a los estudiantes que pertenecen a la
-                carreta:</h2>
+              <h2 title> La convocatoria será enviada a los estudiantes que pertenecen a la
+                carrera:</h2>
               <mat-divider></mat-divider>
-              <h2>INFORMACIÓN:</h2>
-              <h3>Convocatoria Nª: {{anexo2.numeroConvocatoria}}</h3>
-              <h3>Proyecto: {{anexo2.nombreProyecto}}</h3>
-              <h3>Responsable: {{anexo2.nombreResponsable}}</h3>
-              <h3>Carrera: {{anexo2.carrera}} </h3>
-              <h3>Fecha máxima de postulación: {{anexo2.fechaMaxRecepcion | date:"longDate"}}</h3>
+              <h2><strong>INFORMACIÓN:</strong></h2>
+              <h3><strong>Convocatoria Nª: </strong>{{anexo2.numeroConvocatoria}}</h3>
+              <h3><strong>Proyecto: </strong>{{anexo2.nombreProyecto}}</h3>
+              <h3><strong>Responsable:</strong> {{anexo2.nombreResponsable}}</h3>
+              <h3><strong>Carrera: </strong>{{anexo2.carrera}} </h3>
+              <h3><strong>Fecha máxima de postulación: </strong>{{anexo2.fechaMaxRecepcion | date:"longDate"}}</h3>
             </mat-card-content>
             <mat-divider></mat-divider>
             <br>
