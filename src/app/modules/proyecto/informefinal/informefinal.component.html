@@ -5,7 +5,7 @@
         <ng-template matStepLabel>Seleccionar Proyecto</ng-template>
         <mat-card class="example-card">
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-subtitle>INFORME DE SEGUIMIENTO</mat-card-subtitle>
+          <mat-card-subtitle>INFORME FINAL</mat-card-subtitle>
           <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY</mat-card-title>
           <mat-card-title>COORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD</mat-card-title>
         </mat-card>
@@ -44,7 +44,7 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="1 DATOS INFORMATIVOS DEL PROYECTO">
+   <mat-step [stepControl]="secondFormGroup" label="1 DATOS INFORMATIVOS DEL PROYECTO">
       <form [formGroup]="secondFormGroup">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
@@ -85,7 +85,7 @@
       <form [formGroup]="thirdFormGroup">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title><br><br> INFORME DE SEGUIMIENTO</mat-card-title>
+          <mat-card-title><br><br> INFORME Final</mat-card-title>
           <mat-card-subtitle><br/>
             PROYECTOS DE VINCULACIÓN CON LA SOCIEDAD <br/>
             INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY <br/>
@@ -100,17 +100,17 @@
               <div>
                 <h3>DOCENTES PARTICIPANTES</h3>
                 <mat-grid-tile colspan="3" *ngFor="let row of thirdFormGroup.get('rows')?.controls;let index = index;">
-                  <!--Carga de lista de nombres-->
+
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label>Nombres y Apellidos</mat-label>
                     <input matInput type="text" [formControl]="row.get('nombres')"
                            placeholder="Nombre completo" [required]>
                   </mat-form-field>
-                  <!--Carga de lista de estudiantes-->
+
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label>No. Cédula</mat-label>
                     <input matInput [formControl]="row.get('cedula')"
-                              placeholder="9999......." [required]>
+                           placeholder="9999......." [required]>
                   </mat-form-field>
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label>Carrera</mat-label>
@@ -143,7 +143,7 @@
       <form [formGroup]="fourFormGroup">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title><br><br> INFORME DE SEGUIMIENTO</mat-card-title>
+          <mat-card-title><br><br> INFORME FINAL</mat-card-title>
           <mat-card-subtitle><br/>
             PROYECTOS DE VINCULACIÓN CON LA SOCIEDAD <br/>
             INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY <br/>
@@ -164,6 +164,11 @@
                     <input matInput type="text" [formControl]="row.get('nombres')"
                            placeholder="Nombre completo" [required]>
                   </mat-form-field>
+                  <mat-form-field style="width: 380px" appearance="outline">
+                    <mat-label>Código Estudiante</mat-label>
+                    <input matInput type="text" [formControl]="row.get('cod_estudiante')"
+                           placeholder="Código" [required]>
+                  </mat-form-field>
 
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label>No. Cédula</mat-label>
@@ -171,15 +176,15 @@
                            placeholder="9999......." [required]>
                   </mat-form-field>
                   <mat-form-field style="width: 380px" appearance="outline">
-                   <mat-label>Carrera</mat-label>
-                   <input matInput [formControl]="row.get('carrera')"
-                          placeholder="Codigo Carrera" [required]>
-                 </mat-form-field>
+                    <mat-label>Carrera</mat-label>
+                    <input matInput [formControl]="row.get('carrera')"
+                           placeholder="Codigo Carrera" [required]>
+                  </mat-form-field>
                   <mat-form-field style="width: 380px" appearance="outline">
-                     <mat-label>Número total de horas de Vinculación</mat-label>
+                    <mat-label>Número total de horas de Vinculación</mat-label>
                     <input matInput [formControl]="row.get('numeroHoras')"
                            placeholder="60" [required]>
-                   </mat-form-field>
+                  </mat-form-field>
                 </mat-grid-tile>
               </div>
             </div>
@@ -197,6 +202,7 @@
         </div>
       </form>
     </mat-step>
+
     <mat-step [stepControl]="fiveFormGroup" label="DATOS INFORMATIVOS DEL PROYECTO">
       <form [formGroup]="fiveFormGroup">
         <mat-card-header>
@@ -225,7 +231,7 @@
               <br>
               <br>
               <mat-list-item><strong>Fecha de fin real: </strong><input type="date" formControlName="fecha" [(ngModel)]="informe.fechaFinReal" >
-                 </mat-list-item>
+              </mat-list-item>
               <mat-divider></mat-divider>
             </mat-list>
           </mat-card>
@@ -271,7 +277,7 @@
               <div>
                 <h3>Objetivos Especificos</h3>
                 <mat-grid-tile colspan="3" *ngFor="let row of sixFormGroup.get('rowsObje')?.controls;let index = index;">
-                  <!--Carga de lista de nombres-->
+
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label>Objetivos</mat-label>
                     <input matInput type="text" [formControl]="row.get('descripcion')"
@@ -288,14 +294,14 @@
           <br>
           <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
             <mat-label> <strong>Situación inicial </strong></mat-label>
-            <textarea   matInput formControlName="situacion" [(ngModel)]="informe.situacionInicio" name="situacionInicial" ></textarea>
+            <textarea   matInput formControlName="situacion" [(ngModel)]="informe.situacionInicialenbeficiarios" name="situacionInicial" ></textarea>
           </mat-form-field>
           <br>
           <mat-label><strong>Situación actual de los beneficiarios </strong></mat-label>
           <br>
           <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
             <mat-label><strong>Situación actual</strong></mat-label>
-            <textarea   matInput formControlName="situacion" [(ngModel)]="informe.situacionActual" name="situacionActual" ></textarea>
+            <textarea   matInput formControlName="situacionA" [(ngModel)]="informe.situacionActualBeneficiarios" name="situacionActual" ></textarea>
           </mat-form-field>
         </mat-card-content>
         <mat-divider></mat-divider>
@@ -310,11 +316,11 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="sevenFormGroup" label="ACTIVIDADES DEL PROYECTO">
+    <mat-step [stepControl]="sevenFormGroup" label="VERIFICACIÓN">
       <form [formGroup]="sevenFormGroup">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title><br><br> INFORME DE SEGUIMIENTO</mat-card-title>
+          <mat-card-title><br><br> INFORME DE FINAL</mat-card-title>
           <mat-card-subtitle><br/>
             PROYECTOS DE VINCULACIÓN CON LA SOCIEDAD <br/>
             INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY <br/>
@@ -340,9 +346,9 @@
                            placeholder="Avance de la Actividad (%)" [required]>
                   </mat-form-field>
                   <mat-form-field class="example-full-width" appearance="outline" style="width: 180px">
-                    <mat-label><strong>Fecha de Ejeucion</strong>{{index}}</mat-label>
+                    <mat-label><strong>Fecha de Ejecucion</strong>{{index}}</mat-label>
                     <input matInput type="date"  [formControl]="row.get('fechaEjecucion')"
-                            [required]>
+                           [required]>
                   </mat-form-field>
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label><strong>Responsable de la Ejecución</strong></mat-label>
@@ -352,7 +358,8 @@
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label><strong>Documento de Evidencia</strong></mat-label>
                     <input matInput type="text" [formControl]="row.get('documento')"
-                           placeholder="Responsable" [required]>
+                           placeholder="Especifique el anexo correspondiente" [required]>
+
                   </mat-form-field>
                   <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label><strong>Observaciones</strong></mat-label>
@@ -376,29 +383,162 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="eigthFormGroup" label="3CONCLUSIONES Y OBSERVACIONES">
+    <mat-step [stepControl]="tenFormGroup" label="3 VERIFICACIÓN DE RESULTADOS">
+      <form [formGroup]="tenFormGroup">
+
+        <mat-card-content>
+
+
+          <mat-label><strong>3.1 Impacto Generado</strong></mat-label>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Seleccione el impacto</mat-label>
+            <mat-select [(ngModel)]="informe.impacto" formControlName="impacto" >
+              <mat-option value="Impacto Social">Impacto Social</mat-option>
+              <mat-option value="Impacto Científico">Impacto Científico</mat-option>
+              <mat-option value="Impacto Económico">Impacto Económico</mat-option>
+              <mat-option value="Impacto Político">Impacto Político</mat-option>
+              <mat-option value="Otro Impacto">Otro Impacto</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-label><strong>3.2 Descripción de Impacto Generado</strong></mat-label>
+          <br>
+          <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
+            <mat-label>Descripción</mat-label>
+            <textarea   matInput formControlName="descripcionImpacto" [(ngModel)]="informe.descripcionImpacto" name="descripcionImpacto"
+                        placeholder="Exponer brevemente el impacto generado conforme a lo seleccionado en el punto 3.1 la descripción
+debe realizarse por cada uno de los ítems señalados. Es decir si se encuentra señalado Impacto
+político e Impacto Económico, se deberá describir por separado cada uno de ellos.
+"></textarea>
+          </mat-form-field>
+          <br>
+          <mat-label><strong>3.3 Indicadores</strong></mat-label>
+          <mat-grid-list cols="3" rowHeight="6:1.10" [formGroup]="tenFormGroup">
+            <div style="margin-top: 15px">
+              <mat-grid-tile colspan="3" >
+                <button mat-fab color="primary" (click)="onAddRowIndi()" ><mat-icon>add_circle</mat-icon></button>
+              </mat-grid-tile>
+              <br>
+              <mat-grid-tile colspan="3" *ngFor="let row of tenFormGroup.get('rowsIndicadores')?.controls;let index = index;">
+
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Descripción del indicador</mat-label>
+                  <input matInput type="text"   [formControl]="row.get('descripcion')"  placeholder="" [required]>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Tipo</mat-label>
+                  <input matInput type="text"   [formControl]="row.get('tipo')"  placeholder="Elija un elemento" [required]>
+                </mat-form-field>
+
+
+                <span class="example-spacer"></span>
+                <button mat-mini-fab color="warn" style="margin-left: 50px" (click)="onRemoveRowIndi(index)" [disabled]=""><mat-icon>delete_sweep</mat-icon></button>
+              </mat-grid-tile>
+            </div>
+          </mat-grid-list>
+
+        <br>
+          <mat-label><strong>3.4 Resultados de los Indicadores de Impacto</strong></mat-label>
+          <br>
+          <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
+            <mat-label>Resultados</mat-label>
+            <textarea   matInput formControlName="resultadoIndicadores" [(ngModel)]="informe.resultadoIndicadores" name="resultadoIndicadores"
+                        placeholder="Presentar los resultados de los indicadores de impacto expuestos en el punto anterior.
+"></textarea>
+          </mat-form-field>
+        <br>
+          <mat-label><strong>3.5 Matriz de verificación de indicadores de objetivos</strong></mat-label>
+          <mat-grid-list cols="3" rowHeight="6:1.10" [formGroup]="tenFormGroup">
+            <div style="margin-top: 15px">
+              <mat-grid-tile colspan="3" >
+
+              </mat-grid-tile>
+
+              <mat-grid-tile colspan="3" *ngFor="let row of tenFormGroup.get('rowsMatriz')?.controls;let index = index;">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Objetivo Específico</mat-label>
+                  <input matInput type="text"   [formControl]="row.get('ObjetivosEspecifico')"  placeholder="" [required]>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Indicador</mat-label>
+                  <input matInput type="text"   [formControl]="row.get('indicadores')"  placeholder="Elija un elemento" [required]>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Resultado Planificado</mat-label>
+                  <input matInput type="text"   [formControl]="row.get('resultadoPlanificado')"  placeholder="Elija un elemento" [required]>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Resultado Obtenido</mat-label>
+                  <input matInput type="text"   [formControl]="row.get('resultadoObtenido')"  placeholder="Elija un elemento" [required]>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Observaciones</mat-label>
+                  <input matInput type="text"   [formControl]="row.get('observaciones')"  placeholder="Elija un elemento" [required]>
+                </mat-form-field>
+
+
+                <span class="example-spacer"></span>
+
+              </mat-grid-tile>
+            </div>
+          </mat-grid-list>
+          <mat-label><strong>3.6 Resultados alcanzados / Productos obtenidos: </strong></mat-label>
+          <br>
+          <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
+            <mat-label><strong>Resultados</strong></mat-label>
+            <textarea   matInput formControlName="productoObtenido" [(ngModel)]="informe.productoObtenido" name="productoObtenido"
+                        placeholder="Exponer brevemente los resultados alcanzados y/o productos obtenidos"></textarea>
+          </mat-form-field>
+          <br>
+          <mat-label><strong>3.7 Observaciones</strong></mat-label>
+          <br>
+          <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
+            <mat-label>Observaciones</mat-label>
+            <textarea   matInput [(ngModel)]="informe.observaciones" name="observacionesInformeSeguimiento" [ngModelOptions]="{standalone: true}"
+                        placeholder="Exponer las diferentes dificultades que se presentaron durante la ejecución del proyecto:
+- Cambios generados con el número de estudiantes participantes.
+- Problemas generados para iniciar o finalizar el proyecto en las fechas aprobadas
+- Cambio de docentes a cargo de estudiantes, etc."></textarea>
+          </mat-form-field>
+          <br>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <br>
+        <div style="text-align: end">
+          <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px">
+            <mat-icon>undo</mat-icon>
+          </button>
+          <button mat-fab matStepperNext color="primary">
+            <mat-icon>queue_play_next</mat-icon>
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="eigthFormGroup" label="4 CONCLUSIONES Y RECOMENDACIONES">
       <form [formGroup]="eigthFormGroup">
 
         <mat-card-content>
 
 
-          <mat-label><strong>3.1 Conclusiones</strong></mat-label>
+          <mat-label><strong>4.1 Conclusiones</strong></mat-label>
           <br>
           <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
             <mat-label><strong>Conclusiones</strong></mat-label>
-            <textarea   matInput [(ngModel)]="informe.conclusiones" name="conclusiones" [ngModelOptions]="{standalone: true}"
-            placeholder="Describir las enseñanzas aprendidas hasta la fecha de elaboración del informe"></textarea>
+            <textarea   matInput [(ngModel)]="informe.conclusiones" name="conclusiones" formControlName="conclusiones"
+                        placeholder="Describir las enseñanzas aprendidas durante la ejecución del proyecto.
+"></textarea>
           </mat-form-field>
           <br>
-          <mat-label><strong>3.2 Observaciones</strong></mat-label>
+          <mat-label><strong>4.2 Recomendaciones</strong></mat-label>
           <br>
           <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
-            <mat-label>Observaciones</mat-label>
-            <textarea   matInput [(ngModel)]="informe.observacionesInformeSeguimiento" name="observacionesInformeSeguimiento" [ngModelOptions]="{standalone: true}"
-            placeholder="Exponer las diferentes dificultades que se presentaron durante la ejecución del proyecto:
-- Cambios generados con el número de estudiantes participantes.
-- Problemas generados para iniciar o finalizar el proyecto en las fechas aprobadas
-- Cambio de docentes a cargo de estudiantes, etc."></textarea>
+            <mat-label>Recomendaciones</mat-label>
+            <textarea   matInput [(ngModel)]="informe.recomendaciones" name="recomendaciones" formControlName="recomendaciones"
+
+                        placeholder="Describir las recomendaciones en función de los logros y resultados obtenidos, para plantear posibles
+acciones futuras"></textarea>
           </mat-form-field>
           <br>
 
@@ -406,7 +546,7 @@
           <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
             <mat-label>Fecha Entrega</mat-label>
             <input type="date"   matInput [(ngModel)]="informe.fechaEntrega" formControlName="fechaEn"
-                        >
+                  >
           </mat-form-field>
 
         </mat-card-content>
@@ -422,68 +562,49 @@
         </div>
       </form>
     </mat-step>
+
     <mat-step [stepControl]="nineFormGroup" label="Documento">
       <form [formGroup]="nineFormGroup">
         <mat-card class="example-card">
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title><br><br> INFORME DE SEGUIMIENTO</mat-card-title>
+            <mat-card-title><br><br> INFORME FINAL</mat-card-title>
             <mat-card-subtitle><br />
               PROYECTOS DE VINCULACIÓN CON LA SOCIEDAD <br />
               INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY <br />
             </mat-card-subtitle>
           </mat-card-header>
-          <h4>Debe obtener el anexo en "Obtener Anexo" y posteriormente debera firmar y subir de en formato PDF</h4>
+          <h4>Debe obtener el anexo en "Obtener Anexo" y posteriormente deberá firmar y subir de en formato PDF</h4>
           <div>
             <button mat-raised-button color="primary" (click)="generarDocumento()">Obtener Anexo</button>
             <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
               <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento($event.target.files)"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
-              <mat-icon matSuffix>folder</mat-icon>
-            </mat-form-field>
-          </div>
+                <mat-icon matSuffix>folder</mat-icon>
+              </mat-form-field>
+            </div>
+            <mat-card-content>
+              <div>
+                <button mat-button matStepperPrevious color="primary">Atrás</button>
+                <button mat-button matStepperNext color="warn">Siguente</button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+    <mat-step  label="CONFIRMAR">
+        <mat-card style="width: 600px;margin: 0 auto">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Informe Final</mat-card-title>
+            <mat-card-subtitle>Guardar Informe Final </mat-card-subtitle>
+          </mat-card-header>
           <mat-card-content>
             <div>
               <button mat-button matStepperPrevious color="primary">Atras</button>
-              <button mat-button matStepperNext color="warn">Siguente</button>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </form>
-    </mat-step>
-    <!--<mat-step  label="Confirmar">
-      <mat-card class="example-card">
-        <mat-card-header style="align-content: center">
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title><br><br> INFORME DE SEGUIMIENTO</mat-card-title>
-          <mat-card-subtitle><br />
-            PROYECTOS DE VINCULACIÓN CON LA SOCIEDAD <br />
-            INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY <br />
-          </mat-card-subtitle>
-          <mat-card-subtitle>GUARDAR INFORME DE SEGUIMIENTO </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-
-          <div>
-            <button mat-button matStepperPrevious color="primary">Atras</button>
-            <button mat-flat-button color="warn" (click)="guardarAnexo()">GUARDAR</button>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </mat-step>-->
-    <mat-step  label="CONFIRMAR">
-      <mat-card style="width: 600px;margin: 0 auto">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Informe de Seguimiento</mat-card-title>
-          <mat-card-subtitle>Guardar Informe de Seguimiento </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <div>
-            <button mat-button matStepperPrevious color="primary">Atras</button>
-            <button mat-flat-button color="warn" (click)="guardarAnexo()">GUARDAR</button>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </mat-step>
-  </mat-stepper>
-</div>
+              <button mat-flat-button color="warn" (click)="guardarAnexo()">GUARDAR</button>
+             </div>
+           </mat-card-content>
+         </mat-card>
+       </mat-step>
+     </mat-stepper>
+   </div>

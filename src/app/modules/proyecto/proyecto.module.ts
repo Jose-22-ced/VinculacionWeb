@@ -67,6 +67,17 @@ import {FirmarinformeseguimientoComponent} from "./firmarinformeseguimiento/firm
 import { Veranexos11Component } from './veranexos11/veranexos11.component';
 import { Anexo11directorComponent } from './anexo11director/anexo11director.component';
 import { Firmaranexo11Component } from './firmaranexo11/firmaranexo11.component';
+import { InformefinalComponent } from './informefinal/informefinal.component';
+import { ListainformefinalComponent } from './listainformefinal/listainformefinal.component';
+import { FirmarinformefinalComponent } from './firmarinformefinal/firmarinformefinal.component';
+import { Editaranexo11apoyoComponent } from './editaranexo11apoyo/editaranexo11apoyo.component';
+import { Editaranexo11directorComponent } from './editaranexo11director/editaranexo11director.component';
+import { Firmaranexo11apoyoComponent } from './firmaranexo11apoyo/firmaranexo11apoyo.component';
+import {SeleccionestudiantesComponent} from "./seleccionestudiantes/seleccionestudiantes.component";
+import {
+  FirmarinformeaceptacionestudiantesComponent
+} from "./firmarinformeaceptacionestudiantes/firmarinformeaceptacionestudiantes.component";
+import {VerseleccionestudiabesComponent} from "./verseleccionestudiabes/verseleccionestudiabes.component";
 
 
 const routes: Routes = [
@@ -128,16 +139,6 @@ const routes: Routes = [
     component:EditardelegacionComponent
   },{path:'editarplanificacion/:id/:cedula',
     component:EditarplanificacionComponent
-  },{path:'anexo6_1/:id/:cedula/:nombres',
-    component:Anexo61Component
-  },{path:'veranexos6_1/:cedula/:nombres',
-    component:Veranexo61Component
-  } ,{path:'anexo6_2/:id/:cedula/:nombres',
-    component:Anexo62Component
-  },{path:'veranexos6_2/:cedula/:nombres',
-    component:Veranexo62Component
-  },{path:'registroactividadesestudiante/:cedula/:nombres',
-    component:RegistroactividadesestudianteComponent
   },{path:'nueavavisita/:cedula',
     component:NuevavisitaComponent
   },{path:'vervisitas/:cedula',
@@ -160,20 +161,6 @@ const routes: Routes = [
     component:FirmarplandeaprendizajeComponent
   },{path:'editarplafinicacionmensuak/:id/:cedula/:nombre',
     component:Editar7planmesualComponent
-  },{path: 'firmaranexo61/:cedula',
-    component: Firmaanexo61Component
-  },{path:'firmaranexo62/:cedula',
-    component:Firmaanexo62Component
-  },{path:'firmaranexo8/:cedula/:nombres',
-    component:Veranexo8Component
-  },{path:'anexo11/:cedula/:nombres',
-    component:Anexo11Component
-  },{path:'registroactividadesestudiante/:cedula/:nombres',
-    component:RegistroactividadesestudianteComponent
-  },{path:'firmaranexo61/:cedula',
-    component:Firmaanexo61Component
-  },{path:'firmaranexo62/:cedula',
-    component:Firmaanexo62Component
   },{ path: 'planificacion_de_actividades_mensual/:cedula',
     component: Anexo7planificacionmensualComponent
   },{ path: 'seguimiento_mensual/:cedula/:nombres',
@@ -192,18 +179,52 @@ const routes: Routes = [
     component: ListainformeseguimientoComponent
   },{ path: 'firmar_informe_seguimiento/:cedula/:nombres',
     component: FirmarinformeseguimientoComponent
-  },{path:'anexo11/:cedula/:nombres',
+  },{ path: 'informe_final/:cedula/:nombres',
+    component: InformefinalComponent
+  },{ path: 'lista_informe_final/:cedula/:nombres',
+    component: ListainformefinalComponent
+  },{ path: 'firmar_informe_final/:cedula/:nombres',
+    component: FirmarinformefinalComponent
+  },
+
+  {path:'anexo6_1/:id/:cedula/:nombres',
+    component:Anexo61Component
+  },{path:'veranexos6_1/:cedula/:nombres',
+    component:Veranexo61Component
+  } ,{path:'anexo6_2/:id/:cedula/:nombres',
+    component:Anexo62Component
+  },{path:'veranexos6_2/:cedula/:nombres',
+    component:Veranexo62Component
+  },{path:'registroactividadesestudiante/:cedula/:nombres',
+    component:RegistroactividadesestudianteComponent
+  },{path:'firmaranexo61/:cedula',
+    component:Firmaanexo61Component
+  } ,{path:'firmaranexo62/:cedula',
+    component:Firmaanexo62Component
+  } , {path:'firmaranexo8/:cedula/:nombres',
+    component:Veranexo8Component
+  }, {path:'anexo11/:cedula/:nombres',
     component:Anexo11Component
-  },
-  {path:'anexo11director/:cedula/:nombres',
+  }, {path:'anexo11director/:cedula/:nombres',
     component:Anexo11directorComponent
-  },
-  {path:'veranexo11apoyo/:cedula/:nombres',
+  }, {path:'veranexo11apoyo/:cedula/:nombres',
     component:Veranexos11Component
-  },
-  {path:'firmaranexo11director/:cedula/:nombres',
+  }, {path:'firmaranexo11director/:cedula/:nombres',
     component:Firmaranexo11Component
+  }, {path:'editaranexo11apoyo/:id/:cedula/:nombres',
+    component:Editaranexo11apoyoComponent
+  }, {path:'editaranexo11director/:id/:cedula/:nombres',
+    component:Editaranexo11directorComponent
+  }, {path:'firmaanexo11apoyo/:cedula/:nombres',
+    component:Firmaranexo11apoyoComponent
+  },{path:'estudiantesseleccionado/:cedula',
+    component:SeleccionestudiantesComponent
+  },{path:'verestudiantesseleccionado/:nombres',
+    component:VerseleccionestudiabesComponent
+  },{path:'firmaestudiantesseleccionado/:nombres',
+    component:FirmarinformeaceptacionestudiantesComponent
   }
+
 ]
 
 @NgModule({
@@ -267,7 +288,17 @@ const routes: Routes = [
     FirmarinformeseguimientoComponent,
     Veranexos11Component,
     Anexo11directorComponent,
-    Firmaranexo11Component
+    Firmaranexo11Component,
+    InformefinalComponent,
+    ListainformefinalComponent,
+    FirmarinformefinalComponent,
+    Editaranexo11apoyoComponent,
+    Editaranexo11directorComponent,
+    Firmaranexo11apoyoComponent,
+    SeleccionestudiantesComponent,
+    VerseleccionestudiabesComponent,
+    FirmarinformeaceptacionestudiantesComponent
+
 
   ],
   imports: [

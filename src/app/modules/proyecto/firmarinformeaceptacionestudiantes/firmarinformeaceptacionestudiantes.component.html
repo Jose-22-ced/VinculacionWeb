@@ -1,0 +1,37 @@
+<div *ngIf="issloading==false">
+  <mat-card>
+    <mat-card-title>PROCESO DE SELECCIÓN DE ESTUDIANTES PARA PARTICIPAR EN EL PROYECTO DE VINCULACION…</mat-card-title>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>BUSCAR INFORME</mat-label>
+      <input matInput   placeholder="FILTRAR" [formControl]="myControl">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </mat-card>
+  <br>
+  <div>
+    <div *ngFor="let proyecto of filteredOptions|async">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Nombre de proyecto{{proyecto.nombreProyecto}}</mat-card-title>
+          <mat-card-subtitle><strong>Responsable: </strong> {{proyecto.nombreRevisado}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Director: </strong>{{proyecto.nombreDirector}}</p>
+          <p><strong>Objetivo General: </strong>{{proyecto.objetivoGeneral}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="accent" (click)="convertFile(proyecto.documento)">Descargar documento</button>
+          <button mat-raised-button color="warn" (click)="subiranexo(proyecto)">Subir firmado</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
+

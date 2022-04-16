@@ -1,0 +1,98 @@
+<p>editaranexo11apoyo works!</p>
+<div *ngIf="issloading==false">
+  <mat-stepper [linear]="isLinear" #stepper>
+
+    <mat-step [stepControl]="thirdFormGroup" label="Seleccón de alumnos">
+      <form [formGroup]="thirdFormGroup">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>  (ANEXO 11)<br><br> INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY<br>
+              COORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD<br>
+              EVALUACIÓN AL ESTUDIANTE DE PRÁCTICAS PRE PROFESIONALES DE SERVICIO COMUNITARIO</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+
+            <mat-grid-list cols="6" rowHeight="2:1.10" [formGroup]="thirdFormGroup">
+              <div style="margin-top: 15px">
+                <mat-card-subtitle style="font-size: large">DESEMPEÑO DEL ESTUDIANTE: {{anexo11select.nombresEstudiante}}</mat-card-subtitle>
+                <mat-card-subtitle style="font-size: large">Docente de Apoyo: {{nombres}}</mat-card-subtitle>
+                <mat-grid-tile colspan="6" >
+
+                  <mat-card-title class="example-full-widthh" appearance="outline">
+                    <mat-label> #ITEM </mat-label>
+                  </mat-card-title>
+                  <mat-card-title class="example-full-width" appearance="outline">
+                    <mat-label> INSTRUMENTO DE EVALUACIÓN</mat-label>
+                  </mat-card-title>
+                  <mat-card-title class="example-full-widthh" appearance="outline">
+                    <mat-label> CALIFICACION (1-5)  </mat-label>
+                  </mat-card-title>
+
+                </mat-grid-tile>
+
+
+
+                <mat-grid-tile  colspan="6" *ngFor="let row of thirdFormGroup.get('rows')?.controls;let index = index;">
+
+
+                  <mat-form-field class="example-full-widthh" appearance="outline">
+                    <input readonly="readonly" matInput type="text" [formControl]="row.get('apoyoItem1')"  [required]>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <textarea style="padding-top: 1px" rows="3" readonly="readonly" matInput type="text"  [formControl]="row.get('apoyoItem2')"  [required]></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-widthh" appearance="outline">
+                    <input matInput type="number" min="1" max="5" [formControl]="row.get('apoyoItem3')" (ngModelChange)="sumar()" (keyup)="sumar()" >
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="6">
+                  <strong class="colorrr" style="font-size: x-large">Puntaje Obtenido: {{sum}} /20</strong>
+
+                </mat-grid-tile>
+
+              </div>
+            </mat-grid-list>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <br>
+          <div style="text-align: end">
+            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px" (click)="refresh()"><mat-icon>undo</mat-icon></button>
+            <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
+          </div>
+        </mat-card>
+      </form>
+    </mat-step>
+    <mat-step  label="Confirmar">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>  (ANEXO 11)<br><br> INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY<br>
+            COORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD<br>
+            EVALUACIÓN AL ESTUDIANTE DE PRÁCTICAS PRE PROFESIONALES DE SERVICIO COMUNITARIO</mat-card-title>
+          <mat-card-subtitle style="font-size: large">CONFIRME LA EVALUACIÓN AL ESTUDIANTE DE PRÁCTICAS PRE PROFESIONALES DE SERVICIO COMUNITARIO</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <br>
+          <button mat-button matStepperPrevious color="primary">Atras</button>
+          <button mat-flat-button color="primary" (click)="editar(anexo11select)">SUBIR</button>
+
+        </mat-card-content>
+      </mat-card>
+    </mat-step>
+  </mat-stepper>
+</div>
+<div *ngIf="isexist==false">
+  <mat-card>
+    <mat-card-title>NO EXISTE</mat-card-title>
+  </mat-card>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

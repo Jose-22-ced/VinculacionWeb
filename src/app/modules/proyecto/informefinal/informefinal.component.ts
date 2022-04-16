@@ -1,49 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Form, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {CordinadorVinculacion} from "../../../models/cordinadorvinculacion";
 import {ActivatedRoute} from "@angular/router";
 import {ProyectoService} from "../../../services/proyecto.service";
-import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
 import {map, Observable, startWith} from "rxjs";
-import {actividadeslistProyectos, ObjetivosEspeciicoslistProyecto, Proyectos} from "../../../models/proyectos";
-import {Entidadbeneficiaria} from "../../../models/entidadbeneficiaria";
+import {ObjetivosEspeciicoslistProyecto, Proyectos} from "../../../models/proyectos";
+import {FechaService} from "../../../services/fecha.service";
 import {MatSelectionListChange} from "@angular/material/list";
+import {Entidadbeneficiaria} from "../../../models/entidadbeneficiaria";
+import {Anexo1} from "../../../models/anexo1";
+import {HorasPersonasResponse, TotalHorasResponse} from "../../../models/anexo7";
+import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
 import {CarrerasService} from "../../../services/carreras.service";
+import {Anexo1Service} from "../../../services/anexo1.service";
+import {Anexo3Service} from "../../../services/anexo3.service";
+import {InformeSeguimientoService} from "../../../services/informeseguimiento.service";
+import {CordinadorvinculacionService} from "../../../services/cordinadorvinculacion.service";
+import {Anexo7Service} from "../../../services/anexo7.service";
+import {InformeFinalService} from "../../../services/informefinal.service";
+import {Anexo3} from "../../../models/anexo3";
+import {Anexo8} from "../../../models/anexo8";
 import {Carreras} from "../../../models/carreras";
-
-import {
-  actividadesInformeSeguimientoRequest,
-  docentesParticipantes,
-  estudiantesParticipantes,
-  InformeSeguimiento, objetivosEspecificosInforme
-} from "../../../models/seguimiento";
+import {InformeSeguimiento} from "../../../models/seguimiento";
+import {InformeFinal} from "../../../models/final";
+import {DatePipe} from "@angular/common";
+import Docxtemplater from "docxtemplater";
 // @ts-ignore
 import PizZip from "pizzip";
 // @ts-ignore
 import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
-import {Anexo1Service} from "../../../services/anexo1.service";
-import {Anexo1} from "../../../models/anexo1";
-import {Anexo3Service} from "../../../services/anexo3.service";
-import {Anexo3} from "../../../models/anexo3";
-import {FechaService} from "../../../services/fecha.service";
-import {actividadesAnexo9, Anexo9} from "../../../models/anexo9";
 import Swal from "sweetalert2";
-import {DatePipe} from "@angular/common";
-import Docxtemplater from "docxtemplater";
-import {InformeSeguimientoService} from "../../../services/informeseguimiento.service";
-import {CordinadorvinculacionService} from "../../../services/cordinadorvinculacion.service";
-import {CordinadorVinculacion} from "../../../models/cordinadorvinculacion";
-import {Anexo8} from "../../../models/anexo8";
-import {Anexo8Service} from "../../../services/anexo8.service";
-import {
-  Anexo7,
-  HorasDocentesA7Request,
-  HorasEstudiantesA7Response,
-  HorasPersonasResponse,
-  TotalHorasResponse
-} from "../../../models/anexo7";
-import {Anexo7Service} from "../../../services/anexo7.service";
+
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
 }
@@ -56,17 +45,16 @@ function getBase64(file: any) {
   });
 }
 @Component({
-  selector: 'app-informeseguimiento',
-  templateUrl: './informeseguimiento.component.html',
-  styleUrls: ['./informeseguimiento.component.css']
+  selector: 'app-informefinal',
+  templateUrl: './informefinal.component.html',
+  styleUrls: ['./informefinal.component.css']
 })
-export class InformeseguimientoComponent implements OnInit {
+export class InformefinalComponent implements OnInit {
   issloading=true;
   isLinear = true;
-  situacionInicio?:String;
-  situacionActual?:String;
-  conclusiones?:String;
-  observacionesInformeSeguimiento?:String;
+  situacionInicialenbeficiarios?: String;
+  situacionActualBeneficiarios?: String;
+  observaciones?:String;
   fecha?:Date;
   nombres?:String;
   cedula?:String;
@@ -74,6 +62,10 @@ export class InformeseguimientoComponent implements OnInit {
   rowsEst: FormArray;
   rowsInfo:FormArray;
   rowsObje:FormArray;
+  rowsIndicadores:FormArray;
+  rowsMatriz:FormArray;
+
+
   cv:CordinadorVinculacion = new CordinadorVinculacion();
   //grupos
   firstFormGroup?: FormGroup;
@@ -85,8 +77,12 @@ export class InformeseguimientoComponent implements OnInit {
   sevenFormGroup?:FormGroup;
   eigthFormGroup?:FormGroup;
   nineFormGroup?:FormGroup;
-  myControl = new FormControl();
+  tenFormGroup?: FormGroup;
+
+
   proyectos:Proyectos[]=[];
+  myControl = new FormControl();
+  filteredOptions?: Observable<Proyectos[]>;
   proyectoSelect:Proyectos=new Proyectos();
   entidadS:Entidadbeneficiaria=new Entidadbeneficiaria();
   anexo1select: Anexo1= new Anexo1();
@@ -97,20 +93,21 @@ export class InformeseguimientoComponent implements OnInit {
   anexo3select: Anexo3[]=[];
   anexo8select: Anexo8[]=[];
   anexo8select1: Anexo8  = new Anexo8();
-  filteredOptions?: Observable<Proyectos[]>;
+
   entidadSelect:Entidadbeneficiaria=new Entidadbeneficiaria();
   carreraSelect:Carreras= new Carreras();
   constructor(private _formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute,
               private proyectoService: ProyectoService,
+              private fechaService: FechaService,
               private entidadService: EntidadbeneficiarioService,
               private carreraService: CarrerasService,
               private anexo1Service: Anexo1Service,
               private anexo3Service: Anexo3Service,
-              private fechaService: FechaService,
-              private informeService: InformeSeguimientoService,
+              private informeFinalService: InformeFinalService,
               private coordinadorService: CordinadorvinculacionService,
               private anexo7Service: Anexo7Service) {
+
     this.thirdFormGroup = this._formBuilder.group({
       items: [null, Validators.required],
       items_value: ['no', Validators.required]
@@ -135,6 +132,13 @@ export class InformeseguimientoComponent implements OnInit {
     this.rows = this._formBuilder.array([]);
     this.rowsEst = this._formBuilder.array([]);
     this.rowsInfo = this._formBuilder.array([]);
+
+    this.tenFormGroup=this._formBuilder.group({
+      items:[null,Validators.required],
+      items_value:['no',Validators.required]})
+    this.rowsIndicadores = this._formBuilder.array([]);
+    this.rowsMatriz = this._formBuilder.array([]);
+
   }
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -150,6 +154,7 @@ export class InformeseguimientoComponent implements OnInit {
       this.cedula=cedula
       this.proyectoService.getProyectosCICedulaDirector(cedula).subscribe(dataPro=>{
         this.proyectos=dataPro.filter(value => value.nombredirector=nombres);
+        console.log(this.proyectos)
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values => this.filter(values)),
@@ -162,36 +167,33 @@ export class InformeseguimientoComponent implements OnInit {
     });
     this.secondFormGroup = this._formBuilder.group({
     });
+
     this.thirdFormGroup = this._formBuilder.group({
     });
-
     this.thirdFormGroup.get("items_value")?.setValue("yes");
     this.thirdFormGroup.addControl('rows', this.rows);
 
     this.fourFormGroup = this._formBuilder.group({
     });
-
     this.fourFormGroup.get("items_value")?.setValue("yes");
     this.fourFormGroup.addControl('rowsEst', this.rowsEst);
     this.sixFormGroup = this._formBuilder.group({
       situacion: ['', Validators.required],
+      situacionA: ['', Validators.required],
     });
     this.sixFormGroup.get("items_value")?.setValue("yes");
     this.sixFormGroup.addControl('rowsObje', this.rowsObje);
-
     this.fiveFormGroup = this._formBuilder.group({
       fecha: ['', Validators.required],
     });
-
-
     this.sevenFormGroup = this._formBuilder.group({
     });
-
     this.sevenFormGroup.get("items_value")?.setValue("yes");
     this.sevenFormGroup.addControl('rowsInfo', this.rowsInfo);
-
     this.eigthFormGroup = this._formBuilder.group({
       fechaEn: ['', Validators.required],
+     recomendaciones: ['', Validators.required],
+      conclusiones: ['', Validators.required]
     });
     this.nineFormGroup = this._formBuilder.group({
       docx: ['', Validators.required],
@@ -199,6 +201,16 @@ export class InformeseguimientoComponent implements OnInit {
     this.fechaService.getSysdate().subscribe(value => {
       this.fecha=value.fecha;
     })
+    this.tenFormGroup = this._formBuilder.group({
+      impacto:['', Validators.required],
+      descripcionImpacto:['', Validators.required],
+      resultadoIndicadores:['', Validators.required],
+     productoObtenido:['', Validators.required],
+
+    });
+    this.tenFormGroup.get("items_value")?.setValue("yes");
+    this.tenFormGroup.addControl('rowsIndicadores',this.rowsIndicadores);
+    this.tenFormGroup.addControl('rowsMatriz',this.rowsMatriz);
   }
   filter(value: any): Proyectos[] {
     const filterValue = value.toString().toLowerCase();
@@ -206,13 +218,30 @@ export class InformeseguimientoComponent implements OnInit {
       || option.nombredirector?.toLocaleLowerCase().includes(filterValue)
     );
   }
+
+  onAddRowIndi() {
+    this.rowsIndicadores.push(this.createItemFormGroupIndi());
+    console.log(this.rows.getRawValue())
+  }
+  createItemFormGroupIndi(): FormGroup {
+    return this._formBuilder.group({
+      descripcion: ['', Validators.required],
+      tipo: ['', Validators.required]
+    });
+  }
+  onRemoveRowIndi(rowIndex: number) {
+    this.rowsIndicadores.removeAt(rowIndex);
+  }
+
+
+
   selectionProyecto(proyectoSele: MatSelectionListChange){
     this.proyectoSelect=proyectoSele.option.value
-      console.log(this.proyectoSelect)
+    console.log(this.proyectoSelect)
 
     this.proyectoSelect.objetivosEspecificosProyecto?.forEach(value=>{
       this.onAddRowOb(value)
-
+      this.onAddRowMatr(value)
     })
     this.entidadService.getsaveEntidadBeneficiariabyId(Number(this.proyectoSelect.id)).subscribe(dataE=>{
       this.entidadSelect=dataE
@@ -231,36 +260,59 @@ export class InformeseguimientoComponent implements OnInit {
             this.actividadesSelectListaa.forEach(value => this.onAddRowInfo(value));
           })
 
-              this.anexo3select.forEach(value => {this.onAddRowEst(value)});
-              this.anexo7Service.docentesPart(Number(this.proyectoSelect.id)).subscribe(dataAn1=>{
-                this.docentesselectLista=dataAn1
-                this.docentesselectLista.forEach(value => this.onAddRow(value));
-                this.coordinadorService.getCVbyId(Number(this.entidadSelect.idCoordinador)).subscribe(dataCv=>{
-                  this.cv=dataCv
-                  console.log(dataCv)
-                })
-              })
-              console.log(this.anexo1selectLista)
-              //console.log(this.anexo3select)
-
-
-
-
+          this.anexo3select.forEach(value => {this.onAddRowEst(value)});
+          this.anexo7Service.docentesPart(Number(this.proyectoSelect.id)).subscribe(dataAn1=>{
+            this.docentesselectLista=dataAn1
+            this.docentesselectLista.forEach(value => this.onAddRow(value));
+            this.coordinadorService.getCVbyId(Number(this.entidadSelect.idCoordinador)).subscribe(dataCv=>{
+              this.cv=dataCv
+              console.log(dataCv)
+            })
+          })
+          console.log(this.anexo1selectLista)
         })
       })
     })
-    }
-onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
-  this.rowsObje.push(this.createItemFormGroupObje(objetivosEspecificosInforme));
-  console.log(this.rowsObje.getRawValue())
-}
-  onAddRow(docentesParticipantes: TotalHorasResponse) {
-    this.rows.push(this.createItemFormGroup(docentesParticipantes));
+  }
+  onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
+    this.rowsObje.push(this.createItemFormGroupObje(objetivosEspecificosInforme));
+    console.log(this.rowsObje.getRawValue())
+  }
+  createItemFormGroupObje(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto): FormGroup {
+    return this._formBuilder.group({
+      descripcion:[objetivosEspecificosInforme.descripcion,Validators.required]
+    });
+  }
+
+  onAddRowMatr(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto) {
+    this.rowsMatriz.push(this.createItemFormGroupMatr(objetivosEspecificosInforme));
     console.log(this.rows.getRawValue())
+  }
+  createItemFormGroupMatr(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto): FormGroup {
+    return this._formBuilder.group({
+      ObjetivosEspecifico: [objetivosEspecificosInforme.descripcion, Validators.required],
+      indicadores: ['', Validators.required],
+      resultadoPlanificado: ['', Validators.required],
+      resultadoObtenido: ['', Validators.required],
+      observaciones: ['', Validators.required]
+    });
   }
   onAddRowEst(estudiantesParticipantes: TotalHorasResponse) {
     this.rowsEst.push(this.createItemFormGroupEst(estudiantesParticipantes));
-   // console.log(this.rowsEst.getRawValue())
+    // console.log(this.rowsEst.getRawValue())
+  }
+  createItemFormGroupEst(estudiantesParticipantes: TotalHorasResponse): FormGroup {
+    return this._formBuilder.group({
+      nombres:[estudiantesParticipantes.nombre,Validators.required],
+      cedula:[estudiantesParticipantes.cedula,Validators.required],
+      carrera:[estudiantesParticipantes.carrera,Validators.required],
+      numeroHoras:[estudiantesParticipantes.horas,Validators.required],
+      cod_estudiante:[estudiantesParticipantes.horas,Validators.required],
+    });
+  }
+  onAddRow(docentesParticipantes: TotalHorasResponse) {
+    this.rows.push(this.createItemFormGroup(docentesParticipantes));
+    console.log(this.rows.getRawValue())
   }
   createItemFormGroup(docentesParticipantes:TotalHorasResponse): FormGroup {
     return this._formBuilder.group({
@@ -270,17 +322,6 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
       numeroHoras:[docentesParticipantes.horas,Validators.required]
     });
   }
-  createItemFormGroupEst(estudiantesParticipantes: TotalHorasResponse): FormGroup {
-    return this._formBuilder.group({
-      nombres:[estudiantesParticipantes.nombre,Validators.required],
-      cedula:[estudiantesParticipantes.cedula,Validators.required],
-      carrera:[estudiantesParticipantes.carrera,Validators.required],
-      numeroHoras:[estudiantesParticipantes.horas,Validators.required]
-    });
-  }
-
-
-
   onAddRowInfo(actividadesInformeSeguimientoRequest: HorasPersonasResponse) {
     this.rowsInfo.push(this.createItemFormGroupInfo(actividadesInformeSeguimientoRequest));
     console.log(this.rowsInfo.getRawValue())
@@ -297,85 +338,39 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
     });
   }
 
-  createItemFormGroupObje(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto): FormGroup {
-    return this._formBuilder.group({
-      descripcion:[objetivosEspecificosInforme.descripcion,Validators.required]
-    });
-  }
-  informe:InformeSeguimiento= new InformeSeguimiento();
-  obtenerDatos(){
-    this.informe.idProyectoPPP=this.proyectoSelect.id;
-    this.informe.programaVinculacion=this.proyectoSelect.programaVinculacion;
-    this.informe.lineaAccion=this.proyectoSelect.lineaaccion;
-    this.informe.nombreProyecto=this.proyectoSelect.nombre;
-    this.informe.carrera=this.carreraSelect.nombre;
-    this.informe.docentesParticipantes=this.rows.getRawValue();
-    this.informe.estudiantesParticipantes=this.rowsEst.getRawValue();
-    this.informe.nombreEntidadBeneficiaria=this.entidadSelect.nombre;
-    this.informe.fechaInicio=this.proyectoSelect.fechaInicio;
-    this.informe.fechaFin=this.proyectoSelect.fechaFin;
-    this.informe.alcanceTerritorial=this.proyectoSelect.alcanceTerritorial;
-    this.informe.objetivoGeneral=this.proyectoSelect.objetivoGeneral;
-    this.informe.objetivosEspecificosInforme=this.rowsObje.getRawValue();
-    this.informe.actividadesInformeSeguimientoRequest=this.rowsInfo.getRawValue();
-    this.informe.fechaSeguimiento=this.fecha;
-    this.informe.cedulaCoordinadorVinculacion=this.cv.cedula;
-    this.informe.nombreDirector=this.proyectoSelect.nombredirector;
-    this.informe.nombreCoordinadorVinculacion=this.cv.nombres;
-    return this.informe;
-  }
-  guardarAnexo(){
-    var informeS=this.obtenerDatos();
-    this.informeService.saveAnexo(informeS).subscribe(value => {
-      console.log(informeS)
-      Swal.fire({
-        title: 'Exito',
-        text: 'Informe seguimiento creado',
-        icon: 'success',
-        iconColor :'#17550c',
-        color: "#0c3255",
-        confirmButtonColor:"#0c3255",
-        background: "#fbc02d",
-      })
-    },error => {
-      Swal.fire({
-        title: 'Error',
-        text: 'Informe seguimiento no se creado '+error.error.message,
-        icon: 'error',
-        color: "#0c3255",
-        confirmButtonColor:"#0c3255",
-        background: "#fbc02d",
-      })
-    })
-  }
+  informe:InformeFinal= new InformeFinal();
+obtenerDatos(){
+  this.informe.idProyectoPPP=this.proyectoSelect.id;
+  this.informe.programaVinculacion=this.proyectoSelect.programaVinculacion;
+  this.informe.lineaAccion=this.proyectoSelect.lineaaccion;
+  this.informe.nombreProyecto=this.proyectoSelect.nombre;
+  this.informe.carreras=this.carreraSelect.nombre;
+  this.informe.docentesParticipantes=this.rows.getRawValue();
+  this.informe.estudiantesParticipantes=this.rowsEst.getRawValue();
+  this.informe.entidadBeneficiaria=this.entidadSelect.nombre;
+  this.informe.fechaInicio=this.proyectoSelect.fechaInicio;
+  this.informe.fechaFin=this.proyectoSelect.fechaFin;
+  this.informe.alcanceTerritorial=this.proyectoSelect.alcanceTerritorial;
+  this.informe.objetivoGeneral=this.proyectoSelect.objetivoGeneral;
+  this.informe.objetivosEspecificosInformes=this.rowsObje.getRawValue();
+  this.informe.actividadesInformeSeguimiento=this.rowsInfo.getRawValue();
+  this.informe.fechaSeguimiento=this.fecha;
+  this.informe.cedulaCoordinadorVinculacion=this.cv.cedula;
+  this.informe.nombreDirector=this.proyectoSelect.nombredirector;
+  this.informe.nombreCoordinadorVinculacion=this.cv.nombres;
+  this.informe.cedulaCoordinadorVinculacion=this.cv.cedula;
+  this.informe.indicadores=this.rowsIndicadores.getRawValue();
+  this.informe.matrizObjetivos=this.rowsMatriz.getRawValue();
+this.informe.plazoEjecucion=this.proyectoSelect.plazoEjecucion;
+  return this.informe;
+}
 
-  subirDocumento(file:FileList){
-    if(file.length==0){
-    }else{
-      getBase64(file[0]).then(docx=>{
-        // @ts-ignore
-        console.log(docx.length)
-        // @ts-ignore
-        if(docx.length>=10485760){
-          this.informe.documento="";
-          Swal.fire(
-            'Fallo',
-            'El documento excede el peso permitido',
-            'warning'
-          )
-        }else{
-          this.informe.documento=docx+"";
-          console.log(this.informe.documento)
-        }
-      })
-    }
-  }
 
   generarDocumento() {
-    var informe:InformeSeguimiento=this.obtenerDatos();
+    var informe:InformeFinal=this.obtenerDatos();
     console.log(informe)
     var pipe:DatePipe = new DatePipe('en-US')
-    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/informe%201.docx", function(
+    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/Informe%202.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore
@@ -393,23 +388,32 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
         nombreDirector:informe.nombreDirector,
         programaVinculacion:informe.programaVinculacion,
         lineaAccion:informe.lineaAccion,
-        carrera:informe.carrera,
-        tb2:informe.docentesParticipantes,
-        tb3:informe.estudiantesParticipantes,
-        nombreEntidadBeneficiaria:informe.nombreEntidadBeneficiaria,
+        carreras:informe.carreras,
+        tb:informe.docentesParticipantes,
+        tb2:informe.estudiantesParticipantes,
+        entidadBeneficiaria:informe.entidadBeneficiaria,
+        plazoEjecucion:informe.plazoEjecucion,
         fechaInicio:informe.fechaInicio,
         fechaFin:informe.fechaFin,
-        fechaSeguimiento:informe.fechaSeguimiento,
+
         fechaInicioReal:informe.fechaInicioReal,
         fechaFinReal:informe.fechaFinReal,
         alcanceTerritorial:informe.alcanceTerritorial,
         objetivoGeneral:informe.objetivoGeneral,
-        tb5:informe.objetivosEspecificosInforme,
-        situacionInicio:informe.situacionInicio,
-        situacionActual:informe.situacionActual,
-        tb4:informe.actividadesInformeSeguimientoRequest,
+        tb5:informe.objetivosEspecificosInformes,
+        situacionInicialenbeficiarios:informe.situacionInicialenbeficiarios,
+        situacionActualBeneficiarios:informe.situacionActualBeneficiarios,
+        tb3:informe.actividadesInformeSeguimiento,
+        impacto:informe.impacto,
+        descripcionImpacto:informe.descripcionImpacto,
+        tb4:informe.indicadores,
+        resultadoIndicadores:informe.resultadoIndicadores,
+        tb6:informe.matrizObjetivos,
+        productoObtenido:informe.productoObtenido,
+        observaciones:informe.observaciones,
+
         conclusiones:informe.conclusiones,
-        observacionesInformeSeguimiento:informe.observacionesInformeSeguimiento,
+        recomendaciones:informe.recomendaciones,
         nombreCoordinadorVinculacion:informe.nombreCoordinadorVinculacion,
         fechaEntrega:informe.fechaEntrega
 
@@ -457,7 +461,56 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
-      saveAs(out, "InformeSeguimiento.docx");
+      saveAs(out, "InformeFinal.docx");
     });
+  }
+
+  subirDocumento(file:FileList){
+    if(file.length==0){
+    }else{
+      getBase64(file[0]).then(docx=>{
+        // @ts-ignore
+        console.log(docx.length)
+        // @ts-ignore
+        if(docx.length>=10485760){
+          this.informe.documento="";
+          Swal.fire(
+            'Fallo',
+            'El documento excede el peso permitido',
+            'warning'
+          )
+        }else{
+          this.informe.documento=docx+"";
+          console.log(this.informe.documento)
+        }
+      })
+    }
+  }
+
+
+  guardarAnexo(){
+    var informeS=this.obtenerDatos();
+    this.informeFinalService.saveAnexo(informeS).subscribe(value => {
+      console.log("DATOS ENVIO")
+      console.log(informeS)
+      Swal.fire({
+        title: 'Exito',
+        text: 'Informe final creado',
+        icon: 'success',
+        iconColor :'#17550c',
+        color: "#0c3255",
+        confirmButtonColor:"#0c3255",
+        background: "#fbc02d",
+      })
+    },error => {
+      Swal.fire({
+        title: 'Error',
+        text: 'Informe final no se creado '+error.error.message,
+        icon: 'error',
+        color: "#0c3255",
+        confirmButtonColor:"#0c3255",
+        background: "#fbc02d",
+      })
+    })
   }
 }

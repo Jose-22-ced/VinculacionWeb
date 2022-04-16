@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Anexo7} from "../models/anexo7";
+import {Anexo7, HorasPersonasResponse, TotalHorasResponse} from "../models/anexo7";
 import {map, Observable} from "rxjs";
 import {Anexo61} from "../models/anexo61";
 
@@ -42,5 +42,19 @@ export class Anexo7Service {
   }
   getanexo7ById(id: number): Observable<Anexo7> {
     return this.http.get(this.urlEndPoint + '/' + id, {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo7))
+  }
+
+  docentesPart(idProyecto:Number):Observable<TotalHorasResponse[]>{
+    return this.http.get("http://localhost:8080/api/informeSeguimiento/proyecto/"+idProyecto+"/horasdocentes",{headers: this.httpHeaders}).pipe(map(Response => Response as TotalHorasResponse[]))
+
+  }
+  docentesEst(idProyecto:Number):Observable<TotalHorasResponse[]>{
+    return this.http.get("http://localhost:8080/api/informeSeguimiento/proyecto/"+idProyecto+"/horasestudiantes",{headers: this.httpHeaders}).pipe(map(Response => Response as TotalHorasResponse[]))
+
+  }
+
+  actividadesParticipantes(idProyecto:Number):Observable<HorasPersonasResponse[]>{
+    return this.http.get("http://localhost:8080/api/informeSeguimiento/proyecto/"+idProyecto+"/horas",{headers: this.httpHeaders}).pipe(map(Response => Response as HorasPersonasResponse[]))
+
   }
 }

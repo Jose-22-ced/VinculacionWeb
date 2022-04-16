@@ -23,7 +23,11 @@ export class HorasDocentesA7Request{
   observaciones?:String;
 }
 
-export class NombreDocenteApoyo{
+export class TotalHorasResponse{
+  nombre?:String;
+  cedula?:String;
+  carrera?:String;
+  horas?:Number;
 }
 
 export class HorasEstudiantesA7Request{
@@ -38,3 +42,27 @@ export class HorasEstudiantesA7Request{
   observaciones?:String;
 }
 
+export class HorasEstudiantesA7Response{
+  id?:Number;
+  resultados?:String;
+  actividad?:String;
+  cedulaEstudiante?:String;
+  nombreEstudiante?:[]=[];
+  numHoras?:Number;
+  fechaInicio?:Date;
+  fechaFin?:Date;
+  observaciones?:String;
+}
+
+
+export class HorasPersonasResponse{
+  id?:Number;
+  resultados?:String;
+  actividad?:String;
+  nombre?:String;
+  cedula?:String;
+  numHoras?:Number;
+  fechaInicio?:Date;
+  fechaFin?:Date;
+  observaciones?:String;
+}

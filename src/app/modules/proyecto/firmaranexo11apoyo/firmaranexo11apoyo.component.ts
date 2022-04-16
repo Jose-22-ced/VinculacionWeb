@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-
-import {Anexo61} from "../../../models/anexo61";
+// @ts-ignore
+import { saveAs } from "file-saver";
+import Swal from "sweetalert2";
+import {Anexo11} from "../../../models/anexo11";
 import {FormBuilder, FormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FechaService} from "../../../services/fecha.service";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {DateAdapter} from "@angular/material/core";
-import {Anexo11} from "../../../models/anexo11";
 import {Anexo11Service} from "../../../services/anexo11.service";
-// @ts-ignore
-import { saveAs } from "file-saver";
-import Swal from "sweetalert2";
 function getBase64(file: any) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -22,16 +20,17 @@ function getBase64(file: any) {
 }
 
 @Component({
-  selector: 'app-firmaranexo11',
-  templateUrl: './firmaranexo11.component.html',
-  styleUrls: ['./firmaranexo11.component.css']
+  selector: 'app-firmaranexo11apoyo',
+  templateUrl: './firmaranexo11apoyo.component.html',
+  styleUrls: ['./firmaranexo11apoyo.component.css']
 })
-export class Firmaranexo11Component implements OnInit {
+export class Firmaranexo11apoyoComponent implements OnInit {
+
+
 
   issloading=true;
   isexist?:boolean;
   panelOpenState = false;
-
   anexo11:Anexo11[]=[];
   myControl = new FormControl();
   filteredOptions?: Observable<Anexo11[]>;
@@ -49,19 +48,19 @@ export class Firmaranexo11Component implements OnInit {
       let cedula = params['cedula']
       let nombres=params['nombres']
       this.nombres=nombres;
-      this.cedula=cedula
-      this.anexo11Service.getAll().subscribe(value => {
-        this.anexo11 = value.filter(value => value.nombreDirector==nombres);
+      console.log(cedula)
+      this.anexo11Service.getAll().subscribe(anex11 => {
+        this.anexo11 = anex11.filter(value => value.nombreApoyo==nombres);
 
-        console.log(value);
-        this.isexist=value.length!=0;
-        this.anexo11=value;
+        console.log(nombres);
+        this.isexist=anex11.length!=0;
+        this.issloading=false;
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values=>this.filter(values)),
         );
-        this.issloading=false;
-        console.log(value)
+
+        console.log(anex11)
       })
     })
   }
@@ -69,7 +68,6 @@ export class Firmaranexo11Component implements OnInit {
   filter(value: any): Anexo11[] {
     const filterValue = value.toLowerCase();
     return this.anexo11.filter(option => option.nombreApoyo?.toLowerCase().includes(filterValue)
-      ||option.nombreDirector?.toLocaleLowerCase().includes(filterValue)
       ||option.nombresEstudiante?.toLocaleLowerCase().includes(filterValue)
       || option.carrera?.toLocaleLowerCase().includes(filterValue)
       || option.cedulaEstudiante?.toLocaleLowerCase().includes(filterValue)
@@ -122,34 +120,9 @@ export class Firmaranexo11Component implements OnInit {
         })
       }
     })
+  }
 
-  }
-  eliminarAnexo11(anexo11: Anexo11) {
-    this.issloading = true;
-    this.anexo11Service.deleteAnexo11(anexo11.id).subscribe(value => {
-      Swal.fire({
-        title: 'Exito',
-        text: 'Anexo 11 eliminado',
-        icon: 'success',
-        iconColor: '#17550c',
-        color: "#0c3255",
-        confirmButtonColor: "#0c3255",
-        background: "#fbc02d",
-      })
-      window.location.reload();
-    }, error => {
-      Swal.fire({
-        title: 'Error',
-        text: 'Anexo no se elimino ' + error.error.messages,
-        icon: 'error',
-        color: "#0c3255",
-        confirmButtonColor: "#0c3255",
-        background: "#fbc02d",
-      })
-      window.location.reload();
-    })
-    this.issloading = false;
-  }
+
   //convert a pdf
   convertFile(docum:any) {
     console.log(docum)

@@ -1,0 +1,107 @@
+<div>
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Proyectos</ng-template>
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Seleccione el proyecto</mat-card-title>
+            <mat-card-subtitle>Proyectos</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field appearance="outline">
+              <mat-label>BUSCAR DOCENTE</mat-label>
+              <input matInput  placeholder="FILTRAR" [formControl]="myControl">
+              <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+              <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+                <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionProyecto($event)" formControlName="firstCtrl" required>
+                  <mat-list-option *ngFor="let shoe of filteredOptions | async" [value]="shoe" class="example-item">
+                    {{shoe.nombre}}
+                  </mat-list-option>
+                </mat-selection-list>
+              </cdk-virtual-scroll-viewport>
+              <br>
+              <p>
+                Docente seleccionado: {{pryectoselect.nombre}}
+              </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button matStepperNext color="primary">Siguente</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Informe">
+      <form [formGroup]="secondFormGroup">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Informe</mat-card-title>
+            <mat-card-subtitle>Datos importantes</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field appearance="fill" style="width: 100%;">
+              <mat-label>Antecedentes</mat-label>
+              <textarea matInput formControlName="antece" [(ngModel)]="informeAceotacion.antecedentes"></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 100%;">
+              <mat-label>Objetevo general</mat-label>
+              <textarea matInput formControlName="objetivo"  [(ngModel)]="informeAceotacion.objetivoGeneral"></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 100%;">
+              <mat-label>Desarrollo</mat-label>
+              <textarea matInput formControlName="descrip" [(ngModel)]="informeAceotacion.desasarollo" ></textarea>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
+            <button mat-raised-button color="primary" matStepperNext>Siguente</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirthFormGroup" label="Documento">
+      <form [formGroup]="thirthFormGroup">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-subtitle>Generar Anexo</mat-card-subtitle>
+            <h4>Debe obtener el anexo en "Obtener Anexo" y posteriormente deberá firmar y subir de en formato PDF</h4>
+          </mat-card-header>
+          <mat-card-content>
+            <div>
+              <button mat-raised-button color="primary" (click)="generarDocumento()">Obtener Anexo</button>
+              <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
+                <ngx-mat-file-input accept="application/pdf" (change)="subirDocumento($event.target.files)" formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
+                <mat-icon matSuffix>folder</mat-icon>
+              </mat-form-field>
+            </div>
+          <mat-card-actions>
+            <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
+            <button mat-raised-button color="primary" matStepperNext>Siguente</button>
+          </mat-card-actions>
+            </mat-card-content>
+        </mat-card>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-subtitle>Generar Anexo</mat-card-subtitle>
+        </mat-card-header>
+        Se gurdara el informe de seleccion de alumnos para el proyecto
+        <mat-card-content>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button matStepperPrevious color="warn">Atras</button>
+          <button mat-raised-button color="accent" (click)="guardarAceptacion()" >Guardar</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-step>
+  </mat-stepper>
+</div>

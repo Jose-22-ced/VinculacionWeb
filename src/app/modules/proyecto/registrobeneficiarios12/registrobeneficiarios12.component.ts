@@ -94,17 +94,7 @@ export class Registrobeneficiarios12Component implements OnInit {
         );
         this.issloading = false;
       })
-     /* this.proyectoService.getProyectobyCIApoyo(cedula).subscribe(dataPro=>{
-        this.proyectoSelect=dataPro
-        this.entidadService.getsaveEntidadBeneficiariabyId(Number(dataPro.entidadbeneficiaria)).subscribe(dataEn=>{
-          this.entidadSelect=dataEn
-          this.filteredOptions= this.myControl.valueChanges.pipe(
-            startWith(''),
-            map(values => this.filter(values)),
-          );
-          this.issloading = false;
-        })
-      })*/
+
 
     })
 

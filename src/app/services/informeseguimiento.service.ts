@@ -19,7 +19,7 @@ export class InformeSeguimientoService {
   }
   updateAnexo(informe:InformeSeguimiento):Observable<InformeSeguimiento>{
     console.log(informe)
-    return this.http.put<Anexo9>(this.urlEndPoint,informe,{headers:this.httpHeaders})
+    return this.http.put<InformeSeguimiento>(this.urlEndPoint,informe,{headers:this.httpHeaders})
   }
 
   getAnexo():Observable<Anexo9[]>{

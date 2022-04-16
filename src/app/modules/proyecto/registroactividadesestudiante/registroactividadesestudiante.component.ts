@@ -44,7 +44,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
   isLinear = true;
   panelOpenState = true;
   isexist?: boolean;
-
+  canBotton: boolean = false
   public sum=0;
   actualzar=false
   public cedula?:String;
@@ -113,6 +113,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
     this.rows.push(this.createItemFormGroup(actividades));
     this.rows.getRawValue().forEach(element => {
       this.sum+=element.numHoras;
+
       console.log(this.sum)
     })
     console.log(this.rows.getRawValue())
@@ -130,7 +131,6 @@ export class RegistroactividadesestudianteComponent implements OnInit {
     return this._formBuilder.group({
       id:actividades?.id,
       fecha:actividades?.fecha,
-      // .setDate(actividades.fecha?.getDate()+1),
       descripcionActividad:actividades?.descripcionActividad,
       lugar:actividades?.lugar,
       numHoras:actividades?.numHoras,
@@ -150,9 +150,10 @@ export class RegistroactividadesestudianteComponent implements OnInit {
     this.anexo8Service.deteledActivadades(this.anexo8requeste.id,actividades.id).subscribe(data=>{
       Swal.fire({
         icon: 'success',
-        title: 'PLAN GUARDADO',
-        text: 'Eliminado guadados correctamente',
-        confirmButtonColor: "#0c3255"
+        title: 'ELIMINADO',
+        text: 'Correctamente',
+        confirmButtonColor: "#0c3255",
+        background: "#fbc02d",
       })
       window.location.reload();
       this.actulizar();
@@ -161,15 +162,16 @@ export class RegistroactividadesestudianteComponent implements OnInit {
         icon: 'warning',
         title: 'Al paracer hubo un problema',
         text: err.error.message,
-        confirmButtonColor: "#0c3255"
+        confirmButtonColor: "#0c3255",
+        background: "#fbc02d",
       })
       window.location.reload();
     })
   }
 
 
-  selectOpcion(event:number){
-    this.proyectoService.getProyectobyid(event).subscribe(data=>{
+  selectOpcion(event:any){
+    this.proyectoService.getProyectobyid(event.target.value).subscribe(data=>{
       this.proyecto=data
       this.anexo8Service.getEntidadById(data.entidadbeneficiaria).subscribe(da=>{
         this.edntidad=da;
@@ -190,6 +192,9 @@ export class RegistroactividadesestudianteComponent implements OnInit {
     })
 
   }
+
+
+
   anexo8:Anexo8= new Anexo8;
   ontnerDatos():Anexo8{
     this.anexo8.cedulaEstudiante=this.cedula;
@@ -209,13 +214,15 @@ export class RegistroactividadesestudianteComponent implements OnInit {
     return this.anexo8;
   }
   guardar(){
-     this.anexo8=this.ontnerDatos();
+    this.anexo8=this.ontnerDatos();
     this.anexo8Service.saveAnexo8(this.ontnerDatos()).subscribe(datos=>{
+      console.log(">."+this.anexo8Service.saveAnexo8(this.ontnerDatos()))
       Swal.fire({
         icon: 'success',
         title: 'ACTIVIDAD REGISTRADA CORRECTAMENTE',
         text: 'Datos guadados correctamente',
-        confirmButtonColor: "#0c3255"
+        confirmButtonColor: "#0c3255",
+        background: "#fbc02d",
       })
       window.location.reload();
     },err=>{
@@ -223,9 +230,9 @@ export class RegistroactividadesestudianteComponent implements OnInit {
         icon: 'warning',
         title: 'Al paracer hubo un problema',
         text: err.error.message,
-        confirmButtonColor: "#0c3255"
+        confirmButtonColor: "#0c3255",
+        background: "#fbc02d",
       })
-      window.location.reload();
     })
 
   }
@@ -254,24 +261,25 @@ export class RegistroactividadesestudianteComponent implements OnInit {
   actulizar(){
     console.log(this.ontnerDatos())
     this.anexo8.id=this.anexo8requeste.id
-          this.anexo8Service.updateActivadades(this.ontnerDatos()).subscribe(datos=>{
-                      console.log(this.ontnerDatos()),
-                      Swal.fire({
-                        icon: 'success',
-                        title: 'ACTIVIDAD REGISTRADA',
-                        text: 'Datos guadados correctamente',
-                        confirmButtonColor: "#0c3255"
-                      })
-            window.location.reload();
-                      this.issloading=false;
-             },err=>{
-          Swal.fire({
+    this.anexo8Service.updateActivadades(this.ontnerDatos()).subscribe(datos=>{
+      console.log(this.anexo8Service.updateActivadades(this.ontnerDatos()))
+      Swal.fire({
+        icon: 'success',
+        title: 'ACTIVIDAD REGISTRADA',
+        text: 'Datos guadados correctamente',
+        confirmButtonColor: "#0c3255",
+        background: "#fbc02d",
+      })
+      window.location.reload();
+    },err=>{
+      Swal.fire({
         icon: 'warning',
-         title: 'Al paracer hubo un problema',
-      text: err.error.message,
-      confirmButtonColor: "#0c3255"
-       })
-     })
+        title: 'Al paracer hubo un problema',
+        text: err.error.message,
+        confirmButtonColor: "#0c3255",
+        background: "#fbc02d",
+      })
+    })
   }
   ggenerarDocumento8() {
     var anexo8:Anexo8=this.ontnerDatos();
@@ -345,4 +353,5 @@ export class RegistroactividadesestudianteComponent implements OnInit {
       saveAs(out, "Anexo8.docx");
     });
   }
+
 }

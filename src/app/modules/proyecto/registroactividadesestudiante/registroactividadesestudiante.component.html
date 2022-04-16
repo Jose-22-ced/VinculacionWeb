@@ -21,23 +21,31 @@
           <mat-card-content>
             <br>
 
-            <mat-form-field appearance="fill" >
+
+            <mat-form-field appearance="fill">
               <mat-label>SELECCIONE UN PROYECTO:</mat-label>
-              <mat-select (selectionChange)="selectOpcion($event.value)" formControlName="proyecto">
-                <mat-option *ngFor="let item of anexo3"[value]="item.idProyectoPPP">{{item.nombreproyecto}}</mat-option>
-              </mat-select>
+              <select matNativeControl class="form-control"  (change)="selectOpcion($event)" style="width: 100%" name="select" required formControlName="proyecto">
+                <option value="" selected></option>
+                <option *ngFor="let item of anexo3"[value]="item.idProyectoPPP">{{item.nombreproyecto}}</option>
+              </select>
             </mat-form-field>
 
-             <div>
-               <br>
-               <strong >Datos Informativos:</strong>
-               <br>
-               <strong>Entidad beneficiaria: </strong> {{edntidad.nombre}}
-               <br>
-               <strong>Nombre del Estudiante:  </strong> {{nombre}}
-               <br>
-               <strong>Nro. de Cédula:  </strong> {{cedula}}
-             </div>
+            <br>
+            <br>
+            <mat-card-title>
+              <strong>Datos Informativos:</strong>
+              <br>
+              <br>
+            </mat-card-title>
+            <mat-card-subtitle style="font-size: x-large">
+              <strong>Entidad beneficiaria: </strong> {{edntidad.nombre}}
+            </mat-card-subtitle>
+            <mat-card-subtitle style="font-size: x-large">
+              <strong>Nombre del Estudiante:  </strong> {{nombre}}
+            </mat-card-subtitle>
+            <mat-card-subtitle style="font-size: x-large">
+              <strong>Nro. de Cédula:  </strong> {{cedula}}
+            </mat-card-subtitle>
           </mat-card-content>
           <mat-divider></mat-divider>
           <br>
@@ -51,7 +59,7 @@
 
     <mat-step [stepControl]="secondFormGroup" label="ACTIVIDADES DEL ESTUDIANTE">
       <form [formGroup]="secondFormGroup">
-        <mat-card class="example-card">
+        <mat-card class="example-card2">
 
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
@@ -60,6 +68,7 @@
               INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY
             </mat-card-title>
             <mat-card-subtitle>
+
               <br />
               CORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD<br>
               REGISTRO DIARIO DE ACTIVIDADES DE LOS ESTUDIANTES
@@ -68,40 +77,57 @@
 
           <mat-card-content>
             <mat-grid-list cols="4" rowHeight="3:1.10" [formGroup]="secondFormGroup">
-          <h3>ACTIVIDADES DEL ESTUDIANTE</h3>
-          <mat-grid-tile colspan="4" >
-          <button mat-fab color="primary" (click)="onAddRow()" *ngIf="secondFormGroup.get('rows')"><mat-icon>add_circle</mat-icon></button>
-          </mat-grid-tile>
+              <mat-grid-tile colspan="4" >
+                <button mat-fab color="primary" (click)="onAddRow()" *ngIf="secondFormGroup.get('rows')"><mat-icon>add_circle</mat-icon></button>
+              </mat-grid-tile>
 
-           <mat-grid-tile colspan="4" *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
-             <mat-form-field class="example-full-widthf" appearance="outline">
-               <mat-label>Fecha:{{index}}</mat-label>
-               <input matInput [matDatepicker]="picker"  [formControl]="row.get('fecha')"  placeholder="Fecha:" [required]>
-               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-               <mat-datepicker #picker></mat-datepicker>
-             </mat-form-field>
+              <mat-grid-tile colspan="1">
+                <mat-label  class="example-full-widthf" appearance="outline"><b>FECHA</b></mat-label>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1">
+                <mat-label  class="example-full-width" appearance="outline"><b> DESCRIPCION DE ACTICIDADES</b></mat-label>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1" >
+                <mat-label  class="example-full-widthl" appearance="outline"><b>LUGAR</b></mat-label>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1">
+                <mat-label  class="example-full-width2" appearance="outline"> <b> N.HORAS</b></mat-label>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="4" *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
+                <mat-form-field class="example-full-widthf" appearance="outline">
+                  <mat-label>Fecha:{{index}}</mat-label>
+                  <input matInput type="date"   [formControl]="row.get('fecha')"  placeholder="Fecha:" [required]>
+                </mat-form-field>
 
-             <mat-form-field class="example-full-width" appearance="outline">
-               <mat-label>Descripción de Actividades:{{index}}</mat-label>
-               <textarea matInput [formControl]="row.get('descripcionActividad')"  placeholder="Descripción de Actividades:" [required]>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Descripción de Actividades:{{index}}</mat-label>
+                  <textarea matInput [formControl]="row.get('descripcionActividad')"  placeholder="Descripción de Actividades:" [required]>
                </textarea>
-             </mat-form-field>
-             <mat-form-field class="example-full-widthl" appearance="outline">
-               <mat-label>Lugar{{index}}</mat-label>
-               <input matInput type="text"   [formControl]="row.get('lugar')"  placeholder="Lugar" [required]>
-             </mat-form-field>
+                </mat-form-field>
+                <mat-form-field class="example-full-widthl" appearance="outline">
+                  <mat-label>Lugar{{index}}</mat-label>
+                  <input matInput type="text"   [formControl]="row.get('lugar')"  placeholder="Lugar" [required]>
+                </mat-form-field>
 
-             <mat-form-field class="example-full-width2"  appearance="outline">
-               <mat-label>Numero de Horas{{index}}</mat-label>
-               <input matInput type="number" style="font-size: 18px;" class="form-control" (keyup)="sumar()"  class="impnumber"  [formControl]="row.get('numHoras')"  placeholder="Horas" [required]>
-             </mat-form-field>
+                <mat-form-field class="example-full-width2"  appearance="outline">
+                  <mat-label>Numero de Horas{{index}}</mat-label>
+                  <input matInput type="number" style="font-size: 18px;" class="form-control" (keyup)="sumar()"  class="impnumber"  [formControl]="row.get('numHoras')"  placeholder="Horas" [required]>
+                </mat-form-field>
 
-             <span class="example-spacer"></span>
-             <button mat-mini-fab color="warn" style="margin-left: 50px" (click)="onRemoveRow(index)" (click)="eliminarActividad(row.value)" [disabled]=""><mat-icon>delete_sweep</mat-icon></button>
-           </mat-grid-tile>
-</mat-grid-list>
+                <span class="example-spacer"></span>
+                <button mat-mini-fab color="warn" style="margin-left: 50px" (click)="onRemoveRow(index)" (click)="eliminarActividad(row.value)" [disabled]=""><mat-icon>delete_sweep</mat-icon></button>
+              </mat-grid-tile>
+            </mat-grid-list>
 
-  <strong style="font-size:large">TOTAL DE HORAS:</strong> <strong style="font-size:large"> {{sum}}</strong><br>
+            <strong style="font-size:large">TOTAL DE HORAS:</strong> <strong style="font-size:large"> {{sum}}</strong><br>
+
+            <br>
+            <div>
+              <!--              <button style="align-self: center;" mat-raised-button color="primary" *ngIf="actualzar else actualizardatos" (click)="actulizar()">Actualizar Nuevos Datos</button>-->
+              <!--              <ng-template #actualizardatos>-->
+              <button  style="align-self: center;" mat-raised-button color="accent"  (click)="guardar()">GUARDAR REGISTRO</button>
+              <!--              </ng-template>-->
+            </div>
           </mat-card-content>
 
 
@@ -121,18 +147,19 @@
         <mat-card class="example-card">
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Anexo 8</mat-card-title>
-            <mat-card-subtitle>Generar Anexo 8</mat-card-subtitle>
-          </mat-card-header>
-          <h4>ACTUALICE SUS ACTIVIDADES</h4>
-          <div>
-              <button style="align-self: center;" mat-raised-button color="primary" *ngIf="actualzar else actualizardatos" (click)="actulizar()">Actualizar Nuevos Datos</button>
-                 <ng-template #actualizardatos>
-                <button  style="align-self: center;" class="btn btn-info"  (click)="guardar()">GUARDAR REGISTRO</button>
-              </ng-template>
+            <mat-card-title>
+              (ANEXO 8)<br>
+              INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY
+            </mat-card-title>
+            <mat-card-subtitle>
 
-          </div>
-<br><br>
+              <br />
+              CORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD<br>
+              REGISTRO DIARIO DE ACTIVIDADES DE LOS ESTUDIANTES
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <br><br>
           <h4> SI YA CULMINO EL REGISTRO DE TODAS SUS ACTIVIDADES, DESCARGUE EL ARCHIVO Y SUBALO EN FORMATO PDF.</h4>
           <div>
             <button mat-raised-button color="primary" (click)="ggenerarDocumento8()">Obtener Anexo</button>
@@ -156,19 +183,23 @@
       <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>  (ANEXO  8)<br><br>CONFIRMACION DE ENVIO DE ACTIVIDADES</mat-card-title>
-          <mat-card-subtitle><br />
-            PROYECTOS DE VINCULACIÓN CON LA SOCIEDAD <br />
-            INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY <br />
+          <mat-card-title>
+            (ANEXO 8)<br>
+            INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY
+          </mat-card-title>
+          <mat-card-subtitle>
+            <br />
+            CORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD<br>
+            REGISTRO DIARIO DE ACTIVIDADES DE LOS ESTUDIANTES
           </mat-card-subtitle>
-          <mat-card-subtitle>Guardar Registro de Actividades </mat-card-subtitle>
+          <mat-card-subtitle style="font-size: large">ESTA SEGURO DE SUBIR SUS ACTIVIDADES REGISTRADAS HASTA EL MOMENTO</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
 
-          <div>
-            <button mat-button matStepperPrevious color="primary">Atras</button>
-            <button mat-flat-button color="warn" (click)="actulizar()">GUARDAR</button>
-          </div>
+          <br>
+          <button mat-button matStepperPrevious color="primary">Atras</button>
+          <button mat-flat-button color="primary" (click)="actulizar()">SUBIR</button>
+
         </mat-card-content>
       </mat-card>
     </mat-step>
