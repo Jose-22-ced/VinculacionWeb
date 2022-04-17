@@ -1,6 +1,6 @@
 <div *ngIf="issloading==false">
   <mat-card>
-    <mat-card-title>INFORMES DE CULMINACION</mat-card-title>
+    <mat-card-title>INFORMES DE CULMINACIÓN</mat-card-title>
   </mat-card>
   <br>
   <div *ngIf="isexist">
@@ -25,9 +25,9 @@
           </mat-menu>
         </mat-card-header>
         <mat-card-content>
-          <p>Apoyo: {{anex10.nombreDocenteapoyo}}</p>
-          <p>Fecha de Inico y Fin: {{anex10.fechaFin | date:"longDate"}} - {{anex10.fechaFin | date:"longDate"}}</p>
-          <p>Director: {{anex10.nombreDirector}}</p>
+          <p><strong> Apoyo:</strong>  {{anex10.nombreDocenteapoyo}}</p>
+          <p><strong>Fecha de Inico y Fin:</strong>  {{anex10.fechaFin | date:"longDate"}} - {{anex10.fechaFin | date:"longDate"}}</p>
+          <p><strong>Director: </strong> {{anex10.nombreDirector}}</p>
           <strong *ngIf="date>=anex10.fechaFin">Fuera de tiempo</strong>
         </mat-card-content>
       </mat-card>

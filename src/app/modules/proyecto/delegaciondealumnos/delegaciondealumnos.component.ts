@@ -249,7 +249,7 @@ export class DelegaciondealumnosComponent implements OnInit {
     if(this.alumnoselect.length==0){
       Swal.fire({
         title: 'Detalle',
-        text: 'No a seleccionado a ningun estudiantes, vueva atras y realicelo',
+        text: 'No ha seleccionado a ningún estudiante, vueva atrás y seleccionelo',
         icon: 'info',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",
@@ -263,7 +263,7 @@ export class DelegaciondealumnosComponent implements OnInit {
     if(this.alumnoselect.length==0){
       Swal.fire({
         title: 'Detalle',
-        text: 'No a seleccionado a ningun estudiantes, vueva atras y realicelo',
+        text: 'No ha seleccionado a ningún estudiante, vueva atrás y seleccionelo',
         icon: 'info',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",
@@ -272,8 +272,8 @@ export class DelegaciondealumnosComponent implements OnInit {
     }else {
       this.anexo5Service.saveAnexo5(this.obtnerDatos()).subscribe(value => {
         Swal.fire({
-          title: 'Exito',
-          text: 'Asignacion guardada correctamnete',
+          title: 'Éxito',
+          text: 'Asignación guardada correctamente',
           icon: 'success',
           iconColor :'#17550c',
           color: "#0c3255",
@@ -283,8 +283,8 @@ export class DelegaciondealumnosComponent implements OnInit {
         this.router.navigate(['/panelusuario/proyectovinculacion/verdelegacion',this.cedula]);
       },error => {
         Swal.fire({
-          title: 'Fallo',
-          text: 'Asignacion no a guardada'  + error.error.message,
+          title: 'Ha surgido un error',
+          text: "Hubo un error, contáctese con TICs.",
           icon: 'error',
           color: "#0c3255",
           confirmButtonColor:"#0c3255",
@@ -305,7 +305,7 @@ export class DelegaciondealumnosComponent implements OnInit {
           this.anexo5resposae.documento="";
           Swal.fire(
             'Fallo',
-            'El docemento es demaciado pesado',
+            'El documento es demaciado pesado',
             'warning'
           )
         }else{

@@ -41,6 +41,7 @@ import * as _moment from 'moment';
 
 // @ts-ignore
 import {default as _rollupMoment, Moment} from 'moment';
+import {variable} from "@angular/compiler/src/output/output_ast";
 
 const moment = _rollupMoment || _moment;
 
@@ -321,8 +322,8 @@ export class Anexo7planificacionmensualComponent implements OnInit {
     var anexo7=this.obtnerdatos();
     this.anexo7service.saveAnexo7(anexo7).subscribe(value => {
       Swal.fire({
-        title: 'Exito',
-        text: 'SEGUIMIENTO GUARDADO',
+        title: 'Éxito',
+        text: 'Informe de segimiento guardado.',
         icon: 'success',
         iconColor :'#17550c',
         color: "#0c3255",
@@ -333,8 +334,8 @@ export class Anexo7planificacionmensualComponent implements OnInit {
       this.router.navigate(['/panelusuario/proyectovinculacion/verplatificaciones',this.cedula,this.nombres]);
     },error => {
       Swal.fire({
-        title: 'Error',
-        text: 'La nueva planecion no se creado '+error.error.message,
+        title: 'Ha surgido un error',
+        text: "Hubo un error, contáctese con TICs.",
         icon: 'error',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",

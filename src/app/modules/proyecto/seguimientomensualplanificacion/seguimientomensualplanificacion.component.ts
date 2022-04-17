@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Proyectos} from "../../../models/proyectos";
 import {map, Observable, startWith} from 'rxjs';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {Anexo7Service} from "../../../services/anexo7.service";
 import {Anexo7, HorasEstudiantesA7Request} from "../../../models/anexo7";
@@ -70,7 +70,8 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
               private anexo7Service: Anexo7Service,
               private _formBuilder: FormBuilder,
               private anexo9Service:Anexo9Service,
-              private fechaService: FechaService) {
+              private fechaService: FechaService,
+              private router:Router) {
     this.secondFormGroup = this._formBuilder.group({
       items: [null, Validators.required],
       items_value: ['no', Validators.required]
@@ -135,15 +136,20 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
   }
   filter(value: any): Anexo7[] {
     const filterValue = value.toString().toLowerCase();
-    return this.anexo7select.filter(option => option.mesAnioPlanificado?.toISOString().toLowerCase().includes(filterValue)
-    );
+    return this.anexo7select;
 
   }
 
   selectionProyecto(proyectoSelection:MatSelectionListChange){
     this.proyectoselect=proyectoSelection.option.value
     this.anexo7Service.getAnexo7All().subscribe(data=>{
-      this.anexo7select=data.filter(value => value.idProyecto=this.proyectoselect.id)
+      this.anexo9Service.getAnexo9().subscribe(value => {
+          data.filter(value => value.idProyecto=this.proyectoselect.id).forEach(value2 => {
+           if(value.filter(value1 => value1.mesPlanificaccion==value2.mesAnioPlanificado+"").length==0){
+             this.anexo7select.push(value2)
+           }
+          })
+      })
       console.log(data)
       this.filteredOptions= this.myControl.valueChanges.pipe(
         startWith(''),
@@ -204,14 +210,15 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
     this.anexo9Service.saveAnexo(anexo9).subscribe(value => {
       console.log(anexo9)
       Swal.fire({
-        title: 'Exito',
-        text: 'Anexo9 creado',
+        title: 'Éxito',
+        text: 'Anexo de planificación creado existosamente',
         icon: 'success',
         iconColor :'#17550c',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",
         background: "#fbc02d",
       })
+      this.router.navigate(['/panelusuario/proyectovinculacion/ver_seguimiento_mensual',this.cedula,this.nombres])
     },error => {
       Swal.fire({
         title: 'Error',
@@ -315,7 +322,7 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
-      saveAs(out, "Anexo9.docx");
+      saveAs(out, "Anexo9 "+anexo9.nombreApoyo+".docx");
     });
   }
 }

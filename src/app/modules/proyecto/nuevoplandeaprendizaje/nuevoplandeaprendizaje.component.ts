@@ -309,18 +309,19 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
     var anexo6=this.obtnerdatos();
     this.anexo6Service.saveAnexo6(anexo6).subscribe(value => {
       Swal.fire({
-        title: 'Exito',
-        text: 'La nueva planecion creado y enviada con exito',
+        title: 'Éxito',
+        text: 'La nueva planeación fue creada y enviada con exito',
         icon: 'success',
         iconColor :'#17550c',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",
         background: "#fbc02d",
       })
+      this.router.navigate(['/panelusuario/proyectovinculacion/nuevoplandeaprendizaje',this.cedula])
     },error => {
       Swal.fire({
-        title: 'Error',
-        text: 'La nueva planecion no se creado '+error.error.message,
+        title: 'Ha surgido un error',
+        text: "Hubo un error, contáctese con TICs.",
         icon: 'error',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",
@@ -423,7 +424,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
-      saveAs(out, "Anexo6.docx");
+      saveAs(out, "Anexo6 "+anexo6.nombreEstudiante+".docx");
     });
   }
 }

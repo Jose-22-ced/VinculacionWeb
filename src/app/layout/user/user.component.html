@@ -281,7 +281,6 @@
             </mat-expansion-panel>
 
             <br>
-            <br>
 
             <mat-expansion-panel (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
@@ -325,7 +324,6 @@
                       routerLinkActive="active">-Firmar Evaluaciones</button>
             </mat-expansion-panel>
             <br>
-
             <mat-expansion-panel (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
@@ -353,7 +351,6 @@
 
             </mat-expansion-panel>
             <br>
-
             <mat-expansion-panel (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
@@ -432,19 +429,19 @@
                       routerLinkActive="active">-Nuevo Plan de Aprendizaje</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verplanifiaciones',persona.cedula]"
                       routerLinkActive="active">-Ver Planes de Aprendizaje</button>
-              <br>
-              <mat-expansion-panel (opened)="panelOpenState = true"
-                                   (closed)="panelOpenState = false">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    Selección de estudiantes (Informe)
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/estudiantesseleccionado',persona.cedula]"
-                        routerLinkActive="active">-Estudiantes Seleccionados</button>
-                <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verestudiantesseleccionado',persona.nombrescompletos]"
-                        routerLinkActive="active">-Ver informe de selección</button>
-              </mat-expansion-panel>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Selección de estudiantes (Informe)
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/estudiantesseleccionado',persona.cedula]"
+                      routerLinkActive="active">-Estudiantes Seleccionados</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verestudiantesseleccionado',persona.nombrescompletos]"
+                      routerLinkActive="active">-Ver informe de selección</button>
             </mat-expansion-panel>
           </div>
           <!--Estudiante-->

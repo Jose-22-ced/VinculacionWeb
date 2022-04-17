@@ -84,7 +84,7 @@ export class FirmarpostulacionComponent implements OnInit {
     if(anexo4.num_proceso==2){
       Swal.fire({
         title: 'Finalizado',
-        text: 'Se a finalizado usted el proceso de aceptación',
+        text: 'Se ha finalizado el proceso de aceptación',
         icon: 'success',
         iconColor :'#17550c',
         color: "#0c3255",
@@ -96,11 +96,11 @@ export class FirmarpostulacionComponent implements OnInit {
         allowOutsideClick: false,
         allowEnterKey:false,
         allowEscapeKey:false,
-        title: '¡¡¡ATENCIÓN!!!',
-        text: '🔊 Antes de "CONTINUAR LA FIRMA" usted deberá ' +
-          '"OBTNER EL ANEXO" dando click en esa opción. Una vez obtenido el anexo deberá FIRMAR, para finalizar la aceptación' +
-          'Tome su tiempo, una ves tenga lo requerido puede regresar a esta ventana' +
-          ' y "CONTINUAR LA ACEPTACIÓN 🔊"',
+        title: '¡ATENCIÓN!',
+        text: '🔊 Antes de "CONTINUAR LA ACEPTACIÓN" usted deberá: ' +
+          '1. Obtener el anexo\n' +
+          '2. Firmar el anexo y trasnformarlo a PDF '+
+          '3. Dar clic en "Continuar Postulación"',
         icon: 'info',
         showDenyButton: true,
         showCancelButton: true,
@@ -126,7 +126,7 @@ export class FirmarpostulacionComponent implements OnInit {
             confirmButtonColor: "#3cb227",
             background: "#fbc02d",
             title: 'Confirmación',
-            text: 'Debe subir la el anexo en el formato anterirmente requerido "PDF" para finalizar. Nota: Sea reponsable con el documento a subir, para evitar problemas futuros.',
+            text: 'Debe subir el anexo en el formato requerido "PDF" para finalizar. Nota: Sea reponsable con el documento a subir.',
             input: 'file',
             inputAttributes: {
               'accept': 'application/pdf',
@@ -142,8 +142,8 @@ export class FirmarpostulacionComponent implements OnInit {
                     anexo4.num_proceso=2;
                     this.anexo4Service.updateAnexo4(anexo4).subscribe(value1 => {
                       Swal.fire({
-                        title: 'Exito',
-                        text: 'Se a finalizado el proceso de aceptación',
+                        title: 'Éxito',
+                        text: 'Ha finalizado el proceso de aceptación',
                         icon: 'success',
                         iconColor :'#17550c',
                         color: "#0c3255",
@@ -152,8 +152,8 @@ export class FirmarpostulacionComponent implements OnInit {
                       })
                     },error => {
                       Swal.fire({
-                        title: 'Error',
-                        text: 'No se a finalizado el proceso de aceptación '+error.error.message,
+                        title: 'Ha surgido un error',
+                        text: "Hubo un error, contáctese con TICs.",
                         icon: 'error',
                         iconColor :'#17550c',
                         color: "#0c3255",

@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="issloading==false">
   <mat-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
@@ -11,7 +11,7 @@
           </mat-card-header>
           <mat-card-content>
             <mat-form-field appearance="outline">
-              <mat-label>BUSCAR DOCENTE</mat-label>
+              <mat-label>BUSCAR PROYECTO</mat-label>
               <input matInput  placeholder="FILTRAR" [formControl]="myControl">
               <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
             </mat-form-field>
@@ -25,7 +25,7 @@
               </cdk-virtual-scroll-viewport>
               <br>
               <p>
-                Docente seleccionado: {{pryectoselect.nombre}}
+                <strong>Proyecto seleccionado: </strong> {{pryectoselect.nombre}}
               </p>
           </mat-card-content>
           <mat-card-actions>
@@ -48,7 +48,7 @@
               <textarea matInput formControlName="antece" [(ngModel)]="informeAceotacion.antecedentes"></textarea>
             </mat-form-field>
             <mat-form-field appearance="fill" style="width: 100%;">
-              <mat-label>Objetevo general</mat-label>
+              <mat-label>Objetivo general</mat-label>
               <textarea matInput formControlName="objetivo"  [(ngModel)]="informeAceotacion.objetivoGeneral"></textarea>
             </mat-form-field>
             <mat-form-field appearance="fill" style="width: 100%;">
@@ -57,7 +57,7 @@
             </mat-form-field>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
+            <button mat-raised-button color="warn" matStepperPrevious>Atrás</button>
             <button mat-raised-button color="primary" matStepperNext>Siguente</button>
           </mat-card-actions>
         </mat-card>
@@ -80,7 +80,7 @@
               </mat-form-field>
             </div>
           <mat-card-actions>
-            <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
+            <button mat-raised-button color="warn" matStepperPrevious>Atrás</button>
             <button mat-raised-button color="primary" matStepperNext>Siguente</button>
           </mat-card-actions>
             </mat-card-content>
@@ -94,7 +94,7 @@
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-subtitle>Generar Anexo</mat-card-subtitle>
         </mat-card-header>
-        Se gurdara el informe de seleccion de alumnos para el proyecto
+        Se gurdará el informe sobre los alumnos aceptados para el proyecto
         <mat-card-content>
         </mat-card-content>
         <mat-card-actions>
@@ -105,3 +105,10 @@
     </mat-step>
   </mat-stepper>
 </div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

@@ -88,8 +88,8 @@
                   <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Fecha de Inicio y de Fin del Proyecto</mat-label>
                     <mat-date-range-input [rangePicker]="picker">
-                      <input matStartDate [formControl]="row.get('fechaInicio')" placeholder="Inicio">
-                      <input matEndDate [formControl]="row.get('fechaFin')" placeholder="Fin">
+                      <input matStartDate [formControl]="row.get('fechaInicio')"  [min]="proyecto.fechaInicio" [max]="proyecto.fechaFin"  placeholder="Inicio">
+                      <input matEndDate [formControl]="row.get('fechaFin')"  [min]="proyecto.fechaInicio" [max]="proyecto.fechaFin" placeholder="Fin">
                     </mat-date-range-input>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker></mat-date-range-picker>
@@ -162,8 +162,8 @@
                   <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Fecha de Inicio y de Fin del Proyecto</mat-label>
                     <mat-date-range-input [rangePicker]="picker">
-                      <input matStartDate [formControl]="row1.get('fechaInicio')" placeholder="Inicio">
-                      <input matEndDate [formControl]="row1.get('fechaFin')" placeholder="Fin">
+                      <input matStartDate [formControl]="row1.get('fechaInicio')" [min]="proyecto.fechaInicio" [max]="proyecto.fechaFin" placeholder="Inicio">
+                      <input matEndDate [formControl]="row1.get('fechaFin')" [min]="proyecto.fechaInicio" [max]="proyecto.fechaFin" placeholder="Fin">
                     </mat-date-range-input>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker></mat-date-range-picker>

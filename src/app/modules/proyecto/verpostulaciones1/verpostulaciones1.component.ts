@@ -60,7 +60,7 @@ export class Verpostulaciones1Component implements OnInit {
   proyecto:Proyectos[]=[];
 
   //tablas
-  displayedColumns: string[] = ['nombresestudiante', 'apellidosestudiante', 'cedula', 'paralelo','ciclo','nombreproyecto','fecha_solicitud','documento','aceptar','denegar'];
+  displayedColumns: string[] = ['nombresestudiante', 'apellidosestudiante', 'cedula', 'paralelo','nombreproyecto','fecha_solicitud','documento','aceptar','denegar'];
   // @ts-ignore
   dataSource: MatTableDataSource<Anexo3>;
   // @ts-ignore
@@ -176,12 +176,11 @@ export class Verpostulaciones1Component implements OnInit {
       allowOutsideClick: false,
       allowEnterKey:false,
       allowEscapeKey:false,
-      title: '¡¡¡ATENCIÓN!!!',
-      text: '🔊 Antes de "CONTINUAR LA POSTULACIÓN" usted deberá ' +
-        '"OBTNER EL ANEXO" dando click en esa opción. Una vez obtenido el anexo deberá FIRMAR y trasformar' +
-        ' el documeto a formato PDF el cual se le pedirá mas adelante. ' +
-        'Tome su tiempo, una ves tenga lo requerido puede regresar a esta ventana' +
-        ' y "CONTINIAR LA POSTULACIÓN 🔊"',
+      title: '¡ATENCIÓN!',
+      text: '🔊 Antes de "CONTINUAR LA ACEPTACIÓN" usted deberá: ' +
+        '1. Obtener el anexo\n' +
+        '2. Firmar el anexo y trasnformarlo a PDF '+
+        '3. Dar clic en "Continuar Postulación"',
       icon: 'info',
       showDenyButton: true,
       showCancelButton: true,
@@ -201,16 +200,17 @@ export class Verpostulaciones1Component implements OnInit {
           allowEscapeKey:false,
           showCancelButton: true,
           cancelButtonText: 'Salir, y continuar después',
-          title: 'Ingrese el numero de horas',
+          title: 'Ingrese el número de horas',
           input: 'number',
-          inputLabel: 'Numero de horas',
-          inputPlaceholder: 'Ingrese el numero de horas',
+          inputLabel: 'Número de horas',
+          inputPlaceholder: 'Ingrese el número de horas',
           color: "#0c3255",
           confirmButtonColor: "#0c3255",
           background: "#f3e0b8",
         })
         if (number) {
           anexo4.numeroHoras=number;
+          console.log(anexo4.numeroHoras)
           this.generarDocumento(anexo4);
         }
       } else if (result.isDenied) {
@@ -224,8 +224,8 @@ export class Verpostulaciones1Component implements OnInit {
           confirmButtonText: "CONTINUAR ACEPTACIÓN 👉",
           background: "#f3e0b8",
           cancelButtonText: 'Salir, y continuar después',
-          title:'¡¡¡ATENCIÓN!!!',
-          text:"Es impartante dar una explicación por el cual la postulación del estudiante a sido aceptado.",
+          title:'¡ATENCIÓN!',
+          text:"Es importante dar una explicación por el cual la postulación del estudiante ha sido aceptado.",
           inputLabel: '¿POR QUÉ?',
           inputPlaceholder: 'La razón de....',
           inputAttributes: {
@@ -236,6 +236,7 @@ export class Verpostulaciones1Component implements OnInit {
         if (text) {
           anexo.razon=text;
           anexo.estado="AN";
+          console.log(anexo.razon)
           const {value: file} = await Swal.fire({
             allowOutsideClick: false,
             allowEnterKey:false,
@@ -246,11 +247,11 @@ export class Verpostulaciones1Component implements OnInit {
             confirmButtonColor: "#3cb227",
             background: "#fbc02d",
             title: 'Confirmación',
-            text: 'Debe subir la el anexo en el formato anterirmente requerido "PDF" para finalizar. Nota: Sea reponsable con el documento a subir, para evitar problemas futuros.',
+            text: 'Debe subir el anexo en el formato requerido "PDF" para finalizar. Nota: Sea reponsable con el documento a subir.',
             input: 'file',
             inputAttributes: {
               'accept': 'application/pdf',
-              'aria-label': 'Debe subir la convocatoria en formato PDF'
+              'aria-label': 'Debe subir el documento en formato PDF'
             },
             inputValidator: (value) => {
               return new Promise((resolve) => {
@@ -263,8 +264,8 @@ export class Verpostulaciones1Component implements OnInit {
                     this.anexo4Service.saveAnexo4(anexo4).subscribe(value1 => {
                       this.anexo3Service.updateAnexo3(anexo).subscribe(value => {
                         Swal.fire({
-                          title: 'Exito',
-                          text: 'La aceptación a sido enviada',
+                          title: 'Éxito',
+                          text: 'La aceptación ha sido enviada',
                           icon: 'success',
                           iconColor :'#17550c',
                           color: "#0c3255",
@@ -275,8 +276,8 @@ export class Verpostulaciones1Component implements OnInit {
                         this.router.navigate(['/panelusuario/proyectovinculacion/verportulaciones1',this.cedula]);
                       },error => {
                         Swal.fire({
-                          title: 'Fallo',
-                          text: 'La aceptación no a sido enviada' +error.error.message,
+                          title: 'Ha surgido un error',
+                          text: "Hubo un error, contáctese con TICs.",
                           icon: 'info',
                           iconColor :'#17550c',
                           color: "#0c3255",
@@ -287,8 +288,8 @@ export class Verpostulaciones1Component implements OnInit {
                       this.issloading=false;
                     },error => {
                       Swal.fire({
-                        title: 'Fallo',
-                        text: 'La aceptación no a sido enviada' +error.error.message,
+                        title: 'Ha surgido un error',
+                        text: "Hubo un error, contáctese con TICs.",
                         icon: 'info',
                         iconColor :'#17550c',
                         color: "#0c3255",
@@ -338,8 +339,8 @@ export class Verpostulaciones1Component implements OnInit {
       confirmButtonText: "ENVIAR DENEGACIÓN 👉",
       background: "#f3e0b8",
       cancelButtonText: 'Salir, y continuar después',
-      title: '¡¡¡ATENCIÓN!!!',
-      text:"Es impartante dar una explicación por el cual la postulación del estudiante a sido denegado.",
+      title: '¡ATENCIÓN!',
+      text:"Es importante dar una explicación por el cual la postulación del estudiante ha sido denegado.",
       inputLabel: '¿POR QUÉ?',
       inputPlaceholder: 'La razón de....',
       inputAttributes: {
@@ -353,8 +354,8 @@ export class Verpostulaciones1Component implements OnInit {
       anexo.estado="DN";
       this.anexo3Service.updateAnexo3(anexo).subscribe(value => {
         Swal.fire({
-          title: 'Exito',
-          text: 'La denagación a sido enviada',
+          title: 'Éxito',
+          text: 'La denagación ha sido denagada',
           icon: 'success',
           iconColor :'#17550c',
           color: "#0c3255",
@@ -365,8 +366,8 @@ export class Verpostulaciones1Component implements OnInit {
         this.router.navigate(['/panelusuario/proyectovinculacion/verportulaciones1',this.cedula]);
       },error => {
         Swal.fire({
-          title: 'Fallo',
-          text: 'La denagación no a sido enviada' +error.error.message,
+          title: 'Ha surgido un error',
+          text: "Hubo un error, contáctese con TICs.",
           icon: 'info',
           iconColor :'#17550c',
           color: "#0c3255",
@@ -446,16 +447,16 @@ export class Verpostulaciones1Component implements OnInit {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
-      saveAs(out, "Anexo 2 aceptacion al estudiente "+ anexo4.nombreEstudiante+".docx");
+      saveAs(out, "Anexo 4 aceptacion al estudiante "+ anexo4.nombreEstudiante+".docx");
     });
   }
 
   convertFile(docum:any) {
     console.log(docum)
     //Usage example:
-    var file = this.dataURLtoFile(docum, 'Anexo2.pdf');
+    var file = this.dataURLtoFile(docum, 'Anexo3.pdf');
     console.log(file);
-    saveAs(file, 'Anexo2.pdf');
+    saveAs(file, 'Anexo3.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {
     let arr = dataurl.split(','),

@@ -57,7 +57,7 @@ export class SeleccionestudiantesComponent implements OnInit {
   firstFormGroup?: FormGroup;
   secondFormGroup?: FormGroup;
   thirthFormGroup?: FormGroup;
-
+  issloading=true;
   proyecto:Proyectos[]=[];
   pryectoselect:Proyectos = new Proyectos();
   myControl = new FormControl();
@@ -92,6 +92,7 @@ export class SeleccionestudiantesComponent implements OnInit {
               startWith(''),
               map(values=>this.filter(values)),
             );
+            this.issloading=false;
           })
         })
       })
@@ -167,7 +168,7 @@ export class SeleccionestudiantesComponent implements OnInit {
     var informe:Informeaceptacion=this.obtnerdatos();
     this.informedeaceptacionestdiatesService.savePreInforme(informe).subscribe(value => {
       Swal.fire({
-        title: 'Exito',
+        title: 'Éxito',
         text: 'Informe guardado exitosamente',
         icon: 'success',
         iconColor :'#17550c',
@@ -175,10 +176,11 @@ export class SeleccionestudiantesComponent implements OnInit {
         confirmButtonColor:"#0c3255",
         background: "#fbc02d",
       })
+      this.router.navigate(['/panelusuario/proyectovinculacion/verestudiantesseleccionado',informe.nombreElaborado])
     },error => {
       Swal.fire({
-        title: 'Error',
-        text: 'Informe no guardado '+error.error.message,
+        title: 'Ha surgido un error',
+        text: "Hubo un error, contáctese con TICs.",
         icon: 'error',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",

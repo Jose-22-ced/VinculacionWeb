@@ -189,7 +189,7 @@ export class NuevoinformedeculminacionComponent implements OnInit {
     console.log(this.obtenarDatos().documento)
     this.anexo10Service.saveAnexo10(this.obtenarDatos()).subscribe(value => {
       Swal.fire({
-        title: 'Exito',
+        title: 'Éxito',
         text: 'Informe guardado con exito.',
         icon: 'success',
         iconColor :'#17550c',
@@ -200,8 +200,8 @@ export class NuevoinformedeculminacionComponent implements OnInit {
       this.router.navigate(['/panelusuario/proyectovinculacion/verinformedeculminación',this.obtenarDatos().cedulaEstudiante]);
     },error => {
       Swal.fire({
-        title: 'Error',
-        text: 'El informe no se guardo.',
+        title: 'Ha surgido un error',
+        text: "Hubo un error, contáctese con TICs.",
         icon: 'warning',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",
@@ -293,7 +293,7 @@ export class NuevoinformedeculminacionComponent implements OnInit {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
-      saveAs(out, "Anexo10.docx");
+      saveAs(out, "Anexo10 "+anexo10.nombreEstudiante+".docx");
     });
   }
 

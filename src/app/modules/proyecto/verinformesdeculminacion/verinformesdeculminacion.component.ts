@@ -56,7 +56,7 @@ export class VerinformesdeculminacionComponent implements OnInit {
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo10.pdf');
     console.log(file);
-    saveAs(file, 'Anexo2.pdf');
+    saveAs(file, 'Anexo10.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {
     let arr = dataurl.split(','),

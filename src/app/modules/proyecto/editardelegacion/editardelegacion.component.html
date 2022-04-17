@@ -7,13 +7,13 @@
           <mat-card class="example-card">
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>ASIGNACIÓN DE ALUNO A DIRECTOR O DOCENTE DE APOYO</mat-card-title>
+              <mat-card-title>ASIGNACIÓN DE ALUMNO HA DIRECTOR O DOCENTE DE APOYO</mat-card-title>
               <mat-card-subtitle>Seleccione el proyecto</mat-card-subtitle>
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-card-content>
               <p>
-                Proyecto seleccionado: {{anexo5.nombreProyecto}}
+               <strong>Proyecto seleccionado:</strong>  {{anexo5.nombreProyecto}}
               </p>
               <mat-divider></mat-divider>
               <br>
@@ -30,13 +30,13 @@
           <mat-card class="example-card">
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>ASIGNACIÓN DE ALUMNO A DIRECTOR O DOCENTE DE APOYO</mat-card-title>
+              <mat-card-title>ASIGNACIÓN DE ALUMNO HA DIRECTOR O DOCENTE DE APOYO</mat-card-title>
               <mat-card-subtitle>Seleccione un director o docente de apoyo</mat-card-subtitle>
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-card-content>
               <p>
-                Docente seleccionado: {{anexo5.nombreDocenteReceptor}}
+                <strong>Docente seleccionado:</strong> {{anexo5.nombreDocenteReceptor}}
               </p>
               <mat-divider></mat-divider>
               <br>
@@ -53,7 +53,7 @@
           <mat-card class="example-card" style="max-width: 100%">
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>ASIGNACIÓN DE ALUMNO A DIRECTOR O DOCENTE DE APOYO</mat-card-title>
+              <mat-card-title>ASIGNACIÓN DE ALUMNO HA DIRECTOR O DOCENTE DE APOYO</mat-card-title>
               <mat-card-subtitle>Seleccione los alumnos</mat-card-subtitle>
             </mat-card-header>
             <mat-divider></mat-divider>
@@ -138,10 +138,10 @@
             <mat-card-subtitle>Guardar asignación</mat-card-subtitle>
           </mat-card-header>
           <h4>DATOS</h4>
-          <h4>Asignado: {{anexo5.nombreDocenteReceptor}}</h4>
-          <h4>Cedula: {{anexo5.cedulaDocenteApoyo}}</h4>
-          <h4>Proyecto: {{anexo5.nombreProyecto}}</h4>
-          <h4>Alumnos:</h4>
+          <h4> <strong>Asignado:</strong>  {{anexo5.nombreDocenteReceptor}}</h4>
+          <h4> <strong>Cedula: </strong>{{anexo5.cedulaDocenteApoyo}}</h4>
+          <h4> <strong>Proyecto:</strong> {{anexo5.nombreProyecto}}</h4>
+          <h4> <strong>Alumnos:</strong></h4>
           <h4 *ngFor="let alumnos of alumnoselect">{{alumnos.cedulaEstudiante}} {{alumnos.nombreEstudiante}}</h4>
           <mat-card-content>
             <div>
