@@ -104,23 +104,23 @@
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label>Nombres y Apellidos</mat-label>
                     <input matInput type="text" [formControl]="row.get('nombres')"
-                           placeholder="Nombre completo" [required]>
+                           placeholder="Nombre completo" [required] readonly>
                   </mat-form-field>
                   <!--Carga de lista de estudiantes-->
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label>No. Cédula</mat-label>
                     <input matInput [formControl]="row.get('cedula')"
-                              placeholder="9999......." [required]>
+                              placeholder="9999......." [required] readonly>
                   </mat-form-field>
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label>Carrera</mat-label>
                     <input matInput [formControl]="row.get('carrera')"
-                           placeholder="Carrera" [required]>
+                           placeholder="Carrera" [required] readonly>
                   </mat-form-field>
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label>Número total de horas de Vinculación</mat-label>
                     <input matInput [formControl]="row.get('numeroHoras')"
-                           placeholder="60" [required]>
+                           placeholder="60" [required] readonly>
                   </mat-form-field>
                 </mat-grid-tile>
               </div>
@@ -162,23 +162,23 @@
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label>Nombres y Apellidos</mat-label>
                     <input matInput type="text" [formControl]="row.get('nombres')"
-                           placeholder="Nombre completo" [required]>
+                           placeholder="Nombre completo" [required] readonly>
                   </mat-form-field>
 
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label>No. Cédula</mat-label>
                     <input matInput [formControl]="row.get('cedula')"
-                           placeholder="9999......." [required]>
+                           placeholder="9999......." [required] readonly>
                   </mat-form-field>
                   <mat-form-field style="width: 380px" appearance="outline">
                    <mat-label>Carrera</mat-label>
                    <input matInput [formControl]="row.get('carrera')"
-                          placeholder="Codigo Carrera" [required]>
+                          placeholder="Codigo Carrera" [required] readonly>
                  </mat-form-field>
                   <mat-form-field style="width: 380px" appearance="outline">
                      <mat-label>Número total de horas de Vinculación</mat-label>
                     <input matInput [formControl]="row.get('numeroHoras')"
-                           placeholder="60" [required]>
+                           placeholder="60" [required] readonly>
                    </mat-form-field>
                 </mat-grid-tile>
               </div>
@@ -220,11 +220,11 @@
               <mat-divider></mat-divider>
               <mat-list-item><strong>Fecha de seguimiento: </strong>{{fecha | date:'mediumDate'}} </mat-list-item>
               <mat-divider></mat-divider>
-              <mat-list-item><strong>Fecha de inicio real: </strong><input type="date" formControlName="fecha" [(ngModel)]="informe.fechaInicioReal "></mat-list-item>
+              <mat-list-item><strong>Fecha de inicio real: </strong><input type="date" formControlName="fecha" [(ngModel)]="informe.fechaInicioReal " [min]="proyectoSelect.fechaInicio"></mat-list-item>
               <mat-divider></mat-divider>
               <br>
               <br>
-              <mat-list-item><strong>Fecha de fin real: </strong><input type="date" formControlName="fecha" [(ngModel)]="informe.fechaFinReal" >
+              <mat-list-item><strong>Fecha de fin real: </strong><input type="date" formControlName="fecha" [(ngModel)]="informe.fechaFinReal" [min]="informe.fechaInicioReal">
                  </mat-list-item>
               <mat-divider></mat-divider>
             </mat-list>
@@ -275,7 +275,7 @@
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label>Objetivos</mat-label>
                     <input matInput type="text" [formControl]="row.get('descripcion')"
-                           placeholder="Descripcion" [required]>
+                           placeholder="Descripcion" [required] readonly>
                   </mat-form-field>
 
 
@@ -332,7 +332,7 @@
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label><strong>Actividades</strong></mat-label>
                     <input matInput type="text" [formControl]="row.get('actividades')"
-                           placeholder="Actividades" [required]>
+                           placeholder="Actividades" [required] readonly>
                   </mat-form-field>
                   <mat-form-field class="example-full-width" appearance="outline" style="width: 180px">
                     <mat-label><strong>Porcentaje Cumplimiento (%)</strong>{{index}}</mat-label>
@@ -340,19 +340,19 @@
                            placeholder="Avance de la Actividad (%)" [required]>
                   </mat-form-field>
                   <mat-form-field class="example-full-width" appearance="outline" style="width: 180px">
-                    <mat-label><strong>Fecha de Ejeucion</strong>{{index}}</mat-label>
+                    <mat-label><strong>Fecha de Ejecución</strong>{{index}}</mat-label>
                     <input matInput type="date"  [formControl]="row.get('fechaEjecucion')"
-                            [required]>
+                            [required] readonly>
                   </mat-form-field>
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label><strong>Responsable de la Ejecución</strong></mat-label>
                     <input matInput type="text" [formControl]="row.get('responsableEjecucion')"
-                           placeholder="Responsable" [required]>
+                           placeholder="Responsable" [required] readonly>
                   </mat-form-field>
                   <mat-form-field style="width: 380px" appearance="outline">
                     <mat-label><strong>Documento de Evidencia</strong></mat-label>
                     <input matInput type="text" [formControl]="row.get('documento')"
-                           placeholder="Responsable" [required]>
+                           placeholder="Referencia de anexo adjuntado" [required]>
                   </mat-form-field>
                   <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label><strong>Observaciones</strong></mat-label>
@@ -405,8 +405,7 @@
 
           <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
             <mat-label>Fecha Entrega</mat-label>
-            <input type="date"   matInput [(ngModel)]="informe.fechaEntrega" formControlName="fechaEn"
-                        >
+            <input type="date"   matInput [(ngModel)]="informe.fechaEntrega" formControlName="fechaEn" [min]="informe.fechaInicioReal">
           </mat-form-field>
 
         </mat-card-content>
