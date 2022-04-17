@@ -282,6 +282,23 @@
 
             <br>
 
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Firma de Aprendizaje (Parcial-Final)
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--Redireccion con los routerlink-->
+
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmaranexo61',persona.cedula]"
+                      routerLinkActive="active">-Firmar Anexos 6.1</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmaranexo62',persona.cedula]"
+                      routerLinkActive="active">-Firmar Anexos 6.2</button>
+
+            </mat-expansion-panel>
+            <br>
             <mat-expansion-panel (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>

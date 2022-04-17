@@ -40,7 +40,7 @@
           <mat-divider></mat-divider>
           <br>
           <div style="text-align: end">
-            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
+            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px" (click)="refresh()"><mat-icon>undo</mat-icon></button>
             <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
           </div>
         </mat-card>
@@ -50,53 +50,50 @@
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>EVALUACIÓN AL ESTUDIANTE</ng-template>
         <mat-card class="example-card2">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title><br><br> INFORMACIÓN DEL ESTUDIANTE</mat-card-title>
-          <mat-card-subtitle><br/>
-            PROYECTOS DE VINCULACIÓN CON LA SOCIEDAD <br/>
-            INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY <br/>
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <h3>DATOS GENERALES DEL ESTUDIANTE</h3>
-          <mat-card class="example-card">
-            <mat-list>
-              <mat-list-item>Nombres Completos: {{anexo6select.nombreEstudiante}}</mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>Cédula: {{anexo6select.cedulaEstudiante}}</mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>E-Mail: {{user.email}} </mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>Carrera: {{proyectoselect.carrera}}</mat-list-item>
-              <mat-divider></mat-divider>
-
-                <mat-form-field class="example-full-width" appearance="fill">
-                  <mat-label> Númeto Total de Horas:</mat-label>
-                  <input matInput type="number" min="1" formControlName="numero" required [(ngModel)]="anexo11ob.totalHoras">
-                </mat-form-field>
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title><br><br> INFORMACIÓN DEL ESTUDIANTE</mat-card-title>
+            <mat-card-subtitle><br/>
+              PROYECTOS DE VINCULACIÓN CON LA SOCIEDAD <br/>
+              INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY <br/>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <h3>DATOS GENERALES DEL ESTUDIANTE</h3>
+            <mat-card class="example-card">
+              <mat-list>
+                <mat-list-item>Nombres Completos: {{anexo6select.nombreEstudiante}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>Cédula: {{anexo6select.cedulaEstudiante}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>E-Mail: {{user.email}} </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>Carrera: {{proyectoselect.carrera}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>Total de Horas: {{anexo8.totalHoras}}</mat-list-item>
+                <mat-divider></mat-divider>
 
 
-              <mat-divider></mat-divider>
-              <mat-list-item>Fecha de Inicio: <input type="date" formControlName="fechai" [(ngModel)]="anexo11ob.fechaInicio">
-              Fecha de Finalización: <input type="date" formControlName="fechaf" [(ngModel)]="anexo11ob.fechaFinaliza" >
-              </mat-list-item>
-              <mat-list-item>Fecha de Evaluacion: {{fechae | date:'mediumDate'}}
-              </mat-list-item>
-              <mat-divider></mat-divider>
-            </mat-list>
-          </mat-card>
-        </mat-card-content>
-        <mat-divider></mat-divider>
-        <br>
-        <div style="text-align: end">
-          <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px">
-            <mat-icon>undo</mat-icon>
-          </button>
-          <button mat-fab matStepperNext color="primary">
-            <mat-icon>queue_play_next</mat-icon>
-          </button>
-        </div>
+                <mat-divider></mat-divider>
+                <mat-list-item>Fecha de Inicio: <input type="date" formControlName="fechai" [(ngModel)]="anexo11ob.fechaInicio">
+                  Fecha de Finalización: <input type="date" formControlName="fechaf" [(ngModel)]="anexo11ob.fechaFinaliza" >
+                </mat-list-item>
+                <mat-list-item>Fecha de Evaluacion: {{fechae | date:'mediumDate'}}
+                </mat-list-item>
+                <mat-divider></mat-divider>
+              </mat-list>
+            </mat-card>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <br>
+          <div style="text-align: end">
+            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px" (click)="refresh()">
+              <mat-icon>undo</mat-icon>
+            </button>
+            <button mat-fab matStepperNext color="primary">
+              <mat-icon>queue_play_next</mat-icon>
+            </button>
+          </div>
         </mat-card>
       </form>
     </mat-step>
@@ -113,8 +110,8 @@
 
             <mat-grid-list cols="6" rowHeight="2:1.10" [formGroup]="thirdFormGroup">
               <div style="margin-top: 15px">
-                <mat-card-subtitle style="font-size: x-large">DESEMPEÑO DEL ESTUDIANTE:</mat-card-subtitle>
-                <mat-card-subtitle style="font-size: x-large">Docente de Apoyo: {{nombres}}</mat-card-subtitle>
+                <mat-card-subtitle style="font-size: large">DESEMPEÑO DEL ESTUDIANTE:</mat-card-subtitle>
+                <mat-card-subtitle style="font-size: large">Docente de Apoyo: {{nombres}}</mat-card-subtitle>
                 <mat-grid-tile colspan="6" >
 
                   <mat-card-title class="example-full-widthh" appearance="outline">
@@ -144,21 +141,11 @@
                   <mat-form-field class="example-full-widthh" appearance="outline">
                     <input matInput type="number" min="1" max="5" [formControl]="row.get('apoyoItem3')" (ngModelChange)="sumar()" (keyup)="sumar()" >
                   </mat-form-field>
-
-   </mat-grid-tile>
+                </mat-grid-tile>
                 <mat-grid-tile colspan="6">
                   <strong class="colorrr" style="font-size: x-large">Puntaje Obtenido: {{sum}} /20</strong>
 
                 </mat-grid-tile>
-
-<!--                <mat-grid-tile colspan="6">-->
-<!--                  <mat-form-field appearance="outline">-->
-<!--                    <mat-select formControlName="resultadoAnexo11" [(ngModel)]="anexo11ob.resultadoAnexo11" placeholder="APROVADO/NO APROVADO">-->
-<!--                      <mat-option [value]="'APROVADO'">APROVADO</mat-option>-->
-<!--                      <mat-option [value]="'REPROVADO'">REPROVADO</mat-option>-->
-<!--                    </mat-select>-->
-<!--                  </mat-form-field>-->
-<!--                </mat-grid-tile>-->
 
               </div>
             </mat-grid-list>
@@ -166,35 +153,9 @@
           <mat-divider></mat-divider>
           <br>
           <div style="text-align: end">
-            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
+            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px" (click)="refresh()"><mat-icon>undo</mat-icon></button>
             <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
           </div>
-        </mat-card>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="fourFormGroup" label="Documento">
-      <form [formGroup]="fourFormGroup">
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>  (ANEXO 11)<br><br> INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY<br>
-              COORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD<br>
-              EVALUACIÓN AL ESTUDIANTE DE PRÁCTICAS PRE PROFESIONALES DE SERVICIO COMUNITARIO</mat-card-title>
-              </mat-card-header>
-          <h4>Debe obtener el anexo en "Obtener Anexo" y posteriormente debera firmar y subir de en formato PDF</h4>
-          <div>
-            <button mat-raised-button color="primary" (click)="generarDocumento11()">Obtener Anexo</button>
-            <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
-              <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento11($event.target.files)"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
-              <mat-icon matSuffix>folder</mat-icon>
-            </mat-form-field>
-          </div>
-          <mat-card-content>
-            <div>
-              <button mat-button matStepperPrevious color="primary">Atras</button>
-              <button mat-button matStepperNext color="warn">Siguente</button>
-            </div>
-          </mat-card-content>
         </mat-card>
       </form>
     </mat-step>
@@ -208,7 +169,6 @@
           <mat-card-subtitle style="font-size: large">CONFIRME LA EVALUACIÓN AL ESTUDIANTE DE PRÁCTICAS PRE PROFESIONALES DE SERVICIO COMUNITARIO</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-
           <br>
           <button mat-button matStepperPrevious color="primary">Atras</button>
           <button mat-flat-button color="primary" (click)="guardar()">SUBIR</button>

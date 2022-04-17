@@ -17,13 +17,14 @@ import {DateAdapter} from "@angular/material/core";
 import {Anexo61} from "../../../models/anexo61";
 import {DatePipe} from "@angular/common";
 import Docxtemplater from "docxtemplater";
-
 // @ts-ignore
 import PizZip from "pizzip";
 // @ts-ignore
 import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
+import {Anexo8Service} from "../../../services/anexo8.service";
+import {Anexo8} from "../../../models/anexo8";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -75,6 +76,8 @@ export class Anexo11Component implements OnInit {
   fechae?:Date;
   resultadoAnexo11?:String;
   user: User=new User();
+  anexo8: Anexo8=new Anexo8();
+  anexo8select: Anexo8[] = []
   anexo6: Anexo6[] = []
   anexo6select: Anexo6 = new Anexo6();
   proyectoselect: Proyectos = new Proyectos();
@@ -99,6 +102,7 @@ export class Anexo11Component implements OnInit {
               private fechaService: FechaService,
               private _adapter: DateAdapter<any>,
               private anexo11Service: Anexo11Service,
+              private anexo8Service:Anexo8Service,
 
   ) {
     this._adapter.setLocale('es-ec');
@@ -146,7 +150,7 @@ export class Anexo11Component implements OnInit {
       anexo6: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      numero:['', Validators.required],
+      // numero:['', Validators.required],
       fechai:['', Validators.required],
       fechaf:['', Validators.required],
     });
@@ -155,9 +159,9 @@ export class Anexo11Component implements OnInit {
     });
     this.fiveFormGroup = this._formBuilder.group({
     });
-    this.fourFormGroup = this._formBuilder.group({
-      docx: ['', Validators.required],
-    });
+    // this.fourFormGroup = this._formBuilder.group({
+    //   docx: ['', Validators.required],
+    // });
     //ArrayActividades
     this.thirdFormGroup.get("items_value")?.setValue("yes");
     this.thirdFormGroup.addControl('rows', this.rows);
@@ -182,15 +186,19 @@ export class Anexo11Component implements OnInit {
     })
 
     this.anexo11Service.getusuario(this.anexo6select.cedulaEstudiante+'').subscribe(dataUser=>{
-        this.user=dataUser
+      this.user=dataUser
       console.log(this.user)
+    })
+    this.anexo8Service.getAnexo8byCedula(this.anexo6select.cedulaEstudiante+'').subscribe(data=>{
+      this.anexo8=data[0]
+      console.log('pppppppppp'+this.anexo8select)
     })
 
     resultado?.forEach(value2 => {
-        // @ts-ignore
-        this.onAddRow(value2.item+"", value2.de+"")
-        console.log(this.rows.getRawValue())
-      })
+      // @ts-ignore
+      this.onAddRow(value2.item+"", value2.de+"")
+      console.log(this.rows.getRawValue())
+    })
 
 
   }
@@ -268,11 +276,11 @@ export class Anexo11Component implements OnInit {
     this.anexo11ob.nombreDirector=this.proyectoselect.nombredirector;
     this.anexo11ob.promedio=this.anexo11ob.promedio;
     this.anexo11ob.fechaEvaluacion=this.fechae;
-    // this.anexo11ob.totalHoras=this.numero;
+    this.anexo11ob.totalHoras=parseInt(this.anexo8.totalHoras+'');
     this.anexo11ob.apoyo=this.rows.getRawValue();
     this.anexo11ob.director=this.rows2.getRawValue();
     return this.anexo11ob;
-}
+  }
 
 
   guardar(){
@@ -281,11 +289,14 @@ export class Anexo11Component implements OnInit {
       Swal.fire({
         icon: 'success',
         title: 'EVALUACION AL ESTUDIANTE COMPLETADA',
-        text: 'Datos guadados correctamente',
+        text: 'Datos guadados correctamente,' +
+          ' CUANDO EL DIRECTOR DE PROYECTO CULMINE SU RESPECTIVA EVALUACION' +
+          ' > DESCAGUE EL DOCUMENTO Y FIRME ',
+
         confirmButtonColor: "#0c3255",
         background: "#fbc02d",
       })
-      window.location.reload();
+      // window.location.reload();
     },err=>{
       Swal.fire({
         icon: 'warning',
@@ -400,6 +411,7 @@ export class Anexo11Component implements OnInit {
       saveAs(out, "Anexo11.docx");
     });
   }
-
-
+  refresh() {
+    window.location.reload();
+  }
 }

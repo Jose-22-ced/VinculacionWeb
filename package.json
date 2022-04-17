@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~13.1.0",
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
+    "angular-cli-ghpages": "^1.0.0",
     "angularx-social-login": "^4.0.1",
     "docxtemplater": "^3.28.6",
     "file-saver": "^2.0.5",

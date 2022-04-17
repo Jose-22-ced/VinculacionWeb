@@ -26,13 +26,13 @@
                 <cdk-virtual-scroll-viewport appendOnly itemSize="40" class="example-viewport1">
                   <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionAnexo11($event)" formControlName="anexo6">
                     <mat-list-option *ngFor="let option of filteredOptions | async" [value]="option">
-                      <strong>Proyecto: </strong>{{option.idProyecto}}   <strong>Cedula: </strong>{{option.cedulaEstudiante}} :  <strong>Estudiante: </strong>{{option.nombresEstudiante}}
+                      Proyecto: {{option.idProyecto}} :  Cedula: {{option.cedulaEstudiante}} :  Estudiante: {{option.nombresEstudiante}} : {{option.nombreEstudiante}}
                     </mat-list-option>
                   </mat-selection-list>
                 </cdk-virtual-scroll-viewport>
                 <br>
                 <p style="font-size: medium">
-                  <strong>Estudiante Seleccionado:</strong> {{anexo11select.cedulaEstudiante}} : {{anexo11select.nombresEstudiante}}
+                  Estudiante Seleccionado: {{anexo11select.cedulaEstudiante}} : {{anexo11select.nombresEstudiante}}
                 </p>
               </div>
             </div>
@@ -40,7 +40,7 @@
           <mat-divider></mat-divider>
           <br>
           <div style="text-align: end">
-            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
+            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px" (click)="refresh()"><mat-icon>undo</mat-icon></button>
             <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
           </div>
         </mat-card>
@@ -62,20 +62,19 @@
             <h3>DATOS GENERALES DEL ESTUDIANTE</h3>
             <mat-card class="example-card">
               <mat-list>
-                <mat-list-item><strong>Nombres Completos: </strong> {{anexo11select.nombresEstudiante}}</mat-list-item>
+                <mat-list-item>Nombres Completos: {{anexo11select.nombresEstudiante}}</mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item><strong>Cédula: </strong>{{anexo11select.cedulaEstudiante}}</mat-list-item>
+                <mat-list-item>Cédula: {{anexo11select.cedulaEstudiante}}</mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item><strong>E-Mail: </strong>{{anexo11select.emailEstudiante}} </mat-list-item>
+                <mat-list-item>E-Mail: {{anexo11select.emailEstudiante}} </mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item><strong>Carrera: </strong>{{anexo11select.carrera}}</mat-list-item>
+                <mat-list-item>Carrera: {{anexo11select.carrera}}</mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item><strong>Númeto Total de Horas: </strong>{{anexo11select.totalHoras}}</mat-list-item>
+                <mat-list-item>Númeto Total de Horas: {{anexo11select.totalHoras}}</mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item><strong>Fecha de Inicio: </strong>{{ anexo11select.fechaInicio}} -  </mat-list-item>
-                <mat-list-item> <strong>Fecha de Finalización: </strong>{{anexo11select.fechaFinaliza }} </mat-list-item>
+                <mat-list-item>Fecha de Inicio: {{ anexo11select.fechaInicio | date:"longDate"}} - Fecha de Finalización: {{anexo11select.fechaFinaliza | date:"longDate"}} </mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item><strong>Fecha de Evaluacion: </strong>{{fechae | date:'mediumDate'}}
+                <mat-list-item>Fecha de Evaluacion: {{fechae | date:'mediumDate'}}
                 </mat-list-item>
                 <mat-divider></mat-divider>
               </mat-list>
@@ -84,7 +83,7 @@
           <mat-divider></mat-divider>
           <br>
           <div style="text-align: end">
-            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px">
+            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px" (click)="refresh()">
               <mat-icon>undo</mat-icon>
             </button>
             <button mat-fab matStepperNext color="primary">
@@ -107,8 +106,8 @@
 
             <mat-grid-list cols="6" rowHeight="2:1.10" [formGroup]="thirdFormGroup">
               <div style="margin-top: 15px">
-                <mat-card-subtitle style="font-size: x-large">DESEMPEÑO DEL ESTUDIANTE:</mat-card-subtitle>
-                <mat-card-subtitle style="font-size: x-large"><strong>Director de Proyecto: </strong>{{nombres}}</mat-card-subtitle>
+                <mat-card-subtitle style="font-size: large">DESEMPEÑO DEL ESTUDIANTE:</mat-card-subtitle>
+                <mat-card-subtitle style="font-size: large">Director de Proyecto: {{nombres}}</mat-card-subtitle>
                 <mat-grid-tile colspan="6" >
 
                   <mat-card-title class="example-full-widthh" appearance="outline">
@@ -141,19 +140,22 @@
 
                 </mat-grid-tile>
                 <mat-grid-tile colspan="6">
-                  <strong class="colorrr" style="font-size: x-large">Puntaje Obtenido: {{sum}} /20</strong>
-
-
+                  <strong class="colorrr" style="font-size: large">Puntaje Obtenido: {{sum}} /20</strong>
+                </mat-grid-tile>
+                <mat-divider></mat-divider>
+                <mat-grid-tile colspan="6">
+                  <strong class="colorrr" style="font-size: large">Puntaje otorgado por el Docente de Apoyo:  {{anexo11select.apoyoPuntaje}} /20</strong>
                 </mat-grid-tile>
 
-                                <mat-grid-tile colspan="6">
-                                  <mat-form-field appearance="outline">
-                                    <mat-select formControlName="resultadoAnexo11" [(ngModel)]="anexo11ob.resultadoAnexo11" placeholder="APROVADO/NO APROVADO">
-                                      <mat-option [value]="'APROVADO'">APROBADO</mat-option>
-                                      <mat-option [value]="'REPROVADO'">REPROBADO</mat-option>
-                                    </mat-select>
-                                  </mat-form-field>
-                                </mat-grid-tile>
+
+                <mat-grid-tile colspan="6">
+                  <mat-form-field appearance="outline">
+                    <mat-select formControlName="resultadoAnexo11" [(ngModel)]="anexo11ob.resultadoAnexo11" placeholder="APROVADO/NO APROVADO">
+                      <mat-option [value]="'APRUEBA'">APRUEBA</mat-option>
+                      <mat-option [value]="'REPRUEBA'">REPRUEBA</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-grid-tile>
 
               </div>
             </mat-grid-list>
@@ -161,7 +163,7 @@
           <mat-divider></mat-divider>
           <br>
           <div style="text-align: end">
-            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
+            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px" (click)="refresh()"><mat-icon>undo</mat-icon></button>
             <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
           </div>
         </mat-card>
@@ -186,7 +188,7 @@
           </div>
           <mat-card-content>
             <div>
-              <button mat-button matStepperPrevious color="primary">Atrás</button>
+              <button mat-button matStepperPrevious color="primary">Atras</button>
               <button mat-button matStepperNext color="warn">Siguente</button>
             </div>
           </mat-card-content>
@@ -205,8 +207,8 @@
         <mat-card-content>
 
           <br>
-          <button mat-button matStepperPrevious color="primary">Atras</button>
-          <button mat-flat-button color="primary" (click)="edit()">SUBIR</button>
+          <button mat-button matStepperPrevious color="primary" (click)="refresh()">Atras</button>
+          <button mat-flat-button color="primary" (click)="edit(anexo11select)">SUBIR</button>
 
         </mat-card-content>
       </mat-card>
@@ -215,7 +217,7 @@
 </div>
 <div *ngIf="isexist==false">
   <mat-card>
-    <mat-card-title>No existen documentos por firmar.</mat-card-title>
+    <mat-card-title>NO EXISTE</mat-card-title>
   </mat-card>
 </div>
 <ng-container *ngIf="issloading">

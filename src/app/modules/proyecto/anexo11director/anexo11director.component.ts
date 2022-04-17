@@ -16,7 +16,6 @@ import Swal from "sweetalert2";
 import {DateAdapter} from "@angular/material/core";
 import {DatePipe} from "@angular/common";
 import Docxtemplater from "docxtemplater";
-
 // @ts-ignore
 import PizZip from "pizzip";
 // @ts-ignore
@@ -54,6 +53,7 @@ export class Anexo11directorComponent implements OnInit {
   numerominimo=0;
   idpro?:Number;
   puntajea?:Number;
+  result?:number;
   isLinear = true;
   panelOpenState = true;
   issloading = true;
@@ -115,7 +115,7 @@ export class Anexo11directorComponent implements OnInit {
 
       })
       this.fechaService.getSysdate().subscribe(value => {
-        this.fecha = value.fecha;
+        this.fechae = value.fecha;
       })
     })
 
@@ -225,7 +225,7 @@ export class Anexo11directorComponent implements OnInit {
     this.anexo11ob.apoyoPuntaje=this.anexo11select.apoyoPuntaje;
     // @ts-ignore
     this.anexo11ob.promedio=(this.puntajea+this.anexo11ob.directorPuntaje)/2
-    // this.anexo11ob.totalHoras=this.numero;
+    this.anexo11ob.totalHoras=this.anexo11select.totalHoras;
     this.anexo11ob.director=this.rows.getRawValue();
     return this.anexo11ob;
   }
@@ -252,6 +252,7 @@ export class Anexo11directorComponent implements OnInit {
     })
 
   }
+
 
 
   generarDocumento11() {
@@ -357,5 +358,7 @@ export class Anexo11directorComponent implements OnInit {
       })
     }
   }
-
+  refresh(){
+    window.location.reload();
+  }
 }

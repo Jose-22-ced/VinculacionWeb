@@ -153,9 +153,9 @@ export class Anexo61Component implements OnInit,AfterViewInit {
       this.onAddRow(value1.actividad+"")
     })
   }
-refresh(){
-  window.location.reload();
-}
+  refresh(){
+    window.location.reload();
+  }
   onAddRow(actividad:String) {
     this.rows.push(this.createItemFormGroup(actividad));
     console.log(this.rows.getRawValue())
@@ -248,7 +248,7 @@ refresh(){
     var anexo61:Anexo61=this.obtnerdatos();
     console.log(anexo61)
     var pipe:DatePipe = new DatePipe('en-US')
-    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6%20.1.docx", function(
+    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6.1.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore

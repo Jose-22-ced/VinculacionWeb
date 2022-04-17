@@ -31,7 +31,7 @@
                 </cdk-virtual-scroll-viewport>
                 <br>
                 <p style="font-size: medium">
-                  <strong> Estudiante Seleccionado: </strong>{{anexo6select.cedulaEstudiante}} : {{anexo6select.nombreEstudiante}}
+                  Estudiante Seleccionado: {{anexo6select.cedulaEstudiante}} : {{anexo6select.nombreEstudiante}}
                 </p>
               </div>
             </div>
@@ -79,10 +79,10 @@
                 <mat-grid-tile colspan="5" *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
 
 
-                    <mat-form-field class="example-full-widthf" appearance="outline">
-                      <mat-label>Actividad</mat-label>
-                      <input readonly="readonly" matInput type="text" [formControl]="row.get('actividadesEstudiante')"  placeholder="Actividad" [required]>
-                    </mat-form-field>
+                  <mat-form-field class="example-full-widthf" appearance="outline">
+                    <mat-label>Actividad</mat-label>
+                    <input readonly="readonly" matInput type="text" [formControl]="row.get('actividadesEstudiante')"  placeholder="Actividad" [required]>
+                  </mat-form-field>
 
 
 

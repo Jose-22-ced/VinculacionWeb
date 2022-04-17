@@ -243,7 +243,7 @@ export class Anexo62Component implements OnInit {
     var anexo62:Anexo62=this.obtnerdatos();
     console.log(anexo62)
     var pipe:DatePipe = new DatePipe('en-US')
-    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6%20.1.docx", function(
+    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6.2.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore
@@ -309,3 +309,4 @@ export class Anexo62Component implements OnInit {
     });
   }
 }
+
