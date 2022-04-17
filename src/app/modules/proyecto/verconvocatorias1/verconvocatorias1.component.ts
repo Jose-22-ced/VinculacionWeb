@@ -97,7 +97,7 @@ export class Verconvocatorias1Component implements OnInit {
       if(value.filter(value1 => value1.idProyectoPPP==anexo2.idProyectoPPP).length!=0){
         Swal.fire({
           title: 'En proceso',
-          text: 'Usted ya se postulo en esta convocatoria, espere su respuesta en el aparado de "Postulaciones".',
+          text: 'Usted ya se postuló en esta convocatoria, espere su respuesta en el apartado de "Postulaciones".',
           icon: 'info',
           color: "#0c3255",
           confirmButtonColor:"#0c3255",
@@ -119,12 +119,13 @@ export class Verconvocatorias1Component implements OnInit {
               allowOutsideClick: false,
               allowEnterKey:false,
               allowEscapeKey:false,
-              title: '¡¡¡ATENCIÓN!!!',
-              text: '🔊 Antes de "CONTINUAR LA ACEPTACIÓN" usted deberá ' +
-                '"OBTNER EL ANEXO" dando click en esa opción. Una vez obtenido el anexo deberá FIRMAR y trasformar' +
-                ' el documeto a formato PDF el cual se le pedirá mas adelante, y sera enviada al estudiante ' +
-                'Tome su tiempo, una ves tenga lo requerido puede regresar a esta ventana' +
-                ' y "CONTINUAR LA ACEPTACIÓN 🔊"',
+              title: '¡ATENCIÓN!',
+              text: '🔊 Antes de "CONTINUAR LA ACEPTACIÓN" usted deberá: ' +
+                '1. Obtener el anexo\n' +
+                '2. Firmar el anexo y trasnformarlo a PDF '+
+                '3. Regrese a esta pestaña pulsando en "POSTULAR AQUI" \n' +
+                '4. Dar clic en "Continuar Postulación"',
+
               icon: 'info',
               showDenyButton: true,
               showCancelButton: true,
@@ -150,7 +151,7 @@ export class Verconvocatorias1Component implements OnInit {
                   confirmButtonColor: "#3cb227",
                   background: "#fbc02d",
                   title: 'Confirmación',
-                  text: 'Debe subir la el anexo en el formato anterirmente requerido "PDF" para finalizar. Nota: Sea reponsable con el documento a subir, para evitar problemas futuros.',
+                  text: 'Debe subir el anexo en el formato requerido "PDF" para finalizar. Nota: Sea reponsable con el documento a subir.',
                   input: 'file',
                   inputAttributes: {
                     'accept': 'application/pdf',
@@ -165,8 +166,8 @@ export class Verconvocatorias1Component implements OnInit {
                           anexo3.documento = docx + '';
                           this.anexo3Service.saveAnexo3(anexo3).subscribe(value2 => {
                             Swal.fire({
-                              title: 'Exito',
-                              text: 'La solicitud enviada de forma existosa, espere su repuesta',
+                              title: 'Éxito',
+                              text: 'La solicitud fue enviada de forma existosa, espere su repuesta',
                               icon: 'success',
                               iconColor :'#17550c',
                               color: "#0c3255",
@@ -175,8 +176,8 @@ export class Verconvocatorias1Component implements OnInit {
                             })
                           },error => {
                             Swal.fire({
-                              title: 'Fallo',
-                              text: 'La solicitud ha sido creada '  + error.error.message,
+                              title: 'Ha surgido un error',
+                              text: "Hubo un error, contáctese con TICs.",
                               icon: 'error',
                               color: "#0c3255",
                               confirmButtonColor:"#0c3255",
@@ -193,7 +194,14 @@ export class Verconvocatorias1Component implements OnInit {
             })
 
           } else {
-            console.log("No cumple, para postular")
+            Swal.fire({
+              title: 'Mensaje',
+              text: 'No cumple con los requisitos para postular, revise el documento por favor".',
+              icon: 'info',
+              color: "#0c3255",
+              confirmButtonColor:"#0c3255",
+              background: "#fbc02d",
+            })
           }
         })
       }

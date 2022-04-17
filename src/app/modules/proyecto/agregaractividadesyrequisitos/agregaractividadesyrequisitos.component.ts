@@ -128,8 +128,8 @@ export class AgregaractividadesyrequisitosComponent implements OnInit {
     console.log(Number(proyecto.id),this.actividadeslistProyecto)
     this.proyectoService.updateActividadesbyIdProyectos(Number(proyecto.id),this.actividadeslistProyecto).subscribe( value=>{
       Swal.fire({
-        title: 'Exito',
-        text: 'Se modifico de forma correcta',
+        title: 'Éxito',
+        text: 'Actividades agregadas.',
         icon: 'success',
         iconColor :'#17550c',
         color: "#0c3255",
@@ -138,8 +138,8 @@ export class AgregaractividadesyrequisitosComponent implements OnInit {
       })
     },error => {
       Swal.fire({
-        title: 'Fallo',
-        text: 'No se modifico Materias'  + error.error.message,
+        title: 'Ha surgido un error al actualizar actividades',
+        text: "Hubo un error, contáctese con TICs.",
         icon: 'error',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",
@@ -159,8 +159,8 @@ export class AgregaractividadesyrequisitosComponent implements OnInit {
     console.log(proyecto.id,this.requisitoslistProyectos)
     this.proyectoService.updateRequistosbyIdProyectos(Number(proyecto.id),this.requisitoslistProyectos).subscribe( value=>{
       Swal.fire({
-        title: 'Exito',
-        text: 'Se modifico de forma correcta',
+        title: 'Éxito',
+        text: 'Requisitos agregados.',
         icon: 'success',
         iconColor :'#17550c',
         color: "#0c3255",
@@ -169,8 +169,8 @@ export class AgregaractividadesyrequisitosComponent implements OnInit {
       })
     },error => {
       Swal.fire({
-        title: 'Fallo',
-        text: 'No se modifico Materias'  + error.error.message,
+        title: 'Ha surgido un error al actualizar requisitos',
+        text: "Hubo un error, contáctese con TICs.",
         icon: 'error',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",

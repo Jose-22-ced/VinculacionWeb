@@ -31,8 +31,8 @@ export class VercordinadorvinculacionComponent implements OnInit {
 
   quitarCordinadorVinculacion(docente:CordinadorVinculacion){
     Swal.fire({
-      title: 'Esta seguro?',
-      text: "Al docente seleccionado ya no sera Cordinador de Vinculación",
+      title: 'Eliminar Coordinador de Vinculación',
+      text: "Se eleiminará al docente seleccionado.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -45,8 +45,8 @@ export class VercordinadorvinculacionComponent implements OnInit {
             docente.estado=false;
             this.cordinadorvinculacionService.updateCordinadorVinculacion(docente).subscribe(datau=>{
               Swal.fire({
-                title: 'Quitar ASiganación',
-                text: 'El docente ya no esta sido Asignado!',
+                title: 'Asiganción eliminada.',
+                text: 'El docente ya no está asignado como Coordinador de Vinculación.',
                 icon: 'success',
                 iconColor :'#17550c',
                 color: "#0c3255",
@@ -56,8 +56,8 @@ export class VercordinadorvinculacionComponent implements OnInit {
               this.router.navigate(['/panelusuario/proyectovinculacion/cordinadorvinculacion']);
             },err => {
               Swal.fire({
-                title: 'Opss',
-                text: err.error().message,
+                title: 'Ha surgido un error',
+                text: "Hubo un error, contáctese con TICs.",
                 icon: 'warning',
                 color: "#0c3255",
                 confirmButtonColor:"#0c3255",

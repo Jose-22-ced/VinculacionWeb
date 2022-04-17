@@ -1,6 +1,6 @@
 <div *ngIf="issloading==false">
   <mat-card>
-    <mat-card-title>AGREGAR ACTIVIDADES Y REQUSIITOS A PROYECTO</mat-card-title>
+    <mat-card-title>AGREGAR ACTIVIDADES Y REQUISITOS A PROYECTO</mat-card-title>
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>BUSCAR PROYECTO</mat-label>
       <input matInput   placeholder="FILTRAR" [formControl]="myControl">
@@ -12,8 +12,7 @@
     <div *ngFor="let proyecto of filteredOptions | async">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title>Nombre de proyecto{{proyecto.nombre}}</mat-card-title>
-          <mat-card-subtitle><strong>Responsable: </strong> {{proyecto.nombreresponsable}}</mat-card-subtitle>
+          <mat-card-title>Nombre de proyecto: {{proyecto.nombre}}</mat-card-title>
 
           <span class="example-spacer"></span>
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

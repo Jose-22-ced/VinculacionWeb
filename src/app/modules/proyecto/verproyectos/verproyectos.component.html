@@ -1,6 +1,6 @@
 <div *ngIf="issloading==false">
   <mat-card>
-    <mat-card-title>AGREGAR ACTIVIDADES Y REQUSIITOS A PROYECTOS</mat-card-title>
+    <mat-card-title>PROYECTOS CREADOS</mat-card-title>
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>BUSCAR PROYECTO</mat-label>
       <input matInput   placeholder="FILTRAR" [formControl]="myControl">
@@ -12,8 +12,8 @@
     <div *ngFor="let proyecto of filteredOptions | async">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title>{{proyecto.nombre}}</mat-card-title>
-          <mat-card-subtitle>Resposanble: {{proyecto.nombreresponsable}}</mat-card-subtitle>
+          <mat-card-title>Nombre: {{proyecto.nombre}}</mat-card-title>
+
 
           <span class="example-spacer"></span>
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
@@ -31,11 +31,11 @@
           </mat-menu>
         </mat-card-header>
         <mat-card-content>
-          <p>Carrera: {{proyecto.carrera}}</p>
-          <p>Fecha de Inico y Fin: {{proyecto.fechaFin | date:"longDate"}} - {{proyecto.fechaFin | date:"longDate"}}</p>
-          <p>Director: {{proyecto.nombredirector}}</p>
-          <p>Plazo: {{proyecto.plazoEjecucion}}</p>
-          <p>Objetivo General: {{proyecto.objetivoGeneral}}</p>
+          <p><strong>Carrera: </strong>{{proyecto.carrera}}</p>
+          <p><strong>Fecha de Inico y Fin: </strong>{{proyecto.fechaFin | date:"longDate"}} - {{proyecto.fechaFin | date:"longDate"}}</p>
+          <p><strong>Director: </strong>{{proyecto.nombredirector}}</p>
+          <p><strong>Plazo:</strong> {{proyecto.plazoEjecucion}}</p>
+          <p><strong>Objetivo General: </strong>{{proyecto.objetivoGeneral}}</p>
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -60,7 +60,8 @@
                   Actividades
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <p *ngFor="let actividales of proyecto.actividadeslistProyectos" > {{actividales.descripcion}}</p>
+              <p *ngFor="let actividales of proyecto.actividadeslistProyectos" > <mat-divider></mat-divider>
+                <br>{{actividales.descripcion}}</p>
             </mat-expansion-panel>
             <br>
             <mat-expansion-panel (opened)="panelOpenState = true"
@@ -70,7 +71,8 @@
                   Requisitos
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <p *ngFor="let requisitos of proyecto.requisitoslistProyectos" > {{requisitos.descripcion}}</p>
+              <p *ngFor="let requisitos of proyecto.requisitoslistProyectos" ><mat-divider></mat-divider>
+                <br> {{requisitos.descripcion}}</p>
             </mat-expansion-panel>
             <br>
             <mat-expansion-panel (opened)="panelOpenState = true"
@@ -80,7 +82,10 @@
                   Docentes de Apoyo
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <p *ngFor="let docentes of proyecto.docenteApoyoResponse" > {{docentes.cedula}} || {{docentes.nombres}}</p>
+              <p *ngFor="let docentes of proyecto.docenteApoyoResponse" >
+                <mat-divider></mat-divider>
+                <br>
+                <strong>Cédula: </strong>{{docentes.cedula}} || <strong>Nombres: </strong>{{docentes.nombres}}</p>
             </mat-expansion-panel>
           </mat-expansion-panel>
         </mat-card-content>
@@ -89,7 +94,7 @@
   </div>
   <div *ngIf="isexist==false">
     <mat-card>
-      <mat-card-title>NO EXISTEN PROYECTOS ACTUALMENTE BENEFICARIAS REGISTRADAS</mat-card-title>
+      <mat-card-title>NO EXISTEN PROYECTOS.</mat-card-title>
     </mat-card>
   </div>
 </div>

@@ -72,7 +72,7 @@ export class EditarentidadbeneficiariaComponent implements OnInit {
         console.log(data)
       Swal.fire({
         title: 'Exito',
-        text: 'Entidad Actualizada',
+        text: 'Entidad Beneficiaria Actualizada',
         icon: 'success',
         iconColor :'#17550c',
         color: "#0c3255",
@@ -82,8 +82,8 @@ export class EditarentidadbeneficiariaComponent implements OnInit {
       this.router.navigate(['/panelusuario/proyectovinculacion/verentidadesbenefiarias']);
       },err=>{
       Swal.fire({
-        title: 'Al parecer hubo un problema',
-        text: err.error.message,
+        title: 'Ha surgido un error',
+        text: "Hubo un error, contáctese con TICs.",
         icon: 'warning',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",

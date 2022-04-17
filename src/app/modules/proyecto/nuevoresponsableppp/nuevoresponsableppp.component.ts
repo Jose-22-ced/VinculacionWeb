@@ -94,19 +94,19 @@ export class NuevoresponsablepppComponent implements OnInit {
   //GuardarResaposableppp
   guardarResaposableppp(docente:Docentes):void{
     Swal.fire({
-      title: 'Esta seguro?',
-      text: "Al docente seleccionado como Cordinador de Vinculación",
+      title: 'Confirmación',
+      text: "El docente ha sido seleccionado como Responsable de prácticas de Servicio Comunitario",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Aceptar'
+      confirmButtonText: 'Aceptar',
+      background: "#fbc02d"
     }).then((result) => {
       if (result.isConfirmed) {
         this.responsablepppService.saveResposableppp(this.obtnerdatos(docente)).subscribe(value => {
           Swal.fire({
-            title: 'Asignado',
-            text: 'El docente a sido Asignado!',
+            title: 'Asignación Correcta',
             icon: 'success',
             iconColor :'#17550c',
             color: "#0c3255",
@@ -116,8 +116,8 @@ export class NuevoresponsablepppComponent implements OnInit {
           this.router.navigate(['/panelusuario/proyectovinculacion/verresponsable',this.cedula]);
         },error => {
           Swal.fire({
-            title: 'Opss',
-            text: error.error().message,
+            title: 'Ha surgido un error',
+            text: "Hubo un error, contáctese con TICs.",
             icon: 'warning',
             color: "#0c3255",
             confirmButtonColor:"#0c3255",

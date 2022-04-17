@@ -42,8 +42,8 @@ export class VerresposabledepppComponent implements OnInit {
   quitarCargo(responsable:Resposableppp){
     responsable.estado=false;
     Swal.fire({
-      title: 'Esta seguro?',
-      text: "Al docente seleccionado ya no sera Resaposable de PPP",
+      title: 'Eliminar Responsable de prácticas de Servicio Comunitario',
+
       icon: 'warning',
       showCancelButton: true,
       color: "#0c3255",
@@ -55,8 +55,8 @@ export class VerresposabledepppComponent implements OnInit {
       if (result.isConfirmed) {
         this.responsablepppService.updateResposableppp(responsable).subscribe(datau=>{
           Swal.fire({
-            title: 'Quitar Asiganación',
-            text: 'El docente ya no esta sido Asignado!',
+            title: 'Se ha eliminado la asiganción correctamente',
+
             icon: 'success',
             iconColor :'#17550c',
             color: "#0c3255",
@@ -66,8 +66,8 @@ export class VerresposabledepppComponent implements OnInit {
           this.router.navigate(['/panelusuario/proyectovinculacion/nuevoresponsable',this.cedula]);
         },err => {
           Swal.fire({
-            title: 'Opss',
-            text: err.error().message,
+            title: 'Ha surgido un error',
+            text: "Hubo un error, contáctese con TICs.",
             icon: 'warning',
             color: "#0c3255",
             confirmButtonColor:"#0c3255",

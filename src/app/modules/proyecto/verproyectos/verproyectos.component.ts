@@ -83,7 +83,7 @@ export class VerproyectosComponent implements OnInit {
 
   eliminarProyecto(proyecto:Proyectos){
     Swal.fire({
-      title: 'Seguro?',
+      title: 'Confirmación',
       text: "Está por eliminar el proyecto: "+proyecto.nombre,
       icon: 'warning',
       showCancelButton: true,
@@ -91,7 +91,7 @@ export class VerproyectosComponent implements OnInit {
       confirmButtonColor:"#0c3255",
       background: "#fbc02d",
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Eliminar!'
+      confirmButtonText: 'Eliminar'
     }).then((result) => {
       if (result.isConfirmed) {
         this.issloading=true;
@@ -99,7 +99,7 @@ export class VerproyectosComponent implements OnInit {
         this.proyectoService.deleteProyectos(proyecto.id).subscribe(value => {
           Swal.fire({
             title: 'Eliminado',
-            text: 'El proyecto se elimino correctamente',
+            text: 'El proyecto se eliminó correctamente',
             icon: 'success',
             iconColor :'#17550c',
             color: "#0c3255",
@@ -109,8 +109,8 @@ export class VerproyectosComponent implements OnInit {
           this.router.navigate(['/panelusuario/proyectovinculacion/verproyecto',this.cedulaCor,this.cedulaCor]);
         },error => {
           Swal.fire({
-            title: 'Error',
-            text: 'Hubo un error al eliminar el proyecto '+error.error.message,
+            title: 'Ha surgido un error',
+            text: "Hubo un error, contáctese con TICs.",
             icon: 'warning',
             color: "#0c3255",
             confirmButtonColor:"#0c3255",

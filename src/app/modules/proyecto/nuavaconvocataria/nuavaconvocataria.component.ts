@@ -207,8 +207,8 @@ export class NuavaconvocatariaComponent implements OnInit {
         if(docx.length>=10485760){
           this.anexo2.documento="";
           Swal.fire(
-            'Fallo',
-            'El docemento es demaciado pesado',
+            'Error',
+            'El documento es demasiado pesado',
             'warning'
           )
         }else{
@@ -222,8 +222,8 @@ export class NuavaconvocatariaComponent implements OnInit {
     this.issloading=true;
     this.anexo2Service.saveAnexo2(this.obtnerDatos(proyeco)).subscribe(value => {
       Swal.fire({
-        title: 'Exito',
-        text: 'La convocatoria creado y enviada con exito',
+        title: 'Éxito',
+        text: 'La convocatoria ha sido creada y enviada',
         icon: 'success',
         iconColor :'#17550c',
         color: "#0c3255",
@@ -235,8 +235,8 @@ export class NuavaconvocatariaComponent implements OnInit {
     },error => {
       if(error.error.message=="No se envió el email"){
         Swal.fire({
-          title: 'Algo fallo',
-          text: 'La convocatoria creado y enviada con exito, pero no se envio el correo',
+          title: 'Error',
+          text: 'La convocatoria ha sido creada y enviada con éxito, pero no se envió el correo',
           icon: 'warning',
           iconColor :'#17550c',
           color: "#0c3255",
@@ -247,8 +247,8 @@ export class NuavaconvocatariaComponent implements OnInit {
         this.router.navigate(['/panelusuario/proyectovinculacion/verconvocatoria',this.cedula]);
       }else {
         Swal.fire({
-          title: 'Fallo',
-          text: 'La convocatoria ha sido creada '  + error.error.message,
+          title: 'Ha surgido un error',
+          text: "Hubo un error, contáctese con TICs.",
           icon: 'error',
           color: "#0c3255",
           confirmButtonColor:"#0c3255",

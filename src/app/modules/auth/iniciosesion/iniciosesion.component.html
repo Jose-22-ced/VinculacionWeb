@@ -38,8 +38,8 @@
         <mat-card-title>REGISTRARSE</mat-card-title>
         <mat-card-content>
           <br>
-          <p>A los miembros que ingresan por PRIMERA ves al plataforma de Vinculación a la Sociedad,
-            se deben indentificar por ello es necesario que ingrese su Número de Cédula.</p>
+          <p style="text-align: justify">A los miembros que ingresan por primera vez a la plataforma de Vinculación con la Sociedad,
+            se deben identificar, por ello es necesario que ingrese su número de cédula.</p>
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <form class="example-form">
@@ -47,7 +47,7 @@
             <mat-label>CÉDULA</mat-label>
             <input type="text" matInput [formControl]="cedulaFormControl" [errorStateMatcher]="matcher"
                    placeholder="Ex. 0154154874" (keypress)="omit_special_char($event)" (keypress)="omit_max_char($event)" [(ngModel)]="userRequest.cedula">
-            <mat-hint>Cédula Requerida!</mat-hint>
+            <mat-hint>¡Cédula Requerida!</mat-hint>
             <mat-error *ngIf="cedulaFormControl.hasError('pattern') && !cedulaFormControl.hasError('required')">
               Cedula Invalida
             </mat-error>

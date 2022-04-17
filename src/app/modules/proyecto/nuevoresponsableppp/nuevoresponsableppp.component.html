@@ -5,15 +5,16 @@
         <ng-template matStepLabel>Información de Cargo</ng-template>
         <mat-card class="example-card">
           <mat-card-header>
-            <mat-card-title>CORDINADOR DE VINCULACIÓN</mat-card-title>
+            <mat-card-title>Responsable de prácticas de Servicio Comunitario</mat-card-title>
           </mat-card-header>
           <mat-divider></mat-divider>
           <br>
           <mat-card-content>
-            <h2 title> El Cordinador de Vinculacón es el encargado de:
-              <h3 display-3>Crear entidad Beneficiaria</h3>
-              <h3 display-3> Firmar Plan de Aprendizajel</h3>
-              <h3 display-3>Firmar Informe Final</h3>
+            <h2 title> El Responsable de prácticas de Servicio Comunitario es el encargado de:
+              <h3 display-3>1. Crear convocatorias.</h3>
+              <h3 display-3>2. Proceso de selección.</h3>
+              <h3 display-3>3. Delegación de estudiantes a docentes.</h3>
+              <h3 display-3>4. Gestiones diversas.</h3>
             </h2>
             <mat-divider></mat-divider>
             <br>
@@ -31,7 +32,7 @@
       <form [formGroup]="secondFormGroup">
         <mat-card class="example-card">
           <mat-card-header>
-            <mat-card-title>CORDINADOR DE VINCULACIÓN</mat-card-title>
+            <mat-card-title>Responsable de prácticas de Servicio Comunitario</mat-card-title>
           </mat-card-header>
           <mat-form-field appearance="outline">
             <mat-label>BUSCAR DOCENTE</mat-label>
@@ -43,16 +44,16 @@
             <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
               <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionDocente($event)" formControlName="secondCtrl" required>
                 <mat-list-option *ngFor="let shoe of filteredOptions | async" [value]="shoe" class="example-item">
-                  {{shoe.cedula}}---{{shoe.nombres_completo}}---{{shoe.docente_tipo_tiempo}}
+                  Cédula:{{shoe.cedula}}   Nombres:{{shoe.nombres_completo}} Carga Laboral:{{shoe.docente_tipo_tiempo}}
                 </mat-list-option>
               </mat-selection-list>
             </cdk-virtual-scroll-viewport>
             <br>
             <p>
-              Docente seleccionado: {{docentesselect.nombres_completo}}
+              <strong>Docente seleccionado: </strong>{{docentesselect.nombres_completo}}
             </p>
             <mat-form-field appearance="fill" style="width: 100%">
-              <mat-label>PERIDO DE ASIGNACION</mat-label>
+              <mat-label>PERIÓDO DE ASIGNACIÓN</mat-label>
               <mat-date-range-input [rangePicker]="picker">
                 <input matStartDate formControlName="start" placeholder="Inicio" [(ngModel)]="docentesselect.fecha_inicio_periodo">
                 <input matEndDate formControlName="end" placeholder="Final" [(ngModel)]="docentesselect.fecha_fin_periodo">
@@ -63,7 +64,7 @@
             <mat-divider></mat-divider>
             <br>
             <div>
-              <button mat-button matStepperPrevious color="warn">Atras</button>
+              <button mat-button matStepperPrevious color="warn">Atrás</button>
               <button mat-button matStepperNext color="primary">Siguente</button>
             </div>
           </mat-card-content>
@@ -74,20 +75,24 @@
       <ng-template matStepLabel>Confirmar</ng-template>
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title>CORDINADOR DE VINCULACIÓN</mat-card-title>
+          <mat-card-title>Responsable de prácticas de Servicio Comunitario</mat-card-title>
         </mat-card-header>
         <mat-divider></mat-divider>
         <br>
         <mat-card-content>
-          <h2 title> El Cordinador de Vinculacón es el encargado de: <h3 display-3>Crear entidad Beneficiaria,
-            Firmar Plan de Aprendizaje y Firmar Informe Final</h3></h2>
+          <h2 title> El Responsable de prácticas de Servicio Comunitario es el encargado de:
+            <h3 display-3>1. Crear convocatorias.</h3>
+            <h3 display-3>2. Proceso de selección.</h3>
+            <h3 display-3>3. Delegación de estudiantes a docentes.</h3>
+            <h3 display-3>4. Gestiones diversas.</h3>
+          </h2>
           <mat-divider></mat-divider>
-          <h2>INFORMACIÓN:</h2>
-          <h3>Cédula: {{docentesselect.cedula}}</h3>
-          <h3>Nombres: {{docentesselect.nombres_completo}}</h3>
-          <h3>Titulo: {{docentesselect.titulo}}</h3>
-          <h3>Apellidos: {{docentesselect.docente_tipo_tiempo}} </h3>
-          <h3>Periado: {{docentesselect.fecha_inicio_periodo | date:"longDate"}}--{{docentesselect.fecha_fin_periodo | date:"longDate"}} </h3>
+          <h2><strong>INFORMACIÓN:</strong></h2>
+          <h3><strong>Cédula:</strong> {{docentesselect.cedula}}</h3>
+          <h3><strong>Nombres:</strong> {{docentesselect.nombres_completo}}</h3>
+          <h3><strong>Título:</strong> {{docentesselect.titulo}}</h3>
+          <h3><strong>Apellidos:</strong> {{docentesselect.docente_tipo_tiempo}} </h3>
+          <h3><strong>Periódo: </strong>{{docentesselect.fecha_inicio_periodo | date:"longDate"}}--{{docentesselect.fecha_fin_periodo | date:"longDate"}} </h3>
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -96,7 +101,7 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <div *ngFor="let meterias of docentesselect.materias">
-              <p>{{meterias.nombre}}</p>
+              <p><strong>Nombre: </strong>{{meterias.nombre}}</p>
             </div>
           </mat-expansion-panel>
           <br>
@@ -108,14 +113,14 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <div *ngFor="let carreras of docentesselect.carreas">
-              <p>{{carreras.nombrecarrera}}</p>
+              <p><strong>Nombre: </strong>{{carreras.nombrecarrera}}</p>
             </div>
           </mat-expansion-panel>
         </mat-card-content>
         <mat-divider></mat-divider>
         <br>
         <div>
-          <button mat-button matStepperPrevious color="accent">Atras</button>
+          <button mat-button matStepperPrevious color="accent">Atrás</button>
           <button mat-flat-button (click)="guardarResaposableppp(docentesselect)">Finalizar</button>
         </div>
       </mat-card>

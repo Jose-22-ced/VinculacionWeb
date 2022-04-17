@@ -68,7 +68,14 @@ export class IniciosesionComponent implements OnInit,AfterViewInit {
           data=>{
             sessionStorage.clear;
             if(data.rol=="DOC"){
-              console.log("No esta dentro")
+              Swal.fire({
+                title: 'Error',
+                text: 'La cédula ingresada no pertenece al Instituto Superior Tecnológico del Azuay',
+                icon: 'warning',
+                color: "#0c3255",
+                confirmButtonColor:"#0c3255",
+                background: "#fbc02d",
+              })
             }else{
               sessionStorage.setItem('user', JSON.stringify(data));
               console.log(data)
@@ -92,14 +99,28 @@ export class IniciosesionComponent implements OnInit,AfterViewInit {
       data => {
         sessionStorage.clear;
         if(data.rol=="DOC"){
-          console.log("No esta dentro")
+          Swal.fire({
+            title: 'Error',
+            text: 'La cédula ingresada no pertenece al Instituto Superior Tecnológico del Azuay',
+            icon: 'warning',
+            color: "#0c3255",
+            confirmButtonColor:"#0c3255",
+            background: "#fbc02d",
+          })
         }else{
           sessionStorage.setItem('user', JSON.stringify(data));
-          this.router.navigate(['/panelusuario/proyectovinculacion/cordinadorvinculacion']);
+          this.router.navigate(['/panelusuario/proyectovinculacion/bienvenida']);
         }
       },
       err=>{
-        console.log("No esta dentro")
+        Swal.fire({
+          title: 'Error',
+          text: 'La cédula ingresada no pertenece al Instituto Superior Tecnológico del Azuay',
+          icon: 'warning',
+          color: "#0c3255",
+          confirmButtonColor:"#0c3255",
+          background: "#fbc02d",
+        })
       }
     )
   }

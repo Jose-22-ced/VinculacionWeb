@@ -294,8 +294,8 @@ export class NuevoproyectoComponent implements OnInit {
             }
           })
           Swal.fire(
-            'Fallo',
-            'El docemento es demaciado pesado',
+            'Error',
+            'El documento es demasiado pesado',
             'warning'
           )
         }else{
@@ -335,8 +335,8 @@ export class NuevoproyectoComponent implements OnInit {
             value1.idProyectoPPP=id;
             this.anexo1Service.saveAnexo1(value1).subscribe(value2 => {
               Swal.fire({
-                title: 'Exito',
-                text: 'El proyecto ha sido creado con exito',
+                title: 'Éxito',
+                text: 'Proyecto creado.',
                 icon: 'success',
                 iconColor :'#17550c',
                 color: "#0c3255",
@@ -347,8 +347,8 @@ export class NuevoproyectoComponent implements OnInit {
               this.issloading=false;
             },error => {
               Swal.fire({
-                title: 'Fallo',
-                text: 'El proyecto ha sido creado'  + error.error.message,
+                title: 'Ha surgido un error',
+                text: "Hubo un error, contáctese con TICs.",
                 icon: 'error',
                 color: "#0c3255",
                 confirmButtonColor:"#0c3255",
@@ -360,8 +360,8 @@ export class NuevoproyectoComponent implements OnInit {
         })
       },error => {
         Swal.fire({
-          title: 'Fallo',
-          text: 'El proyecto no ha sido creado'  + error.error.message,
+          title: 'Ha surgido un error',
+          text: "Hubo un error, contáctese con TICs.",
           icon: 'error',
           color: "#0c3255",
           confirmButtonColor:"#0c3255",
@@ -371,8 +371,8 @@ export class NuevoproyectoComponent implements OnInit {
       })
     }else{
       Swal.fire({
-        title: 'Fallo',
-        text: 'Faltan documentos por subir!, en la paso 4',
+        title: 'Error',
+        text: 'Faltan documentos por subir en el paso 4',
         icon: 'warning',
         color: "#0c3255",
         confirmButtonColor:"#0c3255",

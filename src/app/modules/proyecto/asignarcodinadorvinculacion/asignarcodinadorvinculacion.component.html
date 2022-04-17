@@ -10,10 +10,11 @@
           <mat-divider></mat-divider>
           <br>
           <mat-card-content>
-            <h2 title> El Cordinador de Vinculacón es el encargado de:
-              <h3 display-3>Crear entidad Beneficiaria</h3>
-              <h3 display-3> Firmar Plan de Aprendizajel</h3>
-              <h3 display-3>Firmar Informe Final</h3>
+            <h2 title> El Coordinador de Vinculación es el encargado de:
+              <br>
+              <h3 display-3>1. Crear Entidad Beneficiaria.</h3>
+              <h3 display-3>2. Firmar Plan de Aprendizaje.</h3>
+              <h3 display-3>3. Firmar Informe Final.</h3>
             </h2>
             <mat-divider></mat-divider>
             <br>
@@ -31,7 +32,7 @@
       <form [formGroup]="secondFormGroup">
         <mat-card class="example-card">
           <mat-card-header>
-            <mat-card-title>CORDINADOR DE VINCULACIÓN</mat-card-title>
+            <mat-card-title>COORDINADOR DE VINCULACIÓN</mat-card-title>
           </mat-card-header>
           <mat-form-field appearance="outline">
             <mat-label>BUSCAR DOCENTE</mat-label>
@@ -43,13 +44,14 @@
             <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
               <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionCordinador($event)" formControlName="secondCtrl" required>
                 <mat-list-option *ngFor="let shoe of filteredOptions | async" [value]="shoe" class="example-item">
-                  {{shoe.cedula}}---{{shoe.nombres}} {{shoe.apellidos}}---{{shoe.carga}}
+                  Cédula: {{shoe.cedula}}  Nombres: {{shoe.nombres}} {{shoe.apellidos}}
+                 Carga: {{shoe.carga}}
                 </mat-list-option>
               </mat-selection-list>
             </cdk-virtual-scroll-viewport>
             <br>
             <p>
-              Docente seleccionado: {{cordinadorselect.nombres}} {{cordinadorselect.apellidos}}
+              <strong>Docente seleccionado: </strong>{{cordinadorselect.nombres}} {{cordinadorselect.apellidos}}
             </p>
             <mat-divider></mat-divider>
             <br>
@@ -65,25 +67,29 @@
       <ng-template matStepLabel>Confirmar</ng-template>
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title>CORDINADOR DE VINCULACIÓN</mat-card-title>
+          <mat-card-title>COORDINADOR DE VINCULACIÓN</mat-card-title>
         </mat-card-header>
         <mat-divider></mat-divider>
         <br>
         <mat-card-content>
-          <h2 title> El Cordinador de Vinculacón es el encargado de: <h3 display-3>Crear entidad Beneficiaria,
-            Firmar Plan de Aprendizaje y Firmar Informe Final</h3></h2>
+          <h2 title> El Coordinador de Vinculación es el encargado de:
+            <br>
+            <h3 display-3>1. Crear Entidad Beneficiaria.</h3>
+            <h3 display-3>2. Firmar Plan de Aprendizaje.</h3>
+            <h3 display-3>3. Firmar Informe Final.</h3>
+          </h2>
           <mat-divider></mat-divider>
           <h2>INFORMACIÓN:</h2>
-          <h3>Cédula: {{cordinadorselect.cedula}}</h3>
-          <h3>Nombres: {{cordinadorselect.nombres}}</h3>
-          <h3>Apellidos: {{cordinadorselect.apellidos}}</h3>
-          <h3>Titulo: {{cordinadorselect.titulo}} </h3>
-          <h3>Carga: {{cordinadorselect.carga}}</h3>
+          <h3><strong>Cédula: </strong>{{cordinadorselect.cedula}}</h3>
+          <h3><strong>Nombres: </strong>{{cordinadorselect.nombres}}</h3>
+          <h3><strong>Apellidos:</strong> {{cordinadorselect.apellidos}}</h3>
+          <h3><strong>Título:</strong> {{cordinadorselect.titulo}} </h3>
+          <h3><strong>Carga: </strong>{{cordinadorselect.carga}}</h3>
         </mat-card-content>
         <mat-divider></mat-divider>
         <br>
         <div>
-          <button mat-button matStepperPrevious color="accent">Atras</button>
+          <button mat-button matStepperPrevious color="accent">Atrás</button>
           <button mat-flat-button (click)="guardarcv(cordinadorselect)">Finalizar</button>
         </div>
       </mat-card>

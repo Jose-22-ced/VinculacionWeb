@@ -49,7 +49,7 @@
               <div>
                 <strong>CICLO Y FECHA MAXIMA DE RECEPCION</strong>
                 <mat-form-field appearance="fill" style="width: 100%">
-                  <mat-label>SELECCIONE EL CICLO</mat-label>
+                  <mat-label>Seleccione el ciclo</mat-label>
                   <mat-select formControlName="ciclo" [(ngModel)]="anexo2.ciclo">
                     <mat-option value="PRIMER">PRIMER</mat-option>
                     <mat-option value="SEGUNDO">SEGUNDO</mat-option>
@@ -68,7 +68,7 @@
                 </div>
                 <mat-form-field appearance="fill" style="width: 100%;">
                   <mat-label>Fecha maxima de recepción</mat-label>
-                  <input matInput formControlName="fecharesep" [matDatepicker]="picker" [(ngModel)]="anexo2.fechaMaxRecepcion">
+                  <input matInput formControlName="fecharesep" [matDatepicker]="picker" [(ngModel)]="anexo2.fechaMaxRecepcion" [min]="proyectoselect.fechaInicio" [max]="proyectoselect.fechaFin">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -78,8 +78,8 @@
                 <mat-form-field appearance="fill" style="width: 100%">
                   <mat-label>Descripción de actividad: Emisión de la convocatoria </mat-label>
                   <mat-date-range-input [formGroup]="secondFormGroup" [rangePicker]="picker1">
-                    <input matStartDate formControlName="start" placeholder="Inicio" [(ngModel)]="fechae1">
-                    <input matEndDate formControlName="end" placeholder="Fin"  [(ngModel)]="fechae2">
+                    <input matStartDate formControlName="start" placeholder="Inicio" [(ngModel)]="fechae1" [min]="proyectoselect.fechaInicio" >
+                    <input matEndDate formControlName="end" placeholder="Fin"  [(ngModel)]="fechae2" [max]="proyectoselect.fechaFin">
                   </mat-date-range-input>
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-date-range-picker #picker1></mat-date-range-picker>
@@ -89,8 +89,8 @@
                 <mat-form-field appearance="fill" style="width: 100%">
                   <mat-label>Descripción de actividad: Recepción de solicitudes  </mat-label>
                   <mat-date-range-input [formGroup]="secondFormGroup" [rangePicker]="picker2">
-                    <input matStartDate formControlName="start1" placeholder="Inicio" [(ngModel)]="fechar1">
-                    <input matEndDate formControlName="end1" placeholder="Fin" [(ngModel)]="fechar2">
+                    <input matStartDate formControlName="start1" placeholder="Inicio" [(ngModel)]="fechar1" [min]="proyectoselect.fechaInicio"  >
+                    <input matEndDate formControlName="end1" placeholder="Fin" [(ngModel)]="fechar2" [max]="proyectoselect.fechaFin">
                   </mat-date-range-input>
                   <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                   <mat-date-range-picker #picker2></mat-date-range-picker>
@@ -100,8 +100,8 @@
                 <mat-form-field appearance="fill" style="width: 100%">
                   <mat-label>Descripción de actividad: Proceso de selección  </mat-label>
                   <mat-date-range-input [formGroup]="secondFormGroup" [rangePicker]="picker3">
-                    <input matStartDate formControlName="start2" placeholder="Inicio" [(ngModel)]="fechap1">
-                    <input matEndDate formControlName="end2" placeholder="Fin" [(ngModel)]="fechap2">
+                    <input matStartDate formControlName="start2" placeholder="Inicio" [(ngModel)]="fechap1" [min]="proyectoselect.fechaInicio" >
+                    <input matEndDate formControlName="end2" placeholder="Fin" [(ngModel)]="fechap2" [max]="proyectoselect.fechaFin">
                   </mat-date-range-input>
                   <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                   <mat-date-range-picker #picker3></mat-date-range-picker>
@@ -111,8 +111,8 @@
                 <mat-form-field appearance="fill" style="width: 100%">
                   <mat-label>Descripción de actividad: Notificación de resultados </mat-label>
                   <mat-date-range-input [formGroup]="secondFormGroup" [rangePicker]="picker4">
-                    <input matStartDate formControlName="start3" placeholder="Inicio"  [(ngModel)]="fechan1">
-                    <input matEndDate formControlName="end3" placeholder="Fin"  [(ngModel)]="fechan2">
+                    <input matStartDate formControlName="start3" placeholder="Inicio"  [(ngModel)]="fechan1" [min]="proyectoselect.fechaInicio">
+                    <input matEndDate formControlName="end3" placeholder="Fin"  [(ngModel)]="fechan2" [max]="proyectoselect.fechaFin">
                   </mat-date-range-input>
                   <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                   <mat-date-range-picker #picker4></mat-date-range-picker>
@@ -121,7 +121,7 @@
                 </mat-form-field>
               </div>
               <div>
-                <button mat-button matStepperPrevious color="warn">Atras</button>
+                <button mat-button matStepperPrevious color="warn">Atrás</button>
                 <button mat-button matStepperNext color="primary">Siguente</button>
               </div>
             </mat-card-content>
@@ -159,7 +159,7 @@
         <mat-card class="example-card">
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Informacion Final</mat-card-title>
+            <mat-card-title>Información Final</mat-card-title>
             <mat-card-subtitle>Generar Anexo</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>

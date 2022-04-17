@@ -72,8 +72,8 @@ export class AsignarcodinadorvinculacionComponent implements OnInit {
   guardarcv(docente:CordinadorVinculacion):void{
 
     Swal.fire({
-      title: 'Esta seguro?',
-      text: "Al docente seleccionado como Cordinador de Vinculación",
+      title: 'Confirmación',
+      text: "El docente seleccionado será asignado como Coordinador de Vinculación.",
       icon: 'warning',
       showCancelButton: true,
       color: "#0c3255",
@@ -88,8 +88,8 @@ export class AsignarcodinadorvinculacionComponent implements OnInit {
            docente.estado=true;
            this.cordinadorvinculacionService.updateCordinadorVinculacion(docente).subscribe(datau=>{
              Swal.fire({
-               title: 'Asignado',
-               text: 'El docente a sido Asignado!',
+               title: 'Asignado Correctamente',
+               text: 'El docente ha sido asignado.',
                icon: 'success',
                iconColor :'#17550c',
                color: "#0c3255",
@@ -99,7 +99,8 @@ export class AsignarcodinadorvinculacionComponent implements OnInit {
              this.router.navigate(['/panelusuario/proyectovinculacion/vercordinadorvinculacion']);
            },err => {
              Swal.fire({
-               title: 'Opss',
+               title: 'Ha surgido un error',
+               text: "Hubo un error, contáctese con TICs.",
                icon: 'warning',
                color: "#0c3255",
                confirmButtonColor:"#0c3255",
@@ -110,8 +111,8 @@ export class AsignarcodinadorvinculacionComponent implements OnInit {
             docente.estado=true;
             this.cordinadorvinculacionService.saveCordinadorVinculacion(docente).subscribe(datau=>{
               Swal.fire({
-                title: 'Asignado',
-                text: 'El docente a sido Asignado!',
+                title: 'Asignado Correctamente',
+                text: 'El docente ha sido asignado.',
                 icon: 'success',
                 iconColor :'#17550c',
                 color: "#0c3255",
@@ -121,7 +122,8 @@ export class AsignarcodinadorvinculacionComponent implements OnInit {
               this.router.navigate(['/panelusuario/proyectovinculacion/vercordinadorvinculacion']);
             },err => {
               Swal.fire({
-                title: 'Opss',
+                title: 'Ha surgido un error',
+                text: "Hubo un error, contáctese con TICs.",
                 icon: 'warning',
                 color: "#0c3255",
                 confirmButtonColor:"#0c3255",

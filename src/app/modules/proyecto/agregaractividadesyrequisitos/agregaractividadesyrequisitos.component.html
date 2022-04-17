@@ -16,7 +16,7 @@
               </mat-grid-tile>
               <mat-grid-tile colspan="3" *ngFor="let row of addForm.get('rows')?.controls;let index = index;">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Objetivo Especifico {{index}}</mat-label>
+                  <mat-label>Actividad  {{index}}</mat-label>
                   <input matInput  [formControl]="row.get('descripcion')"  placeholder="Ex. Realizar..." [required]>
                 </mat-form-field>
                 <span class="example-spacer"></span>
@@ -38,8 +38,8 @@
       <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>BIENVENIDOS A LA PLATAFORMA DE VINCULACIÓN A LA SOCIEDAD</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          <mat-card-title>REQUISITOS DEL PROYECTO (MATERIAS)</mat-card-title>
+
         </mat-card-header>
         <mat-card-content>
           <div id ="contenedor">

@@ -56,7 +56,7 @@ export class VerentidadesbeneficariasComponent implements OnInit {
   eliminarEntidad(entidad:Entidadbeneficiaria){
     console.log(entidad)
     Swal.fire({
-      title: 'Seguro?',
+      title: 'Eliminar Entidad Beneficiaria',
       text: "Está por eliminar la entidad: "+entidad.nombre,
       icon: 'warning',
       showCancelButton: true,
@@ -65,14 +65,14 @@ export class VerentidadesbeneficariasComponent implements OnInit {
       iconColor:"#b72020",
       background: "#fbc02d",
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Eliminar!'
+      confirmButtonText: 'Eliminar'
     }).then((result) => {
       if (result.isConfirmed) {
         this.issloading=true;
         this.entidadbeneficiarioService.deleteEntidadBeneficiaria(Number(entidad.idEntidad)).subscribe(value => {
           Swal.fire({
-            title: 'Eliminado',
-            text: 'La entidad se elimino correctamente',
+            title: 'Entidad eliminada correctamente',
+
             icon: 'success',
             iconColor :'#17550c',
             color: "#0c3255",
@@ -82,8 +82,8 @@ export class VerentidadesbeneficariasComponent implements OnInit {
           this.issloading=false;
         },error => {
           Swal.fire({
-            title: 'Error',
-            text: 'Hubo un error al eliminar la entidad '+error.error.message,
+            title: 'Ha surgido un error',
+            text: "Hubo un error, contáctese con TICs.",
             icon: 'warning',
             iconColor :'#b72020',
             color: "#0c3255",
