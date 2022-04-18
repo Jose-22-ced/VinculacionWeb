@@ -78,9 +78,10 @@
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>
-                  <mat-form-field class="example-full-width" appearance="outline">
+                  <button mat-raised-button color="warn" style="margin-right: 2px" (click)="obtnerMeses()">Calcular meses</button>
+                  <mat-form-field style="width: 50%;" appearance="outline">
                     <mat-label>Plazo de ejecución en meses</mat-label>
-                    <input matInput formControlName="plazo" placeholder="Ex. 2 meses" [(ngModel)]="proyecto.plazoEjecucion">
+                    <input matInput formControlName="plazo" placeholder="Ex. 2 meses" [(ngModel)]="proyecto.plazoEjecucion" [readonly]="true">
                   </mat-form-field>
                 </mat-grid-tile>
               </mat-grid-list>

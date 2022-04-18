@@ -21,6 +21,7 @@ import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
+import * as moment from "moment";
 
 
 function loadFile(url:any, callback:any) {
@@ -89,6 +90,7 @@ export class EditarproyectoComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtnerDatos();
+    this.obtnerMeses()
     this.entidadbeneficiarioService.getEntidadBeneficiariaAll().subscribe(value => {
       this.entidadBeneficiaria=value;
     })
@@ -186,6 +188,14 @@ export class EditarproyectoComponent implements OnInit {
     this.secondFormGroup.get("items_value")?.setValue("yes");
     // @ts-ignore
     this.secondFormGroup.addControl('rows', this.rows);
+  }
+  meses?:String;
+
+  obtnerMeses(){
+    let ini = moment(this.firstFormGroup?.getRawValue().start);
+    let fin = moment(this.firstFormGroup?.getRawValue().end);
+    let diff = fin.diff(ini, 'months');
+    this.proyecto.plazoEjecucion=diff+' Meses'
   }
   filter(value: any): Docentes[] {
     const filterValue = value.toString().toLowerCase();
