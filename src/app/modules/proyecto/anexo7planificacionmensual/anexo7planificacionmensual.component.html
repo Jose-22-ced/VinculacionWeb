@@ -52,7 +52,7 @@
               PLANIFICACIÓN MENSUAL DE ACTIVIDADES</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <h3>ACTIVIDADES DEL ESTUDIANTE</h3>
+            <h3>ACTIVIDADES DEL DOCENTES</h3>
             <mat-grid-list cols="7" rowHeight="2:1.50" [formGroup]="secondFormGroup">
                 <mat-grid-tile colspan="7" >
                   <button mat-fab color="primary" (click)="onAddRow('')" *ngIf="secondFormGroup.get('rows')"><mat-icon>add_circle</mat-icon></button>
@@ -81,7 +81,7 @@
                 <mat-grid-tile>
                   <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>N.Horas</mat-label>
-                    <input matInput type="number" min="0" [formControl]="row.get('numHoras')"  placeholder="Horas" [required]>
+                    <input matInput type="number" min="0" max="500" [formControl]="row.get('numHoras')"  placeholder="Horas" [required]>
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>
@@ -126,7 +126,7 @@
               PLANIFICACIÓN MENSUAL DE ACTIVIDADES</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <h3>ACTIVIDADES DEL ESTUDIANTE</h3>
+            <h3>ACTIVIDADES DEL ESTUDIANTES</h3>
             <mat-grid-list cols="7" rowHeight="2:1.50" [formGroup]="thirdFormGroup">
                 <mat-grid-tile colspan="7" >
                   <button mat-fab color="primary" (click)="onAddRow1('')" *ngIf="thirdFormGroup.get('rows1')"><mat-icon>add_circle</mat-icon></button>
@@ -155,7 +155,7 @@
                 <mat-grid-tile>
                   <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>N.Horas</mat-label>
-                    <input matInput type="number" min="0" [formControl]="row1.get('numHoras')"  placeholder="Horas" [required]>
+                    <input matInput type="number" min="0" max="500" [formControl]="row1.get('numHoras')"  placeholder="Horas" [required]>
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>

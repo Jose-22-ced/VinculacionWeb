@@ -99,8 +99,7 @@ export class DelegaciondealumnosComponent implements OnInit {
       this.cedula=cedula;
       this.responsablepppService.getResposablepppbyAll().subscribe(value => {
         this.proyectoService.getProyectos().subscribe(value1 => {
-          this.proyectos=value1.filter(value2 => value2.codigocarrera==value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera);
-          console.log(this.proyectos=value1)
+          this.proyectos=value1.filter(value2 => value2.codigocarrera==value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera&&value2.estado==true);
           this.filteredOptionsProyecto = this.myControlproyecto.valueChanges.pipe(
             startWith(''),
             map(values=>this.filterProyecto(values)),

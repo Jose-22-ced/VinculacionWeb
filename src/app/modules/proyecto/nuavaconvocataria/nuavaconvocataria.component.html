@@ -78,8 +78,8 @@
                 <mat-form-field appearance="fill" style="width: 100%">
                   <mat-label>Descripción de actividad: Emisión de la convocatoria </mat-label>
                   <mat-date-range-input [formGroup]="secondFormGroup" [rangePicker]="picker1">
-                    <input matStartDate formControlName="start" placeholder="Inicio" [(ngModel)]="fechae1" [min]="proyectoselect.fechaInicio" >
-                    <input matEndDate formControlName="end" placeholder="Fin"  [(ngModel)]="fechae2" [max]="proyectoselect.fechaFin">
+                    <input matStartDate formControlName="start" placeholder="Inicio" [(ngModel)]="fechae1" [min]="proyectoselect.fechaInicio" [max]="proyectoselect.fechaFin" >
+                    <input matEndDate formControlName="end" placeholder="Fin"  [(ngModel)]="fechae2" [min]="proyectoselect.fechaInicio"  [max]="proyectoselect.fechaFin">
                   </mat-date-range-input>
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-date-range-picker #picker1></mat-date-range-picker>

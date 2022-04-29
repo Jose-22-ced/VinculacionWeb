@@ -340,18 +340,11 @@ export class EditarproyectoComponent implements OnInit {
   }
 
   guardar(proyectos:Proyectos,anexo1:Anexo1[]){
-    console.log(anexo1)
-    console.log(anexo1)
-  }
-  /*guardar(proyectos:Proyectos,anexo1:Anexo1[]){
     var a1=0;
     var a2=0;
     proyectos.objetivosEspecificosProyecto=this.rows.getRawValue();
     proyectos.docentesDelegados=this.delegados;
     proyectos.particpantes=this.delegados.length;
-    proyectos.codigo=this.codigoProyecto+"";
-    proyectos.codigocarrera=this.Siglas+"";
-    proyectos.fechaat=this.Fechaat+"";
     var a1=anexo1.length;
     anexo1.forEach(value => {
       if (value.documento?.length!=0){
@@ -360,35 +353,48 @@ export class EditarproyectoComponent implements OnInit {
     })
     if(a1==a2){
       this.issloading=true;
-      this.proyectoService.saveProyectos(proyectos).subscribe(value => {
+      this.proyectoService.updateProyectos(proyectos).subscribe(value => {
         this.proyectoService.getProyectos().subscribe(value1 => {
           var id = value1.filter(value2 => value2.codigo==proyectos.codigo&&value2.codigocarrera==proyectos.codigocarrera)[0].id;
-          console.log(id)
           anexo1.forEach(value1 => {
             value1.idProyectoPPP=id;
-            this.anexo1Service.saveAnexo1(value1).subscribe(value2 => {
+            this.anexo1Service.updateAnexo1(value1).subscribe(value2 => {
               Swal.fire(
-                'Exito',
-                'El proyecto ha sido creado con exito',
-                'success'
+                {
+                  title: 'Éxito',
+                  text: 'Proyecto actulizado.',
+                  icon: 'success',
+                  iconColor :'#17550c',
+                  color: "#0c3255",
+                  confirmButtonColor:"#0c3255",
+                  background: "#fbc02d",
+                }
               )
               this.router.navigate(['/panelusuario/proyectovinculacion/nuevoproyecto',this.CedulaC]);
               this.issloading=false;
             },error => {
-              Swal.fire(
-                'Fallo',
-                'El proyecto ha sido creado'  + error.error.message,
-                'error'
+              Swal.fire({
+                title: 'Ha surgido un error',
+                text: "Hubo un error, contáctese con TICs.",
+                icon: 'error',
+                color: "#0c3255",
+                confirmButtonColor:"#0c3255",
+                background: "#fbc02d",
+                }
               )
               this.issloading=false;
             })
           })
         })
       },error => {
-        Swal.fire(
-          'Fallo',
-          'El proyecto ha sido creado'  + error.error.message,
-          'error'
+        Swal.fire({
+            title: 'Ha surgido un error',
+            text: "Hubo un error, contáctese con TICs.",
+            icon: 'error',
+            color: "#0c3255",
+            confirmButtonColor:"#0c3255",
+            background: "#fbc02d",
+          }
         )
         this.issloading=false;
       })
@@ -399,7 +405,7 @@ export class EditarproyectoComponent implements OnInit {
         'warning'
       )
     }
-  }*/
+  }
   generate(anexo1: Anexo1) {
     var fecha:[];
     // @ts-ignore

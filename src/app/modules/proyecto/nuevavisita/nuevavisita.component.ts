@@ -72,21 +72,28 @@ export class NuevavisitaComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       let cedula = params['cedula']
       this.anexo1Service.getAnexo1byCedula(cedula).subscribe(value => {
-        this.anexo1=value[0]
-        this.anexo5Service.getAnexo5byCedula(cedula).subscribe(value1 => {
-          this.anexo5=value1[0]
-          this.anexo4Service.getAnexo4All().subscribe(value2 => {
-            this.anexo4=value2.filter(value3 => value3.idProyectoPPP==value1[0].idProyectoPPP&&value3.num_proceso==2)
-          })
-          this.proyectoService.getProyectobyid(Number(value1[0].idProyectoPPP)).subscribe(value2 => {
-            this.proyecto=value2;
-            this.entidadbeneficiarioService.getsaveEntidadBeneficiariabyId(Number(value2.entidadbeneficiaria)).subscribe(value3 => {
+        this.anexo1=value[value.length-1]
+        this.anexo4Service.getAnexo4All().subscribe(value2 => {
+          this.anexo4=value2.filter(value3 => value3.idProyectoPPP==this.anexo1.idProyectoPPP&&value3.num_proceso==2)
+          this.proyectoService.getProyectobyid(Number(this.anexo1.idProyectoPPP)).subscribe(value2 => {
+            this.proyecto=(value2.estado==true)?value2:new Proyectos();
+            if(value2.estado==false){
+              Swal.fire({
+                title: 'Vacío',
+                text: 'No existen proyectos actualmente',
+                icon: 'info',
+                iconColor :'#17550c',
+                color: "#0c3255",
+                background: "#fbc02d",
+              })
+            }
+            this.entidadbeneficiarioService.getsaveEntidadBeneficiariabyId(Number(this.proyecto.entidadbeneficiaria)).subscribe(value3 => {
               this.entidad=value3
-              this.anexo2Service.getAnexoByidProyecto(Number(value1[0].idProyectoPPP)).subscribe(value4 => {
+              this.anexo2Service.getAnexoByidProyecto(Number(this.anexo1.idProyectoPPP)).subscribe(value4 => {
                 this.anexo13.ciclo=value4.ciclo;
                 this.responsablepppService.getResposablepppbyCarrera(value4.siglasCarrera+'').subscribe(value5 => {
                   this.anexo13.periodoAcademicon=value5.fecha_inicio_periodo+" "+value5.fecha_fin_periodo;
-                  this.anexo13Service.getAnexo13by(Number(value1[0].idProyectoPPP)).subscribe(value6 => {
+                  this.anexo13Service.getAnexo13by(Number(this.anexo1.idProyectoPPP)).subscribe(value6 => {
                     if(value6.length==0){
                       this.onAddRow(this.Informe)
                       this.issloading=false;
@@ -100,7 +107,6 @@ export class NuevavisitaComponent implements OnInit {
                     }
 
                   })
-
                 })
               })
             })

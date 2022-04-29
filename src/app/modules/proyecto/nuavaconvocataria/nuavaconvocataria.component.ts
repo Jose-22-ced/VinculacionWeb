@@ -89,7 +89,7 @@ export class NuavaconvocatariaComponent implements OnInit {
       this.responsablepppService.getResposablepppbyAll().subscribe(value => {
         this.proyectoService.getProyectos().subscribe(value1 => {
           this.isexist=value1.filter(value2 => value2.codigocarrera==value.filter(value3 => value3.cedula==cedula)[0]).length==0;
-          this.proyectos=value1.filter(value2 => value2.codigocarrera==value.filter(value3 => value3.cedula==cedula)[0].codigoCarrera)
+          this.proyectos=value1.filter(value2 => value2.codigocarrera==value.filter(value3 => value3.cedula==cedula)[0].codigoCarrera&&value2.estado==true)
           this.anexo2Service.getAnexo2().subscribe(anexo2=>{
             if(anexo2.filter(fil=>fil.siglasCarrera==this.proyectos[0].codigocarrera).length==0){
               this.numeroConvocatoria="1";

@@ -87,7 +87,7 @@ export class Registrobeneficiarios12Component implements OnInit {
       this.cedula=cedula
 
       this.proyectoService.getProyectosCICedulaAp(cedula).subscribe(dataPro=>{
-        this.proyectos=dataPro
+        this.proyectos=dataPro.filter(value => value.estado==true)
         this.filteredOptionsP = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values => this.filterP(values)),

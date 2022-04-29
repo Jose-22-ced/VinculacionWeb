@@ -101,7 +101,7 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
       console.log(cedula)
 
       this.proyectoService.getProyectosCICedulaAp(cedula).subscribe(dataPro=>{
-        this.proyectoSele=dataPro
+        this.proyectoSele=dataPro.filter(value => value.estado==true)
         this.filteredOptionsP = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values => this.filterP(values)),

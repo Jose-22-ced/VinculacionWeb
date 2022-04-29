@@ -32,10 +32,11 @@
               <br><strong>Control (%): </strong>{{alumnos.controlEstudiante}}%</p>
           </mat-expansion-panel>
           <mat-divider></mat-divider>
-          <br>
-          <button mat-raised-button color="primary" (click)="convertFile(anexo61.documento)">DESCARGAR DOCUMENTO</button>
-          <button mat-raised-button color="accent" style="margin-left: 5px" (click)="update(anexo61)">SUBIR DOCUMENTO</button>
         </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="convertFile(anexo61.documento)">DOCUMENTO</button>
+          <button mat-raised-button color="accent" (click)="update(anexo61)">SUBIR DOCUMENTO</button>
+        </mat-card-actions>
       </mat-card>
     </div>
   </div>

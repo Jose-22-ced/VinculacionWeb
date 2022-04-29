@@ -42,7 +42,7 @@ export class Verproyectos1Component implements OnInit {
         this.proyectoService.getProyectos().subscribe(proyecto => {
           this.isexist=proyecto.filter(value1 => value1.codigocarrera==value.filter(value2 => value2.cedula==cedula)[0].codigoCarrera).length!=0;
           // @ts-ignore
-          this.proyectos=proyecto.filter(value1 => value1.codigocarrera==value.filter(value2 => value2.cedula==cedula)[0].codigoCarrera);
+          this.proyectos=proyecto.filter(value1 => value1.codigocarrera==value.filter(value2 => value2.cedula==cedula)[0].codigoCarrera&&value1.estado==true);
           this.issloading=false;
           this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(''),

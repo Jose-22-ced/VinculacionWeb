@@ -54,7 +54,7 @@
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmarplandeaprondizaje',persona.cedula]"
                       routerLinkActive="active">-Plan de aprendizaje (Anexo 6)</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/firmaestudiantesseleccionado',persona.nombrescompletos]"
-                      routerLinkActive="active">-Firmar Informe de aceptacion de alumnos</button>Y
+                      routerLinkActive="active">-Firmar Informe de aceptacion de alumnos</button>
             </mat-expansion-panel>
             <br>
             <mat-expansion-panel (opened)="panelOpenState = true"
@@ -225,12 +225,6 @@
                       routerLinkActive="active">-Ver visitas</button>
             </mat-expansion-panel>
             <br>
-
-
-
-
-
-
           </div>
           <!--Director-->
           <div class="list-group" *ngSwitchCase="'DP'">

@@ -130,7 +130,7 @@
                   <mat-grid-tile>
                     <mat-form-field appearance="fill">
                       <mat-label>Horas</mat-label>
-                      <input matInput type="number" [formControl]="row.get('horasAsignadas')" (ngModelChange)="sumar()" (keyup)="sumar()" placeholder="Ex.5">
+                      <input matInput type="number" [formControl]="row.get('horasAsignadas')" (ngModelChange)="sumar()" [max]="500" (keyup)="sumar()" placeholder="Ex.5">
                     </mat-form-field>
                   </mat-grid-tile>
                   <mat-grid-tile>

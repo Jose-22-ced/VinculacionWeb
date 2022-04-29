@@ -56,6 +56,7 @@ export class NuevoinformedeculminacionComponent implements OnInit {
   thirdFormGroup?: FormGroup;
   fourFormGroup?: FormGroup;
   anexo4:Anexo4[]=[];
+  pryectosProyectos:Proyectos[]=[];
   proyecto:Proyectos = new Proyectos();
   cedula?:String;
   anexo10:Anexo10 = new Anexo10();
@@ -80,10 +81,15 @@ export class NuevoinformedeculminacionComponent implements OnInit {
       this.anexo4Service.getAnexo4byCedula(cedula).subscribe(value => {
         this.anexo10Service.getAnexo10All().subscribe(value1 => {
           if(value1.filter(value2 => value2.idProyectoPPP==
-            value.filter(value3 => value3.num_proceso==2)[0].idProyectoPPP&&value2.cedulaEstudiante==cedula).length==0){
-            this.anexo4=value.filter(value1 => value1.num_proceso==2);
+            value.filter(value3 => value3.num_proceso==2)[value.length-1].idProyectoPPP&&value2.cedulaEstudiante==cedula).length==0){
+            this.proyectoService.getProyectobyid(Number(value.filter(value3 => value3.num_proceso==2)[value.length-1].idProyectoPPP)).forEach(value2 => {
+              value.filter(value1 => value1.num_proceso==2).forEach(value3 => {
+                if(value2.estado==true&&value3.idProyectoPPP==value2.id){
+                  this.anexo4.push(value3)
+                }
+              })
+            })
             this.issloading=false;
-            console.log(value)
           }else {
             Swal.fire({
               title: 'Sin informes pendientes',

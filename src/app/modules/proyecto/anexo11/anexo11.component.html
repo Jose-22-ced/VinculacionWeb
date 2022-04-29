@@ -72,14 +72,22 @@
                 <mat-divider></mat-divider>
                 <mat-list-item>Total de Horas: {{anexo8.totalHoras}}</mat-list-item>
                 <mat-divider></mat-divider>
-
-
                 <mat-divider></mat-divider>
-                <mat-list-item>Fecha de Inicio: <input type="date" formControlName="fechai" [(ngModel)]="anexo11ob.fechaInicio">
-                  Fecha de Finalización: <input type="date" formControlName="fechaf" [(ngModel)]="anexo11ob.fechaFinaliza" >
+                <br>
+                <mat-list-item>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Fecha de Inicio y Fin</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                      <input matStartDate placeholder="Fecha de Inicio" formControlName="fechai" [(ngModel)]="anexo11ob.fechaInicio">
+                      <input matEndDate placeholder="Fecha de Finalización" formControlName="fechaf"  [(ngModel)]="anexo11ob.fechaFinaliza">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  </mat-form-field>
                 </mat-list-item>
                 <mat-list-item>Fecha de Evaluacion: {{fechae | date:'mediumDate'}}
                 </mat-list-item>
+                <br>
                 <mat-divider></mat-divider>
               </mat-list>
             </mat-card>

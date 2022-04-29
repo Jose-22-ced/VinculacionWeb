@@ -121,8 +121,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
       this.cedula=cedula;
       this.responsablepppService.getResposablepppbyAll().subscribe(value => {
         this.proyectoService.getProyectos().subscribe(value1 => {
-          this.proyectos=value1.filter(value2 => value2.codigocarrera==value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera);
-          console.log(this.proyectos=value1)
+          this.proyectos=value1.filter(value2 => value2.codigocarrera==value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera&&value2.estado==true);
           this.filteredOptionsProyecto = this.myControlproyecto.valueChanges.pipe(
             startWith(''),
             map(values=>this.filter(values)),
@@ -250,9 +249,9 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
   selectionDocente(docenteselect: String){
     this.anexo5Service.getAnexo5byCedula(docenteselect).subscribe(value => {
       if(value.length!=0){
-        this.anexo5=value[0];
-        this.anexo6.cedulaDocente=value[0].cedulaDocenteApoyo;
-        this.anexo6.nombreDocenteApoyo=value[0].nombreDocenteReceptor;
+        this.anexo5=value[value.length-1];
+        this.anexo6.cedulaDocente=value[value.length-1].cedulaDocenteApoyo;
+        this.anexo6.nombreDocenteApoyo=value[value.length-1].nombreDocenteReceptor;
         this.activate=false;
       }else {
         this.activate=true;
@@ -271,9 +270,9 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
 
   selectionAlumno(alimnoselect: String){
     this.anexo4Service.getAnexo4byCedula(alimnoselect).subscribe(value => {
-      this.numerominimo=Number(value[0].numeroHoras);
-      this.anexo6.cedulaEstudiante=value[0].cedulaEstudiante;
-      this.anexo6.nombreEstudiante=value[0].nombreEstudiante;
+      this.numerominimo=Number(value[value.length-1].numeroHoras);
+      this.anexo6.cedulaEstudiante=value[value.length-1].cedulaEstudiante;
+      this.anexo6.nombreEstudiante=value[value.length-1].nombreEstudiante;
       if(this.numerominimo-1>=this.sum){
         this.activar=true;
       }else{
@@ -319,14 +318,26 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
       })
       this.router.navigate(['/panelusuario/proyectovinculacion/nuevoplandeaprendizaje',this.cedula])
     },error => {
-      Swal.fire({
-        title: 'Ha surgido un error',
-        text: "Hubo un error, contáctese con TICs.",
-        icon: 'error',
-        color: "#0c3255",
-        confirmButtonColor:"#0c3255",
-        background: "#fbc02d",
-      })
+      if(error.error.message=="La fecha de inicio no puede ser mayor a la fecha fin"){
+        Swal.fire({
+          title: 'Ha surgido un error',
+          text: error.error.message,
+          icon: 'error',
+          color: "#0c3255",
+          confirmButtonColor:"#0c3255",
+          background: "#fbc02d",
+        })
+      }else {
+        Swal.fire({
+          title: 'Ha surgido un error',
+          text: "Hubo un error, contáctese con TICs.",
+          icon: 'error',
+          color: "#0c3255",
+          confirmButtonColor:"#0c3255",
+          background: "#fbc02d",
+        })
+      }
+
     })
   }
 

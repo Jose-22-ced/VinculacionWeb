@@ -66,15 +66,14 @@ export class VervisitasComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       let cedula = params['cedula']
       this.anexo1Service.getAnexo1byCedula(cedula).subscribe(value => {
-        this.anexo13Service.getAnexo13by(Number(value[0].idProyectoPPP)).subscribe(value1 => {
-          this.anexo13=value1[0]
-          this.proyectoService.getProyectobyid(Number(value[0].idProyectoPPP)).subscribe(value2 => {
+        this.anexo13Service.getAnexo13by(Number(value[value.length-1].idProyectoPPP)).subscribe(value1 => {
+          this.anexo13=value1[value1.length-1]
+          this.proyectoService.getProyectobyid(Number(value[value.length-1].idProyectoPPP)).subscribe(value2 => {
             this.proyecto=value2;
           })
           this.issloading=false;
-          console.log(value1[0])
           // @ts-ignore
-          date=value1[0].periodoAcademicon.split(" ");
+          date=value1[value1.length-1].periodoAcademicon.split(" ");
           this.date1= new Date(date[0]+"")
           this.date2= new Date(date[1]+"")
         })

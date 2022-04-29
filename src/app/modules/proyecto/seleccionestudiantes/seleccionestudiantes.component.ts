@@ -85,7 +85,7 @@ export class SeleccionestudiantesComponent implements OnInit {
       let cedula = params['cedula']
       this.responsablepppService.getResposablepppbyAll().subscribe(value => {
         this.proyectoService.getProyectos().subscribe(value1 => {
-          this.proyecto=value1.filter(value2 => value2.codigocarrera==value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera);
+          this.proyecto=value1.filter(value2 => value2.estado==true&&value2.codigocarrera==value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera);
           this.cordinadorvinculacionService.getCordinadorVinculacioAll().subscribe(da=>{
             this.informeAceotacion.nombreRevisado=da.nombres+" "+da.apellidos
             this.filteredOptions = this.myControl.valueChanges.pipe(

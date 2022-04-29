@@ -187,8 +187,18 @@ export class Anexo7planificacionmensualComponent implements OnInit {
       })
       //filtros para obtner datos de entidad, proyecto por id de proyecto.
       this.anexo1Service.getAnexo1byCedula(cedula).subscribe(datos=>{
-        this.proyectoService.getProyectobyid(Number(datos[0].idProyectoPPP)).subscribe(data=> {
-          this.proyecto=data
+        this.proyectoService.getProyectobyid(Number(datos[datos.length-1].idProyectoPPP)).subscribe(data=> {
+          this.proyecto=(data.estado==true)?data:new Proyectos();
+          if(data.estado==false){
+            Swal.fire({
+              title: 'Vacío',
+              text: 'No existen proyectos actualmente',
+              icon: 'info',
+              iconColor :'#17550c',
+              color: "#0c3255",
+              background: "#fbc02d",
+            })
+          }
           this.anexo7service.getAnexo7All().subscribe(value => {
             this.numdemes=value.filter(value1 => value1.idProyecto==Number(datos[0].idProyectoPPP)).length;
             var hora: string[]

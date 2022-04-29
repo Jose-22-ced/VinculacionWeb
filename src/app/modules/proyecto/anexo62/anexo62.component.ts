@@ -108,15 +108,21 @@ export class Anexo62Component implements OnInit {
         })
       })
       this.anexo6Service.getAnexo6all().subscribe(data => {
-        this.anexo6 = data.filter(value => value.nombreDocenteApoyo==nombre);
-        // AUN NO HAY CEDULAS
-        // this.anexo6 = data.filter(value => value.cedulaDocente==cedula);
-        console.log(data);
-        this.filteredOptions = this.myControl.valueChanges.pipe(
-          startWith(''),
-          map(values => this.filter(values)),
-        );
-        this.issloading = false;
+        this.proyectoService.getProyectos().subscribe(value => {
+          value.forEach(value1 => {
+            data.filter(value => value.cedulaDocente==cedula).forEach(value2 => {
+              if(value1.estado==true&&value2.proyectoId==value1.id){
+                this.anexo6.push(value2)
+                this.filteredOptions = this.myControl.valueChanges.pipe(
+                  startWith(''),
+                  map(values => this.filter(values)),
+                );
+              }
+              this.issloading = false;
+            })
+          })
+        })
+
       })
       this.fechaService.getSysdate().subscribe(value => {
         this.Fechaenvio = value.fecha;
@@ -144,6 +150,11 @@ export class Anexo62Component implements OnInit {
   selectionAnexo6(anexo6: MatSelectionListChange){
     this.anexo6select=anexo6.option.value
     console.log(this.anexo6select.cedulaEstudiante)
+    this.anexo62Service.getDocentedirector(this.anexo6select.proyectoId).subscribe(value => {
+      this.nombredir = value.nombre + " " + value.apellidos
+      this.ceduladir = value.cedula;
+
+    })
     this.anexo6select.actividades?.forEach(value1 => {
       this.onAddRow(value1.actividad+"")
     })
@@ -175,10 +186,6 @@ export class Anexo62Component implements OnInit {
     this.anexoss62.nombreApoyo = this.anexo6select.nombreDocenteApoyo;
     this.anexoss62.fechaApoyo=this.Fechaenvio;
     this.anexoss62.fechaDirector=this.Fechaenvio;
-    this.anexo62Service.getDocentedirector(this.anexo6select.proyectoId).subscribe(value => {
-      this.nombredir = value.nombre + " " + value.apellidos
-      this.ceduladir = value.cedula;
-    })
     this.anexoss62.cedulaDirector=this.ceduladir;
     this.anexoss62.id_anexo=this.anexo6select.id;
     this.anexoss62.nombreDirector=this.nombredir;
@@ -186,6 +193,7 @@ export class Anexo62Component implements OnInit {
     this.anexoss62.cedulaEstudiante=this.anexo6select.cedulaEstudiante;
     this.anexoss62.ciclo=this.anexo6select.ciclo;
     this.anexoss62.actividades = this.rows.getRawValue();
+
     return this.anexoss62;
   }
 

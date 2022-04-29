@@ -7,27 +7,17 @@
 
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>
-              (ANEXO 8)<br>
-              INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY
-            </mat-card-title>
+            <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY</mat-card-title>
             <mat-card-subtitle>
-
-              <br />
-              CORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD<br>
-              REGISTRO DIARIO DE ACTIVIDADES DE LOS ESTUDIANTES
             </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <br>
-
-
             <mat-form-field appearance="fill">
               <mat-label>SELECCIONE UN PROYECTO:</mat-label>
-              <select matNativeControl class="form-control"  (change)="selectOpcion($event)" style="width: 100%" name="select" required formControlName="proyecto">
-                <option value="" selected></option>
-                <option *ngFor="let item of anexo3"[value]="item.idProyectoPPP">{{item.nombreproyecto}}</option>
-              </select>
+              <mat-select  (selectionChange)="selectOpcion($event)" style="width: 100%" name="select" required formControlName="proyecto">
+                <mat-option *ngFor="let item of proyectos" [value]="item.id">{{item.nombre}}</mat-option>
+              </mat-select>
             </mat-form-field>
 
             <br>
@@ -63,16 +53,8 @@
 
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>
-              (ANEXO 8)<br>
-              INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY
+            <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY
             </mat-card-title>
-            <mat-card-subtitle>
-
-              <br />
-              CORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD<br>
-              REGISTRO DIARIO DE ACTIVIDADES DE LOS ESTUDIANTES
-            </mat-card-subtitle>
           </mat-card-header>
 
           <mat-card-content>
@@ -94,24 +76,26 @@
                 <mat-label  class="example-full-width2" appearance="outline"> <b> N.HORAS</b></mat-label>
               </mat-grid-tile>
               <mat-grid-tile colspan="4" *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
-                <mat-form-field class="example-full-widthf" appearance="outline">
+                <mat-form-field appearance="outline"  style="margin-left: 2px; width: 120px">
                   <mat-label>Fecha:{{index}}</mat-label>
-                  <input matInput type="date"   [formControl]="row.get('fecha')"  placeholder="Fecha:" [required]>
+                  <input matInput [matDatepicker]="picker" [formControl]="row.get('fecha')" [min]="proyecto.fechaInicio" [max]="proyecto.fechaFin" placeholder="Fecha:" [required]>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="example-full-width" appearance="outline">
+                <mat-form-field class="example-full-width" appearance="outline" style="margin-left: 2px">
                   <mat-label>Descripción de Actividades:{{index}}</mat-label>
                   <textarea matInput [formControl]="row.get('descripcionActividad')"  placeholder="Descripción de Actividades:" [required]>
                </textarea>
                 </mat-form-field>
-                <mat-form-field class="example-full-widthl" appearance="outline">
+                <mat-form-field class="example-full-widthl" appearance="outline" style="margin-left: 2px">
                   <mat-label>Lugar{{index}}</mat-label>
                   <input matInput type="text"   [formControl]="row.get('lugar')"  placeholder="Lugar" [required]>
                 </mat-form-field>
 
-                <mat-form-field class="example-full-width2"  appearance="outline">
+                <mat-form-field class="example-full-width2"  appearance="outline" style="margin-left: 2px">
                   <mat-label>Numero de Horas{{index}}</mat-label>
-                  <input matInput type="number" style="font-size: 18px;" class="form-control" (keyup)="sumar()"  class="impnumber"  [formControl]="row.get('numHoras')"  placeholder="Horas" [required]>
+                  <input matInput type="number" min="0" max="15" style="font-size: 18px;" class="form-control" (ngModelChange)="sumar()" (keyup)="sumar()"  class="impnumber"  [formControl]="row.get('numHoras')"  placeholder="Horas" [required]>
                 </mat-form-field>
 
                 <span class="example-spacer"></span>
@@ -183,15 +167,8 @@
       <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>
-            (ANEXO 8)<br>
-            INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY
+          <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY
           </mat-card-title>
-          <mat-card-subtitle>
-            <br />
-            CORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD<br>
-            REGISTRO DIARIO DE ACTIVIDADES DE LOS ESTUDIANTES
-          </mat-card-subtitle>
           <mat-card-subtitle style="font-size: large">ESTA SEGURO DE SUBIR SUS ACTIVIDADES REGISTRADAS HASTA EL MOMENTO</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>

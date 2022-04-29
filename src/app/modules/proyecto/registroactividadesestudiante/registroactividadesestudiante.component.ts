@@ -20,6 +20,8 @@ import { saveAs } from "file-saver";
 import {FechaService} from "../../../services/fecha.service";
 import {Anexo61} from "../../../models/anexo61";
 import {DatePipe} from "@angular/common";
+import {MatSelectionListChange} from "@angular/material/list";
+import {MatSelectChange} from "@angular/material/select";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -50,6 +52,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
   public cedula?:String;
   public nombre?:String;
   anexo3:Anexo3[]=[];
+  proyectos:Proyectos[]=[];
   anexo8requeste:Anexo8=new Anexo8;
   proyecto:Proyectos=new Proyectos;
   edntidad:Entidadbeneficiaria=new Entidadbeneficiaria();
@@ -82,9 +85,10 @@ export class RegistroactividadesestudianteComponent implements OnInit {
       let nombre = params['nombres']
       this.nombre=nombre;
       this.cedula=cedula;
-
       this.anexo3Service.getanexo3(cedula).subscribe(datos=>{
-        this.anexo3=datos.filter(d=>d.estado=="AN")
+        this.proyectoService.getProyectos().forEach(value => {
+          this.proyectos=value.filter(value1 => value1.id==datos.filter(d=>d.estado=="AN")[datos.length-1].idProyectoPPP&&value1.estado==true)
+        })
         this.issloading=false;
       })
       this.fechaService.getSysdate().subscribe(value => {
@@ -170,9 +174,10 @@ export class RegistroactividadesestudianteComponent implements OnInit {
   }
 
 
-  selectOpcion(event:any){
-    this.proyectoService.getProyectobyid(event.target.value).subscribe(data=>{
+  selectOpcion(event: MatSelectChange){
+    this.proyectoService.getProyectobyid(event.value).subscribe(data=>{
       this.proyecto=data
+      console.log( this.proyecto)
       this.anexo8Service.getEntidadById(data.entidadbeneficiaria).subscribe(da=>{
         this.edntidad=da;
       })
@@ -182,12 +187,12 @@ export class RegistroactividadesestudianteComponent implements OnInit {
         this.anexo8requeste=datos[0]
         if(datos[0].actividades?.length!=0){
           this.actualzar=true;
-
           datos[0].actividades?.forEach(element => {
             this.onAddRow(element)
           });
+        }else {
+          this.onAddRow(new ActividadesAnexo8Request())
         }
-        console.log(this.actualzar)
       }
     })
 

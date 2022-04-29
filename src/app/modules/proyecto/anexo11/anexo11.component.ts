@@ -132,7 +132,7 @@ export class Anexo11Component implements OnInit {
       let nombres = params['nombres']
       this.nombres = nombres;
       this.anexo6Service.getAnexo6all().subscribe(data => {
-        this.anexo6 = data.filter(value => value.nombreDocenteApoyo==nombres);
+        this.anexo6 = data.filter(value => value.cedulaDocente==cedula);
         console.log(data);
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),

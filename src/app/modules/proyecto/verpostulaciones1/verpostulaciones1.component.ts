@@ -98,7 +98,7 @@ export class Verpostulaciones1Component implements OnInit {
   cargarpostulaiones(cedula:String){
     this.responsablepppService.getResposablepppbyAll().subscribe(value => {
       this.proyectoService.getProyectos().subscribe(value1 => {
-        this.proyecto=value1.filter(value2 => value2.codigocarrera==value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera);
+        this.proyecto=value1.filter(value2 => value2.codigocarrera==value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera&&value2.estado==true);
       })
       this.anexo3Service.getAnexo3byCodigoCorrera(value.filter(value1 => value1.cedula==cedula)[0].codigoCarrera).subscribe(value1 => {
         this.isexist=value1.length!=0;
@@ -459,15 +459,28 @@ export class Verpostulaciones1Component implements OnInit {
     saveAs(file, 'Anexo3.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {
-    let arr = dataurl.split(','),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      n = bstr.length,
-      u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
+    try {
+      let arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], filename, { type: mime });
+
+    } catch (error) {
+      let arr = dataurl,
+        mime = arr,
+        bstr = atob(arr),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], filename, { type: mime });
     }
-    return new File([u8arr], filename, { type: mime });
   }
 
 }
