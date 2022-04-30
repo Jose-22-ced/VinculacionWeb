@@ -14,11 +14,11 @@ export class IniciosesionService {
   constructor(private http:HttpClient) { }
 
   Login(userRequest: User):Observable<User>{
-    console.log(userRequest.cedula)
+    //console.log(userRequest.cedula)
     return this.http.post<User>(this.urlEndPoint+"/login",userRequest)
   }
   Signup(userRequest: User):Observable<User>{
-    console.log(userRequest)
+    //console.log(userRequest)
     return this.http.post<User>(this.urlEndPoint+"/signup",userRequest)
   }
 }

@@ -19,7 +19,7 @@ export class Anexo8Service {
   constructor(private http: HttpClient) {
   }
   updateActivadades(anexo8: Anexo8):Observable<Anexo8>{
-    console.log(anexo8);
+    //console.log(anexo8);
     return this.http.put<Anexo8>(this.urlEndPoint,anexo8,{headers: this.httpHeaders})
   }
   deteledActivadades(idAnexo?: Number,idactividad?:Number){
@@ -41,5 +41,8 @@ export class Anexo8Service {
   }
   getDocentedirector(codigoProyecto?:Number):Observable<DirectorNombres>{
     return this.http.get("http://localhost:8080/api/docentes/director/"+codigoProyecto,{headers: this.httpHeaders}).pipe(map(Response => Response as DirectorNombres))
+  }
+  getanexo8byproyecto(idProyectoPPP?:number):Observable<Anexo8[]>{
+    return this.http.get(this.urlEndPoint+"/allByProyecto/"+idProyectoPPP,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo8[]))
   }
 }

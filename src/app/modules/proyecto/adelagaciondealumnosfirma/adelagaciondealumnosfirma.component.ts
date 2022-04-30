@@ -69,7 +69,6 @@ export class AdelagaciondealumnosfirmaComponent implements OnInit {
           map(values=>this.filter(values)),
         );
         this.issloading=false;
-        console.log(value)
       })
     })
   }
@@ -125,7 +124,7 @@ export class AdelagaciondealumnosfirmaComponent implements OnInit {
                   background: "#fbc02d",
                 })
               })
-              console.log(anexo1)
+
             })
           }
         })
@@ -136,10 +135,8 @@ export class AdelagaciondealumnosfirmaComponent implements OnInit {
 
   //convert a pdf
   convertFile(docum:any) {
-    console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo5.pdf');
-    console.log(file);
     saveAs(file, 'Anexo5.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

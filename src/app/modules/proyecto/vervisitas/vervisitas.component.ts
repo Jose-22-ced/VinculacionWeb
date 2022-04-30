@@ -135,7 +135,7 @@ export class VervisitasComponent implements OnInit {
   }
 
   generate(anexo13:Anexo13,proyecto:Proyectos,date1:Date,date2:Date) {
-    console.log(anexo13)
+    // console.log(anexo13)
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo13.docx", function(
       // @ts-ignore
@@ -207,10 +207,10 @@ export class VervisitasComponent implements OnInit {
   }
 
   convertFile(docum:any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo13.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo2.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

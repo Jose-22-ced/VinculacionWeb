@@ -85,7 +85,7 @@ export class NuavaconvocatariaComponent implements OnInit {
     this.activatedRoute.params.subscribe( params => {
       let cedula = params['cedula']
       this.cedula=cedula;
-      console.log(cedula)
+      // console.log(cedula)
       this.responsablepppService.getResposablepppbyAll().subscribe(value => {
         this.proyectoService.getProyectos().subscribe(value1 => {
           this.isexist=value1.filter(value2 => value2.codigocarrera==value.filter(value3 => value3.cedula==cedula)[0]).length==0;
@@ -145,7 +145,7 @@ export class NuavaconvocatariaComponent implements OnInit {
   }
   selectionProyecto(proyectoselect: MatSelectionListChange){
     this.proyectoselect=proyectoselect.option.value
-    console.log(this.proyectoselect)
+    //console.log(this.proyectoselect)
   }
 
 
@@ -202,7 +202,7 @@ export class NuavaconvocatariaComponent implements OnInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        //console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.anexo2.documento="";
@@ -323,7 +323,7 @@ export class NuavaconvocatariaComponent implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -333,7 +333,7 @@ export class NuavaconvocatariaComponent implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

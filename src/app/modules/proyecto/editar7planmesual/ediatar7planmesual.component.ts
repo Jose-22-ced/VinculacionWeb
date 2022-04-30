@@ -119,7 +119,7 @@ export class Editar7planmesualComponent implements OnInit {
             })
             this.anexo3Service.getAnexo3byProyecto(data.id).subscribe(dates=>{
               this.anexo3=dates.filter(d=>d.estado=='AN')
-              console.log(this.anexo3);
+              //console.log(this.anexo3);
             })
             this.issloading=false;
           })
@@ -145,7 +145,7 @@ export class Editar7planmesualComponent implements OnInit {
   //filas DOCENTES
   onAddRow(horasDocentes:HorasDocentesA7Request) {
     this.rows.push(this.createItemFormGroup(horasDocentes));
-    console.log(this.rows.getRawValue())
+    //console.log(this.rows.getRawValue())
   }
   onRemoveRow(rowIndex: number) {
     this.rows.removeAt(rowIndex);
@@ -167,13 +167,13 @@ export class Editar7planmesualComponent implements OnInit {
   //filas ESTUDIANTES
   onAddRow1(horasEstudiantes:HorasEstudiantesA7Request) {
     this.rows1.push(this.createItemFormGroup1(horasEstudiantes));
-    console.log(this.rows1.getRawValue())
+    //console.log(this.rows1.getRawValue())
   }
   onRemoveRow1(rowIndex: number) {
     this.rows1.removeAt(rowIndex);
   }
   createItemFormGroup1(horasEstudiantes:HorasEstudiantesA7Request): FormGroup {
-    console.log(horasEstudiantes)
+    //console.log(horasEstudiantes)
     // this.docentess?.push(horasEstudiantes.)
     return this._formBuilder.group({
       id:horasEstudiantes.id,
@@ -198,7 +198,7 @@ export class Editar7planmesualComponent implements OnInit {
   guardaranexo7(){
     this.issloading=true;
     var anexo7=this.obtnerdatos();
-    console.log(anexo7)
+    //console.log(anexo7)
     this.anexo7service.updateAnexo7(anexo7).subscribe(value => {
       Swal.fire({
         title: 'Exito',

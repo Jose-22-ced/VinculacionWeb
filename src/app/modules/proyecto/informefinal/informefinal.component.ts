@@ -154,7 +154,7 @@ export class InformefinalComponent implements OnInit {
       this.cedula=cedula
       this.proyectoService.getProyectosCICedulaDirector(cedula).subscribe(dataPro=>{
         this.proyectos=dataPro.filter(value => value.nombredirector=nombres&&value.estado==true);
-        console.log(this.proyectos)
+        //console.log(this.proyectos)
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values => this.filter(values)),
@@ -221,7 +221,7 @@ export class InformefinalComponent implements OnInit {
 
   onAddRowIndi() {
     this.rowsIndicadores.push(this.createItemFormGroupIndi());
-    console.log(this.rows.getRawValue())
+    //console.log(this.rows.getRawValue())
   }
   createItemFormGroupIndi(): FormGroup {
     return this._formBuilder.group({
@@ -237,7 +237,7 @@ export class InformefinalComponent implements OnInit {
 
   selectionProyecto(proyectoSele: MatSelectionListChange){
     this.proyectoSelect=proyectoSele.option.value
-    console.log(this.proyectoSelect)
+    //console.log(this.proyectoSelect)
 
     this.proyectoSelect.objetivosEspecificosProyecto?.forEach(value=>{
       this.onAddRowOb(value)
@@ -245,7 +245,7 @@ export class InformefinalComponent implements OnInit {
     })
     this.entidadService.getsaveEntidadBeneficiariabyId(Number(this.proyectoSelect.id)).subscribe(dataE=>{
       this.entidadSelect=dataE
-      console.log(dataE)
+      //console.log(dataE)
       this.carreraService.getCarrerabyCodigo(String(this.proyectoSelect.codigocarrera)).subscribe(dataC=>{
         this.carreraSelect=dataC
         this.anexo1Service.getAnexo1byCedula(this.cedula).subscribe(dataAnexo1=>{
@@ -253,7 +253,7 @@ export class InformefinalComponent implements OnInit {
           this.anexo7Service.docentesEst(Number(this.proyectoSelect.id)).subscribe(dataAn1=>{
             this.estudiantesselectLista=dataAn1
             this.estudiantesselectLista.forEach(value => this.onAddRowEst(value));
-            console.log(dataAn1)
+            //console.log(dataAn1)
           })
           this.anexo7Service.actividadesParticipantes(Number(this.proyectoSelect.id)).subscribe(dataAct=>{
             this.actividadesSelectListaa=dataAct
@@ -266,17 +266,17 @@ export class InformefinalComponent implements OnInit {
             this.docentesselectLista.forEach(value => this.onAddRow(value));
             this.coordinadorService.getCVbyId(Number(this.entidadSelect.idCoordinador)).subscribe(dataCv=>{
               this.cv=dataCv
-              console.log(dataCv)
+              //console.log(dataCv)
             })
           })
-          console.log(this.anexo1selectLista)
+          //console.log(this.anexo1selectLista)
         })
       })
     })
   }
   onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
     this.rowsObje.push(this.createItemFormGroupObje(objetivosEspecificosInforme));
-    console.log(this.rowsObje.getRawValue())
+    //console.log(this.rowsObje.getRawValue())
   }
   createItemFormGroupObje(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto): FormGroup {
     return this._formBuilder.group({
@@ -286,7 +286,7 @@ export class InformefinalComponent implements OnInit {
 
   onAddRowMatr(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto) {
     this.rowsMatriz.push(this.createItemFormGroupMatr(objetivosEspecificosInforme));
-    console.log(this.rows.getRawValue())
+    //console.log(this.rows.getRawValue())
   }
   createItemFormGroupMatr(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto): FormGroup {
     return this._formBuilder.group({
@@ -312,7 +312,7 @@ export class InformefinalComponent implements OnInit {
   }
   onAddRow(docentesParticipantes: TotalHorasResponse) {
     this.rows.push(this.createItemFormGroup(docentesParticipantes));
-    console.log(this.rows.getRawValue())
+    //console.log(this.rows.getRawValue())
   }
   createItemFormGroup(docentesParticipantes:TotalHorasResponse): FormGroup {
     return this._formBuilder.group({
@@ -324,7 +324,7 @@ export class InformefinalComponent implements OnInit {
   }
   onAddRowInfo(actividadesInformeSeguimientoRequest: HorasPersonasResponse) {
     this.rowsInfo.push(this.createItemFormGroupInfo(actividadesInformeSeguimientoRequest));
-    console.log(this.rowsInfo.getRawValue())
+    //console.log(this.rowsInfo.getRawValue())
   }
 
   createItemFormGroupInfo(actividadesInformeSeguimientoRequest: HorasPersonasResponse): FormGroup {
@@ -368,7 +368,7 @@ this.informe.plazoEjecucion=this.proyectoSelect.plazoEjecucion;
 
   generarDocumento() {
     var informe:InformeFinal=this.obtenerDatos();
-    console.log(informe)
+    //console.log(informe)
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/Informe%202.docx", function(
       // @ts-ignore
@@ -439,7 +439,7 @@ this.informe.plazoEjecucion=this.proyectoSelect.plazoEjecucion;
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -449,7 +449,7 @@ this.informe.plazoEjecucion=this.proyectoSelect.plazoEjecucion;
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          // console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }
@@ -470,7 +470,7 @@ this.informe.plazoEjecucion=this.proyectoSelect.plazoEjecucion;
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        //console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.informe.documento="";
@@ -481,7 +481,7 @@ this.informe.plazoEjecucion=this.proyectoSelect.plazoEjecucion;
           )
         }else{
           this.informe.documento=docx+"";
-          console.log(this.informe.documento)
+          // console.log(this.informe.documento)
         }
       })
     }
@@ -491,8 +491,8 @@ this.informe.plazoEjecucion=this.proyectoSelect.plazoEjecucion;
   guardarAnexo(){
     var informeS=this.obtenerDatos();
     this.informeFinalService.saveAnexo(informeS).subscribe(value => {
-      console.log("DATOS ENVIO")
-      console.log(informeS)
+      //console.log("DATOS ENVIO")
+      //console.log(informeS)
       Swal.fire({
         title: 'Exito',
         text: 'Informe final creado',

@@ -16,7 +16,7 @@ export class Anexo12Service {
 
   constructor(private http:HttpClient) { }
   saveAnexo(anexo12: Anexo12):Observable<Anexo12>{
-    console.log(anexo12);
+    //console.log(anexo12);
     return this.http.post<Anexo12>(this.urlEndPoint,anexo12,{headers: this.httpHeaders})
   }
 
@@ -30,5 +30,9 @@ export class Anexo12Service {
   }
   deleteAnexo12(id?: Number){
     return this.http.delete<Anexo9>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
+  }
+
+  getAnexo12byidproyecto(idProyecoPPP?:number):Observable<Anexo12[]>{
+    return this.http.get(this.urlEndPoint+"/allProyecto/"+idProyecoPPP,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo12[]))
   }
 }

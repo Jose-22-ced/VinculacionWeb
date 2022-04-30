@@ -102,19 +102,19 @@ export class Editaranexo11directorComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']
-      console.log(id)
+      // console.log(id)
       let cedula = params['cedula']
       let nombres = params['nombres']
       this.nombres = nombres;
       this.anexo11Service.getAnexo11byid(id).subscribe(data => {
         this.anexo11select = data
         this.puntajea = this.anexo11select.apoyoPuntaje;
-        console.log(this.anexo11select.apoyoPuntaje+ 'lllllll')
+        // console.log(this.anexo11select.apoyoPuntaje+ 'lllllll')
         this.anexo11select.director?.forEach(value1 => {
           this.onAddRow(value1);
         })
 
-        console.log(data);
+        // console.log(data);
         this.issloading = false;
       })
 
@@ -138,7 +138,7 @@ export class Editaranexo11directorComponent implements OnInit {
     this.rows.push(this.createItemFormGroup(director));
     this.rows.getRawValue().forEach(element => {
       this.sum += element.directorPuntaje;
-      console.log(this.sum)
+      //console.log(this.sum)
     })
     if (this.numerominimo - 1 >= this.sum) {
       this.activar = true;
@@ -152,7 +152,7 @@ export class Editaranexo11directorComponent implements OnInit {
     this.rows.removeAt(rowIndex);
     this.rows.getRawValue().forEach(element => {
       this.sum += element.directorItem3;
-      console.log(this.sum)
+      //console.log(this.sum)
     })
     if (this.numerominimo - 1 >= this.sum) {
       this.activar = true;
@@ -165,7 +165,7 @@ export class Editaranexo11directorComponent implements OnInit {
     this.sum = 0;
     this.rows.getRawValue().forEach(element => {
       this.sum += element.directorItem3;
-      console.log(this.sum)
+      //console.log(this.sum)
     })
     if (this.numerominimo - 1 >= this.sum) {
       this.activar = true;
@@ -186,12 +186,12 @@ export class Editaranexo11directorComponent implements OnInit {
   anexo11ob: Anexo11 = new Anexo11();
 
   obtenerdatos() {
-    console.log(this.rows.getRawValue())
+    //console.log(this.rows.getRawValue())
     this.anexo11ob.id = this.anexo11select.id;
     // @ts-ignore
     this.anexo11ob.director?.length = 0;
     this.anexo11ob.director = this.rows.getRawValue();
-    console.log(this.anexo11ob.director)
+    //console.log(this.anexo11ob.director)
     this.anexo11ob.carrera = this.anexo11select.carrera;
     this.anexo11ob.idProyecto = this.anexo11select.idProyecto;
     this.anexo11ob.nombreApoyo = this.anexo11select.nombreApoyo;
@@ -221,7 +221,7 @@ export class Editaranexo11directorComponent implements OnInit {
     anexo11.directorPuntaje = this.sum;
     // @ts-ignore
     this.anexo11Service.updateanexo11(anexo11).subscribe(datos => {
-      console.log(anexo11, anexo11.id)
+      //console.log(anexo11, anexo11.id)
       Swal.fire({
         icon: 'success',
         title: 'ACTUALIZADO',
@@ -247,7 +247,7 @@ export class Editaranexo11directorComponent implements OnInit {
     } else {
       getBase64(file[0]).then(docx => {
         // @ts-ignore
-        console.log(docx.length)
+        //console.log(docx.length)
         // @ts-ignore
         if (docx.length >= 10485760) {
           this.anexo11ob.documento = "";
@@ -265,7 +265,7 @@ export class Editaranexo11directorComponent implements OnInit {
 
   generarDocumento11() {
     var anexo11: Anexo11 = this.obtenerdatos();
-    console.log(anexo11)
+    //console.log(anexo11)
     var pipe: DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo11.docx", function (
       // @ts-ignore
@@ -321,7 +321,7 @@ export class Editaranexo11directorComponent implements OnInit {
           return value;
         }
 
-        console.log(JSON.stringify({error: error}, replaceErrors));
+        //console.log(JSON.stringify({error: error}, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -331,7 +331,7 @@ export class Editaranexo11directorComponent implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

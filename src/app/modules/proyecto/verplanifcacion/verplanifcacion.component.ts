@@ -65,7 +65,7 @@ export class VerplanifcacionComponent implements OnInit {
           this.cordinadorvinculacionService.getCordinadorVinculacioAll().subscribe(value2 => {
             this.isexist=value1.filter(value3 => value3.cedulaCoordinadorVinculacion==value2.cedula).length!=0;
             this.anexo6=value1.filter(value3 => value3.cedulaCoordinadorVinculacion==value2.cedula)
-            console.log(this.anexo6)
+            // console.log(this.anexo6)
             this.issloading=false;
             this.filteredOptions = this.myControl.valueChanges.pipe(
               startWith(''),
@@ -115,10 +115,10 @@ export class VerplanifcacionComponent implements OnInit {
   }
 
   convertFile(docum:any) {
-    console.log(docum)
+    // console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo6.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo6.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

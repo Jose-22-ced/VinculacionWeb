@@ -85,6 +85,18 @@
                       routerLinkActive="active">-Firmar Informe Final</button>
 
             </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Documentos
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verdescargar',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">Ver Documentos</button>
+            </mat-expansion-panel>
           </div>
           <!--Cordinado de Carrera-->
           <div class="list-group" *ngSwitchCase="'CC'">
@@ -114,6 +126,18 @@
                       routerLinkActive="active">-Nuevo Proyecto</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verproyecto',persona.cedula,persona.nombrescompletos]"
                       routerLinkActive="active">-Proyectos Creados</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Documentos
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verdescargar',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">Ver Documentos</button>
             </mat-expansion-panel>
           </div>
           <!--Docente de Apoyo-->
@@ -375,7 +399,17 @@
                       routerLinkActive="active">-Ver Informes Finales</button>
             </mat-expansion-panel>
             <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Documentos
+                </mat-panel-title>
+              </mat-expansion-panel-header>
 
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verdescargar',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">Ver Documentos</button>
+            </mat-expansion-panel>
           </div>
           <!--Resposanle de PPP-->
           <div class="list-group" *ngSwitchCase="'RPPP'">
@@ -453,6 +487,18 @@
                       routerLinkActive="active">-Estudiantes Seleccionados</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verestudiantesseleccionado',persona.nombrescompletos]"
                       routerLinkActive="active">-Ver informe de selección</button>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Documentos
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/verdescargar',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">Ver Documentos</button>
             </mat-expansion-panel>
           </div>
           <!--Estudiante-->

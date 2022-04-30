@@ -16,11 +16,11 @@ export class Anexo4Service {
 
 
   saveAnexo4(anexo4:Anexo4):Observable<Anexo4>{
-    console.log(anexo4)
+    //console.log(anexo4)
     return this.http.post<Anexo4>(this.urlEndPoint,anexo4,{headers:this.httpHeaders})
   }
   updateAnexo4(anexo4:Anexo4):Observable<Anexo4>{
-    console.log(anexo4)
+    //console.log(anexo4)
     return this.http.put<Anexo4>(this.urlEndPoint,anexo4,{headers:this.httpHeaders})
   }
   getAnexo4All():Observable<Anexo4[]>{
@@ -29,5 +29,8 @@ export class Anexo4Service {
 
   getAnexo4byCedula(cedula?:String):Observable<Anexo4[]>{
     return this.http.get(this.urlEndPoint+"/allByCedulaAnexo4/"+cedula,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo4[]))
+  }
+  getAnexo4byProyecto(idProyecto?:number):Observable<Anexo4[]>{
+    return this.http.get(this.urlEndPoint+"/allByAnexo4/"+idProyecto,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo4[]))
   }
 }

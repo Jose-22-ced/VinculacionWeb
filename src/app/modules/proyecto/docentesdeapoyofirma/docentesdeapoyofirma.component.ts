@@ -117,7 +117,7 @@ export class DocentesdeapoyofirmaComponent implements OnInit {
                   background: "#fbc02d",
                 })
               })
-              console.log(anexo1)
+              //console.log(anexo1)
             })
           }
         })
@@ -127,14 +127,14 @@ export class DocentesdeapoyofirmaComponent implements OnInit {
   }
 
   descargardocx(file:String){
-    console.log(file);
+    // console.log(file);
   }
   //convert a pdf
   convertFile(docum:any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo1.pdf');
-    console.log(file);
+    //console.log(file);
     saveAs(file, 'Anexo1.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

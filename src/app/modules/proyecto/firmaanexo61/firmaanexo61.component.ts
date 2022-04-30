@@ -55,7 +55,7 @@ export class Firmaanexo61Component implements OnInit {
           map(values=>this.filter(values)),
         );
         this.issloading=false;
-        console.log(value)
+        //console.log(value)
       })
     })
   }
@@ -112,7 +112,7 @@ export class Firmaanexo61Component implements OnInit {
                   background: "#fbc02d",
                 })
               })
-              console.log(anexo61)
+              //console.log(anexo61)
             })
           }
         })
@@ -123,10 +123,10 @@ export class Firmaanexo61Component implements OnInit {
 
   //convert a pdf
   convertFile(docum:any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo61.pdf');
-    console.log(file);
+    //console.log(file);
     saveAs(file, 'Anexo61.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

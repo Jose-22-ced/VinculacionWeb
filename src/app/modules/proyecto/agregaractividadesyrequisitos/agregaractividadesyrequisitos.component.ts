@@ -83,7 +83,6 @@ export class AgregaractividadesyrequisitosComponent implements OnInit {
             startWith(''),
             map(values=>this.filter(values)),
           );
-          console.log(value1)
         })
       })
     })
@@ -97,7 +96,6 @@ export class AgregaractividadesyrequisitosComponent implements OnInit {
   //ArrayActividades
   onAddRow(descripcion:String) {
     this.rows.push(this.createItemFormGroup(descripcion));
-    console.log(this.rows.getRawValue())
   }
   onRemoveRow(rowIndex:number){
     this.rows.removeAt(rowIndex);
@@ -125,7 +123,6 @@ export class AgregaractividadesyrequisitosComponent implements OnInit {
   actividadeslistProyecto:actividadeslistProyectos[]=[];
   agregarActividades(proyecto:Proyectos){
     this.actividadeslistProyecto=this.rows.getRawValue();
-    console.log(Number(proyecto.id),this.actividadeslistProyecto)
     this.proyectoService.updateActividadesbyIdProyectos(Number(proyecto.id),this.actividadeslistProyecto).subscribe( value=>{
       Swal.fire({
         title: 'Éxito',

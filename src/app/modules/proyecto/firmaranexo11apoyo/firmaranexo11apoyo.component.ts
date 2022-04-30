@@ -48,11 +48,11 @@ export class Firmaranexo11apoyoComponent implements OnInit {
       let cedula = params['cedula']
       let nombres=params['nombres']
       this.nombres=nombres;
-      console.log(cedula)
+      // console.log(cedula)
       this.anexo11Service.getAll().subscribe(anex11 => {
         this.anexo11 = anex11.filter(value => value.nombreApoyo==nombres);
 
-        console.log(nombres);
+        // console.log(nombres);
         this.isexist=anex11.length!=0;
         this.issloading=false;
         this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -60,7 +60,7 @@ export class Firmaranexo11apoyoComponent implements OnInit {
           map(values=>this.filter(values)),
         );
 
-        console.log(anex11)
+        // console.log(anex11)
       })
     })
   }
@@ -114,7 +114,7 @@ export class Firmaranexo11apoyoComponent implements OnInit {
                   background: "#fbc02d",
                 })
               })
-              console.log(anexo11)
+              //console.log(anexo11)
             })
           }
         })
@@ -125,10 +125,10 @@ export class Firmaranexo11apoyoComponent implements OnInit {
 
   //convert a pdf
   convertFile(docum:any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo11.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo11.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

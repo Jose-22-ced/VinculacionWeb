@@ -27,7 +27,7 @@ export class EditarentidadbeneficiariaComponent implements OnInit {
   omit_max_char(event:{ target: any; })
   {var k;
     k = event.target.value.length;  //         k = event.keyCode;  (Both can be used)
-    console.log(k)
+    //console.log(k)
     return (k <= 9);
   }
 
@@ -36,7 +36,7 @@ export class EditarentidadbeneficiariaComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       let id = params['id']
-      console.log(id)
+      //console.log(id)
       this.entidadbeneficiarioService.getsaveEntidadBeneficiariabyId(id).subscribe(value => {
         this.entidad=value;
         this.issloading=false;
@@ -69,7 +69,7 @@ export class EditarentidadbeneficiariaComponent implements OnInit {
     console.log(this.entidad)
     entidad.id=entidad.idEntidad;
     this.entidadbeneficiarioService.updateEntidadBeneficiaria(this.entidad).subscribe(data =>{
-        console.log(data)
+      //console.log(data)
       Swal.fire({
         title: 'Exito',
         text: 'Entidad Beneficiaria Actualizada',

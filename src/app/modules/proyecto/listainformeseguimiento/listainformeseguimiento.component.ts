@@ -52,13 +52,13 @@ cedulaa?:String;
       this.informeService.getInforme_porDirector(cedula).subscribe(value=>{
         this.isexist=value.length!=0;
         this.informeS=value;
-        console.log(value)
+        // console.log(value)
         this.filteredOptions=this.myControl.valueChanges.pipe(
           startWith(''),
           map(values=>this.filter(values)),
         );
         this.issloading=false;
-        console.log(value)
+        //console.log(value)
       })
     })
   }
@@ -73,10 +73,10 @@ cedulaa?:String;
   }
 
   convertFile(docum:any) {
-    console.log(docum)
+    // console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'InformeSeguimiento.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'InformeSeguimiento.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {
@@ -93,7 +93,7 @@ cedulaa?:String;
 
   eliminar(informe: InformeSeguimiento){
     this.issloading=true;
-    console.log(informe.id)
+    //console.log(informe.id)
     this.informeService.deleteAnexo(informe.id).subscribe(value => {
       Swal.fire({
         title: 'Exito',

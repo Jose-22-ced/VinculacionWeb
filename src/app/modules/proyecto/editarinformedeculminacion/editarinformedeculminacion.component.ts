@@ -149,7 +149,7 @@ export class EditarinformedeculminacionComponent implements OnInit {
   }
 
   generarDocumento() {
-    console.log(this.obtenarDatos())
+    //console.log(this.obtenarDatos())
     this.obtenarDatos();
     var anexo10:Anexo10=this.obtenarDatos();
     var pipe:DatePipe = new DatePipe('en-US')
@@ -210,7 +210,7 @@ export class EditarinformedeculminacionComponent implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        // console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -220,7 +220,7 @@ export class EditarinformedeculminacionComponent implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }
@@ -240,7 +240,7 @@ export class EditarinformedeculminacionComponent implements OnInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        //console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.anexo10.documento="";

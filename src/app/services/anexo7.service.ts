@@ -20,17 +20,20 @@ export class Anexo7Service {
   }
 
   saveAnexo7(anexo7: Anexo7): Observable<Anexo7> {
-    console.log(anexo7);
+    //console.log(anexo7);
     return this.http.post<Anexo7>(this.urlEndPoint, anexo7, {headers: this.httpHeaders})
   }
 
   updateAnexo7(anexo7: Anexo7): Observable<Anexo7> {
-    console.log(anexo7);
+    //console.log(anexo7);
     return this.http.put<Anexo7>(this.urlEndPoint, anexo7, {headers: this.httpHeaders})
   }
 
   getanexo7(idProyecto: Number): Observable<Anexo7> {
     return this.http.get(this.urlEndPoint + "/proyecto/" + idProyecto, {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo7))
+  }
+  getanexo7ppp(idProyecto?: number): Observable<Anexo7[]> {
+    return this.http.get(this.urlEndPoint + "/proyecto/" + idProyecto, {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo7[]))
   }
 
   getAnexo7All():Observable<Anexo7[]>{

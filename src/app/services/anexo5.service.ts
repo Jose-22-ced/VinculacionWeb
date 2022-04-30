@@ -17,12 +17,12 @@ export class Anexo5Service {
   constructor(private http:HttpClient) { }
 
   saveAnexo5(anexo5: Anexo5):Observable<Anexo5>{
-    console.log(anexo5);
+    //console.log(anexo5);
     return this.http.post<Anexo5>(this.urlEndPoint,anexo5,{headers: this.httpHeaders})
   }
 
   updateAnexo5(anexo5: Anexo5):Observable<Anexo5>{
-    console.log(anexo5);
+    // console.log(anexo5);
     return this.http.put<Anexo5>(this.urlEndPoint,anexo5,{headers: this.httpHeaders})
   }
   getAnexo5All():Observable<Anexo5[]>{

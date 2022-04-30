@@ -97,7 +97,7 @@ export class Anexo62Component implements OnInit {
       let cedula = params['cedula']
       let nombre = params['nombres']
       this.nombre = nombre;
-      console.log(cedula)
+      //console.log(cedula)
       this.anexo62Service.getAnexo62_porid(id).subscribe(value => {
         this.anexo62es = value
         if (value.actividades?.length != 0) {
@@ -149,7 +149,7 @@ export class Anexo62Component implements OnInit {
   }
   selectionAnexo6(anexo6: MatSelectionListChange){
     this.anexo6select=anexo6.option.value
-    console.log(this.anexo6select.cedulaEstudiante)
+    // console.log(this.anexo6select.cedulaEstudiante)
     this.anexo62Service.getDocentedirector(this.anexo6select.proyectoId).subscribe(value => {
       this.nombredir = value.nombre + " " + value.apellidos
       this.ceduladir = value.cedula;
@@ -162,7 +162,7 @@ export class Anexo62Component implements OnInit {
 
   onAddRow(actividad:String) {
     this.rows.push(this.createItemFormGroup(actividad));
-    console.log(this.rows.getRawValue())
+    //console.log(this.rows.getRawValue())
   }
   onRemoveRow(rowIndex: number) {
     this.rows.removeAt(rowIndex);
@@ -231,7 +231,7 @@ export class Anexo62Component implements OnInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        //console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.anexoss62.documento="";
@@ -291,7 +291,7 @@ export class Anexo62Component implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -301,7 +301,7 @@ export class Anexo62Component implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

@@ -1,0 +1,287 @@
+<div *ngIf="issloading == false">
+  <mat-stepper mat-stepper  [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Proyectos</ng-template>
+        <mat-card class="example-card">
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY</mat-card-title>
+          <mat-card-title>COORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD</mat-card-title>
+          <mat-card-content>
+            <div id="contenedor">
+              <div id="cabecera">
+                <mat-form-field appearance="outline" style="width: 90%">
+                  <mat-label>BUSCAR...</mat-label>
+                  <input matInput placeholder="FILTRAR" [formControl]="myControl">
+                  <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+                <cdk-virtual-scroll-viewport appendOnly itemSize="40" class="example-viewport1">
+                  <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionP($event)"
+                                      formControlName="proyecto">
+                    <mat-list-option *ngFor="let option of filteredOptions | async" [value]="option" >
+                      Proyecto: {{option.nombre}}
+                    </mat-list-option>
+                  </mat-selection-list>
+                </cdk-virtual-scroll-viewport>
+                <br>
+                <p style="font-size: medium">
+                  <strong> Proyecto Seleccionado: </strong>{{proyectoselect.nombre}}
+                </p>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <br>
+          <div style="text-align: end">
+            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px">
+              <mat-icon>undo</mat-icon>
+            </button>
+            <button mat-fab matStepperNext color="primary">
+              <mat-icon>queue_play_next</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+
+      </form>
+    </mat-step>
+
+
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Documentos</ng-template>
+        <mat-card class="example-card">
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY</mat-card-title>
+          <mat-card-title>COORDINACIÓN DE VINCULACIÓN CON LA SOCIEDAD</mat-card-title>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-content>
+
+            <table class="table table-bordered"  class="mat-elevation-z8 demo-table" border="2px">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th colspan="2">Descripcion</th>
+                <th scope="col">Documento</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th scope="row"><span>(ANEXO 1)</span></th>
+                <td colspan="2"> <span>DELEGACIÓN DE DOCENTES</span></td>
+                <td> <div  *ngIf="isexist">
+                  <div *ngFor="let anexo1 of filteredOptionsanexo1 | async" class="mb-2">
+                    <div ><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile1(anexo1.documento,'anexo1')"><mat-icon>save_alt</mat-icon> {{anexo1.nombreDelegado}}.pdf  </button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(ANEXO 2)</span></th>
+                <td colspan="2"><span>CONVOCATORIA PARTICIPACIÓN DE PROYECTO DE VINCULACIÓN</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo2 of filteredOptionsanexo2 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile2(anexo2.documento,'anexo2')"><mat-icon>save_alt</mat-icon> Convocatoria {{anexo2.numeroConvocatoria}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(ANEXO 3)</span></th>
+                <td colspan="2"><span>SOLICITUD DE PARTICIPACIÓN EN PROYECTO DE VINCULACIÓN</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo3 of filteredOptionsanexo3 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile3(anexo3.documento,'anexo3')"><mat-icon>save_alt</mat-icon> Solicitud de {{anexo3.nombresestudiante}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(ANEXO 4)</span></th>
+                <td colspan="2"><span>RESPUESTA AL ESTUDIANTE</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo4 of filteredOptionsanexo4 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile4(anexo4.documento,'anexo4')"><mat-icon>save_alt</mat-icon> CRespuesta a {{anexo4.nombreEstudiante}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="row"><span>(ANEXO 5)</span></th>
+                <td colspan="2"><span>DELEGACIÓN DE ESTUDIANTES A DOCENTES DE APOYO</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo5 of filteredOptionsanexo5 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile5(anexo5.documento,'anexo5')"><mat-icon>save_alt</mat-icon> Delegacion {{anexo5.cedulaDocenteApoyo}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(ANEXO 6)</span></th>
+                <td colspan="2"><span>DPLAN DE APRENDIZAJE</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo6 of filteredOptionsanexo6 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile6(anexo6.documento,'anexo6')"><mat-icon>save_alt</mat-icon> Plan de aprendizaje {{anexo6.nombreEstudiante}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(ANEXO 6.1)</span></th>
+                <td colspan="2"><span>SEGUIMIENTO, CONTROL Y EVALUACIÓN (PARCIAL) DEL PLAN DE APRENDIZAJE</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo61 of filteredOptionsanexo61 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile61(anexo61.documento,'anexo61')"><mat-icon>save_alt</mat-icon> Plan de aprendizaje inicial {{anexo61.nombreEstudiante}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(ANEXO 6.2)</span></th>
+                <td colspan="2"><span>SEGUIMIENTO, CONTROL Y EVALUACIÓN (FINAL) DEL PLAN DE APRENDIZAJE</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo62 of filteredOptionsanexo62 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile62(anexo62.documento,'anexo62')"><mat-icon>save_alt</mat-icon> Plan de aprendizaje final {{anexo62.nombreEstudiante}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(ANEXO 7)</span></th>
+                <td colspan="2"><span>PLANIFICACIÓN MENSUAL DE ACTIVIDADES</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo7 of filteredOptionsanexo7 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile7(anexo7.documento,'anexo7')"><mat-icon>save_alt</mat-icon> Planificacion del proyecto {{anexo7.nombreProyecto}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(ANEXO 8)</span></th>
+                <td colspan="2"><span>REGISTRO DIARIO DE ACTIVIDADES DE LOS ESTUDIANTES</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo8 of filteredOptionsanexo8 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile8(anexo8.documento,'anexo8')"><mat-icon>save_alt</mat-icon> Registro de actividades de {{anexo8.nombreEstudiante}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="row"><span>(ANEXO 9)</span></th>
+                <td colspan="2"><span>SEGUIMIENTO MENSUAL SEGÚN PLANIFICACIÓN</span></td>
+                <td><div  *ngIf="isexist">
+
+                  <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile9(anexo9.documento,'anexo9')"><mat-icon>save_alt</mat-icon> Seguimiento mensual del proyecto {{anexo9.nombreProyecto}}.pdf</button></div>
+
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(ANEXO 10)</span></th>
+                <td colspan="2"><span>INFORME DE CULMINACIÓN DEL PROYECTO DE VINCULACIÓN (ESTUDIANTE)</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo10 of filteredOptionsanexo10 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile10(anexo10.documento,'anexo10')"><mat-icon>save_alt</mat-icon> Informe de culminacion de {{anexo10.nombreEstudiante}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(ANEXO 11)</span></th>
+                <td colspan="2"><span>EVALUACIÓN AL ESTUDIANTE DE PRÁCTICAS PRE PROFESIONALES DE SERVICIO COMUNITARIO</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo11 of filteredOptionsanexo11 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile11(anexo11.documento,'anexo11')"><mat-icon>save_alt</mat-icon> Evaluacion de {{anexo11.nombresEstudiante}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(ANEXO 12)</span></th>
+                <td colspan="2"><span>REGISTRO DE BENEFICIARIOS / CAPACITACIONES</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo12 of filteredOptionsanexo12 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile12(anexo12.documento,'anexo12')"><mat-icon>save_alt</mat-icon> Registro de beneficiarios de {{anexo12.entidadBeneficiaria}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(ANEXO 13)</span></th>
+                <td colspan="2"><span>REGISTRO DE VISITAS A LA INSTITUCIÓN</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let anexo13 of filteredOptionsanexo13 | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertFile13(anexo13.documento,'anexo13')"><mat-icon>save_alt</mat-icon> Registro de visitas a la institucion {{anexo13.empresa}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(INFORMES)</span></th>
+                <td colspan="2"><span>INFORME DE ACEPTACION</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let informeanexo3 of filteredOptiona | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertInformeAceptacion(informeanexo3.documento,'informeanexo3')"><mat-icon>save_alt</mat-icon> Informe de aceptacion al proyecto {{informeanexo3.nombreProyecto}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(INFORMES)</span></th>
+                <td colspan="2"><span>INFORME DE SEGUIMIENTO</span></td>
+                <td><div  *ngIf="isexist">
+
+                  <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertInforme(informe.documento,'informe')"><mat-icon>save_alt</mat-icon> Informe del proyecto {{informe.nombreProyecto}}.pdf</button></div>
+
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>(INFORMES)</span></th>
+                <td colspan="2"><span>INFORME FINAL</span></td>
+                <td><div  *ngIf="isexist">
+                  <div *ngFor="let informefinal of filteredOptionif | async" class="mb-2">
+                    <div><button class="buttondoc" mat-raised-button color="primary" (click)="convertInformefinal(informefinal.documento,'informefinal')"><mat-icon>save_alt</mat-icon> Informe final del proyecto {{informefinal.nombreProyecto}}.pdf</button></div>
+                  </div>
+                </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <br>
+          <div style="text-align: end">
+            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px">
+              <mat-icon>undo</mat-icon>
+            </button>
+
+          </div>
+        </mat-card>
+
+      </form>
+    </mat-step>
+
+
+
+
+
+  </mat-stepper>
+</div>
+<div *ngIf="isexist==false">
+  <mat-card>
+    <mat-card-title>No existen documentos.</mat-card-title>
+  </mat-card>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
+

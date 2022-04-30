@@ -54,7 +54,7 @@ export class VerentidadesbeneficariasComponent implements OnInit {
 
 
   eliminarEntidad(entidad:Entidadbeneficiaria){
-    console.log(entidad)
+    // console.log(entidad)
     Swal.fire({
       title: 'Eliminar Entidad Beneficiaria',
       text: "Está por eliminar la entidad: "+entidad.nombre,

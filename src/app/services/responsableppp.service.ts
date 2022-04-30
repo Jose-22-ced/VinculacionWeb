@@ -22,12 +22,12 @@ export class ResponsablepppService {
   }
 
   saveResposableppp(responsableppp:Resposableppp):Observable<Resposableppp>{
-    console.log(responsableppp);
+    // console.log(responsableppp);
     return this.http.post<Resposableppp>(this.urlEndPoint+"/save/responsable",responsableppp,{headers: this.httpHeaders})
   }
 
   updateResposableppp(responsableppp:Resposableppp):Observable<Resposableppp>{
-    console.log(responsableppp);
+    // console.log(responsableppp);
     return this.http.put<Resposableppp>(this.urlEndPoint+"/update/responsable",responsableppp,{headers: this.httpHeaders})
   }
 
@@ -43,7 +43,7 @@ export class ResponsablepppService {
     ));
   }
   getResposablepppbyCarrera(codigoCarrera:String):Observable<Docentes>{
-    console.log(codigoCarrera)
+    // console.log(codigoCarrera)
     return this.http.get(this.urlEndPoint+"/responsable/"+codigoCarrera,{headers: this.httpHeaders}).pipe(map(Response => Response as Docentes))
   }
 

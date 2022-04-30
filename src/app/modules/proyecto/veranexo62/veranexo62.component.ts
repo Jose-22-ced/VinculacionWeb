@@ -37,7 +37,7 @@ export class Veranexo62Component implements OnInit {
       let cedula = params['cedula']
       let nombre = params['nombres']
       this.nombre = nombre;
-      console.log(cedula)
+      // console.log(cedula)
       this.anexo62Service.getAnexo6().subscribe(anex62 => {
         this.anexos62=anex62.filter(value => value.nombreApoyo==nombre);
         this.isexist=anex62.length!=0;
@@ -46,7 +46,7 @@ export class Veranexo62Component implements OnInit {
           startWith(''),
           map(values=>this.filter(values)),
         );
-        console.log( this.anexos62)
+        // console.log( this.anexos62)
       })
     })
 

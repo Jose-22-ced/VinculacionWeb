@@ -65,7 +65,7 @@ export class FirmarinformeaceptacionestudiantesComponent implements OnInit {
       let nombre = params['nombres']
       this.informedeaceptacionestdiatesService.getAll().forEach(value => {
         this.informeAceotacion=value.filter(value1 => value1.nombreRevisado==nombre)
-        console.log(value)
+        //console.log(value)
         this.issloading=false;
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
@@ -84,10 +84,10 @@ export class FirmarinformeaceptacionestudiantesComponent implements OnInit {
   }
 
   convertFile(docum:any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo13.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo2.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

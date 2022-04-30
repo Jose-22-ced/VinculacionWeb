@@ -50,21 +50,21 @@ export class VerpostulacionesComponent implements OnInit {
       this.cedula=cedula;
       this.anexo3Service.getAnexo3byCedula(cedula).subscribe(value => {
         this.isexist=value.length!=0;
-        console.log(value)
+        // console.log(value)
         this.anexo3enproceso=value.filter(value1 => value1.estado=="PN")
         this.anexo3aceptados=value.filter(value1 => value1.estado=="AN")
         this.anexo3denagados=value.filter(value1 => value1.estado=="DN")
         this.issloading=false;
-        console.log(this.anexo3enproceso)
+        // console.log(this.anexo3enproceso)
       })
     })
   }
 
   convertFile(docum:any) {
-    console.log(docum)
+    // console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo2.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo2.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

@@ -15,7 +15,7 @@ export class InformedeaceptacionestdiatesService {
   constructor(private http:HttpClient) {
   }
   savePreInforme(preinforme: Informeaceptacion):Observable<Informeaceptacion>{
-    console.log(preinforme);
+    //console.log(preinforme);
     return this.http.post<Informeaceptacion>(this.urlEndPoint,preinforme,{headers: this.httpHeaders})
   }
   getpreinformeById(proyectoId?:Number):Observable<Informeaceptacion[]>{
@@ -25,7 +25,7 @@ export class InformedeaceptacionestdiatesService {
     return this.http.get(this.urlEndPoint+"/all",{headers: this.httpHeaders}).pipe(map(Response => Response as Informeaceptacion[]))
   }
   updatepreinforme(preinforme: Informeaceptacion):Observable<Informeaceptacion>{
-    console.log(preinforme);
+    //console.log(preinforme);
     return this.http.put<Informeaceptacion>(this.urlEndPoint,preinforme,{headers: this.httpHeaders})
   }
 }

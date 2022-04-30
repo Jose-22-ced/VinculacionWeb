@@ -18,12 +18,12 @@ export class ProyectoService {
   }
 
   saveProyectos(proyectos: Proyectos):Observable<Proyectos>{
-    console.log(proyectos);
+    //console.log(proyectos);
     return this.http.post<Proyectos>(this.urlEndPoint+"/save",proyectos,{headers: this.httpHeaders})
   }
 
   updateProyectos(proyectos: Proyectos):Observable<Proyectos>{
-    console.log(proyectos);
+    //console.log(proyectos);
     return this.http.put<Proyectos>(this.urlEndPoint+"/update",proyectos,{headers: this.httpHeaders})
   }
 
@@ -36,12 +36,12 @@ export class ProyectoService {
   }
 
   updateRequistosbyIdProyectos(id:number,requisitoslistProyectos:requisitoslistProyectos[]):Observable<Proyectos>{
-    console.log(requisitoslistProyectos);
+    //console.log(requisitoslistProyectos);
     return this.http.put<Proyectos>(this.urlEndPoint+"/"+id+"/requisitos",requisitoslistProyectos,{headers: this.httpHeaders})
   }
 
   updateActividadesbyIdProyectos(id:number,actividadeslistProyecto:actividadeslistProyectos[]):Observable<Proyectos>{
-    console.log(actividadeslistProyecto);
+    //console.log(actividadeslistProyecto);
     return this.http.put<Proyectos>(this.urlEndPoint+"/"+id+"/actividades",actividadeslistProyecto,{headers: this.httpHeaders})
   }
   getProyectosCICedulaDirector(cedula:String):Observable<Proyectos[]>{

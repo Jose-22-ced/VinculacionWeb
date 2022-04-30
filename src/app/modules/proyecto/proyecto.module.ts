@@ -78,6 +78,7 @@ import {
   FirmarinformeaceptacionestudiantesComponent
 } from "./firmarinformeaceptacionestudiantes/firmarinformeaceptacionestudiantes.component";
 import {VerseleccionestudiabesComponent} from "./verseleccionestudiabes/verseleccionestudiabes.component";
+import { DescargardocumentoComponent } from './descargardocumento/descargardocumento.component';
 
 
 const routes: Routes = [
@@ -223,6 +224,8 @@ const routes: Routes = [
     component:VerseleccionestudiabesComponent
   },{path:'firmaestudiantesseleccionado/:nombres',
     component:FirmarinformeaceptacionestudiantesComponent
+  },{path:'verdescargar/:cedula/:nombres',
+    component:DescargardocumentoComponent
   }
 
 ]
@@ -297,7 +300,8 @@ const routes: Routes = [
     Firmaranexo11apoyoComponent,
     SeleccionestudiantesComponent,
     VerseleccionestudiabesComponent,
-    FirmarinformeaceptacionestudiantesComponent
+    FirmarinformeaceptacionestudiantesComponent,
+    DescargardocumentoComponent
 
 
   ],

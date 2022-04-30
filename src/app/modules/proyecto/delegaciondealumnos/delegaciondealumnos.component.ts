@@ -108,7 +108,7 @@ export class DelegaciondealumnosComponent implements OnInit {
         })
       })
       this.isexist=true;
-      console.log(cedula)
+      //console.log(cedula)
     })
 
 
@@ -210,7 +210,7 @@ export class DelegaciondealumnosComponent implements OnInit {
   }
 
   addAlumnos(anexo:Anexo4){
-    console.log(anexo)
+    //console.log(anexo)
     if(this.alumnoselect.filter(value => value.cedulaEstudiante==anexo.cedulaEstudiante).length==0){
       this.alumnoselect.push(anexo);
     }
@@ -298,7 +298,7 @@ export class DelegaciondealumnosComponent implements OnInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        //console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.anexo5resposae.documento="";
@@ -316,7 +316,7 @@ export class DelegaciondealumnosComponent implements OnInit {
 
 
   generarDocumento(anexo5:Anexo5) {
-    console.log(anexo5)
+    //console.log(anexo5)
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo5.docx", function(
       // @ts-ignore
@@ -360,7 +360,7 @@ export class DelegaciondealumnosComponent implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -370,7 +370,7 @@ export class DelegaciondealumnosComponent implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

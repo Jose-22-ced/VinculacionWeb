@@ -208,7 +208,7 @@ export class InformeseguimientoComponent implements OnInit {
   }
   selectionProyecto(proyectoSele: MatSelectionListChange){
     this.proyectoSelect=proyectoSele.option.value
-      console.log(this.proyectoSelect)
+    // console.log(this.proyectoSelect)
 
     this.proyectoSelect.objetivosEspecificosProyecto?.forEach(value=>{
       this.onAddRowOb(value)
@@ -237,10 +237,10 @@ export class InformeseguimientoComponent implements OnInit {
                 this.docentesselectLista.forEach(value => this.onAddRow(value));
                 this.coordinadorService.getCVbyId(Number(this.entidadSelect.idCoordinador)).subscribe(dataCv=>{
                   this.cv=dataCv
-                  console.log(dataCv)
+                  // console.log(dataCv)
                 })
               })
-              console.log(this.anexo1selectLista)
+          //console.log(this.anexo1selectLista)
               //console.log(this.anexo3select)
 
 
@@ -252,11 +252,11 @@ export class InformeseguimientoComponent implements OnInit {
     }
 onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
   this.rowsObje.push(this.createItemFormGroupObje(objetivosEspecificosInforme));
-  console.log(this.rowsObje.getRawValue())
+  //console.log(this.rowsObje.getRawValue())
 }
   onAddRow(docentesParticipantes: TotalHorasResponse) {
     this.rows.push(this.createItemFormGroup(docentesParticipantes));
-    console.log(this.rows.getRawValue())
+    //console.log(this.rows.getRawValue())
   }
   onAddRowEst(estudiantesParticipantes: TotalHorasResponse) {
     this.rowsEst.push(this.createItemFormGroupEst(estudiantesParticipantes));
@@ -283,7 +283,7 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
 
   onAddRowInfo(actividadesInformeSeguimientoRequest: HorasPersonasResponse) {
     this.rowsInfo.push(this.createItemFormGroupInfo(actividadesInformeSeguimientoRequest));
-    console.log(this.rowsInfo.getRawValue())
+    //console.log(this.rowsInfo.getRawValue())
   }
 
   createItemFormGroupInfo(actividadesInformeSeguimientoRequest: HorasPersonasResponse): FormGroup {
@@ -327,7 +327,7 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
   guardarAnexo(){
     var informeS=this.obtenerDatos();
     this.informeService.saveAnexo(informeS).subscribe(value => {
-      console.log(informeS)
+      //console.log(informeS)
       Swal.fire({
         title: 'Exito',
         text: 'Informe seguimiento creado',
@@ -354,7 +354,7 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        //console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.informe.documento="";
@@ -365,7 +365,7 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
           )
         }else{
           this.informe.documento=docx+"";
-          console.log(this.informe.documento)
+          //console.log(this.informe.documento)
         }
       })
     }
@@ -373,7 +373,7 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
 
   generarDocumento() {
     var informe:InformeSeguimiento=this.obtenerDatos();
-    console.log(informe)
+    //console.log(informe)
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/informe%201.docx", function(
       // @ts-ignore
@@ -435,7 +435,7 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -445,7 +445,7 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

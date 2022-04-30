@@ -78,12 +78,10 @@ export class IniciosesionComponent implements OnInit,AfterViewInit {
               })
             }else{
               sessionStorage.setItem('user', JSON.stringify(data));
-              console.log(data)
               this.router.navigate(['/panelusuario/proyectovinculacion/bienvenida']);
             }
           },
           err =>{
-            console.log(err.error.mensaje);
             if(err.error.mensaje=="No existe"){
               this.setHabilitar(false);
             }
@@ -94,7 +92,6 @@ export class IniciosesionComponent implements OnInit,AfterViewInit {
   }
   //Crea a un usario nuevo si este no existe
   public create():void{
-    console.log(this.userRequest.cedula)
     this.iniciosesionService.Signup(this.userRequest).subscribe(
       data => {
         sessionStorage.clear;

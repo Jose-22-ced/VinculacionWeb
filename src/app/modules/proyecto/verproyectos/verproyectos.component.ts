@@ -50,7 +50,7 @@ export class VerproyectosComponent implements OnInit {
   other(cedula:String){
     this.responsablepppService.getDocenteCarrerabyCedula(cedula).subscribe(value => {
       this.proyectoService.getProyectos().subscribe(proyecto => {
-        console.log(proyecto)
+        // console.log(proyecto)
         // @ts-ignore
         this.isexist=proyecto.filter(value1 => value1.codigocarrera==value[0].codigo).length!=0;
         // @ts-ignore
@@ -60,7 +60,7 @@ export class VerproyectosComponent implements OnInit {
           startWith(''),
           map(values=>this.filter(values)),
         );
-        console.log( this.proyectos)
+        // console.log( this.proyectos)
       })
     })
   }

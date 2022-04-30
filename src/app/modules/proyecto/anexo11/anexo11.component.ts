@@ -133,7 +133,6 @@ export class Anexo11Component implements OnInit {
       this.nombres = nombres;
       this.anexo6Service.getAnexo6all().subscribe(data => {
         this.anexo6 = data.filter(value => value.cedulaDocente==cedula);
-        console.log(data);
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values => this.filter(values)),
@@ -179,7 +178,6 @@ export class Anexo11Component implements OnInit {
 
   selectionAnexo6(anexo6: MatSelectionListChange){
     this.anexo6select=anexo6.option.value
-    console.log(this.anexo6select.cedulaEstudiante)
     //this.usarioService.
     this.proyectoService.getProyectobyid(Number(this.anexo6select.proyectoId)).subscribe(dataP=>{
       this.proyectoselect=dataP
@@ -187,17 +185,14 @@ export class Anexo11Component implements OnInit {
 
     this.anexo11Service.getusuario(this.anexo6select.cedulaEstudiante+'').subscribe(dataUser=>{
       this.user=dataUser
-      console.log(this.user)
     })
     this.anexo8Service.getAnexo8byCedula(this.anexo6select.cedulaEstudiante+'').subscribe(data=>{
       this.anexo8=data[0]
-      console.log('pppppppppp'+this.anexo8select)
     })
 
     resultado?.forEach(value2 => {
       // @ts-ignore
       this.onAddRow(value2.item+"", value2.de+"")
-      console.log(this.rows.getRawValue())
     })
 
 
@@ -209,7 +204,6 @@ export class Anexo11Component implements OnInit {
     this.rows.push(this.createItemFormGroup(apoyo1,apoyo));
     this.rows.getRawValue().forEach(element => {
       this.sum+=element.apoyoPuntaje;
-      console.log(this.sum)
     })
     if(this.numerominimo-1>=this.sum){
       this.activar=true;
@@ -222,7 +216,6 @@ export class Anexo11Component implements OnInit {
     this.rows.removeAt(rowIndex);
     this.rows.getRawValue().forEach(element => {
       this.sum+=element.apoyoItem3;
-      console.log(this.sum)
     })
     if(this.numerominimo-1>=this.sum){
       this.activar=true;
@@ -234,7 +227,6 @@ export class Anexo11Component implements OnInit {
     this.sum = 0;
     this.rows.getRawValue().forEach(element => {
       this.sum+=element.apoyoItem3;
-      console.log(this.sum)
     })
     if(this.numerominimo-1>=this.sum){
       this.activar=true;
@@ -317,8 +309,6 @@ export class Anexo11Component implements OnInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
-        // @ts-ignore
         if(docx.length>=10485760){
           this.anexo11ob.documento="";
           Swal.fire(
@@ -386,7 +376,7 @@ export class Anexo11Component implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -396,7 +386,7 @@ export class Anexo11Component implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

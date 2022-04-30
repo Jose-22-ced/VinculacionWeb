@@ -33,14 +33,14 @@ export class Veranexo9Component implements OnInit {
       this.nombres = nombres;
       this.anexos9Service.getAnexo9().subscribe(anex9=>{
         this.anexos9=anex9.filter(value => value.nombreApoyo==nombres);
-        console.log(nombres)
+        // console.log(nombres)
         this.isexist=anex9.length!=0;
         this.issloading = false;
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values => this.filter(values)),
         );
-        console.log(this.anexos9)
+        //console.log(this.anexos9)
       })
     })
   }
@@ -88,10 +88,10 @@ export class Veranexo9Component implements OnInit {
   }
 
   convertFile(docum: any) {
-    console.log(docum)
+    // console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo6.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo61.pdf');
   }
 

@@ -119,7 +119,7 @@ export class Verpostulaciones1Component implements OnInit {
   }
 
   proyetoFilterp(event: any){
-    console.log(this.anexo3pendientes)
+    //console.log(this.anexo3pendientes)
     if(event+""!="ND"){
       this.dataSource = new MatTableDataSource(this.anexo3pendientes.filter(value => value.nombreproyecto==event+""));
       this.dataSource.paginator = this.paginator;
@@ -131,7 +131,7 @@ export class Verpostulaciones1Component implements OnInit {
     }
   }
   proyetoFiltera(event: any){
-    console.log(this.anexo3pendientes)
+    // console.log(this.anexo3pendientes)
     if(event+""!="ND"){
       this.dataSource = new MatTableDataSource(this.anexo3pendientes.filter(value => value.nombreproyecto==event+""));
       this.dataSource.paginator = this.paginator;
@@ -210,7 +210,7 @@ export class Verpostulaciones1Component implements OnInit {
         })
         if (number) {
           anexo4.numeroHoras=number;
-          console.log(anexo4.numeroHoras)
+          //console.log(anexo4.numeroHoras)
           this.generarDocumento(anexo4);
         }
       } else if (result.isDenied) {
@@ -236,7 +236,7 @@ export class Verpostulaciones1Component implements OnInit {
         if (text) {
           anexo.razon=text;
           anexo.estado="AN";
-          console.log(anexo.razon)
+          // console.log(anexo.razon)
           const {value: file} = await Swal.fire({
             allowOutsideClick: false,
             allowEnterKey:false,
@@ -452,10 +452,10 @@ export class Verpostulaciones1Component implements OnInit {
   }
 
   convertFile(docum:any) {
-    console.log(docum)
+    // console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo3.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo3.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

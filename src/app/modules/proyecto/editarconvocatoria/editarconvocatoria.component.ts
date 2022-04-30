@@ -108,7 +108,7 @@ export class EditarconvocatoriaComponent implements OnInit {
             this.proyectoselect=value2.filter(value3 => value3.id==this.anexo2.idProyectoPPP)[0]
           })
         })
-        console.log(this.anexo2)
+        //console.log(this.anexo2)
         this.issloading=false;
       })
     })
@@ -149,7 +149,7 @@ export class EditarconvocatoriaComponent implements OnInit {
   }
   selectionProyecto(proyectoselect: MatSelectionListChange){
     this.proyectoselect=proyectoselect.option.value
-    console.log(this.proyectoselect)
+    //console.log(this.proyectoselect)
   }
 
 
@@ -191,7 +191,7 @@ export class EditarconvocatoriaComponent implements OnInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        //console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.anexo2.documento="";
@@ -249,7 +249,7 @@ export class EditarconvocatoriaComponent implements OnInit {
   }
 
   generarDocumento(proyecto:Proyectos,fechas:Fechas) {
-    console.log(this.obtnerDatos())
+    // console.log(this.obtnerDatos())
     var pipe:DatePipe = new DatePipe('en-US')
     var anexo:Anexo2=this.obtnerDatos();
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo2.docx", function(
@@ -311,7 +311,7 @@ export class EditarconvocatoriaComponent implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //  console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -321,7 +321,7 @@ export class EditarconvocatoriaComponent implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          // console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

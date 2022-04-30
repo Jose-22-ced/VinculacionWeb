@@ -69,7 +69,7 @@ export class FirmarpostulacionComponent implements OnInit {
     })
   }
   filter(value: any): Anexo4[] {
-    console.log(value)
+    //console.log(value)
     const filterValue = value.toLowerCase();
     return this.anexo4.filter(option => option.nombreProyecto?.toLowerCase().includes(filterValue)
       ||option.cedulaDirector?.toLocaleLowerCase().includes(filterValue)
@@ -174,10 +174,10 @@ export class FirmarpostulacionComponent implements OnInit {
 
 
   convertFile(docum:any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo4.pdf');
-    console.log(file);
+    //console.log(file);
     saveAs(file, 'Anexo4.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

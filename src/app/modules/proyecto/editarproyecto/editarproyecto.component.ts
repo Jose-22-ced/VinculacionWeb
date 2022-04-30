@@ -110,7 +110,7 @@ export class EditarproyectoComponent implements OnInit {
           }else {
             this.codigoProyecto=1;
           }
-          console.log(this.codigoProyecto)
+          // console.log(this.codigoProyecto)
         })
         // @ts-ignore
         this.carrerasService.getCarreras().subscribe(value1 => {
@@ -129,16 +129,16 @@ export class EditarproyectoComponent implements OnInit {
         this.onRemoveRow(0);
         getproyecto.objetivosEspecificosProyecto?.forEach(value => {
           this.onAddRow(value.descripcion)
-          console.log(value)
+          //console.log(value)
         })
         this.proyecto=getproyecto;
       })
       this.responsablepppService.getDocentesbyAll().subscribe(value => {
         this.docentes=value;
-        console.log(value)
+        //console.log(value)
         this.anexo1Service.getAnexo1byIdProyecto(id).subscribe(value => {
           value.forEach(value1 => {
-            console.log(value1+"dfsdfsd")
+            //console.log(value1+"dfsdfsd")
             if(value1.nombreRol=="apoyo"){
               this.docentesselectApoyo.push(this.docentes.filter(value2 => value2.cedula==value1.cedulaDelegado)[0])
             }
@@ -298,7 +298,7 @@ export class EditarproyectoComponent implements OnInit {
   selectionDirector(director: MatSelectionListChange){
     this.docentesselectDirector=director.option.value
     this.obtnerDatos();
-    console.log(this.docentesselectDirector.nombres_completo)
+    //console.log(this.docentesselectDirector.nombres_completo)
   }
 
   generarDocumento(anexo1:Anexo1,file:FileList){
@@ -311,7 +311,7 @@ export class EditarproyectoComponent implements OnInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        // console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.anexo1.forEach(value => {
@@ -453,7 +453,7 @@ export class EditarproyectoComponent implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -463,7 +463,7 @@ export class EditarproyectoComponent implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          // console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

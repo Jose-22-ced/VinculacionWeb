@@ -120,10 +120,10 @@ export class VerconvocatoriasComponent implements OnInit {
 
 
   convertFile(docum:any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo2.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo2.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

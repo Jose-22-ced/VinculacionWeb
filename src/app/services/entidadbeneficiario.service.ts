@@ -13,16 +13,16 @@ export class EntidadbeneficiarioService {
   constructor(private http:HttpClient) { }
 
   saveEntidadBeneficiaria(entidad:Entidadbeneficiaria):Observable<Entidadbeneficiaria>{
-    console.log(entidad);
+    // console.log(entidad);
     return this.http.post<Entidadbeneficiaria>(this.urlEndPoint,entidad,{headers: this.httpHeaders})
   }
   updateEntidadBeneficiaria(entidad:Entidadbeneficiaria){
-    console.log(entidad);
+    //console.log(entidad);
     return this.http.put<Entidadbeneficiaria>(this.urlEndPoint,entidad,{headers: this.httpHeaders})
   }
 
   deleteEntidadBeneficiaria(id:Number){
-    console.log(id)
+    // console.log(id)
     return this.http.delete<Entidadbeneficiaria>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
   }
 

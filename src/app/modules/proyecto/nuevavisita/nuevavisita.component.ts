@@ -158,7 +158,7 @@ export class NuevavisitaComponent implements OnInit {
   }
 
   guardarAnexo13(){
-    console.log(this.obtnerDatos())
+    //console.log(this.obtnerDatos())
     this.anexo13Service.saveAnexo13(this.obtnerDatos()).subscribe(value => {
       Swal.fire({
         title: 'Exito',

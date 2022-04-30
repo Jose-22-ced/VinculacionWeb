@@ -74,10 +74,10 @@ export class Veranexos7Component implements OnInit {
       let nombres = params['nombres']
       this.cedula=cedula;
       this.nombres = nombres;
-      console.log(cedula)
+      //console.log(cedula)
       this.anexo1Service.getAnexo1byCedula(cedula).subscribe(datos=>{
         this.anexo7Service.getAnexo7All().subscribe(anex7 => {
-          console.log(anex7)
+          //console.log(anex7)
           this.anexos7 = anex7.filter(value => value.nombreDirectorProyecto==nombres);
           this.isexist = anex7.length != 0;
           this.anexo3Service.getAnexo3byProyecto(datos[0].idProyectoPPP).subscribe(value => {
@@ -135,10 +135,10 @@ export class Veranexos7Component implements OnInit {
   }
 
   convertFile(docum: any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo7.pdf');
-    console.log(file);
+    //console.log(file);
     saveAs(file, 'Anexo7.pdf');
   }
 
@@ -209,7 +209,7 @@ export class Veranexos7Component implements OnInit {
 
 
   generarDocumento711(anexo7:Anexo7,anexo3:Anexo3[]) {
-    console.log(anexo7)
+    //console.log(anexo7)
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo7.docx", function(
       // @ts-ignore
@@ -255,7 +255,7 @@ export class Veranexos7Component implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        // console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -265,7 +265,7 @@ export class Veranexos7Component implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          // console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

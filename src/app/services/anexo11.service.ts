@@ -28,7 +28,7 @@ export class Anexo11Service {
 
   }
   updateanexo11(anexo11: Anexo11): Observable<Anexo11> {
-    console.log(anexo11);
+    //console.log(anexo11);
     return this.http.put<Anexo11>(this.urlEndPoint, anexo11, {headers: this.httpHeaders})
   }
 
@@ -40,11 +40,13 @@ export class Anexo11Service {
   }
 
   saveAnexo11(anexo11: Anexo11): Observable<Anexo11> {
-    console.log(anexo11);
+    //console.log(anexo11);
     return this.http.post<Anexo11>(this.urlEndPoint, anexo11, {headers: this.httpHeaders})
   }
   deleteAnexo11(id?: Number){
     return this.http.delete<Anexo11>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
   }
-
+  getAnexo11byidproyecto(idProyecoPPP?:number):Observable<Anexo11[]>{
+    return this.http.get(this.urlEndPoint+"/allByProyecto/"+idProyecoPPP,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo11[]))
+  }
 }

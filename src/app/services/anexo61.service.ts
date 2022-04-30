@@ -31,7 +31,7 @@ export class Anexo61Service {
     return this.http.get(this.urlEndPoint+"/allAnexos/"+cedulaDirector,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo61[]))
   }
   updateAnexo61(anexo61:Anexo61):Observable<Anexo61>{
-    console.log(anexo61)
+    //console.log(anexo61)
     return this.http.put<Anexo61>(this.urlEndPoint,anexo61,{headers:this.httpHeaders})
   }
 
@@ -41,7 +41,7 @@ export class Anexo61Service {
 
 
   updateActivadades(anexo61: Anexo61):Observable<Anexo61>{
-    console.log(anexo61);
+    //console.log(anexo61);
     return this.http.put<Anexo61>(this.urlEndPoint,anexo61,{headers: this.httpHeaders})
   }
 
@@ -51,7 +51,7 @@ export class Anexo61Service {
   }
 
   saveAnexo61(anexo61:Anexo61):Observable<Anexo61[]>{
-    console.log(anexo61);
+    //console.log(anexo61);
     return this.http.post<Anexo61[]>(this.urlEndPoint,anexo61,{headers: this.httpHeaders})
   }
 

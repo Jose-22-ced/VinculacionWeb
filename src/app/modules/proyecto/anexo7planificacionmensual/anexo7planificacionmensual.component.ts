@@ -181,7 +181,6 @@ export class Anexo7planificacionmensualComponent implements OnInit {
       let nombres = params['nombres']
       this.cedula=cedula;
       this.nombres = nombres;
-      console.log(cedula)
       this.fechaService.getSysdate().subscribe(value => {
         this.anexoss71.fechaPlanificacion=value.fecha;
       })
@@ -210,15 +209,15 @@ export class Anexo7planificacionmensualComponent implements OnInit {
       ///llenado de filas de actividades del proyecto
       data.actividadeslistProyectos?.forEach(value1 => {
         this.onAddRow(value1.descripcion+"")
-        console.log(value1.descripcion)
+
       })
       data.actividadeslistProyectos?.forEach(value1 => {
             this.onAddRow1(value1.descripcion+"")
-            console.log(value1.descripcion)
+
       })
       this.anexo3Service.getAnexo3byProyecto(data.id).subscribe(dates=>{
             this.anexo3=dates.filter(d=>d.estado=='AN')
-            console.log(this.anexo3);
+
       })
           this.anexo1Service.getAnexo1byIdProyecto(data.id).subscribe(datosap=>{
             this.anexo1=datosap
@@ -236,7 +235,7 @@ export class Anexo7planificacionmensualComponent implements OnInit {
         map(values => this.filter(values)),
           );
        })
-       console.log(this.proyecto)
+
       });
       })
       this.fechaService.getSysdate().subscribe(value => {
@@ -262,7 +261,7 @@ export class Anexo7planificacionmensualComponent implements OnInit {
   //filas DOCENTES
   onAddRow(horasDocentes:String) {
     this.rows.push(this.createItemFormGroup(horasDocentes));
-    console.log(this.rows.getRawValue())
+
   }
   onRemoveRow(rowIndex: number) {
     this.rows.removeAt(rowIndex);
@@ -282,7 +281,7 @@ export class Anexo7planificacionmensualComponent implements OnInit {
   //filas ESTUDIANTES
   onAddRow1(horasEstudiantes:String) {
     this.rows1.push(this.createItemFormGroup1(horasEstudiantes));
-    console.log(this.rows1.getRawValue())
+
   }
   onRemoveRow1(rowIndex: number) {
     this.rows1.removeAt(rowIndex);
@@ -359,8 +358,8 @@ export class Anexo7planificacionmensualComponent implements OnInit {
     if(file.length==0){
     }else{
       getBase64(file[0]).then(docx=>{
-        // @ts-ignore
-        console.log(docx.length)
+
+
         // @ts-ignore
         if(docx.length>=10485760){
           this.anexoss71.documento="";
@@ -378,7 +377,7 @@ export class Anexo7planificacionmensualComponent implements OnInit {
 
   generarDocumento711(anexo3:Anexo3[]) {
     var anexo7:Anexo7=this.obtnerdatos();
-    console.log(anexo7)
+
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo7.docx", function(
       // @ts-ignore

@@ -16,7 +16,7 @@ export class Anexo10Service {
 
 
   saveAnexo10(anexo10: Anexo10):Observable<Anexo10>{
-    console.log(anexo10.documento);
+    // console.log(anexo10.documento);
     return this.http.post<Anexo10>(this.urlEndPoint,anexo10,{headers: this.httpHeaders})
   }
   updateAnexo10(anexo10: Anexo10):Observable<Anexo10>{

@@ -138,7 +138,7 @@ export class Registrobeneficiarios12Component implements OnInit {
 
   onAddRow() {
     this.rows.push(this.createItemFormGroup());
-    console.log(this.rows.getRawValue())
+    //console.log(this.rows.getRawValue())
   }
   onRemoveRow(rowIndex: number) {
     this.rows.removeAt(rowIndex);
@@ -169,7 +169,7 @@ export class Registrobeneficiarios12Component implements OnInit {
   guardarAnexo12(){
     var anexo12=this.obtenerDatos();
     this.anexo12Service.saveAnexo(anexo12).subscribe(value => {
-      console.log(anexo12)
+      // console.log(anexo12)
       Swal.fire({
         title: 'Exito',
         text: 'Anexo12 creado',
@@ -195,7 +195,7 @@ export class Registrobeneficiarios12Component implements OnInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        // console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.anexo12Ob.documento="";
@@ -212,7 +212,7 @@ export class Registrobeneficiarios12Component implements OnInit {
   }
   generarDocumento12() {
     var anexo12:Anexo12=this.obtenerDatos();
-    console.log(anexo12)
+    //console.log(anexo12)
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo12.docx", function(
       // @ts-ignore
@@ -261,7 +261,7 @@ export class Registrobeneficiarios12Component implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -271,7 +271,7 @@ export class Registrobeneficiarios12Component implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

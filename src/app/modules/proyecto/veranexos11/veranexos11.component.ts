@@ -44,18 +44,18 @@ export class Veranexos11Component implements OnInit {
       let cedula = params['cedula']
       let nombre = params['nombres']
       this.nombre = nombre;
-      console.log(cedula)
+      // console.log(cedula)
       this.anexo11Service.getAll().subscribe(anex11 => {
         this.anexos11 = anex11.filter(value => value.nombreApoyo == nombre);
 
-        console.log(nombre)
+        // console.log(nombre)
         this.isexist = anex11.length != 0;
         this.issloading = false;
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values => this.filter(values)),
         );
-        console.log(this.anexos11)
+        //console.log(this.anexos11)
       })
     })
 
@@ -104,10 +104,10 @@ export class Veranexos11Component implements OnInit {
   }
 
   convertFile(docum: any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo11.pdf');
-    console.log(file);
+    //console.log(file);
     saveAs(file, 'Anexo11.pdf');
   }
 

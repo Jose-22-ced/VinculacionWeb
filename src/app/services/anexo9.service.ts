@@ -16,11 +16,11 @@ export class Anexo9Service {
 
   constructor(private http:HttpClient) { }
   saveAnexo(anexo9: Anexo9):Observable<Anexo9>{
-    console.log(anexo9);
+    //console.log(anexo9);
     return this.http.post<Anexo9>(this.urlEndPoint,anexo9,{headers: this.httpHeaders})
   }
   updateAnexo9(anexo9:Anexo9):Observable<Anexo9>{
-    console.log(anexo9)
+    //console.log(anexo9)
     return this.http.put<Anexo9>(this.urlEndPoint,anexo9,{headers:this.httpHeaders})
   }
   getAnexo9_porid(id:Number):Observable<Anexo9>{
@@ -35,5 +35,8 @@ export class Anexo9Service {
   }
   deleteAnexo9(id?: Number){
     return this.http.delete<Anexo9>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
+  }
+  getAnexo9_poridproyecto(idProyectoPPP?:number):Observable<Anexo9>{
+    return this.http.get(this.urlEndPoint+"/allByProyecto/"+idProyectoPPP,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo9))
   }
 }

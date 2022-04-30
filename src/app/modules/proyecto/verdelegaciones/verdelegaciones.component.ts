@@ -58,7 +58,7 @@ export class VerdelegacionesComponent implements OnInit {
         this.anexo5Service.getAnexo5All().subscribe(value1 => {
           this.isexist=value1.filter(value2 => value2.siglasCarrera==value.filter(value3 => value3.cedula==cedula)[0].codigoCarrera).length!=0;
           this.anexo5=value1.filter(value2 => value2.siglasCarrera==value.filter(value3 => value3.cedula==cedula)[0].codigoCarrera)
-          console.log(this.anexo5)
+          //  console.log(this.anexo5)
           this.issloading=false;
           this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(''),
@@ -109,10 +109,10 @@ export class VerdelegacionesComponent implements OnInit {
   }
 
   convertFile(docum:any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo5.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo5.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

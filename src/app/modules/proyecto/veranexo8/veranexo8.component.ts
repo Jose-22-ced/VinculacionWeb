@@ -58,7 +58,7 @@ export class Veranexo8Component implements OnInit {
           map(values=>this.filter(values)),
         );
         this.issloading=false;
-        console.log(value)
+        //console.log(value)
       })
     })
   }
@@ -123,10 +123,10 @@ export class Veranexo8Component implements OnInit {
 
   //convert a pdf
   convertFile(docum:any) {
-    console.log(docum)
+    // console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo8.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo8.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

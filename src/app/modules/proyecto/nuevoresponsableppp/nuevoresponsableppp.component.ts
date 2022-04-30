@@ -77,7 +77,7 @@ export class NuevoresponsablepppComponent implements OnInit {
   }
   selectionDocente(docenteselect: MatSelectionListChange){
     this.docentesselect=docenteselect.option.value
-    console.log(this.docentesselect.nombres_completo)
+    //console.log(this.docentesselect.nombres_completo)
   }
 
   responsable:Resposableppp = new Resposableppp();

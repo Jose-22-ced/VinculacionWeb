@@ -99,7 +99,7 @@ export class Anexo61Component implements OnInit,AfterViewInit {
       let cedula = params['cedula']
       let nombre = params['nombres']
       this.nombre = nombre;
-      console.log(cedula)
+      //console.log(cedula)
       this.anexo61Service.getAnexo61_porid(id).subscribe(value => {
         this.anexo61es = value
         if (value.actividades?.length != 0) {
@@ -124,7 +124,7 @@ export class Anexo61Component implements OnInit,AfterViewInit {
             })
           })
         })
-        console.log(data);
+        //console.log(data);
 
       })
 
@@ -235,7 +235,7 @@ export class Anexo61Component implements OnInit,AfterViewInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        //console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.anexoss61.documento="";
@@ -253,7 +253,7 @@ export class Anexo61Component implements OnInit,AfterViewInit {
 
   generarDocumento6111() {
     var anexo61:Anexo61=this.obtnerdatos();
-    console.log(anexo61)
+    //console.log(anexo61)
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6.1.docx", function(
       // @ts-ignore
@@ -295,7 +295,7 @@ export class Anexo61Component implements OnInit,AfterViewInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -305,7 +305,7 @@ export class Anexo61Component implements OnInit,AfterViewInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

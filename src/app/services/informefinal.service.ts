@@ -13,11 +13,11 @@ export class InformeFinalService {
   private httpHeaders = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage["user"]).token})
   constructor(private http:HttpClient) { }
   saveAnexo(informe: InformeFinal):Observable<InformeFinal>{
-    console.log(informe);
+    //console.log(informe);
     return this.http.post<InformeFinal>(this.urlEndPoint,informe,{headers: this.httpHeaders})
   }
   updateAnexo(informe:InformeFinal):Observable<InformeFinal>{
-    console.log(informe)
+    // console.log(informe)
     return this.http.put<InformeFinal>(this.urlEndPoint,informe,{headers:this.httpHeaders})
   }
   getInforme_porDirector(cedula:String):Observable<InformeFinal[]>{
@@ -29,5 +29,9 @@ export class InformeFinalService {
 
   deleteAnexo(id?: Number){
     return this.http.delete<InformeFinal>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
+  }
+  getinformeallo():Observable<InformeFinal[]>{
+    return this.http.get(this.urlEndPoint+"/all",{headers: this.httpHeaders}).pipe(map(Response => Response as InformeFinal[]))
+
   }
 }

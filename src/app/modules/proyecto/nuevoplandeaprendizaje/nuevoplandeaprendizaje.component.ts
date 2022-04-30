@@ -163,7 +163,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
     this.rows.push(this.createItemFormGroup(actividad));
     this.rows.getRawValue().forEach(element => {
       this.sum+=element.horasAsignadas;
-      console.log(this.sum)
+      // console.log(this.sum)
     })
     if(this.numerominimo-1>=this.sum){
       this.activar=true;
@@ -176,7 +176,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
     this.rows.removeAt(rowIndex);
     this.rows.getRawValue().forEach(element => {
       this.sum+=element.horasAsignadas;
-      console.log(this.sum)
+      //console.log(this.sum)
     })
     if(this.numerominimo-1>=this.sum){
       this.activar=true;
@@ -188,7 +188,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
     this.sum = 0;
     this.rows.getRawValue().forEach(element => {
       this.sum+=element.horasAsignadas;
-      console.log(this.sum)
+      //console.log(this.sum)
     })
     if(this.numerominimo-1>=this.sum){
       this.activar=true;
@@ -228,7 +228,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
     })
     this.anexo1Service.getAnexo1byIdProyecto(this.proyectoselect.id).subscribe(value => {
       this.anexo1=value;
-      console.log(this.anexo1)
+      //console.log(this.anexo1)
     })
     this.anexo2Service.getAnexoByidProyecto(this.proyectoselect.id).subscribe(value => {
       this.anexo6.ciclo=value.ciclo
@@ -278,7 +278,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
       }else{
         this.activar=false;
       }
-      console.log(value)
+      //console.log(value)
     })
   }
 
@@ -346,7 +346,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        //console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.anexo6.documento="";
@@ -364,7 +364,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
 
   generarDocumento() {
     var anexo6:Anexo6=this.obtnerdatos();
-    console.log(anexo6)
+    //console.log(anexo6)
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo6.docx", function(
       // @ts-ignore
@@ -413,7 +413,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -423,7 +423,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          // console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

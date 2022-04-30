@@ -192,7 +192,7 @@ export class SeleccionestudiantesComponent implements OnInit {
   generarDocumento() {
     this.obtnerdatos();
     var informe:Informeaceptacion=this.obtnerdatos();
-    console.log(informe)
+    //console.log(informe)
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Sbryan20/Sistema-PPProfesionales/main/src/assets/doc/preinforme.docx", function(
       // @ts-ignore
@@ -238,7 +238,7 @@ export class SeleccionestudiantesComponent implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -248,7 +248,7 @@ export class SeleccionestudiantesComponent implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }
@@ -269,7 +269,7 @@ export class SeleccionestudiantesComponent implements OnInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        // console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.informeAceotacion.documento="";

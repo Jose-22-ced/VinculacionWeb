@@ -52,7 +52,7 @@ export class AsignarcodinadorvinculacionComponent implements OnInit {
 
   selectionCordinador(cordinadorselect: MatSelectionListChange){
     this.cordinadorselect=cordinadorselect.option.value
-    console.log(this.cordinadorselect.nombres)
+    //console.log(this.cordinadorselect.nombres)
   }
 
   filter(value: any): CordinadorVinculacion[] {

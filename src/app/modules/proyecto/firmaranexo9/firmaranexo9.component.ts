@@ -56,7 +56,7 @@ export class Firmaranexo9Component implements OnInit {
           map(values=>this.filter(values)),
         );
         this.issloading=false;
-        console.log(value)
+        // console.log(value)
       })
     })
   }
@@ -111,7 +111,7 @@ export class Firmaranexo9Component implements OnInit {
                   background: "#fbc02d",
                 })
               })
-              console.log(anexo9)
+              //console.log(anexo9)
             })
           }
         })
@@ -122,10 +122,10 @@ export class Firmaranexo9Component implements OnInit {
 
   //convert a pdf
   convertFile(docum:any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo9.pdf');
-    console.log(file);
+    //console.log(file);
     saveAs(file, 'Anexo9.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

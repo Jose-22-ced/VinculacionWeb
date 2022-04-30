@@ -32,14 +32,14 @@ export class Veranexo12Component implements OnInit {
       this.nombres = nombres;
       this.anexos12Service.getAnexo12_porapoyo(cedula).subscribe(anex12=>{
         this.anexos12=anex12;
-        console.log(nombres)
+        // console.log(nombres)
         this.isexist=anex12.length!=0;
         this.issloading = false;
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values => this.filter(values)),
         );
-        console.log(this.anexos12)
+        //  console.log(this.anexos12)
       })
     })
   }
@@ -86,10 +86,10 @@ export class Veranexo12Component implements OnInit {
   }
 
   convertFile(docum: any) {
-    console.log(docum)
+    // console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo12.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo12.pdf');
   }
 

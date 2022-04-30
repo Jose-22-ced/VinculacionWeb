@@ -15,12 +15,12 @@ export class Anexo1Service {
 
 
   saveAnexo1(anexo1: Anexo1):Observable<Anexo1>{
-    console.log(anexo1);
+
     return this.http.post<Anexo1>(this.urlEndPoint,anexo1,{headers: this.httpHeaders})
   }
 
   updateAnexo1(anexo1: Anexo1):Observable<Anexo1>{
-    console.log(anexo1);
+
     return this.http.put<Anexo1>(this.urlEndPoint,anexo1,{headers: this.httpHeaders})
   }
 

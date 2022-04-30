@@ -48,7 +48,7 @@ export class Verproyectos1Component implements OnInit {
             startWith(''),
             map(values=>this.filter(values)),
           );
-          console.log( this.proyectos)
+          // console.log( this.proyectos)
         })
       })
     })

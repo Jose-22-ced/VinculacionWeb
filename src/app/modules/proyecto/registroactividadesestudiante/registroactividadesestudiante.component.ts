@@ -118,16 +118,16 @@ export class RegistroactividadesestudianteComponent implements OnInit {
     this.rows.getRawValue().forEach(element => {
       this.sum+=element.numHoras;
 
-      console.log(this.sum)
+      // console.log(this.sum)
     })
-    console.log(this.rows.getRawValue())
+    //console.log(this.rows.getRawValue())
   }
   onRemoveRow(rowIndex:number){
     this.rows.removeAt(rowIndex)
     this.sum = 0;
     this.rows.getRawValue().forEach(element => {
       this.sum+=element.numHoras;
-      console.log(this.sum)
+      //  console.log(this.sum)
     })
   }
   ///
@@ -144,8 +144,8 @@ export class RegistroactividadesestudianteComponent implements OnInit {
     this.sum = 0;
     this.rows.getRawValue().forEach(element => {
       this.sum+=element.numHoras;
-      console.log(this.sum)
-      console.log(this.proyecto)
+      // console.log(this.sum)
+      //console.log(this.proyecto)
     })
   }
 
@@ -221,7 +221,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
   guardar(){
     this.anexo8=this.ontnerDatos();
     this.anexo8Service.saveAnexo8(this.ontnerDatos()).subscribe(datos=>{
-      console.log(">."+this.anexo8Service.saveAnexo8(this.ontnerDatos()))
+      // console.log(">."+this.anexo8Service.saveAnexo8(this.ontnerDatos()))
       Swal.fire({
         icon: 'success',
         title: 'ACTIVIDAD REGISTRADA CORRECTAMENTE',
@@ -247,7 +247,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        //console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.anexo8.documento="";
@@ -264,10 +264,10 @@ export class RegistroactividadesestudianteComponent implements OnInit {
   }
 
   actulizar(){
-    console.log(this.ontnerDatos())
+    // console.log(this.ontnerDatos())
     this.anexo8.id=this.anexo8requeste.id
     this.anexo8Service.updateActivadades(this.ontnerDatos()).subscribe(datos=>{
-      console.log(this.anexo8Service.updateActivadades(this.ontnerDatos()))
+      // console.log(this.anexo8Service.updateActivadades(this.ontnerDatos()))
       Swal.fire({
         icon: 'success',
         title: 'ACTIVIDAD REGISTRADA',
@@ -288,7 +288,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
   }
   ggenerarDocumento8() {
     var anexo8:Anexo8=this.ontnerDatos();
-    console.log(anexo8)
+    // console.log(anexo8)
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Sbryan20/Sistema-PPProfesionales/main/src/assets/doc/anexo8.docx", function(
       // @ts-ignore
@@ -333,7 +333,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -343,7 +343,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          // console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

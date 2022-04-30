@@ -98,7 +98,7 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
       let nombres=params['nombres']
       this.nombres=nombres
       this.cedula=cedula
-      console.log(cedula)
+      // console.log(cedula)
 
       this.proyectoService.getProyectosCICedulaAp(cedula).subscribe(dataPro=>{
         this.proyectoSele=dataPro.filter(value => value.estado==true)
@@ -150,7 +150,7 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
            }
           })
       })
-      console.log(data)
+      //console.log(data)
       this.filteredOptions= this.myControl.valueChanges.pipe(
         startWith(''),
         map(values => this.filter(values)),
@@ -160,23 +160,23 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
   }
   selectionAnexo7(anexo7: MatSelectionListChange){
     this.anexo7=anexo7.option.value
-    console.log(this.anexo7.mesAnioPlanificado)
-    console.log(this.anexo7.id)
+    //console.log(this.anexo7.mesAnioPlanificado)
+    //console.log(this.anexo7.id)
     this.anexo7Service.getanexo7ById(Number(this.anexo7.id)).subscribe(dataP=>{
       this.anexo7=dataP
-      console.log(this.anexo7.nombreEntidadBeneficiaria)
-      console.log(dataP.idProyecto)
-      console.log(dataP)
+      //console.log(this.anexo7.nombreEntidadBeneficiaria)
+      //console.log(dataP.idProyecto)
+      // console.log(dataP)
       dataP.horasEstudiantes?.forEach(value => {
         this.onAddRow(value)
-        console.log(value.actividad)
+        //console.log(value.actividad)
 
       })
     })
   }
   onAddRow(actividadesAnexo9:HorasEstudiantesA7Request) {
     this.rows.push(this.createItemFormGroup(actividadesAnexo9));
-    console.log(this.rows.getRawValue())
+    // console.log(this.rows.getRawValue())
   }
   onRemoveRow(rowIndex: number) {
     this.rows.removeAt(rowIndex);
@@ -208,7 +208,7 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
   guardarAnexo9(){
     var anexo9=this.obtenerdatos();
     this.anexo9Service.saveAnexo(anexo9).subscribe(value => {
-      console.log(anexo9)
+      //console.log(anexo9)
       Swal.fire({
         title: 'Éxito',
         text: 'Anexo de planificación creado existosamente',
@@ -236,7 +236,7 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
-        console.log(docx.length)
+        // console.log(docx.length)
         // @ts-ignore
         if(docx.length>=10485760){
           this.anexos9.documento="";
@@ -255,7 +255,7 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
 
   generarDocumento9() {
     var anexo9:Anexo9=this.obtenerdatos();
-    console.log(anexo9)
+    // console.log(anexo9)
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo9.docx", function(
       // @ts-ignore
@@ -300,7 +300,7 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -310,7 +310,7 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }

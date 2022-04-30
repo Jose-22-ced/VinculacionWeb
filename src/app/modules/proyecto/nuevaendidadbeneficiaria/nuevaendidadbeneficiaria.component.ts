@@ -59,9 +59,9 @@ export class NuevaendidadbeneficiariaComponent implements OnInit {
   crearEntidad(entidad:Entidadbeneficiaria){
     this.fechaService.getSysdate().subscribe(data=>{
       entidad.fechaCreacion=data.fecha;
-      console.log(this.entidad)
+      //console.log(this.entidad)
       this.entidadbeneficiarioService.saveEntidadBeneficiaria(this.entidad).subscribe(data =>{
-          console.log(data)
+        // console.log(data)
         Swal.fire({
           title: 'Éxito',
           text: 'Entidad Beneficiaria Registrada',

@@ -48,13 +48,13 @@ export class FirmarinformefinalComponent implements OnInit {
       this.informeService.getInforme_porCV(cedula).subscribe(value=>{
         this.isexist=value.length!=0;
         this.informeS=value;
-        console.log(value)
+        // console.log(value)
         this.filteredOptions=this.myControl.valueChanges.pipe(
           startWith(''),
           map(values=>this.filter(values)),
         );
         this.issloading=false;
-        console.log(value)
+        // console.log(value)
       })
     })
   }
@@ -106,7 +106,7 @@ export class FirmarinformefinalComponent implements OnInit {
                   background: "#fbc02d",
                 })
               })
-              console.log(informe)
+              //console.log(informe)
             })
           }
         })
@@ -116,10 +116,10 @@ export class FirmarinformefinalComponent implements OnInit {
   }
 
   convertFile(docum:any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'InformeFinal.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'InformeFinal.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

@@ -53,7 +53,7 @@ export class Firmaranexo11Component implements OnInit {
       this.anexo11Service.getAll().subscribe(value => {
         this.anexo11 = value.filter(value => value.nombreDirector==nombres);
 
-        console.log(value);
+        //console.log(value);
         this.isexist=value.length!=0;
         this.anexo11=value;
         this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -61,7 +61,7 @@ export class Firmaranexo11Component implements OnInit {
           map(values=>this.filter(values)),
         );
         this.issloading=false;
-        console.log(value)
+        //console.log(value)
       })
     })
   }
@@ -116,7 +116,7 @@ export class Firmaranexo11Component implements OnInit {
                   background: "#fbc02d",
                 })
               })
-              console.log(anexo11)
+              // console.log(anexo11)
             })
           }
         })
@@ -152,10 +152,10 @@ export class Firmaranexo11Component implements OnInit {
   }
   //convert a pdf
   convertFile(docum:any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo11.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo11.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

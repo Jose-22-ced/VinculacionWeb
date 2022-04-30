@@ -17,11 +17,11 @@ export class Anexo2Service {
 
 
   saveAnexo2(anexo2:Anexo2):Observable<Anexo2>{
-    console.log(anexo2)
+    //console.log(anexo2)
     return this.http.post<Anexo2>(this.urlEndPoint,anexo2,{headers:this.httpHeaders})
   }
   updateAnexo2(anexo2:Anexo2):Observable<Anexo2>{
-    console.log(anexo2)
+    //console.log(anexo2)
     return this.http.put<Anexo2>(this.urlEndPoint,anexo2,{headers:this.httpHeaders})
   }
   getAnexo2():Observable<Anexo2[]>{

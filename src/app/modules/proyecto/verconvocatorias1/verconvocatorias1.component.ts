@@ -81,7 +81,7 @@ export class Verconvocatorias1Component implements OnInit {
         })
       })
       this.anexo3Service.getAnexo3byCedula(cedula).subscribe(value => {
-        console.log(value)
+        // console.log(value)
       })
     })
   }
@@ -184,7 +184,7 @@ export class Verconvocatorias1Component implements OnInit {
                               background: "#fbc02d",
                             })
                           })
-                          console.log(anexo3)
+                          // console.log(anexo3)
                         })
                       }
                     })
@@ -234,7 +234,7 @@ export class Verconvocatorias1Component implements OnInit {
   }
 
   generarDocumento(anex2:Anexo2) {
-    console.log(this.obtnerDatos(anex2))
+    //console.log(this.obtnerDatos(anex2))
     var anexo3:Anexo3=this.obtnerDatos(anex2);
     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo3.docx", function(
       // @ts-ignore
@@ -282,7 +282,7 @@ export class Verconvocatorias1Component implements OnInit {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
         // @ts-ignore
         if (error.properties && error.properties.errors instanceof Array) {
           // @ts-ignore
@@ -292,7 +292,7 @@ export class Verconvocatorias1Component implements OnInit {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
           // errorMessages is a humanly readable message looking like this :
           // 'The tag beginning with "foobar" is unopened'
         }
@@ -310,10 +310,10 @@ export class Verconvocatorias1Component implements OnInit {
 
 
   convertFile(docum:any) {
-    console.log(docum)
+    //console.log(docum)
     //Usage example:
     var file = this.dataURLtoFile(docum, 'Anexo2.pdf');
-    console.log(file);
+    // console.log(file);
     saveAs(file, 'Anexo2.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {

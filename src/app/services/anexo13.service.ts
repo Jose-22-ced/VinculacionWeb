@@ -15,11 +15,11 @@ export class Anexo13Service {
   constructor(private http:HttpClient) { }
 
   saveAnexo13(anexo13: Anexo13):Observable<Anexo13>{
-    console.log(anexo13);
+    //console.log(anexo13);
     return this.http.post<Anexo13>(this.urlEndPoint,anexo13,{headers: this.httpHeaders})
   }
   updateAnexo13(anexo13: Anexo13):Observable<Anexo13>{
-    console.log(anexo13);
+    //console.log(anexo13);
     return this.http.put<Anexo13>(this.urlEndPoint,anexo13,{headers: this.httpHeaders})
   }
   getAnexo13by(idproyecto:Number):Observable<Anexo13[]>{

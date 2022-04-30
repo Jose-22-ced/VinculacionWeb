@@ -12,7 +12,7 @@ export class CordinadorvinculacionService {
   private httpHeaders = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage["user"]).token})
 
   constructor(private http:HttpClient) {
-    console.log(JSON.parse(sessionStorage["user"]).token)
+    //console.log(JSON.parse(sessionStorage["user"]).token)
   }
   getCordinadorVinculacion():Observable<CordinadorVinculacion[]>{
     return this.http.get(this.urlEndPoint+"/all/docentes",{headers: this.httpHeaders}).pipe(map(
@@ -33,11 +33,11 @@ export class CordinadorvinculacionService {
     ));
   }
   saveCordinadorVinculacion(cordinadorVinculacion: CordinadorVinculacion):Observable<CordinadorVinculacion>{
-    console.log(cordinadorVinculacion);
+    //console.log(cordinadorVinculacion);
     return this.http.post<CordinadorVinculacion>(this.urlEndPoint,cordinadorVinculacion,{headers: this.httpHeaders})
   }
   updateCordinadorVinculacion(cordinadorVinculacion: CordinadorVinculacion):Observable<CordinadorVinculacion>{
-    console.log(cordinadorVinculacion);
+    // console.log(cordinadorVinculacion);
     return this.http.put<CordinadorVinculacion>(this.urlEndPoint,cordinadorVinculacion,{headers: this.httpHeaders})
   }
   getCVbyId(id:number):Observable<CordinadorVinculacion>{

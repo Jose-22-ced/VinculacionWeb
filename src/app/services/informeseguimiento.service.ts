@@ -14,11 +14,11 @@ export class InformeSeguimientoService {
 
   constructor(private http:HttpClient) { }
   saveAnexo(informe: InformeSeguimiento):Observable<InformeSeguimiento>{
-    console.log(informe);
+    //console.log(informe);
     return this.http.post<InformeSeguimiento>(this.urlEndPoint,informe,{headers: this.httpHeaders})
   }
   updateAnexo(informe:InformeSeguimiento):Observable<InformeSeguimiento>{
-    console.log(informe)
+    //console.log(informe)
     return this.http.put<InformeSeguimiento>(this.urlEndPoint,informe,{headers:this.httpHeaders})
   }
 
@@ -38,6 +38,9 @@ export class InformeSeguimientoService {
   }
   getInforme_porid(id:Number):Observable<InformeSeguimiento>{
     return this.http.get(this.urlEndPoint+"/byId/"+id,{headers: this.httpHeaders}).pipe(map(Response => Response as InformeSeguimiento))
+  }
+  getInforme_poridproyetco(idProyectoPPP?:Number):Observable<InformeSeguimiento>{
+    return this.http.get(this.urlEndPoint+"/allByProyecto/"+idProyectoPPP,{headers: this.httpHeaders}).pipe(map(Response => Response as InformeSeguimiento))
   }
 }
 
