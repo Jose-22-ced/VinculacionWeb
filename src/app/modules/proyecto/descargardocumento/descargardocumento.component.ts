@@ -204,7 +204,7 @@ export class DescargardocumentoComponent implements OnInit {
         map(values=>this.filteranexo1(values)),
       );
       this.issloading=false;
-      console.log(this.anexo1)
+      //console.log(this.anexo1)
     })
     this.anexo2Service.getAnexo2().subscribe(va=>{
       this.anexo2=va.filter(fil=>fil.idProyectoPPP==this.proyectoselect.id);

@@ -30,7 +30,7 @@ export class VerresposabledepppComponent implements OnInit {
         this.responsablepppService.getResposablepppbyCarrera(value[0].codigo).subscribe(data=>{
           this.responsableppp=data;
           this.issloading=false;
-          console.log(this.responsableppp)
+          //console.log(this.responsableppp)
         },err=>{
           this.issloading=false;
           this.isexist=false;

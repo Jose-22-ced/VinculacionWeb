@@ -110,7 +110,7 @@ export class NuevoproyectoComponent implements OnInit {
       this.responsablepppService.getDocenteCarrerabyCedula(cedula).subscribe(value => {
         this.proyectoService.getProyectos().subscribe(valuecod =>{
           // @ts-ignore
-          if(valuecod.filter(value1 => value1.codigocarrera==value[0].codigo)[0].codigo!=""){
+          if(valuecod.filter(value1 => value1.codigocarrera==value[0].codigo)[0]?.codigo!=undefined){
             // @ts-ignore
             this.codigoProyecto=Number(valuecod.filter(value1 => value1.codigocarrera==value[0].codigo).pop().codigo)+1;
           }else {
