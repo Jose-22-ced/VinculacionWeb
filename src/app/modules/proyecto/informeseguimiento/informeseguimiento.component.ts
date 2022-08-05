@@ -149,7 +149,7 @@ export class InformeseguimientoComponent implements OnInit {
       this.nombres=nombres
       this.cedula=cedula
       this.proyectoService.getProyectosCICedulaDirector(cedula).subscribe(dataPro=>{
-        this.proyectos=dataPro.filter(value => value.nombredirector=nombres&&value.estado==true);
+        this.proyectos=dataPro.filter(value => value.nombredirector==nombres&&value.estado==true);
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values => this.filter(values)),
