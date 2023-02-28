@@ -3,7 +3,7 @@ import {FechaService} from "../../../services/fecha.service";
 import {CarrerasService} from "../../../services/carreras.service";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {Anexo1Service} from "../../../services/anexo1.service";
@@ -22,7 +22,7 @@ export class VerproyectosComponent implements OnInit {
   issloading=true;
   isexist?:boolean
   panelOpenState = false;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Proyectos[]>;
   cedulaCor?:String;
   nombreCor?:String;
@@ -30,7 +30,7 @@ export class VerproyectosComponent implements OnInit {
   proyectos:Proyectos[]=[];
   constructor(private fechaService:FechaService,private carrerasService:CarrerasService,
               private responsablepppService:ResponsablepppService,
-              private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,
+              private activatedRoute: ActivatedRoute,private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private proyectoService:ProyectoService,
               private anexo1Service:Anexo1Service,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Form, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Form, UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {CordinadorVinculacion} from "../../../models/cordinadorvinculacion";
 import {ActivatedRoute} from "@angular/router";
 import {ProyectoService} from "../../../services/proyecto.service";
@@ -58,30 +58,30 @@ export class InformefinalComponent implements OnInit {
   fecha?:Date;
   nombres?:String;
   cedula?:String;
-  rows: FormArray;
-  rowsEst: FormArray;
-  rowsInfo:FormArray;
-  rowsObje:FormArray;
-  rowsIndicadores:FormArray;
-  rowsMatriz:FormArray;
+  rows: UntypedFormArray;
+  rowsEst: UntypedFormArray;
+  rowsInfo:UntypedFormArray;
+  rowsObje:UntypedFormArray;
+  rowsIndicadores:UntypedFormArray;
+  rowsMatriz:UntypedFormArray;
 
 
   cv:CordinadorVinculacion = new CordinadorVinculacion();
   //grupos
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  thirdFormGroup?:FormGroup;
-  fourFormGroup?:FormGroup;
-  fiveFormGroup?:FormGroup;
-  sixFormGroup?:FormGroup;
-  sevenFormGroup?:FormGroup;
-  eigthFormGroup?:FormGroup;
-  nineFormGroup?:FormGroup;
-  tenFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  thirdFormGroup?:UntypedFormGroup;
+  fourFormGroup?:UntypedFormGroup;
+  fiveFormGroup?:UntypedFormGroup;
+  sixFormGroup?:UntypedFormGroup;
+  sevenFormGroup?:UntypedFormGroup;
+  eigthFormGroup?:UntypedFormGroup;
+  nineFormGroup?:UntypedFormGroup;
+  tenFormGroup?: UntypedFormGroup;
 
 
   proyectos:Proyectos[]=[];
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Proyectos[]>;
   proyectoSelect:Proyectos=new Proyectos();
   entidadS:Entidadbeneficiaria=new Entidadbeneficiaria();
@@ -96,7 +96,7 @@ export class InformefinalComponent implements OnInit {
 
   entidadSelect:Entidadbeneficiaria=new Entidadbeneficiaria();
   carreraSelect:Carreras= new Carreras();
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
               private proyectoService: ProyectoService,
               private fechaService: FechaService,
@@ -223,7 +223,7 @@ export class InformefinalComponent implements OnInit {
     this.rowsIndicadores.push(this.createItemFormGroupIndi());
     //console.log(this.rows.getRawValue())
   }
-  createItemFormGroupIndi(): FormGroup {
+  createItemFormGroupIndi(): UntypedFormGroup {
     return this._formBuilder.group({
       descripcion: ['', Validators.required],
       tipo: ['', Validators.required]
@@ -278,7 +278,7 @@ export class InformefinalComponent implements OnInit {
     this.rowsObje.push(this.createItemFormGroupObje(objetivosEspecificosInforme));
     //console.log(this.rowsObje.getRawValue())
   }
-  createItemFormGroupObje(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto): FormGroup {
+  createItemFormGroupObje(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto): UntypedFormGroup {
     return this._formBuilder.group({
       descripcion:[objetivosEspecificosInforme.descripcion,Validators.required]
     });
@@ -288,7 +288,7 @@ export class InformefinalComponent implements OnInit {
     this.rowsMatriz.push(this.createItemFormGroupMatr(objetivosEspecificosInforme));
     //console.log(this.rows.getRawValue())
   }
-  createItemFormGroupMatr(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto): FormGroup {
+  createItemFormGroupMatr(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto): UntypedFormGroup {
     return this._formBuilder.group({
       ObjetivosEspecifico: [objetivosEspecificosInforme.descripcion, Validators.required],
       indicadores: ['', Validators.required],
@@ -301,7 +301,7 @@ export class InformefinalComponent implements OnInit {
     this.rowsEst.push(this.createItemFormGroupEst(estudiantesParticipantes));
     // console.log(this.rowsEst.getRawValue())
   }
-  createItemFormGroupEst(estudiantesParticipantes: TotalHorasResponse): FormGroup {
+  createItemFormGroupEst(estudiantesParticipantes: TotalHorasResponse): UntypedFormGroup {
     return this._formBuilder.group({
       nombres:[estudiantesParticipantes.nombre,Validators.required],
       cedula:[estudiantesParticipantes.cedula,Validators.required],
@@ -314,7 +314,7 @@ export class InformefinalComponent implements OnInit {
     this.rows.push(this.createItemFormGroup(docentesParticipantes));
     //console.log(this.rows.getRawValue())
   }
-  createItemFormGroup(docentesParticipantes:TotalHorasResponse): FormGroup {
+  createItemFormGroup(docentesParticipantes:TotalHorasResponse): UntypedFormGroup {
     return this._formBuilder.group({
       nombres:[docentesParticipantes.nombre,Validators.required],
       cedula:[docentesParticipantes.cedula,Validators.required],
@@ -327,7 +327,7 @@ export class InformefinalComponent implements OnInit {
     //console.log(this.rowsInfo.getRawValue())
   }
 
-  createItemFormGroupInfo(actividadesInformeSeguimientoRequest: HorasPersonasResponse): FormGroup {
+  createItemFormGroupInfo(actividadesInformeSeguimientoRequest: HorasPersonasResponse): UntypedFormGroup {
     return this._formBuilder.group({
       actividades:[actividadesInformeSeguimientoRequest.actividad, Validators.required],
       porcentajeCumplimiento:['', Validators.required],

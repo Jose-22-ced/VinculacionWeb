@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Anexo4Service} from "../../../services/anexo4.service";
 import {Anexo4} from "../../../models/anexo4";
@@ -50,25 +50,25 @@ export class NuevoinformedeculminacionComponent implements OnInit {
   isLinear = true;
   issloading=true;
   // @ts-ignore
-  firstFormGroup: FormGroup;
+  firstFormGroup: UntypedFormGroup;
   // @ts-ignore
-  secondFormGroup: FormGroup;
-  thirdFormGroup?: FormGroup;
-  fourFormGroup?: FormGroup;
+  secondFormGroup: UntypedFormGroup;
+  thirdFormGroup?: UntypedFormGroup;
+  fourFormGroup?: UntypedFormGroup;
   anexo4:Anexo4[]=[];
   pryectosProyectos:Proyectos[]=[];
   proyecto:Proyectos = new Proyectos();
   cedula?:String;
   anexo10:Anexo10 = new Anexo10();
   //ArrayActividades
-  rows: FormArray;
+  rows: UntypedFormArray;
 
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
               private anexo4Service:Anexo4Service,
               private proyectoService:ProyectoService,
               private anexo10Service:Anexo10Service,
-              private anexo8Service:Anexo8Service,private anexo5Service:Anexo5Service, private anexo2Service:Anexo2Service,  private router: Router,private fb: FormBuilder,private fechaService:FechaService) {
+              private anexo8Service:Anexo8Service,private anexo5Service:Anexo5Service, private anexo2Service:Anexo2Service,  private router: Router,private fb: UntypedFormBuilder,private fechaService:FechaService) {
     //ArrayActividades
     this.rows = this._formBuilder.array([]);
   }
@@ -132,7 +132,7 @@ export class NuevoinformedeculminacionComponent implements OnInit {
   onRemoveRow(rowIndex:number){
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(actividad:String): FormGroup {
+  createItemFormGroup(actividad:String): UntypedFormGroup {
     return this._formBuilder.group({
       actividadesGenerales: [actividad, Validators.required],
       actividadesEspecificas: ['', Validators.required],

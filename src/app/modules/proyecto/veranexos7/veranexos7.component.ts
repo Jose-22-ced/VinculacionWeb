@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {FechaService} from "../../../services/fecha.service";
 import {CarrerasService} from "../../../services/carreras.service";
@@ -50,7 +50,7 @@ export class Veranexos7Component implements OnInit {
   issloading = true;
   isexist?: boolean
   panelOpenState = false;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Anexo7[]>;
   cedula?: String;
   nombres?: String;
@@ -58,7 +58,7 @@ export class Veranexos7Component implements OnInit {
   anexos3:Anexo3[] = [];
 
   constructor(private fechaService: FechaService, private carrerasService: CarrerasService,
-              private activatedRoute: ActivatedRoute, private _formBuilder: FormBuilder,
+              private activatedRoute: ActivatedRoute, private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService: EntidadbeneficiarioService,
               private anexo7Service: Anexo7Service,
               private _adapter: DateAdapter<any>,

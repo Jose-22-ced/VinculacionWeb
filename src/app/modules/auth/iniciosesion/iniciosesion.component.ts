@@ -1,15 +1,15 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import Swal from "sweetalert2";
 import {ErrorStateMatcher} from "@angular/material/core";
-import {FormControl, FormGroupDirective, NgForm, Validators} from "@angular/forms";
-import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
+import {UntypedFormControl, FormGroupDirective, NgForm, Validators} from "@angular/forms";
 import {User} from "../../../models/user";
 import {Router} from "@angular/router";
 import {IniciosesionService} from "../../../services/iniciosesion.service";
+import {SocialAuthService} from "@abacritt/angularx-social-login";
 
 let PARAMETROS=''
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
@@ -21,8 +21,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class IniciosesionComponent implements OnInit,AfterViewInit {
   //Angular Social Login
-  socialUser!: SocialUser;
-  userLogged!: SocialUser;
+  user:any;
+  loggedIn:any;
   issloading=true;
  //Obtiene los datos del inicio de sesión
   public userRequest: User = new User();
@@ -30,7 +30,7 @@ export class IniciosesionComponent implements OnInit,AfterViewInit {
   habilitar: boolean = true;
 
   //Validaciones
-  cedulaFormControl = new FormControl('', [ Validators.pattern( '[0-9]{10}'),Validators.required]);
+  cedulaFormControl = new UntypedFormControl('', [ Validators.pattern( '[0-9]{10}'),Validators.required]);
   matcher = new MyErrorStateMatcher();
   omit_special_char(event: { charCode: any; })
   {var k;
@@ -50,16 +50,18 @@ export class IniciosesionComponent implements OnInit,AfterViewInit {
     },2000)
   }
   ngOnInit(): void {
-    this.authService.authState.subscribe(data =>{
-      this.userLogged=data;
-    })
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      console.log(this.user)
+    });
   }
   logOut(): void{
-    this.authService.signOut();
+
   }
   //Auth2 para el incio de sesón con google.
   signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
+    /*this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       data => {
         this.userRequest.email=data.email;
         this.userRequest.urlFoto=data.photoUrl;
@@ -88,7 +90,7 @@ export class IniciosesionComponent implements OnInit,AfterViewInit {
           }
         )
       }
-    )
+    )*/
   }
   //Crea a un usario nuevo si este no existe
   public create():void{

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Anexo7, HorasDocentesA7Request, HorasEstudiantesA7Request} from "../../../models/anexo7";
 import {Proyectos} from "../../../models/proyectos";
 import {Anexo1} from "../../../models/anexo1";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {Anexo3} from "../../../models/anexo3";
 import {Anexo2} from "../../../models/anexo2";
 import {Anexo6} from "../../../models/anexo6";
@@ -41,16 +41,16 @@ export class Editar7planmesualComponent implements OnInit {
   proyectos:Proyectos[]=[];
   proyectoselect:Proyectos=new Proyectos();
   anexo1:Anexo1[]=[];
-  rows: FormArray;
-  itemForm?: FormGroup;
-  rows1: FormArray;
+  rows: UntypedFormArray;
+  itemForm?: UntypedFormGroup;
+  rows1: UntypedFormArray;
   // rows1: FormArray;
   // itemForm1?: FormGroup;
 
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  thirdFormGroup?: FormGroup;
-  fourFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  thirdFormGroup?: UntypedFormGroup;
+  fourFormGroup?: UntypedFormGroup;
 
   anexo3:Anexo3[]=[];
   anexo2:Anexo2=new Anexo2();
@@ -68,14 +68,14 @@ export class Editar7planmesualComponent implements OnInit {
   docentess?:String[];
   numdemes?:Number;
 //filtros
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Proyectos[]>;
   pipe:DatePipe = new DatePipe('en-US')
 
   anexp4:Anexo4[]=[];
 
   constructor(private anexo7service:Anexo7Service,
-              private router: Router, private activatedRoute: ActivatedRoute, private _formBuilder: FormBuilder,
+              private router: Router, private activatedRoute: ActivatedRoute, private _formBuilder: UntypedFormBuilder,
               private fechaService: FechaService, private proyectoService:ProyectoService, private anexo1Service:Anexo1Service,
               private anexo3Service: Anexo3Service, private anexo2Service:Anexo2Service,private _adapter: DateAdapter<any>,
               private anexo4Service:Anexo4Service) {
@@ -150,7 +150,7 @@ export class Editar7planmesualComponent implements OnInit {
   onRemoveRow(rowIndex: number) {
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(horasDocentes:HorasDocentesA7Request): FormGroup {
+  createItemFormGroup(horasDocentes:HorasDocentesA7Request): UntypedFormGroup {
     return this._formBuilder.group({
       id:horasDocentes.id,
       resultados: [horasDocentes.resultados, Validators.required],
@@ -172,7 +172,7 @@ export class Editar7planmesualComponent implements OnInit {
   onRemoveRow1(rowIndex: number) {
     this.rows1.removeAt(rowIndex);
   }
-  createItemFormGroup1(horasEstudiantes:HorasEstudiantesA7Request): FormGroup {
+  createItemFormGroup1(horasEstudiantes:HorasEstudiantesA7Request): UntypedFormGroup {
     //console.log(horasEstudiantes)
     // this.docentess?.push(horasEstudiantes.)
     return this._formBuilder.group({

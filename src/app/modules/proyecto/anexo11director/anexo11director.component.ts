@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {User} from "../../../models/user";
 import {Anexo6} from "../../../models/anexo6";
 import {Proyectos} from "../../../models/proyectos";
@@ -59,7 +59,7 @@ export class Anexo11directorComponent implements OnInit {
   issloading = true;
   fechae?:Date;
   isexist?: boolean;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   cedula?:String;
   nombres?:String;
   fecha?:Date;
@@ -69,15 +69,15 @@ export class Anexo11directorComponent implements OnInit {
   proyectoselect: Proyectos = new Proyectos();
   filteredOptions?: Observable<Anexo11[]>;
   //secuenciasdepantallas
-  firstFormGroup?: FormGroup;
-  secondFormGroup?:FormGroup;
-  thirdFormGroup?:FormGroup;
-  fourFormGroup?:FormGroup;
-  fiveFormGroup?:FormGroup;
-  rows: FormArray;
-  itemForm?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?:UntypedFormGroup;
+  thirdFormGroup?:UntypedFormGroup;
+  fourFormGroup?:UntypedFormGroup;
+  fiveFormGroup?:UntypedFormGroup;
+  rows: UntypedFormArray;
+  itemForm?: UntypedFormGroup;
   constructor(private activatedRoute: ActivatedRoute,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private anexo6Service: Anexo6Service,
               private usarioService: IniciosesionService,
               private proyectoService: ProyectoService,
@@ -195,7 +195,7 @@ export class Anexo11directorComponent implements OnInit {
       this.activar=false;
     }
   }
-  createItemFormGroup(director1:String,director:String): FormGroup {
+  createItemFormGroup(director1:String,director:String): UntypedFormGroup {
     return this._formBuilder.group({
       directorItem1:[director1, Validators.required],
       directorItem2:[director, Validators.required],

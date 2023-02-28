@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {MatSelectionListChange} from "@angular/material/list";
 import {Anexo7} from "../../../models/anexo7";
 import {Proyectos} from "../../../models/proyectos";
@@ -42,17 +42,17 @@ export class Registrobeneficiarios12Component implements OnInit {
   issloading=true;
   isLinear = true;
   isexist?:boolean;
-  rows: FormArray;
-  rowsP: FormArray;
+  rows: UntypedFormArray;
+  rowsP: UntypedFormArray;
   cedula?: String;
   nombres?:String;
   anexo12es: Anexo12 = new Anexo12();
   //grupos
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  thirdFormGroup?: FormGroup;
-  fourFormGroup?: FormGroup;
-  myControl = new FormControl();
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  thirdFormGroup?: UntypedFormGroup;
+  fourFormGroup?: UntypedFormGroup;
+  myControl = new UntypedFormControl();
 
   proyectos:Proyectos[]=[];
   proyectoSelect:Proyectos=new Proyectos();
@@ -60,7 +60,7 @@ export class Registrobeneficiarios12Component implements OnInit {
   filteredOptionsP?: Observable<Proyectos[]>;
   entidadSelect:Entidadbeneficiaria=new Entidadbeneficiaria();
 
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
               private proyectoService: ProyectoService,
               private entidadService: EntidadbeneficiarioService,
@@ -143,7 +143,7 @@ export class Registrobeneficiarios12Component implements OnInit {
   onRemoveRow(rowIndex: number) {
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(): FormGroup {
+  createItemFormGroup(): UntypedFormGroup {
     return this._formBuilder.group({
       nombresCompletos: ['', Validators.required],
       cedula: ['', Validators.required],

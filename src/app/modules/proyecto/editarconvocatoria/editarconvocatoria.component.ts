@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {Proyectos} from "../../../models/proyectos";
 import {Actividadesanexo, Anexo2, Fechas} from "../../../models/anexo2";
@@ -43,11 +43,11 @@ export class EditarconvocatoriaComponent implements OnInit {
   issloading=true;
   isexist?:boolean;
   isLinear = true;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Proyectos[]>;
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  tercerFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  tercerFormGroup?: UntypedFormGroup;
   proyectos:Proyectos[]=[];
   proyectoselect:Proyectos = new Proyectos();
   actividadesanexo:Actividadesanexo[]=[]
@@ -75,7 +75,7 @@ export class EditarconvocatoriaComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private proyectoService:ProyectoService,
               private responsablepppService:ResponsablepppService,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private _adapter: DateAdapter<any>,
               private anexo2Service:Anexo2Service) {

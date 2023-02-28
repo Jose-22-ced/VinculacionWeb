@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Anexo1Service} from "../../../services/anexo1.service";
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {Proyectos} from "../../../models/proyectos";
 import {Anexo1} from "../../../models/anexo1";
@@ -34,12 +34,12 @@ export class DocentesdeapoyofirmaComponent implements OnInit {
   isexist?:boolean
 
   anexo1:Anexo1[]=[];
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Anexo1[]>;
 
   constructor(private fechaService:FechaService,private carrerasService:CarrerasService,
               private responsablepppService:ResponsablepppService,
-              private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,
+              private activatedRoute: ActivatedRoute,private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private proyectoService:ProyectoService,
               private anexo1Service:Anexo1Service) { }

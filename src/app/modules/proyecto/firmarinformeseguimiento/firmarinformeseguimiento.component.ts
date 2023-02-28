@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // @ts-ignore
 import { saveAs } from "file-saver";
 import {InformeSeguimiento} from "../../../models/seguimiento";
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProyectoService} from "../../../services/proyecto.service";
@@ -30,13 +30,13 @@ export class FirmarinformeseguimientoComponent implements OnInit {
   panelOpenState = false;
 
   informeS:InformeSeguimiento[]=[];
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<InformeSeguimiento[]>;
 
   constructor(private router:Router,
               private activatedRoute: ActivatedRoute,
               private proyectoService: ProyectoService,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private _adapter: DateAdapter<any>,
               private informeService:InformeSeguimientoService) { }
 

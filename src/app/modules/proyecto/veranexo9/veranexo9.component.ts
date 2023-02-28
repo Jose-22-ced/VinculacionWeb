@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {UntypedFormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {Anexo61} from "../../../models/anexo61";
 import {Anexo9} from "../../../models/anexo9";
@@ -18,7 +18,7 @@ export class Veranexo9Component implements OnInit {
   issloading = true;
   isexist?: boolean
   panelOpenState = false;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Anexo9[]>;
   cedula?: String;
   nombres?: String;

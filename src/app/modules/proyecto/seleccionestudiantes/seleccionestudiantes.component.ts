@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FechaService} from "../../../services/fecha.service";
 import {ProyectoService} from "../../../services/proyecto.service";
@@ -54,17 +54,17 @@ function getBase64(file: any) {
 export class SeleccionestudiantesComponent implements OnInit {
 
   isLinear = true;
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  thirthFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  thirthFormGroup?: UntypedFormGroup;
   issloading=true;
   proyecto:Proyectos[]=[];
   pryectoselect:Proyectos = new Proyectos();
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Proyectos[]>;
   informeAceotacion:Informeaceptacion = new Informeaceptacion();
   anexo3:Anexo3[]=[];
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: UntypedFormBuilder,
               private router: Router,
               private fechaService:FechaService,
               private activatedRoute: ActivatedRoute,

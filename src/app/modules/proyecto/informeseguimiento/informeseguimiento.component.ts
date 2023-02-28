@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
@@ -70,22 +70,22 @@ export class InformeseguimientoComponent implements OnInit {
   fecha?:Date;
   nombres?:String;
   cedula?:String;
-  rows: FormArray;
-  rowsEst: FormArray;
-  rowsInfo:FormArray;
-  rowsObje:FormArray;
+  rows: UntypedFormArray;
+  rowsEst: UntypedFormArray;
+  rowsInfo:UntypedFormArray;
+  rowsObje:UntypedFormArray;
   cv:CordinadorVinculacion = new CordinadorVinculacion();
   //grupos
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  thirdFormGroup?:FormGroup;
-  fourFormGroup?:FormGroup;
-  fiveFormGroup?:FormGroup;
-  sixFormGroup?:FormGroup;
-  sevenFormGroup?:FormGroup;
-  eigthFormGroup?:FormGroup;
-  nineFormGroup?:FormGroup;
-  myControl = new FormControl();
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  thirdFormGroup?:UntypedFormGroup;
+  fourFormGroup?:UntypedFormGroup;
+  fiveFormGroup?:UntypedFormGroup;
+  sixFormGroup?:UntypedFormGroup;
+  sevenFormGroup?:UntypedFormGroup;
+  eigthFormGroup?:UntypedFormGroup;
+  nineFormGroup?:UntypedFormGroup;
+  myControl = new UntypedFormControl();
   proyectos:Proyectos[]=[];
   proyectoSelect:Proyectos=new Proyectos();
   entidadS:Entidadbeneficiaria=new Entidadbeneficiaria();
@@ -100,7 +100,7 @@ export class InformeseguimientoComponent implements OnInit {
   filteredOptions?: Observable<Proyectos[]>;
   entidadSelect:Entidadbeneficiaria=new Entidadbeneficiaria();
   carreraSelect:Carreras= new Carreras();
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
               private proyectoService: ProyectoService,
               private entidadService: EntidadbeneficiarioService,
@@ -262,7 +262,7 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
     this.rowsEst.push(this.createItemFormGroupEst(estudiantesParticipantes));
    // console.log(this.rowsEst.getRawValue())
   }
-  createItemFormGroup(docentesParticipantes:TotalHorasResponse): FormGroup {
+  createItemFormGroup(docentesParticipantes:TotalHorasResponse): UntypedFormGroup {
     return this._formBuilder.group({
       nombres:[docentesParticipantes.nombre,Validators.required],
       cedula:[docentesParticipantes.cedula,Validators.required],
@@ -270,7 +270,7 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
       numeroHoras:[docentesParticipantes.horas,Validators.required]
     });
   }
-  createItemFormGroupEst(estudiantesParticipantes: TotalHorasResponse): FormGroup {
+  createItemFormGroupEst(estudiantesParticipantes: TotalHorasResponse): UntypedFormGroup {
     return this._formBuilder.group({
       nombres:[estudiantesParticipantes.nombre,Validators.required],
       cedula:[estudiantesParticipantes.cedula,Validators.required],
@@ -286,7 +286,7 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
     //console.log(this.rowsInfo.getRawValue())
   }
 
-  createItemFormGroupInfo(actividadesInformeSeguimientoRequest: HorasPersonasResponse): FormGroup {
+  createItemFormGroupInfo(actividadesInformeSeguimientoRequest: HorasPersonasResponse): UntypedFormGroup {
     return this._formBuilder.group({
       actividades:[actividadesInformeSeguimientoRequest.actividad, Validators.required],
       porcentajeCumplimiento:['', Validators.required],
@@ -297,7 +297,7 @@ onAddRowOb(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto ){
     });
   }
 
-  createItemFormGroupObje(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto): FormGroup {
+  createItemFormGroupObje(objetivosEspecificosInforme: ObjetivosEspeciicoslistProyecto): UntypedFormGroup {
     return this._formBuilder.group({
       descripcion:[objetivosEspecificosInforme.descripcion,Validators.required]
     });

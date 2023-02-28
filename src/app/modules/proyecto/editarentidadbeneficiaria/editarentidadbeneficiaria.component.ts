@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FechaService} from "../../../services/fecha.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
 import {Entidadbeneficiaria} from "../../../models/entidadbeneficiaria";
 import Swal from "sweetalert2";
@@ -14,8 +14,8 @@ import Swal from "sweetalert2";
 export class EditarentidadbeneficiariaComponent implements OnInit {
   isLinear = true;
   issloading=true;
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
   entidad:Entidadbeneficiaria = new Entidadbeneficiaria();
 
   //Validaciones
@@ -31,7 +31,7 @@ export class EditarentidadbeneficiariaComponent implements OnInit {
     return (k <= 9);
   }
 
-  constructor(private router: Router,private fechaService:FechaService,private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,private entidadbeneficiarioService:EntidadbeneficiarioService) { }
+  constructor(private router: Router,private fechaService:FechaService,private activatedRoute: ActivatedRoute,private _formBuilder: UntypedFormBuilder,private entidadbeneficiarioService:EntidadbeneficiarioService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {

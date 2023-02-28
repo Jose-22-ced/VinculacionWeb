@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {Proyectos} from "../../../models/proyectos";
 import {FechaService} from "../../../services/fecha.service";
@@ -20,7 +20,7 @@ export class Verproyectos1Component implements OnInit {
   issloading=true;
   isexist?:boolean
   panelOpenState = false;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Proyectos[]>;
   cedula?:String;
   nombreCor?:String;
@@ -28,7 +28,7 @@ export class Verproyectos1Component implements OnInit {
   proyectos:Proyectos[]=[];
   constructor(private fechaService:FechaService,private carrerasService:CarrerasService,
               private responsablepppService:ResponsablepppService,
-              private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,
+              private activatedRoute: ActivatedRoute,private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private proyectoService:ProyectoService,
               private anexo1Service:Anexo1Service) {

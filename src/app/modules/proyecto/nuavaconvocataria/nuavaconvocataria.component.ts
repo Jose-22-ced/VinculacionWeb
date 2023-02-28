@@ -4,7 +4,7 @@ import {FechaService} from "../../../services/fecha.service";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
 import {Proyectos} from "../../../models/proyectos";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {MatSelectionListChange} from "@angular/material/list";
 import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
 import {DateAdapter} from "@angular/material/core";
@@ -42,11 +42,11 @@ export class NuavaconvocatariaComponent implements OnInit {
   issloading=true;
   isexist?:boolean;
   isLinear = true;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Proyectos[]>;
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  tercerFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  tercerFormGroup?: UntypedFormGroup;
   proyectos:Proyectos[]=[];
   proyectoselect:Proyectos = new Proyectos();
   actividadesanexo:Actividadesanexo[]=[]
@@ -74,7 +74,7 @@ export class NuavaconvocatariaComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private proyectoService:ProyectoService,
               private responsablepppService:ResponsablepppService,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private _adapter: DateAdapter<any>,
               private anexo2Service:Anexo2Service) {

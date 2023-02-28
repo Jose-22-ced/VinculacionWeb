@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FechaService} from "../../../services/fecha.service";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
 import {DateAdapter} from "@angular/material/core";
 import {Anexo2Service} from "../../../services/anexo2.service";
@@ -22,7 +22,7 @@ export class VerconvocatoriasComponent implements OnInit {
   issloading=true;
   isexist?:boolean
   panelOpenState = false;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Anexo2[]>;
   cedula?:String;
 
@@ -32,7 +32,7 @@ export class VerconvocatoriasComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private proyectoService:ProyectoService,
               private responsablepppService:ResponsablepppService,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private _adapter: DateAdapter<any>,
               private anexo2Service:Anexo2Service) {

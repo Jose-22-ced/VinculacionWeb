@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {Anexo61} from "../../../models/anexo61";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -34,12 +34,12 @@ export class Firmaanexo61Component implements OnInit {
   panelOpenState = false;
 
   anexo61:Anexo61[]=[];
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Anexo61[]>;
 
 
   constructor(private router: Router, private fechaService:FechaService, private activatedRoute: ActivatedRoute,
-              private proyectoService:ProyectoService, private _formBuilder: FormBuilder,
+              private proyectoService:ProyectoService, private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService, private _adapter: DateAdapter<any>,
               private anexo61Service:Anexo61Service) {
     this._adapter.setLocale('es-ec');

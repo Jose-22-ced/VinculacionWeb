@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from "sweetalert2";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {CordinadorVinculacion} from "../../../models/cordinadorvinculacion";
 import {map, Observable, startWith} from "rxjs";
 import {Router} from "@angular/router";
@@ -16,15 +16,15 @@ export class AsignarcodinadorvinculacionComponent implements OnInit {
   issloading=true;
   isexist?:boolean;
   isLinear = true;
-  myControl = new FormControl();
-  firstFormGroup: FormGroup |  null= null;
-  secondFormGroup: FormGroup | null= null
+  myControl = new UntypedFormControl();
+  firstFormGroup: UntypedFormGroup |  null= null;
+  secondFormGroup: UntypedFormGroup | null= null
   cordinador:CordinadorVinculacion[]=[];
   cordinadorselect:CordinadorVinculacion=new CordinadorVinculacion();
   filteredOptions?: Observable<CordinadorVinculacion[]>;
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
 
-  constructor(private router: Router,private _formBuilder: FormBuilder, private fb: FormBuilder,private cordinadorvinculacionService:CordinadorvinculacionService) { }
+  constructor(private router: Router,private _formBuilder: UntypedFormBuilder, private fb: UntypedFormBuilder,private cordinadorvinculacionService:CordinadorvinculacionService) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({

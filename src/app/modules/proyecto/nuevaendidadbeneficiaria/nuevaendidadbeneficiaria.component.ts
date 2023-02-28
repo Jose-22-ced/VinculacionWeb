@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, FormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {MyErrorStateMatcher} from "../../auth/iniciosesion/iniciosesion.component";
 import {Entidadbeneficiaria} from "../../../models/entidadbeneficiaria";
 import Swal from "sweetalert2";
@@ -14,8 +14,8 @@ import {FechaService} from "../../../services/fecha.service";
 })
 export class NuevaendidadbeneficiariaComponent implements OnInit {
   isLinear = true;
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
   entidad:Entidadbeneficiaria = new Entidadbeneficiaria();
 
   //Validaciones
@@ -31,7 +31,7 @@ export class NuevaendidadbeneficiariaComponent implements OnInit {
     return (k <= 9);
   }
 
-  constructor(private router: Router,private fechaService:FechaService,private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,private entidadbeneficiarioService:EntidadbeneficiarioService) { }
+  constructor(private router: Router,private fechaService:FechaService,private activatedRoute: ActivatedRoute,private _formBuilder: UntypedFormBuilder,private entidadbeneficiarioService:EntidadbeneficiarioService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {

@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FechaService} from "../../../services/fecha.service";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
 import {DateAdapter} from "@angular/material/core";
 import {Anexo2Service} from "../../../services/anexo2.service";
@@ -57,17 +57,17 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
   pipe:DatePipe = new DatePipe('en-US')
 
   isLinear = true;
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  thirtdFormGroup?: FormGroup;
-  fourFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  thirtdFormGroup?: UntypedFormGroup;
+  fourFormGroup?: UntypedFormGroup;
 
   issloading=true;
   isexist?:boolean;
   activate?:boolean=true;
   activar?:boolean=false;
 
-  myControlproyecto = new FormControl();
+  myControlproyecto = new UntypedFormControl();
   filteredOptionsProyecto?: Observable<Proyectos[]>;
   proyectos:Proyectos[]=[];
   proyectoselect:Proyectos=new Proyectos();
@@ -80,8 +80,8 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
   sum = 0;
   numerominimo=0;
   //ArrayAntividades
-  rows: FormArray;
-  itemForm?: FormGroup;
+  rows: UntypedFormArray;
+  itemForm?: UntypedFormGroup;
 
 
   anexo1:Anexo1[]=[];
@@ -95,7 +95,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private proyectoService:ProyectoService,
               private responsablepppService:ResponsablepppService,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private _adapter: DateAdapter<any>,
               private anexo2Service:Anexo2Service,
@@ -196,7 +196,7 @@ export class NuevoplandeaprendizajeComponent implements OnInit {
       this.activar=false;
     }
   }
-  createItemFormGroup(actividad:String): FormGroup {
+  createItemFormGroup(actividad:String): UntypedFormGroup {
     return this._formBuilder.group({
       actividad:[actividad, Validators.required],
       asignatura:['', Validators.required],

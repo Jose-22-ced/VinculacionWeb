@@ -8,7 +8,7 @@ import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
 import {Anexo11, Anexo11ApoyoResponse} from "../../../models/anexo11";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import Docxtemplater from "docxtemplater";
 import {Proyectos} from "../../../models/proyectos";
@@ -50,7 +50,7 @@ export class Editaranexo11apoyoComponent implements OnInit {
   panelOpenState = true;
   issloading = true;
   isexist?: boolean;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   cedula?: String;
   nombres?: String;
   fechai?: Date;
@@ -64,14 +64,14 @@ export class Editaranexo11apoyoComponent implements OnInit {
   anexo11select: Anexo11 = new Anexo11();
   proyectoselect: Proyectos = new Proyectos();
   filteredOptions?: Observable<Anexo11[]>;
-  thirdFormGroup?: FormGroup;
+  thirdFormGroup?: UntypedFormGroup;
   numero?: Number;
-  rows: FormArray;
-  itemForm?: FormGroup;
+  rows: UntypedFormArray;
+  itemForm?: UntypedFormGroup;
   apoyoItem1?: String
 
   constructor(private activatedRoute: ActivatedRoute,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private usarioService: IniciosesionService,
               private proyectoService: ProyectoService,
               private fechaService: FechaService,
@@ -171,7 +171,7 @@ export class Editaranexo11apoyoComponent implements OnInit {
     }
   }
 
-  createItemFormGroup(apoyo: Anexo11ApoyoResponse): FormGroup {
+  createItemFormGroup(apoyo: Anexo11ApoyoResponse): UntypedFormGroup {
     return this._formBuilder.group({
       id:[apoyo.id],
       apoyoItem1: [apoyo.apoyoItem1, Validators.required],
@@ -187,7 +187,7 @@ export class Editaranexo11apoyoComponent implements OnInit {
     //console.log(this.rows.getRawValue())
     this.anexo11ob.id=this.anexo11select.id;
     // @ts-ignore
-    this.anexo11ob.apoyo?.length=0;
+    this.anexo11ob.apoyo.length=0;
     this.anexo11ob.apoyo=this.rows.getRawValue();
     // console.log(this.anexo11ob.apoyo)
     this.anexo11ob.carrera=this.anexo11select.carrera;

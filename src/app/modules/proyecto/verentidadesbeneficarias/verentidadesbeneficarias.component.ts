@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FechaService} from "../../../services/fecha.service";
 import {ActivatedRoute} from "@angular/router";
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
 import {Entidadbeneficiaria} from "../../../models/entidadbeneficiaria";
 import {map, Observable, startWith} from "rxjs";
@@ -19,11 +19,11 @@ export class VerentidadesbeneficariasComponent implements OnInit {
   isexist?:boolean
   panelOpenState = false;
   entidad:Entidadbeneficiaria[]=[];
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Entidadbeneficiaria[]>;
 
 
-  constructor(private fechaService:FechaService,private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,private entidadbeneficiarioService:EntidadbeneficiarioService) { }
+  constructor(private fechaService:FechaService,private activatedRoute: ActivatedRoute,private _formBuilder: UntypedFormBuilder,private entidadbeneficiarioService:EntidadbeneficiarioService) { }
 
   ngOnInit(): void {
     this.entidadbeneficiarioService.getEntidadBeneficiariaAll().subscribe(value => {

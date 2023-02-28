@@ -1,4 +1,4 @@
-FROM node:10-alpine as build-step
+FROM node:16-alpine as build-step
 
 RUN nmkdir -p /app
 

@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {map, Observable, startWith} from "rxjs";
 import {Anexo61Service} from "../../../services/anexo61.service";
@@ -55,12 +55,12 @@ export class Anexo61Component implements OnInit,AfterViewInit {
   nombredir?: String;
   Fechaenvio?: Date;
 //ArrayActividadesEstudiante
-  rows: FormArray;
-  itemForm?: FormGroup;
+  rows: UntypedFormArray;
+  itemForm?: UntypedFormGroup;
 //secuenciasdepantallas
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  fourFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  fourFormGroup?: UntypedFormGroup;
 //anexo6.1
   anexo61: Anexo61[] = []
   anexo61es: Anexo61 = new Anexo61();
@@ -73,12 +73,12 @@ export class Anexo61Component implements OnInit,AfterViewInit {
   anexo6select: Anexo6 = new Anexo6();
   anexo6requeste:Anexo6=new Anexo6;
 //filtros
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Anexo6[]>;
 
   constructor(private fechaService: FechaService, private anexo6Service: Anexo6Service, private activatedRoute: ActivatedRoute,
               private anexo61Service: Anexo61Service, private anexo3Service: Anexo3Service, private proyectoService: ProyectoService,
-              private _formBuilder: FormBuilder) {
+              private _formBuilder: UntypedFormBuilder) {
 
     this.secondFormGroup = this._formBuilder.group({
       items: [null, Validators.required],
@@ -174,7 +174,7 @@ export class Anexo61Component implements OnInit,AfterViewInit {
   onRemoveRow(rowIndex: number) {
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(actividad:String): FormGroup {
+  createItemFormGroup(actividad:String): UntypedFormGroup {
     return this._formBuilder.group({
       actividadesEstudiante: [actividad, Validators.required],
       controlEstudiante: ['', Validators.required],

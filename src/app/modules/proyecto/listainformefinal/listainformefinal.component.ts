@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { saveAs } from "file-saver";
 import {Proyectos} from "../../../models/proyectos";
 import Swal from "sweetalert2";
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {InformeFinal} from "../../../models/final";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -31,13 +31,13 @@ export class ListainformefinalComponent implements OnInit {
   cedulaa?:String;
   nombress?:String;
   informeS:InformeFinal[]=[];
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<InformeFinal[]>;
 
   constructor(private router:Router,
   private activatedRoute: ActivatedRoute,
   private proyectoService: ProyectoService,
-  private _formBuilder: FormBuilder,
+  private _formBuilder: UntypedFormBuilder,
   private _adapter: DateAdapter<any>,
   private informeService:InformeFinalService) { }
 

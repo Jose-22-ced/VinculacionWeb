@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {UntypedFormBuilder} from "@angular/forms";
 import {FechaService} from "../../../services/fecha.service";
 import {CarrerasService} from "../../../services/carreras.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -49,7 +49,7 @@ export class VervisitasComponent implements OnInit {
   // @ts-ignore
   date2:Date;
   proyecto:Proyectos = new Proyectos();
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: UntypedFormBuilder,
               private fechaService:FechaService,private carrerasService:CarrerasService,
               private activatedRoute: ActivatedRoute,
               private entidadbeneficiarioService:EntidadbeneficiarioService,

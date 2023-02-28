@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
 import {Docentes} from "../../../models/docentes";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {CordinadorVinculacion} from "../../../models/cordinadorvinculacion";
 import {MatSelectionListChange} from "@angular/material/list";
@@ -18,16 +18,16 @@ export class NuevoresponsablepppComponent implements OnInit {
   issloading=true;
   isexist?:boolean;
   isLinear = true;
-  myControl = new FormControl();
-  firstFormGroup: FormGroup |  null= null;
-  secondFormGroup: FormGroup | null= null
+  myControl = new UntypedFormControl();
+  firstFormGroup: UntypedFormGroup |  null= null;
+  secondFormGroup: UntypedFormGroup | null= null
   filteredOptions?: Observable<Docentes[]>;
   docentes:Docentes[]=[];
   docentesselect:Docentes = new Docentes();
   private cedula?:string;
   public carrera?: string;
   panelOpenState = false;
-  constructor(private _formBuilder: FormBuilder, private fb: FormBuilder,private router:Router,private activatedRoute: ActivatedRoute,private responsablepppService:ResponsablepppService) { }
+  constructor(private _formBuilder: UntypedFormBuilder, private fb: UntypedFormBuilder,private router:Router,private activatedRoute: ActivatedRoute,private responsablepppService:ResponsablepppService) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({

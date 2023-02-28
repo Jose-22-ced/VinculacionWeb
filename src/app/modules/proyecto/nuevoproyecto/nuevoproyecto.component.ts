@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
 import {CarrerasService} from "../../../services/carreras.service";
@@ -42,15 +42,15 @@ function getBase64(file: any) {
 export class NuevoproyectoComponent implements OnInit {
   panelOpenState = true;
   isLinear = true;
-  firstFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
   isexist?:boolean=true;
   issloading=true;
   // @ts-ignore
-  secondFormGroup: FormGroup;
-  thirdFormGroup?: FormGroup;
+  secondFormGroup: UntypedFormGroup;
+  thirdFormGroup?: UntypedFormGroup;
   // @ts-ignore
-  fourFormGroup: FormGroup;
-  rows: FormArray;
+  fourFormGroup: UntypedFormGroup;
+  rows: UntypedFormArray;
 
   docentes:Docentes[]=[];
   docentesselectDirector:Docentes = new Docentes();
@@ -59,8 +59,8 @@ export class NuevoproyectoComponent implements OnInit {
   entidadBeneficiaria:Entidadbeneficiaria []=[];
   anexo1:Anexo1[]=[];
   delegados: DocentesDelegados[]=[];
-  myControl = new FormControl();
-  myControl1 = new FormControl();
+  myControl = new UntypedFormControl();
+  myControl1 = new UntypedFormControl();
   filteredOptions?: Observable<Docentes[]>;
   filteredOptionsapoyo?: Observable<Docentes[]>;
 
@@ -75,7 +75,7 @@ export class NuevoproyectoComponent implements OnInit {
 
   constructor(private fechaService:FechaService,private carrerasService:CarrerasService,
               private responsablepppService:ResponsablepppService,
-              private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,
+              private activatedRoute: ActivatedRoute,private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private proyectoService:ProyectoService,
               private anexo1Service:Anexo1Service,
@@ -188,7 +188,7 @@ export class NuevoproyectoComponent implements OnInit {
     // @ts-ignore
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(): FormGroup {
+  createItemFormGroup(): UntypedFormGroup {
     return this._formBuilder.group({
       descripcion: ['', Validators.required],
     });

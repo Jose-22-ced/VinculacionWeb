@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {UntypedFormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {Anexo12Service} from "../../../services/anexo12.service";
@@ -17,7 +17,7 @@ export class Veranexo12Component implements OnInit {
   issloading = true;
   isexist?: boolean
   panelOpenState = false;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Anexo12[]>;
   cedula?: String;
   nombres?: String;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {Anexo6} from "../../../models/anexo6";
 import {Proyectos} from "../../../models/proyectos";
 import {map, Observable, startWith} from "rxjs";
@@ -68,7 +68,7 @@ export class Anexo11Component implements OnInit {
   panelOpenState = true;
   issloading = true;
   isexist?: boolean;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   cedula?:String;
   nombres?:String;
   fechai?:Date;
@@ -82,20 +82,20 @@ export class Anexo11Component implements OnInit {
   anexo6select: Anexo6 = new Anexo6();
   proyectoselect: Proyectos = new Proyectos();
   filteredOptions?: Observable<Anexo6[]>;
-  firstFormGroup?: FormGroup;
-  secondFormGroup?:FormGroup;
-  thirdFormGroup?:FormGroup;
-  fourFormGroup?:FormGroup;
-  fiveFormGroup?:FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?:UntypedFormGroup;
+  thirdFormGroup?:UntypedFormGroup;
+  fourFormGroup?:UntypedFormGroup;
+  fiveFormGroup?:UntypedFormGroup;
   numero?:Number;
-  rows: FormArray;
-  itemForm?: FormGroup;
-  rows2: FormArray;
-  itemForm2?: FormGroup;
+  rows: UntypedFormArray;
+  itemForm?: UntypedFormGroup;
+  rows2: UntypedFormArray;
+  itemForm2?: UntypedFormGroup;
   apoyoItem1?:String
 
   constructor(private activatedRoute: ActivatedRoute,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private anexo6Service: Anexo6Service,
               private usarioService: IniciosesionService,
               private proyectoService: ProyectoService,
@@ -234,7 +234,7 @@ export class Anexo11Component implements OnInit {
       this.activar=false;
     }
   }
-  createItemFormGroup(apoyo1:String,apoyo:String): FormGroup {
+  createItemFormGroup(apoyo1:String,apoyo:String): UntypedFormGroup {
     return this._formBuilder.group({
       apoyoItem1:[apoyo1, Validators.required],
       apoyoItem2:[apoyo, Validators.required],
@@ -246,7 +246,7 @@ export class Anexo11Component implements OnInit {
     this.rows2.push(this.createItemFormGroup2(director));
     // console.log(this.rows2.getRawValue())
   }
-  createItemFormGroup2(director:String): FormGroup {
+  createItemFormGroup2(director:String): UntypedFormGroup {
     return this._formBuilder.group({
       directoroitem1:[''],
       directorItem2:[''],

@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {User} from "../../../models/user";
 import {Anexo8} from "../../../models/anexo8";
 import {Proyectos} from "../../../models/proyectos";
@@ -52,7 +52,7 @@ export class Editaranexo11directorComponent implements OnInit {
   panelOpenState = true;
   issloading = true;
   isexist?: boolean;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   cedula?: String;
   nombres?: String;
   fechai?: Date;
@@ -60,21 +60,21 @@ export class Editaranexo11directorComponent implements OnInit {
   fechae?: Date;
   puntajea?: Number;
   resultadoAnexo11?: String;
-  fourFormGroup?:FormGroup;
+  fourFormGroup?:UntypedFormGroup;
   user: User = new User();
   anexo8: Anexo8 = new Anexo8();
   anexo8select: Anexo8[] = []
   anexo11select: Anexo11 = new Anexo11();
   proyectoselect: Proyectos = new Proyectos();
   filteredOptions?: Observable<Anexo11[]>;
-  thirdFormGroup?: FormGroup;
+  thirdFormGroup?: UntypedFormGroup;
   numero?: Number;
-  rows: FormArray;
-  itemForm?: FormGroup;
+  rows: UntypedFormArray;
+  itemForm?: UntypedFormGroup;
   apoyoItem1?: String
 
   constructor(private activatedRoute: ActivatedRoute,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private usarioService: IniciosesionService,
               private proyectoService: ProyectoService,
               private fechaService: FechaService,
@@ -174,7 +174,7 @@ export class Editaranexo11directorComponent implements OnInit {
     }
   }
 
-  createItemFormGroup(director: Anexo11DirectorResponse): FormGroup {
+  createItemFormGroup(director: Anexo11DirectorResponse): UntypedFormGroup {
     return this._formBuilder.group({
       id: [director.id],
       directorItem1: [director.directorItem1, Validators.required],
@@ -189,7 +189,7 @@ export class Editaranexo11directorComponent implements OnInit {
     //console.log(this.rows.getRawValue())
     this.anexo11ob.id = this.anexo11select.id;
     // @ts-ignore
-    this.anexo11ob.director?.length = 0;
+    this.anexo11ob.director.length = 0;
     this.anexo11ob.director = this.rows.getRawValue();
     //console.log(this.anexo11ob.director)
     this.anexo11ob.carrera = this.anexo11select.carrera;

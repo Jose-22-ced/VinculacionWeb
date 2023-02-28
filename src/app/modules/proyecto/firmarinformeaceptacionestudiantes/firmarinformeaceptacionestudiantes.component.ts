@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FechaService} from "../../../services/fecha.service";
 import {ProyectoService} from "../../../services/proyecto.service";
@@ -40,11 +40,11 @@ function getBase64(file: any) {
 })
 export class FirmarinformeaceptacionestudiantesComponent implements OnInit {
 
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Informeaceptacion[]>;
   issloading=true;
   informeAceotacion:Informeaceptacion[] = [];
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: UntypedFormBuilder,
               private router: Router,
               private fechaService:FechaService,
               private activatedRoute: ActivatedRoute,

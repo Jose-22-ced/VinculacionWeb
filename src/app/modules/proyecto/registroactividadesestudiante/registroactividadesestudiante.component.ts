@@ -3,7 +3,7 @@ import {Anexo3} from "../../../models/anexo3";
 import {ActividadesAnexo8Request, Anexo8} from "../../../models/anexo8";
 import {Proyectos} from "../../../models/proyectos";
 import {Entidadbeneficiaria} from "../../../models/entidadbeneficiaria";
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {Anexo8Service} from "../../../services/anexo8.service";
 import {ActivatedRoute} from "@angular/router";
 import {Anexo3Service} from "../../../services/anexo3.service";
@@ -58,14 +58,14 @@ export class RegistroactividadesestudianteComponent implements OnInit {
   edntidad:Entidadbeneficiaria=new Entidadbeneficiaria();
   ceduladir?: String;
   //secuenciasdepantallas
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  fourFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  fourFormGroup?: UntypedFormGroup;
   ////ARRAY
-  rows: FormArray;
-  itemForm?: FormGroup;
+  rows: UntypedFormArray;
+  itemForm?: UntypedFormGroup;
 //ANEXO8
-  constructor(private fechaService: FechaService,private anexo8Service:Anexo8Service,private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,
+  constructor(private fechaService: FechaService,private anexo8Service:Anexo8Service,private activatedRoute: ActivatedRoute,private _formBuilder: UntypedFormBuilder,
               private anexo3Service:Anexo3Service, private proyectoService:ProyectoService) {
     //ArrayActividades
     this.secondFormGroup = this._formBuilder.group({
@@ -131,7 +131,7 @@ export class RegistroactividadesestudianteComponent implements OnInit {
     })
   }
   ///
-  createItemFormGroup(actividades:ActividadesAnexo8Request): FormGroup {
+  createItemFormGroup(actividades:ActividadesAnexo8Request): UntypedFormGroup {
     return this._formBuilder.group({
       id:actividades?.id,
       fecha:actividades?.fecha,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Anexo61} from "../../../models/anexo61";
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FechaService} from "../../../services/fecha.service";
@@ -36,7 +36,7 @@ export class Firmaanexo62Component implements OnInit {
   panelOpenState = false;
 
   anexo62:Anexo62[]=[];
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Anexo62[]>;
 
 
@@ -44,7 +44,7 @@ export class Firmaanexo62Component implements OnInit {
               private fechaService:FechaService,
               private activatedRoute: ActivatedRoute,
               private proyectoService:ProyectoService,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private _adapter: DateAdapter<any>,
               private anexo62Service:Anexo62Service) {

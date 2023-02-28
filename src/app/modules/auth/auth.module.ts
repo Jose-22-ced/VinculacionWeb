@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { IniciosesionComponent } from './iniciosesion/iniciosesion.component';
 import {RouterModule, Routes} from "@angular/router";
 import {MaterialModule} from "../../../material/material.module";
-import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "@abacritt/angularx-social-login";
+
 
 const routes: Routes = [
   {
@@ -35,7 +36,7 @@ const routes: Routes = [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '1011592573922-clhlkvnc4o7p2sedec68brull2t3qmb1.apps.googleusercontent.com'
+              '928340628132-2oortvgm7g2ghc0s01bevdff53ih5cab.apps.googleusercontent.com'
             )
           }
         ]

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {FechaService} from "../../../services/fecha.service";
 import {CarrerasService} from "../../../services/carreras.service";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
@@ -23,19 +23,19 @@ export class AgregaractividadesyrequisitosComponent implements OnInit {
   panelOpenState = true;
   issloading=true;
   //ArrayActividades
-  addForm: FormGroup;
-  rows: FormArray;
-  itemForm?: FormGroup;
+  addForm: UntypedFormGroup;
+  rows: UntypedFormArray;
+  itemForm?: UntypedFormGroup;
   materias:Materias[]=[];
   proyecto:Proyectos = new Proyectos();
   seleccionmaterias:Materias[]=[];
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Materias[]>;
   cedula?:String;
 
   constructor(private fechaService:FechaService,private carrerasService:CarrerasService,
               private responsablepppService:ResponsablepppService,
-              private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,
+              private activatedRoute: ActivatedRoute,private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private proyectoService:ProyectoService,
               private anexo1Service:Anexo1Service,
@@ -100,7 +100,7 @@ export class AgregaractividadesyrequisitosComponent implements OnInit {
   onRemoveRow(rowIndex:number){
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(descripcion:String): FormGroup {
+  createItemFormGroup(descripcion:String): UntypedFormGroup {
     return this._formBuilder.group({
       descripcion:[descripcion, Validators.required],
     });

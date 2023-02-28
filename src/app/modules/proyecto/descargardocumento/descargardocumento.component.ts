@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatSelectionListChange} from "@angular/material/list";
 import {map, Observable, startWith} from "rxjs";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {Proyectos} from "../../../models/proyectos";
@@ -86,8 +86,8 @@ export class DescargardocumentoComponent implements OnInit {
   nombres?:String;
   nombreanexo1:String | undefined;
 //pantallas
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
 
 //proyectos
   proyectos:Proyectos[]=[]
@@ -95,7 +95,7 @@ export class DescargardocumentoComponent implements OnInit {
   proyectodoc: Proyectos[]=[];
 //filtros
   ids?: number;
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Proyectos[]>;
   filteredOptionsanexo1?: Observable<Anexo1[]>; filteredOptionsanexo2?: Observable<Anexo2[]>;
   filteredOptionsanexo3?: Observable<Anexo3[]>; filteredOptionsanexo4?: Observable<Anexo4[]>;
@@ -138,7 +138,7 @@ export class DescargardocumentoComponent implements OnInit {
               private anexo10Service: Anexo10Service, private anexo11Service: Anexo11Service,
               private anexo12Service: Anexo12Service, private anexo13Service: Anexo13Service, private informeService: InformeSeguimientoService,
               private informefinalService: InformeFinalService,  private informeaceptacionServie:InformedeaceptacionestdiatesService ,
-              private _formBuilder: FormBuilder, private responsablepppService:ResponsablepppService,
+              private _formBuilder: UntypedFormBuilder, private responsablepppService:ResponsablepppService,
              private _adapter: DateAdapter<any>,
               private otrosService:OtrosService) {
     this._adapter.setLocale('es-ec');

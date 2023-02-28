@@ -3,7 +3,7 @@ import {FechaService} from "../../../services/fecha.service";
 import {CarrerasService} from "../../../services/carreras.service";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder} from "@angular/forms";
+import {UntypedFormBuilder} from "@angular/forms";
 import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {Anexo1Service} from "../../../services/anexo1.service";
@@ -36,7 +36,7 @@ export class VerpostulacionesComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private proyectoService:ProyectoService,
               private responsablepppService:ResponsablepppService,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private _adapter: DateAdapter<any>,
               private anexo2Service:Anexo2Service,

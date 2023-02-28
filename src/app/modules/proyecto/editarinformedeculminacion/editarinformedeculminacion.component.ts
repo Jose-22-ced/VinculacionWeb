@@ -12,7 +12,7 @@ import {Anexo62} from "../../../models/anexo62";
 import {Anexo6} from "../../../models/anexo6";
 import {DatePipe} from "@angular/common";
 import Swal from "sweetalert2";
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Anexo4Service} from "../../../services/anexo4.service";
 import {ProyectoService} from "../../../services/proyecto.service";
@@ -48,24 +48,24 @@ export class EditarinformedeculminacionComponent implements OnInit {
   isLinear = true;
   issloading=true;
   // @ts-ignore
-  firstFormGroup: FormGroup;
+  firstFormGroup: UntypedFormGroup;
   // @ts-ignore
-  secondFormGroup: FormGroup;
-  thirdFormGroup?: FormGroup;
-  fourFormGroup?: FormGroup;
+  secondFormGroup: UntypedFormGroup;
+  thirdFormGroup?: UntypedFormGroup;
+  fourFormGroup?: UntypedFormGroup;
   anexo4:Anexo4[]=[];
   proyecto:Proyectos = new Proyectos();
   cedula?:String;
   anexo10:Anexo10 = new Anexo10();
   //ArrayActividades
-  rows: FormArray;
+  rows: UntypedFormArray;
 
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
               private anexo4Service:Anexo4Service,
               private proyectoService:ProyectoService,
               private anexo10Service:Anexo10Service,
-              private anexo8Service:Anexo8Service,private anexo5Service:Anexo5Service, private anexo2Service:Anexo2Service,  private router: Router,private fb: FormBuilder,private fechaService:FechaService) {
+              private anexo8Service:Anexo8Service,private anexo5Service:Anexo5Service, private anexo2Service:Anexo2Service,  private router: Router,private fb: UntypedFormBuilder,private fechaService:FechaService) {
     //ArrayActividades
     this.rows = this._formBuilder.array([]);
   }
@@ -107,7 +107,7 @@ export class EditarinformedeculminacionComponent implements OnInit {
   onRemoveRow(rowIndex:number){
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(actividad:actividadesAnexo10s): FormGroup {
+  createItemFormGroup(actividad:actividadesAnexo10s): UntypedFormGroup {
     return this._formBuilder.group({
       id:[actividad.id, Validators.required],
       actividadesGenerales: [actividad.actividadesGenerales, Validators.required],

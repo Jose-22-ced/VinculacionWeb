@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {Observable} from "rxjs";
 import {Proyectos} from "../../../models/proyectos";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -24,17 +24,17 @@ export class VerinformesdeculminacionComponent implements OnInit {
 
   issloading=true;
   isexist?:boolean
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Proyectos[]>;
   date?:Date;
   anexo10:Anexo10[]=[];
 
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
               private anexo4Service:Anexo4Service,
               private proyectoService:ProyectoService,
               private anexo10Service:Anexo10Service,
-              private anexo8Service:Anexo8Service,private anexo5Service:Anexo5Service, private anexo2Service:Anexo2Service,  private router: Router,private fb: FormBuilder,private fechaService:FechaService) { }
+              private anexo8Service:Anexo8Service,private anexo5Service:Anexo5Service, private anexo2Service:Anexo2Service,  private router: Router,private fb: UntypedFormBuilder,private fechaService:FechaService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {

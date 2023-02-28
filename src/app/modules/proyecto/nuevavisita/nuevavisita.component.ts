@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {FechaService} from "../../../services/fecha.service";
 import {CarrerasService} from "../../../services/carreras.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -42,12 +42,12 @@ export class NuevavisitaComponent implements OnInit {
   Informe:InformeVisitaRequest=new InformeVisitaRequest();
 
   // @ts-ignore
-  addForm: FormGroup;
-  rows: FormArray;
+  addForm: UntypedFormGroup;
+  rows: UntypedFormArray;
 
 
 
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: UntypedFormBuilder,
               private fechaService:FechaService,private carrerasService:CarrerasService,
               private activatedRoute: ActivatedRoute,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
@@ -125,7 +125,7 @@ export class NuevavisitaComponent implements OnInit {
   onRemoveRow(rowIndex:number){
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(informeVisitaRequest:InformeVisitaRequest): FormGroup {
+  createItemFormGroup(informeVisitaRequest:InformeVisitaRequest): UntypedFormGroup {
     return this._formBuilder.group({
       id:informeVisitaRequest.id,
       asunto:[informeVisitaRequest.asunto, Validators.required],

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {UntypedFormBuilder} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
 import {Docentes} from "../../../models/docentes";
@@ -17,7 +17,7 @@ export class VerresposabledepppComponent implements OnInit {
   panelOpenState = false;
   cedula?:String;
   responsableppp:Docentes= new Docentes;
-  constructor(private _formBuilder: FormBuilder, private fb: FormBuilder,private router:Router,private activatedRoute: ActivatedRoute,private responsablepppService:ResponsablepppService) { }
+  constructor(private _formBuilder: UntypedFormBuilder, private fb: UntypedFormBuilder,private router:Router,private activatedRoute: ActivatedRoute,private responsablepppService:ResponsablepppService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {Anexo6} from "../../../models/anexo6";
 import {map, Observable, startWith} from "rxjs";
 import {FechaService} from "../../../services/fecha.service";
@@ -53,12 +53,12 @@ export class Anexo62Component implements OnInit {
   nombredir?: String;
   Fechaenvio?: Date;
 //ArrayActividadesEstudiante
-  rows: FormArray;
-  itemForm?: FormGroup;
+  rows: UntypedFormArray;
+  itemForm?: UntypedFormGroup;
 //secuenciasdepantallas
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  fourFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  fourFormGroup?: UntypedFormGroup;
 //anexo6.1
   anexo62: Anexo62[] = []
   anexo62es: Anexo62 = new Anexo62();
@@ -71,12 +71,12 @@ export class Anexo62Component implements OnInit {
   anexo6select: Anexo6 = new Anexo6();
   anexo6requeste:Anexo6=new Anexo6;
 //filtros
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Anexo6[]>;
 
   constructor(private fechaService: FechaService, private anexo6Service: Anexo6Service, private activatedRoute: ActivatedRoute,
               private anexo62Service: Anexo62Service, private anexo3Service: Anexo3Service, private proyectoService: ProyectoService,
-              private _formBuilder: FormBuilder) {
+              private _formBuilder: UntypedFormBuilder) {
 
     this.secondFormGroup = this._formBuilder.group({
       items: [null, Validators.required],
@@ -167,7 +167,7 @@ export class Anexo62Component implements OnInit {
   onRemoveRow(rowIndex: number) {
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(actividad:String): FormGroup {
+  createItemFormGroup(actividad:String): UntypedFormGroup {
     return this._formBuilder.group({
       actividadesEstudiante: [actividad, Validators.required],
       controlEstudiante: ['', Validators.required],

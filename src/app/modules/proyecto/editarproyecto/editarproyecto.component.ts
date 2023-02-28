@@ -3,7 +3,7 @@ import {FechaService} from "../../../services/fecha.service";
 import {CarrerasService} from "../../../services/carreras.service";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {EntidadbeneficiarioService} from "../../../services/entidadbeneficiario.service";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {Anexo1Service} from "../../../services/anexo1.service";
@@ -45,15 +45,15 @@ export class EditarproyectoComponent implements OnInit {
 
   panelOpenState = true;
   isLinear = true;
-  firstFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
   isexist?:boolean=true;
   issloading=true;
   // @ts-ignore
-  secondFormGroup: FormGroup;
-  thirdFormGroup?: FormGroup;
+  secondFormGroup: UntypedFormGroup;
+  thirdFormGroup?: UntypedFormGroup;
   // @ts-ignore
-  fourFormGroup: FormGroup;
-  rows: FormArray;
+  fourFormGroup: UntypedFormGroup;
+  rows: UntypedFormArray;
 
   docentes:Docentes[]=[];
   docentesselectDirector:Docentes = new Docentes();
@@ -63,8 +63,8 @@ export class EditarproyectoComponent implements OnInit {
   anexo1:Anexo1[]=[];
   anexo1list:Anexo1[]=[];
   delegados: DocentesDelegados[]=[];
-  myControl = new FormControl();
-  myControl1 = new FormControl();
+  myControl = new UntypedFormControl();
+  myControl1 = new UntypedFormControl();
   filteredOptions?: Observable<Docentes[]>;
   filteredOptionsapoyo?: Observable<Docentes[]>;
 
@@ -79,7 +79,7 @@ export class EditarproyectoComponent implements OnInit {
 
   constructor(private fechaService:FechaService,private carrerasService:CarrerasService,
               private responsablepppService:ResponsablepppService,
-              private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,
+              private activatedRoute: ActivatedRoute,private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private proyectoService:ProyectoService,
               private anexo1Service:Anexo1Service,
@@ -222,7 +222,7 @@ export class EditarproyectoComponent implements OnInit {
     // @ts-ignore
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(descripcion?:String): FormGroup {
+  createItemFormGroup(descripcion?:String): UntypedFormGroup {
     return this._formBuilder.group({
       descripcion: [descripcion, Validators.required],
     });

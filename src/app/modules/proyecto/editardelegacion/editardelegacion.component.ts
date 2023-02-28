@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {Proyectos} from "../../../models/proyectos";
 import {Anexo1} from "../../../models/anexo1";
@@ -49,15 +49,15 @@ function loadFile(url:any, callback:any) {
 export class EditardelegacionComponent implements OnInit {
 
   isLinear = true;
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  thirtdFormGroup?: FormGroup;
-  fourFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  thirtdFormGroup?: UntypedFormGroup;
+  fourFormGroup?: UntypedFormGroup;
 
   issloading=true;
 
 
-  myControlAnexe4 = new FormControl();
+  myControlAnexe4 = new UntypedFormControl();
   filteredOptionsAnexe4?: Observable<Anexo4[]>;
   alumnosAnexe4:Anexo4[]=[];
   alumnoselect:Anexo4[]=[];
@@ -71,7 +71,7 @@ export class EditardelegacionComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private proyectoService:ProyectoService,
               private responsablepppService:ResponsablepppService,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private entidadbeneficiarioService:EntidadbeneficiarioService,
               private _adapter: DateAdapter<any>,
               private anexo2Service:Anexo2Service,

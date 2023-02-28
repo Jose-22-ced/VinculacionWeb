@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {FechaService} from "../../../services/fecha.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -29,12 +29,12 @@ export class Veranexo8Component implements OnInit {
   isexist?:boolean;
   panelOpenState = false;
   anexo8:Anexo8[]=[];
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Anexo8[]>;
 
 
   constructor(private router: Router, private fechaService:FechaService, private activatedRoute: ActivatedRoute,
-            private _formBuilder: FormBuilder, private _adapter: DateAdapter<any>,
+            private _formBuilder: UntypedFormBuilder, private _adapter: DateAdapter<any>,
               private anexo8Service:Anexo8Service) {
     this._adapter.setLocale('es-ec');
   }

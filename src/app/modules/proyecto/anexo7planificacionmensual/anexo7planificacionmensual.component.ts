@@ -3,7 +3,7 @@ import {Anexo3Service} from "../../../services/anexo3.service";
 import {Anexo7Service} from "../../../services/anexo7.service";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {Anexo1Service} from "../../../services/anexo1.service";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Anexo6Service} from "../../../services/anexo6.service";
 import {Anexo6} from "../../../models/anexo6";
@@ -41,7 +41,6 @@ import * as _moment from 'moment';
 
 // @ts-ignore
 import {default as _rollupMoment, Moment} from 'moment';
-import {variable} from "@angular/compiler/src/output/output_ast";
 
 const moment = _rollupMoment || _moment;
 
@@ -106,16 +105,16 @@ export class Anexo7planificacionmensualComponent implements OnInit {
   proyectos:Proyectos[]=[];
   proyectoselect:Proyectos=new Proyectos();
   anexo1:Anexo1[]=[];
-  rows: FormArray;
-  itemForm?: FormGroup;
-  rows1: FormArray;
+  rows: UntypedFormArray;
+  itemForm?: UntypedFormGroup;
+  rows1: UntypedFormArray;
   // rows1: FormArray;
   // itemForm1?: FormGroup;
 
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  thirdFormGroup?: FormGroup;
-  fourFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  thirdFormGroup?: UntypedFormGroup;
+  fourFormGroup?: UntypedFormGroup;
 
   anexo3:Anexo3[]=[];
   anexo2:Anexo2=new Anexo2();
@@ -133,14 +132,14 @@ export class Anexo7planificacionmensualComponent implements OnInit {
   docentess?:String[];
   numdemes?:Number;
 //filtros
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Proyectos[]>;
   pipe:DatePipe = new DatePipe('en-US')
 
 
   max?:Boolean;
 
-  date = new FormControl(moment());
+  date = new UntypedFormControl(moment());
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value;
     ctrlValue.month(normalizedMonthAndYear.month());
@@ -150,7 +149,7 @@ export class Anexo7planificacionmensualComponent implements OnInit {
   }
 
   constructor(private anexo7service:Anexo7Service,
-              private router: Router, private activatedRoute: ActivatedRoute, private _formBuilder: FormBuilder,
+              private router: Router, private activatedRoute: ActivatedRoute, private _formBuilder: UntypedFormBuilder,
               private fechaService: FechaService, private proyectoService:ProyectoService, private anexo1Service:Anexo1Service,
               private anexo3Service: Anexo3Service, private anexo2Service:Anexo2Service,private _adapter: DateAdapter<any>) {
 
@@ -266,7 +265,7 @@ export class Anexo7planificacionmensualComponent implements OnInit {
   onRemoveRow(rowIndex: number) {
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(horasDocentes:String): FormGroup {
+  createItemFormGroup(horasDocentes:String): UntypedFormGroup {
     return this._formBuilder.group({
       resultados: ['', Validators.required],
       actividad: [horasDocentes, Validators.required],
@@ -286,7 +285,7 @@ export class Anexo7planificacionmensualComponent implements OnInit {
   onRemoveRow1(rowIndex: number) {
     this.rows1.removeAt(rowIndex);
   }
-  createItemFormGroup1(horasEstudiantes:String): FormGroup {
+  createItemFormGroup1(horasEstudiantes:String): UntypedFormGroup {
     // this.docentess?.push(horasEstudiantes.)
     return this._formBuilder.group({
       resultados: [ '', Validators.required],

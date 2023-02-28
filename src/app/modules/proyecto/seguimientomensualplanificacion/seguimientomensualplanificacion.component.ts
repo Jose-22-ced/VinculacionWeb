@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {Proyectos} from "../../../models/proyectos";
 import {map, Observable, startWith} from 'rxjs';
 import {ActivatedRoute, Router} from "@angular/router";
@@ -42,18 +42,18 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
   //ArrayActividadesEstudiante
   fecha?:Date;
   observaciones?:String;
-  rows: FormArray;
-  itemForm?: FormGroup;
-  rowsP: FormArray;
+  rows: UntypedFormArray;
+  itemForm?: UntypedFormGroup;
+  rowsP: UntypedFormArray;
   isexist?:boolean;
   issloading=true;
   isLinear = true;
   cedula?: String;
   nombres?:String;
-  firstFormGroup?: FormGroup;
-  secondFormGroup?: FormGroup;
-  thirdFormGroup?: FormGroup;
-  fourFormGroup?: FormGroup;
+  firstFormGroup?: UntypedFormGroup;
+  secondFormGroup?: UntypedFormGroup;
+  thirdFormGroup?: UntypedFormGroup;
+  fourFormGroup?: UntypedFormGroup;
   seleccionproyecto: Proyectos[] = [];
   proyectoselect: Proyectos = new Proyectos();
   proyectoSele:Proyectos[]=[];
@@ -62,13 +62,13 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
   anexoo7:Anexo7=new Anexo7();
   proyectorequeste:Proyectos = new Proyectos;
   proyecto: Proyectos[] = []
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions?: Observable<Anexo7[]>;
   filteredOptionsP?: Observable<Proyectos[]>;
   constructor(private activatedRoute: ActivatedRoute,
               private proyectoService: ProyectoService,
               private anexo7Service: Anexo7Service,
-              private _formBuilder: FormBuilder,
+              private _formBuilder: UntypedFormBuilder,
               private anexo9Service:Anexo9Service,
               private fechaService: FechaService,
               private router:Router) {
@@ -181,7 +181,7 @@ export class SeguimientomensualplanificacionComponent implements OnInit {
   onRemoveRow(rowIndex: number) {
     this.rows.removeAt(rowIndex);
   }
-  createItemFormGroup(actividadesAnexo9:HorasEstudiantesA7Request): FormGroup {
+  createItemFormGroup(actividadesAnexo9:HorasEstudiantesA7Request): UntypedFormGroup {
     return this._formBuilder.group({
       actividadesPlanificacion: [actividadesAnexo9.actividad, Validators.required],
       estudianteResponsable: [actividadesAnexo9.nombreEstudiante, Validators.required],
