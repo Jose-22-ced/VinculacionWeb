@@ -1,12 +1,12 @@
 FROM node:16-alpine as build-step
 
-RUN nmkdir -p /app
+RUN mkdir -p /app
 
 WORkDIR /app
 
 COPY package.json /app
 
-RUN npm install
+RUN npm install --force
 
 COPY . /app
 
